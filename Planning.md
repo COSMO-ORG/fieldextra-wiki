@@ -1,7 +1,15 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
-#### Table of content
-* [Release planning](#release)
+#### Release planning
+* **v12.2.0** : February 2016
+* **v12.3.0** : May 2016
+
+#### Agreed milestones
+* **09.2014, COSMO TAG** : web pages
+* **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
+* **2015Q3, Sinergia** : NetCDF on input
+
+#### Code development
 * [Bug corrections](#bug)
 * [Code consolidation](#code_consolidation)
 * [Code optimization](#code_optimization)
@@ -12,14 +20,6 @@
 * [fx tools](#fxtool)
 * [Documentation](#docu)
 * [Administrative](#admin)
-
-
----
-##### Release planning <a name="release"></a>
----
-
-* **v12.2.0** : February 2016
-* **v12.3.0** : May 2016
 
 ---------
 ##### Bug corrections <a name="bug"></a>
