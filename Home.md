@@ -1,5 +1,3 @@
-# Welcome to the public fieldextra wiki!
-
 ## Table of Content
 * [Home][home]
 * [Usage][usage]
