@@ -1,4 +1,3 @@
-#### Table of Content
 * [Table of content][home]
 * [Fieldextra usage and contact persons within COSMO][usage]
 
