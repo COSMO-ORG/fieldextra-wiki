@@ -2,8 +2,7 @@
 
 ## Table of Content
 * [Home][home]
-* [User manual][usermanual]
+* [Usage][usage]
 
 [home]: https://github.com/MeteoSwiss-APN/fieldextra-wiki/wiki/Home
-[techdocs]: https://github.com/myproject/wiki/Technical-documentation
-[usermanual]: https://github.com/myproject/wiki/User-manual
+[usage]: https://github.com/MeteoSwiss-APN/fieldextra-wiki/wiki/Usage
