@@ -1,6 +1,7 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Table of content
+* [Release planning](#release)
 * [Bug corrections](#bug)
 * [Code consolidation](#code_consolidation)
 * [Code optimization](#code_optimization)
@@ -11,6 +12,14 @@
 * [fx tools](#fxtool)
 * [Documentation](#documentation)
 * [Administrative](#admin)
+
+
+---
+##### Release planning <a name="release"></a>
+---
+
+* **v12.2.0** : February 2016
+* **v12.3.0** : May 2016
 
 ---
 ##### Bug corrections <a name="bug"></a>
