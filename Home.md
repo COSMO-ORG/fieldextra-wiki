@@ -1,5 +1,3 @@
-### Welcome to the public fieldextra Wiki
-
 #### Table of Content
 * [Home][home]
 * [Fieldextra usage and contact persons within COSMO][usage]
