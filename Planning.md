@@ -1,3 +1,5 @@
+### Fieldextra planning, with priorities and assigned tasks
+
 #### Table of content
 * [Bug corrections](#bug)
 * [Code consolidation](#code_consolidation)
@@ -7,12 +9,12 @@
 * [User interface](#interface)
 * [Environment](#environment)
 * [fx tools](#fxtool)
-* [Documentation](#docu)
+* [Documentation](#documentation)
 * [Administrative](#admin)
 
- -----------------------------------------------------------------------------------------
-  **Bug corrections** <a name="bug"></a>
- -----------------------------------------------------------------------------------------
+---
+##### Bug corrections <a name="bug"></a>
+---
 
 ######Priority high
 
@@ -25,9 +27,9 @@
 
 ######Priority low
 
- -----------------------------------------------------------------------------------------
- **Code consolidation**
- -----------------------------------------------------------------------------------------
+---
+##### Code consolidation <a name="code_consolidation"></a>
+---
 
 ######Priority high
      + [12.2.0;bap;3d] Consolidated wind shear operators
@@ -44,18 +46,16 @@
          translation from undef to output representation (backward compatibility!),
          (3) consistent translation from user defined value in internal representation.
 
-
-
 ######Priority medium
     + [1d] Check internal coding of gamma angle for rotated lat/lon grids
     + [1d] Operator new_field_id: check that dictionary characteristics are compatible
-           with actual properties of field (in particular tri and genproc_type), reset
-          the field properties
-        + [2d] Update imported COSMO modules
-        + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
-        + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
-        + [1w] Re-organize ty_fld_origin and ty_fld_product
-          > this is required to support observations
+      with actual properties of field (in particular tri and genproc_type), reset
+      the field properties
+    + [2d] Update imported COSMO modules
+    + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
+    + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
+    + [1w] Re-organize ty_fld_origin and ty_fld_product
+      > this is required to support observations
           > field_origin should contain all meta-information which is not essential
             for the correct behaviour of fieldextra - should be renamed to
             field_additional_minfo
@@ -111,10 +111,5 @@
           > externalize look-up table for model name
         + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
           32 bits (possible in fortran 2008), real_in_byte set accordingly
-  COSMO codes (incl. ICON) and which minimizes the number of modules to import
-          for accessing a requested functionality
-          > would replace the currently imported COSMO modules
-          > see README.cosmo_api
-          > see minutes of 18.12.2013 meeting
-          > should be discussed at the COSMO TAG level
+
 
