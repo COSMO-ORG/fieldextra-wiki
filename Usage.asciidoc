@@ -1,4 +1,4 @@
-== Fieldextra usage and focal point for COSMO members
+=== Fieldextra usage and focal point for COSMO members
 
 .*ARPA-SIMC*
     Applications:   COSMO-LEPS and IFS product generator
