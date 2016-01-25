@@ -1,5 +1,3 @@
-=== Fieldextra usage and focal point for COSMO members
-
 .*ARPA-SIMC*
     Applications:   COSMO-LEPS and IFS product generator
     Platform:       CRAY-XC30 / SUSE 11.3 / gfortran 4.8.2 (ECMWF)
