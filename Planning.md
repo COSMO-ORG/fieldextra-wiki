@@ -5,7 +5,6 @@
 * **v12.3.0** : May 2016
 
 #### Agreed milestones
-* **09.2014, COSMO TAG** : web pages
 * **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
 * **2015Q3, Sinergia** : NetCDF on input
 
