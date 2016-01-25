@@ -49,7 +49,8 @@
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> 12.2.0] [jmb;3d] Add global memory monitoring of non instrumented libraries (icontool, rttov)
+     + [-> 12.2.0] [jmb;3d] Add global memory monitoring of non instrumented libraries
+       (currently icontool, rttov)
      + [1w] Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
        > Always use iundef for 'undefined' (currently -1 is used in some cases);
