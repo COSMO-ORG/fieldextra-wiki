@@ -1,18 +1,17 @@
 #### Table of content
-[Bug corrections](#Bug)
-    + Code consolidation
-    + Code optimization
-    + Feature consolidation
-    + New features
-    + User interface
-    + Environment
-    + fx tools
-    + Documentation
-    + Administrative
- 
+* [Bug corrections](#bug)
+* [Code consolidation](#code_consolidation)
+* [Code optimization](#code_optimization)
+* [Feature consolidation](#feature_consolidation)
+* [New features](#new_feature)
+* [User interface](#interface)
+* [Environment](#environment)
+* [fx tools](#fxtool)
+* [Documentation](#docu)
+* [Administrative](#admin)
 
  -----------------------------------------------------------------------------------------
-  **Bug corrections** <a name="Bug"></a>
+  **Bug corrections** <a name="bug"></a>
  -----------------------------------------------------------------------------------------
 
 ######Priority high
