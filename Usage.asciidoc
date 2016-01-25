@@ -51,8 +51,8 @@
     Users:          D.Blinov, D.Alferov, E.Astakhova, M.Shatunova, A.Kirsanov, M.Nikitin
 
 .*NMA*
-    Applications:   COSMO pre-processing: re-grid radar composite to rotated lat/lon grid
-                    COSMO post-processing: interpolate COSMO-7 output on geog. lat/lon grid
+    Applications:   COSMO pre-proc: re-grid radar composite to rotated lat/lon grid
+                    COSMO post-proc: interpolate COSMO-7 output on geog. lat/lon grid
     Platform:       ??? / Scientific Linux 2.6.32-279.5.1.el6.x86_64 / gfortran 4.4.6
     Focal point:    Cosmin Barbu (cosmin.barbu@meteoromania.ro)
     Users:          C.Barbu, R.Dumitrache
