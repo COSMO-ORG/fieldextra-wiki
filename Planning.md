@@ -1,5 +1,5 @@
 #### Table of content
-[Bug corrections][Bug]
+[Bug corrections](#Bug)
     + Code consolidation
     + Code optimization
     + Feature consolidation
@@ -12,7 +12,7 @@
  
 
  -----------------------------------------------------------------------------------------
-  **Bug corrections**
+  **Bug corrections** <a name="Bug"></a>
  -----------------------------------------------------------------------------------------
 
 ######Priority high
