@@ -10,7 +10,7 @@
 * [User interface](#interface)
 * [Environment](#environment)
 * [fx tools](#fxtool)
-* [Documentation](#documentation)
+* [Documentation](#docu)
 * [Administrative](#admin)
 
 
@@ -76,49 +76,52 @@
         
 
 ######Priority low
+###### Priority low
 
-        + [1d] Systematic check of staggering information in all operators
-        + [1d] Check that all meta-information of a multi-levels field are
-          consistent (e.g. units, origin ...); otherwise, vertical operators may
-          lead to unpredictable meta-information values
-        + [1d] Keep track of memory usage for all repositories used in fxtr_storage
-        + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
-        + [1d] Implement 'azimut_class' as a named operator (instead of poper)
-        + [2d] Unified interface to decide when two fields represent the same quantity
-          (used in field_compare, get_ic_field, get_fields, ...)
-        + [2d] Introduce in fxtr_operator_support an operator to compute the scalar product
-          of a vector field with the gradient of a scalar field; use it in
-          geostrophic_wind() and  geostrophic_vorticity_advection()
-        + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
-        + [3d] Re-structure read_location_additional()
-        + [3d] Clean-up support_misc
-          > Replace parse_operator_definition(), parse_transformation() and
-            parse_prototype() with a generic procedure, replace corresponding
-            types with a generic type
-        + [3d] Clean-up fxtr_control
-          > handle io specifications as field specifications:
-            introduce io_spec, extend io_spec_default, extend only_for_inout(),
-            add populate_io_spec()
-          > default format for generic output should be set in the corresponding
-            write routine and not in this module
-          > less module variables, use procedure arguments instead
-        + [3d] INCORE storage
-          > unified access to incore fields; curently access is provided by one of
-            incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
-          > support multiple instances of special fields (HSURF ... -> multiple grids)
-        + [1w] Replace POINTER with ALLOCATABLE in TYPE when possible (safer)
-        + [1w] Review stack usage
-          > Evaluate compiler options (e.g. Intel -heap-arrays, see http://software.intel.com/
-            sites/products/documentation/doclib/stdxe/2013/composerxe/compiler/fortran-lin/
-            GUID-0C5CC04A-C8CB-49BF-9382-03799AFD688B.htm)
-          > Avoid silent stacksize overflow (could lead to invisible corrupted data)
-        + [1w] GRIB 1 / GRIB 2 implementation
-          > support_grib1 error handling similar to support_grib2 (more verbose)
-          > write_grib1 error handling similar to write_grib2 (more verbose)
-          > decoding of model type and model name in support_grib1 similar to
-            support_grib2 (table based, use common table where possible)
-          > externalize look-up table for model name
-        + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
-          32 bits (possible in fortran 2008), real_in_byte set accordingly
+     + [1d] Systematic check of staggering information in all operators
+     + [1d] Check that all meta-information of a multi-levels field are
+       consistent (e.g. units, origin ...); otherwise, vertical operators may
+       lead to unpredictable meta-information values
+     + [1d] Keep track of memory usage for all repositories used in fxtr_storage
+     + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
+     + [1d] Implement 'azimut_class' as a named operator (instead of poper)
+     + [2d] Unified interface to decide when two fields represent the same quantity
+       (used in field_compare, get_ic_field, get_fields, ...)
+     + [2d] Introduce in fxtr_operator_support an operator to compute the scalar product
+       of a vector field with the gradient of a scalar field; use it in
+       geostrophic_wind() and  geostrophic_vorticity_advection()
+     + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
+     + [3d] Re-structure read_location_additional()
+     + [3d] Clean-up support_misc
+       > Replace parse_operator_definition(), parse_transformation() and
+         parse_prototype() with a generic procedure, replace corresponding
+         types with a generic type
+     + [3d] Clean-up fxtr_control
+       > handle io specifications as field specifications:
+         introduce io_spec, extend io_spec_default, extend only_for_inout(),
+         add populate_io_spec()
+       > default format for generic output should be set in the corresponding
+         write routine and not in this module
+       > less module variables, use procedure arguments instead
+     + [3d] INCORE storage
+       > unified access to incore fields; curently access is provided by one of
+         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
+       > support multiple instances of special fields (HSURF ... -> multiple grids)
+     + [1w] Replace POINTER with ALLOCATABLE in TYPE when possible (safer)
+     + [1w] Review stack usage
+       > Evaluate compiler options (e.g. Intel -heap-arrays, see http://software.intel.com/
+         sites/products/documentation/doclib/stdxe/2013/composerxe/compiler/fortran-lin/
+         GUID-0C5CC04A-C8CB-49BF-9382-03799AFD688B.htm)
+       > Avoid silent stacksize overflow (could lead to invisible corrupted data)
+     + [1w] GRIB 1 / GRIB 2 implementation
+       > support_grib1 error handling similar to support_grib2 (more verbose)
+       > write_grib1 error handling similar to write_grib2 (more verbose)
+       > decoding of model type and model name in support_grib1 similar to
+         support_grib2 (table based, use common table where possible)
+       > externalize look-up table for model name
+     + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
+       32 bits (possible in fortran 2008), real_in_byte set accordingly
+
+
 
 
