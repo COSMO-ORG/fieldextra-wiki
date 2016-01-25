@@ -1,0 +1,63 @@
+== Fieldextra usage and focal point for COSMO members
+
+.*ARPA-SIMC*
+    Applications:   COSMO-LEPS and IFS product generator
+    Platform:       CRAY-XC30 / SUSE 11.3 / gfortran 4.8.2 (ECMWF)
+                    Linux Fedora 20 (ARPA)
+    Focal point:    Andrea Montani (amontani@arpa.emr.it)
+    Users:          A.Montani, C.Marsigli
+
+.*DWD*
+    Applications:   Wind/T/QNH and FABEC for German Flight Control,
+                    ICON subdomain on regular grid, TIGGE LAM, verification
+    Platform:       Cray (Linux Cluster) / SUSE Linux Enterprise Server 11 / ifort 15.0.1.133
+    Focal point:    Hermann Asensio (Hermann.Asensio@dwd.de)
+    Users:          H.Asensio, A.Barleben (developer), V.Stauch, F.Fundel, C.Endler, R.Keane
+
+.*HNMS*
+    Applications:   None, currently evaluating possible use
+    Platform:       ---
+    Focal point:    TBD
+    Users:          ---
+
+.*IMGW*
+    Applications:   COSMO post-processing, PP CELO (verification)
+    Platform:       ??? / Red Hat Enterprise 5.4 and 6.5 / gfortran 4.4.7
+    Focal point:    TBD
+    Users:          J.Linkowska, D.Wòjcik, A.Mazur
+
+.*IMS*
+    Applications:   TERRA standalone pre-processing
+                    (possibly more in the future)
+    Platform:       SGI, AMD Opteron 6276 / SUSE 11.3 / gfortran 4.6.1
+    Focal point:    Pavel Khain (khainp@ims.gov.il)
+    Users:          P.Khain, A.Shtivelman
+
+.*MCH*
+    Applications:   INCA pre-processing, KENDA pre-processing, COSMO pre-processing,
+                    COSMO & IFS product generator, COSMO-ART & Pollen post-processing
+    Platform:       CRAY-XE6 / SUSE 11.1 / gfortran 4.8.2
+    Focal point:    Jean-Marie Bettems (jean-marie.bettems@meteoswiss.ch)
+    Users:          JM.Bettems (developer), P.Baumann (developer), A.Walser, A.Pauling,
+                    A.C.Letestu, M.Buzzi, S.Trefalt, L.Mayoraz
+
+.*RHM*
+    Applications:   COSMO-RU, COSMO-RU-ART and COSMO-RU2-EPS post-processing,
+                    COSMO-RU data assimilation
+    Platform:       Intel cluster (1) / SUSE 11.1 / Intel Fortran 12.1
+                    (1) RSC TORNADO, see http://rscgroup.ru/
+    Focal point:    Denis Blinov (denisblinov@ya.ru)
+    Users:          D.Blinov, D.Alferov, E.Astakhova, M.Shatunova, A.Kirsanov, M.Nikitin
+
+.*NMA*
+    Applications:   COSMO pre-processing: re-grid radar composite to rotated lat/lon grid
+                    COSMO post-processing: interpolate COSMO-7 output on geog. lat/lon grid
+    Platform:       ??? / Scientific Linux 2.6.32-279.5.1.el6.x86_64 / gfortran 4.4.6
+    Focal point:    Cosmin Barbu (cosmin.barbu@meteoromania.ro)
+    Users:          C.Barbu, R.Dumitrache
+
+.*USAM*
+    Applications:   COSMO-ME EPS
+    Platform:       CRAY-XC30 / SUSE 11.3 / gfortran 4.8.2 (ECMWF)
+    Focal point:    Lucio Torisi (torrisi@meteoam.it)
+    Users:          F.Marcucci
