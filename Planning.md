@@ -146,10 +146,10 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;3d] Improve flexibility in defining partition of threads between inner and
-       outer loop, in order to improve the load balance of a mix of products containing
-       a few expensive and many cheap products (e.g. RTTOV based products)
-       > flag 'expensiveâ~@~Y products, use n_openmp_outerthread*n_openmp_innerthread
+     + [-> 12.2.0] [jmb;3d] Improve flexibility in defining partition of threads between
+       inner and outer loop, in order to improve the load balance of a mix of products
+       containing a few expensive and many cheap products (e.g. RTTOV based products)
+       > flag expensive products, use n_openmp_outerthread*n_openmp_innerthread
          threads in the inner loop for these expensive products, compute expensive
          products sequentially, at the outer loop level, before the other products
      + [3d] Code profiling of COSMO-NExT system
@@ -164,14 +164,14 @@
      + [1w] Evaluate use of accelerator (GPU)
        > [mikko.partio@fmi.fi:
           We decode GRIB 1 and GRIB 2 simple packing with GPU's.
-          The reason why we don't already do the encoding in GPUs is that decoding is much
-          easier to implement than encoding. The performance gain is also much larger in
-          decoding: we have measured up to 100x increase in performance when compared to
-          CPU implementation, whereas the performance gain of encoding is only around 6x.
-          These numbers include the time that it takes to move the data to and from device
-          memory. The performance gain is dependent on grib size: the larger the grib, the
-          better the GPU performs. We regularly handle Hirlam and IFS gribs ranging from
-          ~1000000 to ~4000000 grid points per field.
+          The reason why we don't already do the encoding in GPUs is that decoding is
+          much easier to implement than encoding. The performance gain is also much
+          larger in decoding: we have measured up to 100x increase in performance when
+          compared to CPU implementation, whereas the performance gain of encoding is
+          only around 6x. These numbers include the time that it takes to move the data
+          to and from device memory. The performance gain is dependent on grib size: the
+          larger the grib, the better the GPU performs. We regularly handle Hirlam and
+          IFS gribs ranging from ~1000000 to ~4000000 grid points per field.
           Our implementation is quite simple and it is based on grib_api. There has been
           some talk of releasing the code as it is or to provide a patch to grib_api, but
           nothing has been decided so far.]
@@ -197,9 +197,6 @@
        > Evaluate ADIOS API
      + [1-2w] Memory footprint optimization :
        > Just on time output also when time operator is used
-       > Optimize internal memory usage for reduction operators acting in the time dimension
-
-
-
-
+       > Optimize internal memory usage for reduction operators acting in the time
+         dimension
 
