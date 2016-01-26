@@ -1,8 +1,10 @@
-## v12.1.0
+### v12.1.0
 *Products*
-* Full support of GRIB 2 local use section (Offenbach, Zurich, COSMO-LEPS, COSMO default)
+*   Full support of GRIB 2 local use section 
+    (Offenbach, Zurich, COSMO-LEPS, COSMO default)
 * Full support of GRIB 2 chemical constituents
-* Further consolidation and extension of GRIB 2 support (Full compatibility with ICON and COSMO-EU tested)
+* Further consolidation and extension of GRIB 2 support 
+  (Full compatibility with ICON and COSMO-EU tested)
 
 *Operators*
 * Definitive implementation of synthetic satellite operators (based on RTTOV 11.2.0)
