@@ -1,5 +1,48 @@
 __See file admin/HISTORY for a detailed list!__
 
+### v12.0.0
+*Products*
+* Consolidate support of ICON grid  
+  (missing values, kilometric grids, diagnostic)
+* Full support of synthetic satellite fields  
+  (GRIB1, GRIB2, NetCDF)
+* Support setting generalized height based coordinates characteristics through namelist
+  (allows hybrid to generalized height based coordinates transformation)
+*Operators*
+* Support EPS member to member transformation using a global EPS operator
+  (e.g. reset EPS by adding a more recent determinist forecast to each EPS perturbation)
+* Improve 'fill_undef' operator to have a more targeted effect
+  (ignore regions where too many undef are present)
+* Operators 'merge_with' and 'compare_with' can now act on a collection of fields
+  (e.g. transformation of all members of an EPS system)
+* New operator to find the surface where a 3D field reaches its maximum or minimum
+  (condition is eveluated independently in each column)
+* Possibility to interpolate to an arbitrary surface
+* New operator to compute an arbitrary sum of fields
+* New operator to compute the (differential) vertical wind shear
+* New operators to compute the divergence and the deformation of the horizontal wind
+* New operator to compute the Gradient Richardson number RI
+* New operators to compute CAT indices
+* Preliminary support to compute synthetic satellite fields  
+  (RTTOV lib)
+*Optimization*
+* Support duplicated records in input data
+  (memory optimization for output not compatible with just on time, using a temp GRIB)
+* New variable out_production_granularity in &RunSpecification
+  (control balance bewteen memory footprint and OMP speedup)
+* Memory and compute time optimization for large problems
+*Resources, tools*
+* Change format of dictionary  
+  (use key/value pair)
+* New fxclone tool
+* New dictionary_mill tools  
+  (convert between GRIB API def files and dictionary)
+*Others*
+* New 'debug' value of verbosity in &RunSpecification
+* Extend information in fieldextra.diagnostic when additional_diagnostic=.true.
+* Bug corrections, miscelleanous (see HISTORY)
+
+
 ### v12.1.0
 *Products*
 * Full support of GRIB 2 local use section  
