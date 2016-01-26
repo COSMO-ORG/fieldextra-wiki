@@ -1,5 +1,5 @@
 * [Table of content][home]
-* [Fieldextra history][history]
+* [Fieldextra history (summary)][history]
 * [Fieldextra planning][planning]
 * [Fieldextra usage and contact persons within COSMO][usage]
 
