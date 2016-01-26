@@ -48,7 +48,7 @@
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> 12.2.0] [jmb;3d] Add global memory monitoring of non instrumented libraries
+     + [-> 12.3.0] [jmb;3d] Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
      + [1w] Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
@@ -402,9 +402,9 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;<1d] Short name changes for compatibility with DWD:
-          SNOW_% --> SNOW_PERCENT, CONV_% --> CONV_PERCENT
-     + [-> 12.3.0] [jmb/bap;2w] Migration from SVN to Git / GitHub
+     + [ok 12.2.0] [jmb;<1d] Short name changes for compatibility with DWD:
+       SNOW_% --> SNOW_PERCENT, CONV_% --> CONV_PERCENT
+     + [ok 12.2.0] [jmb/bap;2w] Migration from SVN to Git / GitHub
        > Learn tools
        > Define policy
        > Automatic generation of Git revision in fxtr_main
@@ -475,7 +475,7 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [jmb;1d] COSMO web documentation:
+     + [ok 12.2.0] [jmb;1d] COSMO web documentation:
        > Integrate planning in the framework provided by the COSMO web pages
          (could be a link to some other pages, or at least an e-mail address)
        > Update fieldextra specific page
