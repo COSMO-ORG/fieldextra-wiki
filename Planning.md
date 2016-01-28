@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.2.0** : February 2016
-* **v12.3.0** : May 2016
+* **v12.2.0** : March 2016
+* **v12.3.0** : June 2016
 
 #### Agreed milestones
 * **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
@@ -207,6 +207,10 @@
 
      + [-> 12.3.0] [jmb;1w] Consolidate computation of SYNSAT products
        > see modifications in COMO release 5.3, procedure prepare_rttov_input()
+     + [buz,jmb;2d] Adapt fieldextra to support GRIB 1 output from INCA
+       > make sure that the correct information is available in the INCA output
+         (INCA produces proprietary binary format, converted by companion script)
+       > buz has the lead, and will contact jmb when he is ready to tackle this issue
      + [2d] Add/consolidate support for
        > multi-layers snow model (fxtr, GRIB1/2, NC)
        > coding of kilometric grids (GRIB2 - Need of WMO extension?)
@@ -289,19 +293,21 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;2d;COSMO PP CORSO-A,INCA,BAFU] Extend poper='hcor'
+     + [-> 12.2.0] [jmb;3d;COSMO PP CORSO-A,INCA,BAFU] Extend poper='hcor'
        > introduce multiple options
        > add model lapse rate as option
-     + [-> 12.2.0] [jmb;3-5d] Implement RTTOV release 7 (besides release 11.2)
-     + [-> 12.2.0] [jmb;3-5d;request from Daniel] Add support for ASCII input
+       > add option to apply operator on grid points instead of locations,
+         and to define a reference topography
+     + [-> 12.2.0] [jmb;1w;COSMO PP CORSO-A,INCA,BAFU] New voper
+       > interpolation on a set of levels defined by an external HEIGHT field
+       > interpolation using an external reference topography
+       > interpolation using HPBL and HSL information
+       > interpolation using model lapse rate information
+     + [-> 12.2.0] [jmb;1w] Implement RTTOV release 7 (besides release 11.2)
+     + [-> 12.2.0] [jmb;3d;request from Daniel] Add support for ASCII input
        (to use fieldextra as a tool to create a GRIB or NetCDF file, with the correct
         meta-information)
        > based on BLK_TABLE format (with possible adaptation if needed...)
-     + [-> 12.2.0] [jmb;2w;COSMO PP CORSO-A,INCA,BAFU] Re-gridding using 3D information
-       > support vertical correction of field to interpolate before applying re-gridding
-       > add weighted average based on generalized distance (dh aware)
-       > special application to interpolate T2m on 'real' topography (BAFU)
-       > PBL translation (INCA, TBD with Matteo)
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
@@ -482,7 +488,7 @@
      + [-> 12.3.0] [jmb/bap;2w] Provide more problem based solutions
        > extend cookbook (monitoring product ...)
        > reference file describing as many applications as possible, with keywords
-         and link to namelists
+         and link to namelists (collect usage from users)
      + [-> 12.3.0] [jmb/bap;2-3w] Common information platform, based on GitHub and
        other tools, with, in particular, support for code review, bug tracking, feature
        request, roadmap and history
