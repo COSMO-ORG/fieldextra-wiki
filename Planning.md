@@ -43,12 +43,14 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [bap;3d] Consolidated wind shear operators
+     + [-> 12.2.0] [bap;3d] [issue #2]
+       Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> 12.3.0] [jmb;3d] Add global memory monitoring of non instrumented libraries
+     + [-> 12.3.0] [jmb;3d] 
+       Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
      + [1w] Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
@@ -145,7 +147,8 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;3d] Improve flexibility in defining partition of threads between
+     + [-> 12.2.0] [jmb;3d] [issue #3] 
+       Improve flexibility in defining partition of threads between
        inner and outer loop, in order to improve the load balance of a mix of products
        containing a few expensive and many cheap products (e.g. RTTOV based products)
        > flag expensive products, use n_openmp_outerthread*n_openmp_innerthread
@@ -205,7 +208,8 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [jmb;1w] Consolidate computation of SYNSAT products
+     + [-> 12.3.0] [jmb;1w] 
+       Consolidate computation of SYNSAT products
        > see modifications in COMO release 5.3, procedure prepare_rttov_input()
      + [buz,jmb;2d] Adapt fieldextra to support GRIB 1 output from INCA
        > make sure that the correct information is available in the INCA output
@@ -293,18 +297,22 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;3d;COSMO PP CORSO-A,INCA,BAFU] Extend poper='hcor'
+     + [-> 12.2.0] [jmb;3d;COSMO PP CORSO-A,INCA,BAFU] [issue #4] 
+       Extend poper='hcor'
        > introduce multiple options
        > add model lapse rate as option
        > add option to apply operator on grid points instead of locations,
          and to define a reference topography
-     + [-> 12.2.0] [jmb;1w;COSMO PP CORSO-A,INCA,BAFU] New voper
+     + [-> 12.2.0] [jmb;1w;INCA] [issue #5]
+       New voper for PBL translation
        > interpolation on a set of levels defined by an external HEIGHT field
        > interpolation using an external reference topography
        > interpolation using HPBL and HSL information
        > interpolation using model lapse rate information
-     + [-> 12.2.0] [jmb;1w] Implement RTTOV release 7 (besides release 11.2)
-     + [-> 12.2.0] [jmb;3d;request from Daniel] Add support for ASCII input
+     + [-> 12.2.0] [jmb;1w] [issue #6]
+       Implement RTTOV release 7 (besides release 11.2)
+     + [-> 12.2.0] [jmb;3d;request from Daniel] [issue #7]
+       Add support for ASCII input
        (to use fieldextra as a tool to create a GRIB or NetCDF file, with the correct
         meta-information)
        > based on BLK_TABLE format (with possible adaptation if needed...)
@@ -408,13 +416,16 @@
 
 ###### Priority high
 
-     + [ok 12.2.0] [jmb;<1d] Short name changes for compatibility with DWD:
+     + [ok 12.2.0] [jmb;<1d] 
+       Short name changes for compatibility with DWD:
        SNOW_% --> SNOW_PERCENT, CONV_% --> CONV_PERCENT
-     + [ok 12.2.0] [jmb/bap;2w] Migration from SVN to Git / GitHub
+     + [ok 12.2.0] [jmb/bap;2w] 
+       Migration from SVN to Git / GitHub
        > Learn tools
        > Define policy
        > Automatic generation of Git revision in fxtr_main
-     + [-> 12.3.0] [jmb/bap;2w] Consolidate regression suite
+     + [-> 12.3.0] [jmb/bap;2w] 
+       Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
        > Large differences for non-significative values should be disgarded
@@ -481,17 +492,19 @@
 
 ###### Priority high
 
-     + [ok 12.2.0] [jmb;1d] COSMO web documentation:
+     + [ok 12.2.0] [jmb;1d] 
+       COSMO web documentation:
        > Integrate planning in the framework provided by the COSMO web pages
          (could be a link to some other pages, or at least an e-mail address)
        > Update fieldextra specific page
-     + [-> 12.3.0] [jmb/bap;2w] Provide more problem based solutions
+     + [-> 12.3.0] [jmb/bap;2w] 
+       Provide more problem based solutions
        > extend cookbook (monitoring product ...)
        > reference file describing as many applications as possible, with keywords
          and link to namelists (collect usage from users)
-     + [-> 12.3.0] [jmb/bap;2-3w] Common information platform, based on GitHub and
-       other tools, with, in particular, support for code review, bug tracking, feature
-       request, roadmap and history
+     + [-> 12.3.0] [jmb/bap;2-3w] 
+       Common information platform, based on GitHub and other tools, with, in particular,
+       support for code review, bug tracking, feature request, roadmap and history
 
 ###### Priority medium
 
@@ -511,7 +524,8 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] Planning beyond 12.3.0
+     + [-> 12.3.0] 
+       Planning beyond 12.3.0
        > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
        > possible significant developments : code consolidation, code optimization,
          NetCDF input, full ICON support
@@ -520,6 +534,5 @@
 ###### Priority medium
 
 ###### Priority low
-
 
 
