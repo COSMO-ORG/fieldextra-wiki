@@ -497,14 +497,14 @@
        > Integrate planning in the framework provided by the COSMO web pages
          (could be a link to some other pages, or at least an e-mail address)
        > Update fieldextra specific page
+     + [ok 12.2.0] [jmb/bap;2-3w] 
+       Common information platform, based on GitHub and other tools, with, in particular,
+       support for code review, bug tracking, feature request, roadmap and history
      + [-> 12.3.0] [jmb/bap;2w] 
        Provide more problem based solutions
        > extend cookbook (monitoring product ...)
        > reference file describing as many applications as possible, with keywords
          and link to namelists (collect usage from users)
-     + [-> 12.3.0] [jmb/bap;2-3w] 
-       Common information platform, based on GitHub and other tools, with, in particular,
-       support for code review, bug tracking, feature request, roadmap and history
 
 ###### Priority medium
 
@@ -527,8 +527,7 @@
      + [-> 12.3.0] 
        Planning beyond 12.3.0
        > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
-       > possible significant developments : code consolidation, code optimization,
-         NetCDF input, full ICON support
+       > possible significant developments : code consolidation, code optimization, NetCDF input, full ICON support
        NOTE: wish from waa to focus on input optimization
 
 ###### Priority medium
