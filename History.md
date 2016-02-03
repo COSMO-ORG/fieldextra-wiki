@@ -2,7 +2,7 @@ __See file admin/HISTORY for a detailed list!__
 
 ### Releases
 * [v11.0.0](#11.0.0), [v11.0.1](#11.0.1), [v11.0.2](#11.0.2)
-* [v11.1.0](#11.1.0)
+* [v11.1.0](#11_1_0)
 * [v11.2.0](#11.2.0)
 * [v11.3.0](#11.3.0), [v11.3.1](#11.3.1), [v11.3.2](#11.3.2), [v11.3.3](#11.3.3)
 * [v12.0.0](#12.0.0)
@@ -66,7 +66,7 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections
 
 
-### v11.1.0, released on 31.05.2013 <a name="v11.1.0"></a>
+### v11.1.0, released on 31.05.2013 <a name="v11_1_0"></a>
 * Complete re-factoring of DWD GRIB API
 * Support model names with originating center set to Moscow
 * More robust support of unregistred COSMO centers
