@@ -1,3 +1,5 @@
+## Hello SMC guy!
+
 * [Fieldextra history (summary)][history]
 * [Fieldextra planning][planning]
 * [Fieldextra usage and contact persons within COSMO][usage]
