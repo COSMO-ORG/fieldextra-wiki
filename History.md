@@ -8,7 +8,8 @@ __See file admin/HISTORY for a detailed list!__
 * [v12.0.0](#v12.0.0)
 * [v12.1.0](#v12.1.0)
 
-### v11.0.0, released on 21.12.2012 <a name="v11.0.0"></a>
+<a name="v11.0.0"></a>
+### v11.0.0, released on 21.12.2012 
 * Extend support for COSMO-LEPS products  
   (e.g. control run)
 * Introduce support for SLEVE 2 vertical coordinates
@@ -43,8 +44,8 @@ __See file admin/HISTORY for a detailed list!__
 * Environment: add support for INTEL compiler
 * Documentation: new FAQ, new cookbook, improved README.install
 
-
-### v11.0.1, released on 15.02.2013 <a name="v11.0.1"></a>
+<a name="v11.0.1"></a>
+### v11.0.1, released on 15.02.2013 
 * More robust parsing of namelist : skip product whose definition is incorrect,
   instead of exiting at the first exception detected in the namelist
 * Code optimization for cases where a large number of input files are processed
@@ -52,7 +53,8 @@ __See file admin/HISTORY for a detailed list!__
   (in particular to support IBM compiler)
 
 
-### v11.0.2, released on 22.04.2013 <a name="v11.0.2"></a>
+<a name="v11.0.2"></a>
+### v11.0.2, released on 22.04.2013 
 * Support model names with originating center set to Zurich and ARPA-SIMC
 * Support of ECMWF seasonal forecasts, incl. monthly mean
 * Support screening of input file using eps member, lead time, or validation date
@@ -66,7 +68,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections
 
 
-### v11.1.0, released on 31.05.2013 <a name="v11.1.0"></a>
+<a name="v11.1.0"></a>
+### v11.1.0, released on 31.05.2013 
 * Complete re-factoring of DWD GRIB API
 * Support model names with originating center set to Moscow
 * More robust support of unregistred COSMO centers
@@ -89,7 +92,8 @@ __See file admin/HISTORY for a detailed list!__
   (in particular quantile computation)
 
 
-### v11.2.0, released on 20.11.2013 <a name="v11.2.0"></a>
+<a name="v11.2.0"></a>
+### v11.2.0, released on 20.11.2013 
 * Consolidate fxconvert  
   (NetCDF target and duplicate field names in input file)
 * Simplify usage of dictionaries  
@@ -108,7 +112,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections and many other improvements (see HISTORY)
 
 
-### v11.3.0, released on 14.03.2014 <a name="v11.3.0"></a>
+<a name="v11.3.0"></a>
+### v11.3.0, released on 14.03.2014 
 * Remove limitation on domain subset usage for operators requiring a lateral halo
 * Extend support of MOS estimator  
   (gridded, logistic regression ...)
@@ -122,7 +127,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections, internal code improvements, code optimization (see HISTORY)
 
 
-### v11.3.1, released on 15.04.2014 <a name="v11.3.1"></a>
+<a name="v11.3.1"></a>
+### v11.3.1, released on 15.04.2014 
 * Remove limitation on domain subset usage for operators requiring a lateral halo
 * Extend support of MOS estimator  
   (gridded, logistic regression ...)
@@ -136,7 +142,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections, internal code improvements, code optimization (see HISTORY)
 
 
-### v11.3.2, released on 25.06.2014 <a name="v11.3.2"></a>
+<a name="v11.3.2"></a>
+### v11.3.2, released on 25.06.2014 
 * Option to specify vertical_coordinate_coef in &ModelSpecificatons
 * Add support of COSMO nudgecast and IFS-ENS mean
 * Add support of compact coding of GRIB constant fields
@@ -147,7 +154,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections, miscelleanous (see HISTORY)
 
 
-### v11.3.3, released on 01.09.2014 <a name="v11.3.3"></a>
+<a name="v11.3.3"></a>
+### v11.3.3, released on 01.09.2014 
 * Improve interface for re-gridding input fields
 * Support field specific re-gridding method
 * Support native ICON grid on input - limited implementation
@@ -161,7 +169,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections, miscelleanous (see HISTORY)
 
 
-### v12.0.0, released on 01.03.2015 <a name="v12.0.0"></a>
+<a name="v12.0.0"></a>
+### v12.0.0, released on 01.03.2015 
 *Products*
 * Consolidate support of ICON grid  
   (missing values, kilometric grids, diagnostic)
@@ -208,7 +217,8 @@ __See file admin/HISTORY for a detailed list!__
 * Bug corrections, miscelleanous (see HISTORY)
 
 
-### v12.1.0, released on 10.12.2015 <a name="v12.1.0"></a>
+<a name="v12.1.0"></a>
+### v12.1.0, released on 10.12.2015 
 *Products*
 * Full support of GRIB 2 local use section  
   (Offenbach, Zurich, COSMO-LEPS, COSMO default)
