@@ -1,4 +1,4 @@
-__See file admin/HISTORY for a detailed list!__
+_See file admin/HISTORY for a detailed list!_
 
 ### All releases
 * [v11.0.0](#v11.0.0), [v11.0.1](#v11.0.1), [v11.0.2](#v11.0.2)
