@@ -1,6 +1,6 @@
 __See file admin/HISTORY for a detailed list!__
 
-### Releases
+### All releases
 * [v11.0.0](#v11.0.0), [v11.0.1](#v11.0.1), [v11.0.2](#v11.0.2)
 * [v11.1.0](#v11.1.0)
 * [v11.2.0](#v11.2.0)
