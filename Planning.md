@@ -333,7 +333,7 @@
      + [3d;request from Lucio Torisi] Storm relative helicity
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
      + [3d;interest by O.Liechti] New output type for vertical profiles @ location
-     + [2-4w;request form project Sinergia] Support NetCDF on input
+     + [2w;request form project Sinergia] Support NetCDF on input
          For processing of gridded observations (radar, satellite), for interoperability
          with other MCH groups, for EMPA, for in-memory communication (special NetCDF
          library available at CSCS), for R&D, for the CLM community... (but the StC has
