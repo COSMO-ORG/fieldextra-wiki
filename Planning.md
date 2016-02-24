@@ -147,7 +147,7 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;3d] [issue #3] 
+     + [ok 12.2.0] [jmb;3d] [issue #3] 
        Improve flexibility in defining partition of threads between
        inner and outer loop, in order to improve the load balance of a mix of products
        containing a few expensive and many cheap products (e.g. RTTOV based products)
@@ -305,7 +305,7 @@
          and to define a reference topography
      + [-> 12.2.0] [jmb;1w] [issue #6]
        Implement RTTOV release 7 (besides release 11.2)
-     + [-> 12.2.0] [jmb;3d;request from Daniel] [issue #7]
+     + [ok 12.2.0] [jmb;3d;request from Daniel] [issue #7]
        Add support for ASCII input
        (to use fieldextra as a tool to create a GRIB or NetCDF file, with the correct
         meta-information)
