@@ -333,16 +333,16 @@
      + [3d;request from Lucio Torisi] Storm relative helicity
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
      + [3d;interest by O.Liechti] New output type for vertical profiles @ location
-     + [2w;request form project Sinergia] Support NetCDF on input
-         For processing of gridded observations (radar, satellite), for interoperability
-         with other MCH groups, for EMPA, for in-memory communication (special NetCDF
-         library available at CSCS), for R&D, for the CLM community... (but the StC has
-         decided that fieldextra is not supported/available for the CLM community).
-         EMPA would be interested using fieldextra for postprocessing of model output
-         once this feature is available.
-         Another usefull extension, easy to add once NetCDF is supported, would be the
-         possibility to give to fieldextra a data array as a list of numbers with the
-         associated meta-information.
+     + [-> 12.3.0 (?)] [jmb;2w] Support NetCDF on input
+       Part of project Sinergia
+       Required to use grins in the test environment to compare NetCDF files.
+       Also required for processing of gridded observations (radar, satellite),
+       for interoperability with other MCH groups, for EMPA, for in-memory
+       communication (special NetCDF library available at CSCS), for R&D,
+       for the CLM community... (but the StC has decided that fieldextra is not
+       supported/available for the CLM community).
+       EMPA would be interested using fieldextra for postprocessing of model output
+       once this feature is available.
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
