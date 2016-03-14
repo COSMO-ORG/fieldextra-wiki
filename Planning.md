@@ -43,7 +43,7 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [bap;3d] [issue #2]
+     + [-> 12.3.0] [bap;3d] [issue #2]
        Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
@@ -333,7 +333,7 @@
      + [3d;request from Lucio Torisi] Storm relative helicity
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
      + [3d;interest by O.Liechti] New output type for vertical profiles @ location
-     + [-> 12.3.0 (?)] [jmb;2w] Support NetCDF on input
+     + [-> 12.3.0] [jmb;2w] Support NetCDF on input
        Part of project Sinergia
        Required to use grins in the test environment to compare NetCDF files.
        Also required for processing of gridded observations (radar, satellite),
@@ -428,6 +428,7 @@
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
+         (use grins for GRIB 1, GRIB 2, _and_ NetCDF)
        > Large differences for non-significative values should be disgarded
          (in particular values which are almost 0)
        > Systematic test of all GRIB meta-information
