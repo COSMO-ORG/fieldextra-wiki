@@ -156,6 +156,11 @@
          products sequentially, at the outer loop level, before the other products
      + [3d] Code profiling of COSMO-NExT system
        > Find possible bottlenecks, define optimization approaches
+       > Consider the following aspects:
+         - efficient namelist for each single product
+         - efficient namelist as a whole (e.g. do not duplicate expensive computations)
+         - OMP parallelization (e.g. multiple OMP partitions, product cost)
+         - code profiling (to detect possible code improvements)
      + [2-3w] I/O optimization, file based
        > Asynchronous read (read in advance)
        > Parallel read, in particular of partial model output
