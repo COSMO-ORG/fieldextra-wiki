@@ -2,7 +2,8 @@
 
 #### Release planning
 * **v12.2.0** : March 2016
-* **v12.3.0** : June 2016
+* **v12.3.0** : May 15th 2016
+* **v12.4.0** : July 31st 2016
 
 #### Agreed milestones
 * **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
@@ -43,13 +44,13 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [bap;3d] [issue #2]
+     + [-> 12.4.0] [bap;3d] [issue #2]
        Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> 12.3.0] [jmb;3d] [issue #8]
+     + [-> 12.4.0] [jmb;3d] [issue #8]
        Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
      + [1w] Consolidated usage of meta-information undef value
@@ -213,7 +214,7 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [jmb;1w] [issue #9]
+     + [-> 12.4.0] [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
      + [buz,jmb;2d] Adapt fieldextra to support GRIB 1 output from INCA
@@ -308,13 +309,20 @@
        > add model lapse rate as option
        > add option to apply operator on grid points instead of locations,
          and to define a reference topography
-     + [-> 12.2.0] [jmb;1w] [issue #6]
-       Implement RTTOV release 7 (besides release 11.2)
+     + [ok 12.2.0] [jmb;1w] [issue #6]
+       Improve support of field upscaling 
+       > data reduction, computation on sparse grid, interpolation of full grid
+       > required to work with RTTOV 11.2 for real time applications
+       (this solution has been chosen instead of having to implement the much
+        cheaper but much older and unsupported RTTOV 7)
      + [ok 12.2.0] [jmb;3d;request from Daniel] [issue #7]
        Add support for ASCII input
        (to use fieldextra as a tool to create a GRIB or NetCDF file, with the correct
         meta-information)
        > based on BLK_TABLE format (with possible adaptation if needed...)
+     + [-> 12.3.0] [jmb;3d;to be evaluated for INCA] [issue #28] 
+       INCA import based on native INCA output
+       (instead of using an intermediate GRIB or NetCDF translation)
      + [-> 12.3.0] [jmb;1w;INCA] [issue #5]
        New voper for PBL translation
        > interpolation on a set of levels defined by an external HEIGHT field
@@ -338,7 +346,7 @@
      + [3d;request from Lucio Torisi] Storm relative helicity
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
      + [3d;interest by O.Liechti] New output type for vertical profiles @ location
-     + [-> 12.3.0] [jmb;2w] Support NetCDF on input
+     + [-> 12.4.0] [jmb;2w] Support NetCDF on input
        Part of project Sinergia
        Required to use grins in the test environment to compare NetCDF files.
        Also required for processing of gridded observations (radar, satellite),
@@ -429,7 +437,13 @@
        > Learn tools
        > Define policy
        > Automatic generation of Git revision in fxtr_main
-     + [-> 12.3.0] [jmb/bap;2w] [issue #10]
+     + [-> 12.3.0] [jmb/bap;2w] [issue #29]
+       Update GRIB API environment
+       > Based on ECMWF release 1.14.7
+       > Check / close issue with coding of mars related local keys (SUP-1441)
+       > In relation with COSMO GRIB 2 policy
+         (final decision about env., docu on web, technical test suite)
+     + [-> 12.4.0] [jmb/bap;2w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
@@ -506,7 +520,7 @@
      + [ok 12.2.0] [jmb/bap;2-3w] 
        Common information platform, based on GitHub and other tools, with, in particular,
        support for code review, bug tracking, feature request, roadmap and history
-     + [-> 12.3.0] [jmb/bap;2w] [issue #11]
+     + [-> 12.4.0] [jmb/bap;2w] [issue #11]
        Provide more problem based solutions
        > extend cookbook (monitoring product ...)
        > reference file describing as many applications as possible, with keywords
@@ -530,8 +544,8 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [issue #12]
-       Planning beyond 12.3.0
+     + [-> 12.4.0] [issue #12]
+       Planning beyond 12.4.0
        > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
        > possible significant developments : code consolidation, code optimization, NetCDF input, full ICON support
        NOTE: wish from waa to focus on input optimization
