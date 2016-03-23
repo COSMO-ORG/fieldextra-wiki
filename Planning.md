@@ -303,12 +303,12 @@
 
 ###### Priority high
 
-     + [-> 12.2.0] [jmb;3d;COSMO PP CORSO-A,INCA,BAFU] [issue #4] 
-       Extend poper='hcor'
-       > introduce multiple options
-       > add model lapse rate as option
-       > add option to apply operator on grid points instead of locations,
-         and to define a reference topography
+     + [ok 12.2.0] [jmb;3d;COSMO PP CORSO-A] [issue #4] 
+       New way to compute location dependent height correction
+       > new voper='translate_simple'
+       > use model lapse rate
+       > target topography defined either through locations or through an
+         external topo field
      + [ok 12.2.0] [jmb;1w] [issue #6]
        Improve support of field upscaling 
        > data reduction, computation on sparse grid, interpolation of full grid
@@ -320,15 +320,26 @@
        (to use fieldextra as a tool to create a GRIB or NetCDF file, with the correct
         meta-information)
        > based on BLK_TABLE format (with possible adaptation if needed...)
-     + [-> 12.3.0] [jmb;3d;to be evaluated for INCA] [issue #28] 
+     + [-> 12.3.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
        INCA import based on native INCA output
        (instead of using an intermediate GRIB or NetCDF translation)
      + [-> 12.3.0] [jmb;1w;INCA] [issue #5]
-       New voper for PBL translation
+       New voper='translate_inca' for PBL translation
        > interpolation on a set of levels defined by an external HEIGHT field
        > interpolation using an external reference topography
        > interpolation using HPBL and HSL information
        > interpolation using model lapse rate information
+     + [-> 12.3.0] [jmb;1w;INCA,BAFU,DATA4WEB;to be evaluated] [issue #XXX]
+       Add support for combining location dependent height correction and lateral
+       weighted average
+       > output at specified locations: new location_to_gridpoint algorithm,
+         keep multiple grid points for each location during data reduction,
+         automatically compute weighted average in the last processing iteration
+       > output on an external grid: new type of data reduction declared in
+         in/out file definition (refers to some INCORE HSURF), keep multiple
+         copies of each grid point during data reduction (one copy for each
+         contributed target grid point), automatically compute weighted average
+         in the last processing iteration
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
