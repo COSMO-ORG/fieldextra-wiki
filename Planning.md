@@ -329,7 +329,7 @@
        > interpolation using an external reference topography
        > interpolation using HPBL and HSL information
        > interpolation using model lapse rate information
-     + [-> 12.3.0] [jmb;1w;INCA,BAFU,DATA4WEB;to be evaluated] [issue #XXX]
+     + [-> 12.3.0] [jmb;1w;INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
        Add support for combining location dependent height correction and lateral
        weighted average
        > output at specified locations: new location_to_gridpoint algorithm,
