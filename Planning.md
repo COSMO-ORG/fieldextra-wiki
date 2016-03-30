@@ -1,9 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.2.0** : March 2016
 * **v12.3.0** : May 15th 2016
-* **v12.4.0** : July 31st 2016
+* **v12.4.0** : August 31st 2016
 
 #### Agreed milestones
 * **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
@@ -148,13 +147,6 @@
 
 ###### Priority high
 
-     + [ok 12.2.0] [jmb;3d] [issue #3] 
-       Improve flexibility in defining partition of threads between
-       inner and outer loop, in order to improve the load balance of a mix of products
-       containing a few expensive and many cheap products (e.g. RTTOV based products)
-       > flag expensive products, use n_openmp_outerthread*n_openmp_innerthread
-         threads in the inner loop for these expensive products, compute expensive
-         products sequentially, at the outer loop level, before the other products
      + [3d] Code profiling of COSMO-NExT system
        > Find possible bottlenecks, define optimization approaches
        > Consider the following aspects:
@@ -257,6 +249,7 @@
        > tiles (fxtr, GRIB1/2, NC)
        > coding of EPS perturbation (GRIB2)
        > coding of EPS quantiles difference (GRIB2)
+       > coding of EPS probabilities eith respect to reference distribution (GRIB2)
      + [1w; request from Daniel] Consolidate support of gridded observations
        > add support for satellite and radar (meta-information, GRIB1/2)
        > correct setting in support_grib1:decode_product_origin and transcode_grib1_pds
@@ -287,8 +280,6 @@
 
 ###### Priority low
 
-     + [1d] Add additional options for GRIB 2 packing algorithm
-       (depending on ECMWF feedback, see SUP-1482)
      + [2d] Add/consolidate support for
        > coding of isentropic and pv surfaces (GRIB1) (?)
        > generalized height coordinates UUID (GRIB1) (?)
@@ -303,23 +294,6 @@
 
 ###### Priority high
 
-     + [ok 12.2.0] [jmb;3d;COSMO PP CORSO-A] [issue #4] 
-       New way to compute location dependent height correction
-       > new voper='translate_simple'
-       > use model lapse rate
-       > target topography defined either through locations or through an
-         external topo field
-     + [ok 12.2.0] [jmb;1w] [issue #6]
-       Improve support of field upscaling 
-       > data reduction, computation on sparse grid, interpolation of full grid
-       > required to work with RTTOV 11.2 for real time applications
-       (this solution has been chosen instead of having to implement the much
-        cheaper but much older and unsupported RTTOV 7)
-     + [ok 12.2.0] [jmb;3d;request from Daniel] [issue #7]
-       Add support for ASCII input
-       (to use fieldextra as a tool to create a GRIB or NetCDF file, with the correct
-        meta-information)
-       > based on BLK_TABLE format (with possible adaptation if needed...)
      + [-> 12.3.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
        INCA import based on native INCA output
        (instead of using an intermediate GRIB or NetCDF translation)
@@ -329,7 +303,7 @@
        > interpolation using an external reference topography
        > interpolation using HPBL and HSL information
        > interpolation using model lapse rate information
-     + [-> 12.3.0] [jmb;1w;INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
+     + [-> 12.3.0] [jmb;1w;CORSO-A,INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
        Add support for combining location dependent height correction and lateral
        weighted average
        > output at specified locations: new location_to_gridpoint algorithm,
@@ -440,14 +414,6 @@
 
 ###### Priority high
 
-     + [ok 12.2.0] [jmb;<1d] 
-       Short name changes for compatibility with DWD:
-       SNOW_% --> SNOW_PERCENT, CONV_% --> CONV_PERCENT
-     + [ok 12.2.0] [jmb/bap;2w] 
-       Migration from SVN to Git / GitHub
-       > Learn tools
-       > Define policy
-       > Automatic generation of Git revision in fxtr_main
      + [-> 12.3.0] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.14.7
@@ -523,14 +489,6 @@
 
 ###### Priority high
 
-     + [ok 12.2.0] [jmb;1d] 
-       COSMO web documentation:
-       > Integrate planning in the framework provided by the COSMO web pages
-         (could be a link to some other pages, or at least an e-mail address)
-       > Update fieldextra specific page
-     + [ok 12.2.0] [jmb/bap;2-3w] 
-       Common information platform, based on GitHub and other tools, with, in particular,
-       support for code review, bug tracking, feature request, roadmap and history
      + [-> 12.4.0] [jmb/bap;2w] [issue #11]
        Provide more problem based solutions
        > extend cookbook (monitoring product ...)
