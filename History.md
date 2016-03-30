@@ -7,6 +7,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v11.3.0](#v11.3.0), [v11.3.1](#v11.3.1), [v11.3.2](#v11.3.2), [v11.3.3](#v11.3.3)
 * [v12.0.0](#v12.0.0)
 * [v12.1.0](#v12.1.0)
+* [v12.2.0](#v12.2.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -279,3 +280,28 @@ _See file admin/HISTORY for a detailed list!_
 * Improved README.user
 * Improved diagnostic
 * Bug corrections, miscelleanous (see HISTORY)
+
+
+<a name="v12.2.0"></a>
+### v12.2.0, released on 31.03.2016 
+*Products*
+* Add support for ASCII input  
+  (based on BLK_TABLE format)
+* Add support for EPS probability defined with respect to a reference distribution  
+  (IFS products)
+* Introduce some improvements for BLK_TABLE format
+
+*Operators*
+* New way to compute location dependent height correction  
+  (development within COSMO PT CORSO-A)
+* Improve support of field upscaling
+* Improve support for re-setting field meta-information
+
+*Optimization*
+* Improve flexibility in defining partition of threads between inner and outer loop
+* Optimize RTTOV complex clouds computation
+
+*Others*
+* Exception by input file processing is now non fatal
+* Bug corrections, miscelleanous (see HISTORY)
+
