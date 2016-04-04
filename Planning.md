@@ -28,6 +28,10 @@
 
 ###### Priority medium
 
+     + [3d] Computation of neighbourhood in regridding algorithm does not take into
+       account metric terms (euclidian distance in target coordinates system is used);
+       this is a problem when interpolating to a (rotated) lat/lon grid with grid pole
+       within the original grid
      + [1w] Check and debug multi-pass mode (or remove functionality)
        (nc_out and gb_out must be saved in cache)
        (compatibility with fieldextra.diagnostic extended mode)
