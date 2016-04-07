@@ -3,6 +3,7 @@
 #### Release planning
 * **v12.3.0** : May 15th 2016
 * **v12.4.0** : August 31st 2016
+* **vXXXXXX** : 2016
 
 #### Agreed milestones
 * **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
@@ -53,7 +54,7 @@
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> 12.4.0] [jmb;3d] [issue #8]
+     + [-> XXXXXX] [jmb;3d] [issue #8]
        Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
      + [1w] Consolidated usage of meta-information undef value
@@ -151,20 +152,24 @@
 
 ###### Priority high
 
-     + [3d] Code profiling of COSMO-NExT system
-       > Find possible bottlenecks, define optimization approaches
-       > Consider the following aspects:
-         - efficient namelist for each single product
-         - efficient namelist as a whole (e.g. do not duplicate expensive computations)
-         - OMP parallelization (e.g. multiple OMP partitions, product cost)
-         - code profiling (to detect possible code improvements)
-     + [2-3w] I/O optimization, file based
-       > Asynchronous read (read in advance)
-       > Parallel read, in particular of partial model output
+     + [-> 12.3.0] [jmb;1w] [issue #38]
+       Extend just on time mode
+       > Just on time also when time operator is used (at least a sub-category)
+       > Memory footprint optimization
+       > Load balance optimization
+     + [-> XXXXXX] [jmb;2w] [issue #39]
+       Overlap unpacking and collect steps
+       > huge potential speedup (C1: 500s over 1800s, CE: 1550s over 4000s)
+     + [-> XXXXXX] [jmb/CSCS;3d] [issue #40]
+       Detailed code profiling of COSMO-NExT system
+       > Find possible bottlenecks, optimize
 
 ###### Priority medium
 
      + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
+     + [2-3w] I/O optimization, file based
+       > Asynchronous read (read in advance)
+       > Parallel read, in particular of partial model output
      + [1w] Evaluate use of accelerator (GPU)
        > [mikko.partio@fmi.fi:
           We decode GRIB 1 and GRIB 2 simple packing with GPU's.
@@ -199,10 +204,6 @@
          Sinergia could be available beginning 2015)
        > Evaluate potential performance gains
        > Evaluate ADIOS API
-     + [1-2w] Memory footprint optimization :
-       > Just on time output also when time operator is used
-       > Optimize internal memory usage for reduction operators acting in the time
-         dimension
 
 ---------
 ##### Feature consolidation <a name="feature_consolidation"></a>
@@ -210,13 +211,14 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [jmb;1w] [issue #9]
-       Consolidate computation of SYNSAT products
-       > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
-     + [buz,jmb;2d] Adapt fieldextra to support GRIB 1 output from INCA
+     + [-> 12.3.0] [buz,jmb;2d] [issue #28]
+       Adapt fieldextra to support GRIB 1 output from INCA
        > make sure that the correct information is available in the INCA output
          (INCA produces proprietary binary format, converted by companion script)
-       > buz has the lead, and will contact jmb when he is ready to tackle this issue
+       > or add native INCA import
+     + [-> XXXXXX] [jmb;1w] [issue #9]
+       Consolidate computation of SYNSAT products
+       > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
      + [2d] Add/consolidate support for
        > multi-layers snow model (fxtr, GRIB1/2, NC)
        > coding of kilometric grids (GRIB2 - Need of WMO extension?)
@@ -307,7 +309,20 @@
        > interpolation using an external reference topography
        > interpolation using HPBL and HSL information
        > interpolation using model lapse rate information
-     + [-> 12.3.0] [jmb;1w;CORSO-A,INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
+     + [-> 12.4.0] [jmb;2w] Support NetCDF on input
+       Part of project Sinergia
+       Required to use grins in the test environment to compare NetCDF files.
+       Also required for processing of gridded observations (radar, satellite),
+       for interoperability with other MCH groups, for EMPA, for in-memory
+       communication (special NetCDF library available at CSCS), for R&D,
+       for the CLM community... (but the StC has decided that fieldextra is not
+       supported/available for the CLM community).
+       EMPA would be interested using fieldextra for postprocessing of model output
+       once this feature is available.
+       > define set of dimensions supported
+       > define required / optional meta-information
+       > follow CF standard
+     + [-> XXXXXX] [jmb;1w;CORSO-A,INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
        Add support for combining location dependent height correction and lateral
        weighted average
        > output at specified locations: new location_to_gridpoint algorithm,
@@ -335,19 +350,6 @@
      + [3d;request from Lucio Torisi] Storm relative helicity
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
      + [3d;interest by O.Liechti] New output type for vertical profiles @ location
-     + [-> 12.4.0] [jmb;2w] Support NetCDF on input
-       Part of project Sinergia
-       Required to use grins in the test environment to compare NetCDF files.
-       Also required for processing of gridded observations (radar, satellite),
-       for interoperability with other MCH groups, for EMPA, for in-memory
-       communication (special NetCDF library available at CSCS), for R&D,
-       for the CLM community... (but the StC has decided that fieldextra is not
-       supported/available for the CLM community).
-       EMPA would be interested using fieldextra for postprocessing of model output
-       once this feature is available.
-       > define set of dimensions supported
-       > define required / optional meta-information
-       > follow CF standard
 
 ###### Priority low
 
