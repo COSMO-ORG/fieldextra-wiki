@@ -152,11 +152,6 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [jmb;1w] [issue #38]
-       Extend just on time mode
-       > Just on time also when time operator is used (at least a sub-category)
-       > Memory footprint optimization
-       > Load balance optimization
      + [-> XXXXXX] [jmb;2w] [issue #39]
        Overlap unpacking and collect steps
        > huge potential speedup (C1: 500s over 1800s, CE: 1550s over 4000s)
@@ -193,6 +188,12 @@
 
 ###### Priority low
 
+     + Extend just on time mode
+       > Just on time also when time operator is used (at least a sub-category)
+       > Memory footprint optimization
+       > Load balance optimization
+       (note that load balance and memory footprint optimization can also be
+        achieved by using temporary files for temporal reduction)
      + [with CSCS support] I/O optimization, im memory communication
        > Some possibilities :
          - In-memory communication using a NetCDF framework available at CSCS
