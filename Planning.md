@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.3.0** : May 15th 2016
-* **v12.4.0** : August 31st 2016
+* **v12.3.0** : June 26th 2016
+* **v12.4.0** : October 30th 2016
 * **vXXXXXX** : 2016
 
 #### Agreed milestones
