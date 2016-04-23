@@ -212,11 +212,6 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [buz,jmb;2d] [issue #28]
-       Adapt fieldextra to support GRIB 1 output from INCA
-       > make sure that the correct information is available in the INCA output
-         (INCA produces proprietary binary format, converted by companion script)
-       > or add native INCA import
      + [-> XXXXXX] [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
