@@ -155,7 +155,12 @@
      + [-> XXXXXX] [jmb;2w] [issue #39]
        Overlap unpacking and collect steps
        > huge potential speedup (C1: 500s over 1800s, CE: 1550s over 4000s)
-     + [-> XXXXXX] [jmb/CSCS;3d] [issue #40]
+     + [-> XXXXXX] [jmb;1w] [issue #42]
+       Optimize inner loop parallelism
+       > gp_partitioning should be only set for operators supporting this mode
+       > in some cases, parallelism on field loop would be beneficially replaced
+         by parallelism on gp loop (e.g. point operator)
+     + [-> XXXXXX] [jmb/CSCS;1w] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
 
