@@ -423,7 +423,7 @@
 
      + [-> 12.3.0] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
-       > Based on ECMWF release 1.14.7
+       > Based on ECMWF release 1.15.0
        > Check / close issue with coding of mars related local keys (SUP-1441)
        > In relation with COSMO GRIB 2 policy
          (final decision about env., docu on web, technical test suite)
