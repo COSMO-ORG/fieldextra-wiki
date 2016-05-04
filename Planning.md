@@ -122,7 +122,6 @@
      + [3d] INCORE storage
        > unified access to incore fields; curently access is provided by one of
          incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
-       > support multiple instances of special fields (HSURF ... -> multiple grids)
      + [1w] Replace POINTER with ALLOCATABLE in TYPE when possible (safer)
      + [1w] Review stack usage
        > Evaluate compiler options
@@ -380,6 +379,7 @@
        > add support for vector fields (VN interpolation â~@¦)
        > add support for more fieldextra operators
 
+
 ---------
 ##### User interface <a name="interface"></a>
 ---------
@@ -387,9 +387,11 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
-     + [2d;required by waa] Add mechanism to automatically create a set of location
-       oriented output on the basis of a single namelist (use list of locations ana
-       add a special keyword in the out_file name)
+     + [2d] Simplify access to INCORE
+       > how to make computation of derived fields more intuitive (ask led) ?
+       > on-demand computation of derived field use the information of 'use_tag'
+         when choice of parent is ambiguous (instead of reference_field)
+       > propagate tags defined in INCORE
 
 ###### Priority medium
 
@@ -409,10 +411,13 @@
 
 ###### Priority low
 
-     + [2d;required by led] Evaluate possibility to simplify namelist in order to have
-       easy access to incore derived fields (e.g. HHL)
      + [3d] Make namelist and resources case independant (i.e. normalize all strings)
-
+     + [2d;required by waa] Add mechanism to automatically create a set of location
+       oriented output on the basis of a single namelist (use list of locations and
+       add a special keyword in the out_file name) (note: it probably makes more
+       sense to add a software layer to generate the namelist, instead of building
+       this functionality in fieldextra - this would also support other cases where
+       a namelist block is repeated with small modifications)
 
 
 ---------
