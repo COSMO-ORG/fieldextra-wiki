@@ -54,7 +54,7 @@
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> XXXXXX] [jmb;3d] [issue #8]
+     + [-> vXXXXXX] [jmb;3d] [issue #8]
        Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
      + [1w] Consolidated usage of meta-information undef value
@@ -151,15 +151,15 @@
 
 ###### Priority high
 
-     + [-> XXXXXX] [jmb;2w] [issue #39]
+     + [-> vXXXXXX] [jmb;2w] [issue #39]
        Overlap unpacking and collect steps
        > huge potential speedup (C1: 500s over 1800s, CE: 1550s over 4000s)
-     + [-> XXXXXX] [jmb;1w] [issue #42]
+     + [-> vXXXXXX] [jmb;1w] [issue #42]
        Optimize inner loop parallelism
        > gp_partitioning should be only set for operators supporting this mode
        > in some cases, parallelism on field loop would be beneficially replaced
          by parallelism on gp loop (e.g. point operator)
-     + [-> XXXXXX] [jmb/CSCS;1w] [issue #40]
+     + [-> vXXXXXX] [jmb/CSCS;1w] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
 
@@ -183,7 +183,7 @@
           Our implementation is quite simple and it is based on grib_api. There has been
           some talk of releasing the code as it is or to provide a patch to grib_api, but
           nothing has been decided so far.]
-     + [1w] Evaluate implementation of additional MPI based parallelization
+     + [1w] Evaluate implementation of MPI based parallelization
      + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
      + [1-2w;with CSCS support] Evaluation of ScaleMP software, to use multiple
        nodes as a single virtual shared memory system
@@ -216,7 +216,7 @@
 
 ###### Priority high
 
-     + [-> XXXXXX] [jmb;1w] [issue #9]
+     + [-> vXXXXXX] [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
      + [2d] Add/consolidate support for
@@ -278,7 +278,7 @@
        > consistent values of model_name and model_type (namelist, resources ...)
        > distinct dictionary? if yes, automatic detection of dictionary (grins)
      + [2w; support by F. Prill required] Consolidate ICON support
-       >  integrate memory reservation and monitoring
+       > integrate memory reservation and monitoring
        > introduce graceful exception handling in icon tools
          (currently exceptions detected in icon tools generate a program stop)
        > introduce integrated measurement of omp speedup
@@ -322,7 +322,7 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> XXXXXX] [jmb;1w;CORSO-A,INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
+     + [-> vXXXXXX] [jmb;1w;CORSO-A,INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
        Add support for combining location dependent height correction and lateral
        weighted average
        > output at specified locations: new location_to_gridpoint algorithm,
@@ -361,9 +361,6 @@
      + [3d] Support bitmap for coding/decoding undefined values in GRIB 1
        (introduce global switch in &GlobalSettings to choose mode of undef coding;
         default value is bitmap)
-     + [1w] location oriented output based on interpolation of grid neighbours
-       > keep all relevant neighbours in data store
-       > add final data reduction
      + [2w] Consolidate horizontal re-gridding
        > mask to select source point (e.g. source has same characteristics as target)
        > consolidate weighted average and exp-weight by using a weighting function
@@ -448,12 +445,7 @@
 
 ###### Priority medium
 
-     + [<1d] Add fieldextra admin documents to version control system
      + [1d] Check in Makefile that compiler supports nested OMP (minimum release value)
-     + [1d] Consolidate the information on the release of the different pieces of code
-       (introduce RELEASE file containg target release tag, use this information in
-       setup/setup_environment.bash, tools/create_distribution_package, fxtr_main.f90;
-       included release information in fxtr_main during build process ...)
 
 ###### Priority low
 
@@ -481,7 +473,7 @@
 ###### Priority medium
 
      + [2d] Improve grins
-       > standard output: expend level information, add EPS information, format
+       > standard output: extend level information, add EPS information, format
        > evaluate current options, ask users for feedback
        > add option to produce a sorted TOC, using short name and level as keys
          (modify fxtr to print short name and level as 2 first values when this
@@ -513,7 +505,6 @@
 
 ###### Priority low
 
-     + [<1d] Update and merge PLATFORMS and USERS documents
      + [2w] Documentation in LaTeX
      > Write a tutorial (use intro ppt as basis, COSMO technical report)
      > README.user as full feature document (COSMO Part VI documentation)
