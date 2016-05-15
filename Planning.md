@@ -64,6 +64,9 @@
          GRIB and internal representation, in both directions, (2) for other format,
          translation from undef to output representation (backward compatibility!),
          (3) consistent translation from user defined value in internal representation.
+     + [3d] Consolidate access to INCORE
+       > unified access to incore fields; curently access is provided by one of
+         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
 
 ###### Priority medium
 
@@ -119,9 +122,6 @@
        > default format for generic output should be set in the corresponding
          write routine and not in this module
        > less module variables, use procedure arguments instead
-     + [3d] INCORE storage
-       > unified access to incore fields; curently access is provided by one of
-         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
      + [1w] Replace POINTER with ALLOCATABLE in TYPE when possible (safer)
      + [1w] Review stack usage
        > Evaluate compiler options
@@ -384,11 +384,17 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
-     + [2d] Simplify access to INCORE
+     + [3d] Consolidate and simplify access to INCORE
        > how to make computation of derived fields more intuitive (ask led) ?
        > on-demand computation of derived field use the information of 'use_tag'
          when choice of parent is ambiguous (instead of reference_field)
        > propagate tags defined in INCORE
+       > make sure that get_incore_field() returns the correct HSURF field 
+         (currently the selection is based on grid compatibility and unicity,
+          but it is not automatic that the returned HSURF corresponds to the
+          topography of the data being processed, e.g. when a different topo
+          on the same grid is stored in INCORE)
+      
 
 ###### Priority medium
 
