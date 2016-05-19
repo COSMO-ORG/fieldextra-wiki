@@ -398,6 +398,8 @@
 
 ###### Priority medium
 
+     + [<1d] Check that iteration keywords are properly ordered in namelist
+       (copy&paste easily leads to mixing iteration keywords) 
      + [1d] Consolidate usage of operators supporting multiple options for parent fields
        (an exception should be raised when the choice is ambigous, use_tag should
         be used to discriminate between different possibilities; see e.g. relhum)
