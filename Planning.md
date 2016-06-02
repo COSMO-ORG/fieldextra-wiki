@@ -33,10 +33,6 @@
        account metric terms (euclidian distance in target coordinates system is used);
        this is a problem when interpolating to a (rotated) lat/lon grid with grid pole
        within the original grid
-     + [1w] Check and debug multi-pass mode (or remove functionality)
-       (nc_out and gb_out must be saved in cache)
-       (compatibility with fieldextra.diagnostic extended mode)
-       (add support for input files also used as output?)
 
 ###### Priority low
 
@@ -303,7 +299,7 @@
      + [-> 12.3.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
        INCA import based on native INCA output
        (instead of using an intermediate GRIB or NetCDF translation)
-     + [-> 12.3.0] [jmb;1w;INCA] [issue #5]
+     + [ok 12.3.0] [jmb;1w;INCA] [issue #5]
        New voper='translate_inca' for PBL translation
        > interpolation on a set of levels defined by an external HEIGHT field
        > interpolation using an external reference topography
@@ -431,7 +427,7 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [jmb/bap;2w] [issue #29]
+     + [-> 12.4.0] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.15.0
        > Check / close issue with coding of mars related local keys (SUP-1441)
