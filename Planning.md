@@ -6,7 +6,6 @@
 * **vXXXXXX** : 2016
 
 #### Agreed milestones
-* **2015Q2, COSMO PT CORSO-A & INCA & BAFU** : extended re-gridding operator (T2m)
 * **2015Q3, Sinergia** : NetCDF on input
 
 #### Code development
@@ -218,7 +217,8 @@
      + [2d] Add/consolidate support for
        > multi-layers snow model (fxtr, GRIB1/2, NC)
        > coding of kilometric grids (GRIB2 - Need of WMO extension?)
-     + [2w] Consolidate N_TUPLE, BLK_TABLE, XLS_TABLE, FLD_TABLE and DAT_TABLE
+     + [2w] Review L2E, N_TUPLE, BLK_TABLE, XLS_TABLE, FLD_TABLE and DAT_TABLE
+       > extend L2E? create a new format for profiles? use existing format (XLS, NetCDF)?
        > are FLD_TABLE / DAT_TABLE obsolete?
        > declare out_type_undefcode as string, to allow 'NaN', '' or other literal
          string to flag undefined values
@@ -296,7 +296,7 @@
 
 ###### Priority high
 
-     + [-> 12.3.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
+     + [-> 12.4.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
        INCA import based on native INCA output
        (instead of using an intermediate GRIB or NetCDF translation)
      + [ok 12.3.0] [jmb;1w;INCA] [issue #5]
@@ -333,6 +333,11 @@
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
          into account land-sea mask (Christoph Spirig will provide the algorithm)
+     + [1w] New import / export format for temporary files
+       > instead of GRIB
+       > support for arbitrary list of points (list of locations)
+       > implementation: Fortran unformatted files, each field & validation date
+         coded using an extended ty_gb_field type
      + [1w; request from led; for R&D, for seamless forecast, for radar verification]
        Graceful handling of missing input files in a temporal serie; option to fill
        gaps with constant values, with previous value (persistence), with
@@ -343,14 +348,12 @@
 ###### Priority medium
 
      + [1d;bap;request by Data for Web] EPS based geometric median
-     + [3d;request from Lucio Torisi] Storm relative helicity
+     + [2d] Automatic generation of short names and (internal) dictionary entries
+       for unrecognized fields
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
-     + [3d;interest by O.Liechti] New output type for vertical profiles @ location
 
 ###### Priority low
 
-     + [2d] Automatic generation of short names and (internal) dictionary entries
-       for unrecognized fields
      + [2d] Make pressure@p-levels and height@h-levels automatically available when
        computing a new field; remove ad hoc solution in write_l2e.
      + [2d] Evaluate coupling of fieldextra with COSMO observation operators library
