@@ -310,7 +310,7 @@ _See file admin/HISTORY for a detailed list!_
 <a name="v12.3.0"></a>
 ### v12.3.0, released on 09.06.2016 
 *Operators*
-* Point operator can be iterated up to 3 times in each iteration
+* Point operator can be iterated up to 3 times in each processing iteration
 * New poper hshift_loc, inverse, ratio, logarithm_e, exponential, polynomial
 * New voper upscale_grad_min, upscale_grad_max, intpl_k2h++, intpl_k2z++
   (support extrapolation, support definition of target levels through external field)
