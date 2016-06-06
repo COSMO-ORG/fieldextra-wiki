@@ -297,8 +297,9 @@
 ###### Priority high
 
      + [-> 12.4.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
-       INCA import based on native INCA output
-       (instead of using an intermediate GRIB or NetCDF translation)
+       Use GRIB 1 to communicate between INCA and fieldextra
+       * Adapt meta-information in INCA export (pds)
+       * Introduce model_type = 'inca' in fieldextra
      + [ok 12.3.0] [jmb;1w;INCA] [issue #5]
        New voper='translate_inca' for PBL translation
        > interpolation on a set of levels defined by an external HEIGHT field
