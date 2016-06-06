@@ -312,12 +312,12 @@ _See file admin/HISTORY for a detailed list!_
 *Operators*
 * Point operator can be iterated up to 3 times in each processing iteration
 * New poper hshift_loc, inverse, ratio, logarithm_e, exponential, polynomial
-* New voper upscale_grad_min, upscale_grad_max, intpl_k2h++, intpl_k2z++
+* New voper upscale_grad_min, upscale_grad_max, intpl_k2h++, intpl_k2z++  
   (support extrapolation, support definition of target levels through external field)
-* New hoper regfit
+* New hoper regfit  
   (linear regression within geographical regions)
 * New operator to compute TD_2M using T_2M, QV_2M and PS
-* Projection of model output on a different topography is now possible
+* Projection of model output on a different topography is now possible  
   (fieldextra is used at MCH to interpolate COSMO-1 on INCA grid,
    where INCA is the nowcasting tool from ZAMG)
 
@@ -325,7 +325,7 @@ _See file admin/HISTORY for a detailed list!_
 * Extend and optimize cache usage
 * Optimize arrays initialization
 * Optimize detection of input file type
-* Extend functionality of intermediate files
+* Extend functionality of intermediate files  
   (supports namelist optimization)
 * Automatic data reduction when out_regrid_target is specified
 * Level of diagnostic and profiling can now be controled separately
