@@ -1,9 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.3.0** : June 26th 2016
-* **v12.4.0** : October 30th 2016
-* **vXXXXXX** : 2016
+* **v12.3.1** : July 1st 2016
+* **v12.4.0** : November 25th 2016
+* **vXXXXXX** : 2017 Q1
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -148,7 +148,7 @@
 
      + [-> vXXXXXX] [jmb;2w] [issue #39]
        Overlap unpacking and collect steps
-       > huge potential speedup (C1: 500s over 1800s, CE: 1550s over 4000s)
+       > huge potential speedup (C1: 300s over 1500s, CE: 1550s over 4000s)
      + [-> vXXXXXX] [jmb;1w] [issue #42]
        Optimize inner loop parallelism
        > gp_partitioning should be only set for operators supporting this mode
@@ -296,16 +296,10 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [jmb;3d;INCA;to be evaluated] [issue #28] 
+     + [-> 12.3.1] [jmb;3d;INCA;to be evaluated] [issue #28] 
        Use GRIB 1 to communicate between INCA and fieldextra
        * Adapt meta-information in INCA export (pds)
        * Introduce model_type = 'inca' in fieldextra
-     + [ok 12.3.0] [jmb;1w;INCA] [issue #5]
-       New voper='translate_inca' for PBL translation
-       > interpolation on a set of levels defined by an external HEIGHT field
-       > interpolation using an external reference topography
-       > interpolation using HPBL and HSL information
-       > interpolation using model lapse rate information
      + [-> 12.4.0] [jmb;2w] Support NetCDF on input
        Part of project Sinergia
        Required to use grins in the test environment to compare NetCDF files.
@@ -330,15 +324,16 @@
          copies of each grid point during data reduction (one copy for each
          contributed target grid point), automatically compute weighted average
          in the last processing iteration
-     + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
-       forecasts
-       > new bi-linear interpolation algorithm for location_to_gridpoint, taking
-         into account land-sea mask (Christoph Spirig will provide the algorithm)
-     + [1w] New import / export format for temporary files
+     + [-> vXXXXXX][1w] [issue #49]
+       New import / export format for temporary files
        > instead of GRIB
        > support for arbitrary list of points (list of locations)
        > implementation: Fortran unformatted files, each field & validation date
          coded using an extended ty_gb_field type
+     + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
+       forecasts
+       > new bi-linear interpolation algorithm for location_to_gridpoint, taking
+         into account land-sea mask (Christoph Spirig will provide the algorithm)
      + [1w; request from led; for R&D, for seamless forecast, for radar verification]
        Graceful handling of missing input files in a temporal serie; option to fill
        gaps with constant values, with previous value (persistence), with
@@ -431,6 +426,9 @@
 
 ###### Priority high
 
+     + [-> 12.4.0] [1w;with support of CSCS] [issue #48]
+       Intel compiler for regression suite
+       > Consider also OPenMP problems
      + [-> 12.4.0] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.15.0
@@ -449,7 +447,6 @@
        > Reduce size of tests when meaningfull (but keep some large tests)
        > Integrate in new distributed environment (use Jenkins?)
        > Use / merge with COSMO model regression suite (?)
-     + [2w;with support of CSCS] Additional compilator (ifort ...)
 
 ###### Priority medium
 

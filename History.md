@@ -8,6 +8,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.0.0](#v12.0.0)
 * [v12.1.0](#v12.1.0)
 * [v12.2.0](#v12.2.0)
+* [v12.3.0](#v12.3.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -304,4 +305,34 @@ _See file admin/HISTORY for a detailed list!_
 *Others*
 * Exception by input file processing is now non fatal
 * Bug corrections, miscelleanous (see HISTORY)
+
+
+<a name="v12.3.0"></a>
+### v12.3.0, released on 09.06.2016 
+*Operators*
+* Point operator can be iterated up to 3 times in each iteration
+* New poper hshift_loc, inverse, ratio, logarithm_e, exponential, polynomial
+* New voper upscale_grad_min, upscale_grad_max, intpl_k2h++, intpl_k2z++
+  (support extrapolation, support definition of target levels through external field)
+* New hoper regfit
+  (linear regression within geographical regions)
+* New operator to compute TD_2M using T_2M, QV_2M and PS
+* Projection of model output on a different topography is now possible
+  (fieldextra is used at MCH to interpolate COSMO-1 on INCA grid,
+   where INCA is the nowcasting tool from ZAMG)
+
+*Optimization*
+* Extend and optimize cache usage
+* Optimize arrays initialization
+* Optimize detection of input file type
+* Extend functionality of intermediate files
+  (supports namelist optimization)
+* Automatic data reduction when out_regrid_target is specified
+* Level of diagnostic and profiling can now be controled separately
+
+*Others*
+* Workaround for unreliable time to solution when initializing large arrays
+* Additional tips on namelist optimization in README.user
+* See HISTORY for a full list of modifications
+
 
