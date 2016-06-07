@@ -52,6 +52,9 @@
      + [-> vXXXXXX] [jmb;3d] [issue #8]
        Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
+     + [3d] Consolidate access to INCORE
+       > unified access to incore fields; curently access is provided by one of
+         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
      + [1w] Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
        > Always use iundef for 'undefined' (currently -1 is used in some cases);
@@ -59,19 +62,18 @@
          GRIB and internal representation, in both directions, (2) for other format,
          translation from undef to output representation (backward compatibility!),
          (3) consistent translation from user defined value in internal representation.
-     + [3d] Consolidate access to INCORE
-       > unified access to incore fields; curently access is provided by one of
-         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
 
 ###### Priority medium
 
-     + [1d] Check internal coding of gamma angle for rotated lat/lon grids
      + [1d] Operator new_field_id: check that dictionary characteristics are compatible
-       with actual properties of field (in particular tri and genproc_type), reset
-       the field properties
-     + [2d] Update imported COSMO modules
+       with actual properties of field (in particular tri and genproc_type)
+     + [1d] Systematic check of staggering information in all operators
+     + [1d] Check that all meta-information of a multi-levels field are
+       consistent (e.g. units, origin ...); otherwise, vertical operators may
+       lead to unpredictable meta-information values
      + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
      + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
+     + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
      + [1w] Re-organize ty_fld_origin and ty_fld_product
        > this is required to support observations
        > field_origin should contain all meta-information which is not essential
@@ -82,6 +84,8 @@
        > rename sc_pcat_{radar,satellite} to sc_pcat_obs 
          (use new 'class' to differentiate)
      + [1w] Systematically check and track fields units
+     + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
+       32 bits (possible in fortran 2008), real_in_byte set accordingly
      + [2-4w] Common library of services for COSMO software, which is efficient for all
        COSMO codes (incl. ICON) and which minimizes the number of modules to import
        for accessing a requested functionality
@@ -92,19 +96,15 @@
 
 ###### Priority low
 
-     + [1d] Systematic check of staggering information in all operators
-     + [1d] Check that all meta-information of a multi-levels field are
-       consistent (e.g. units, origin ...); otherwise, vertical operators may
-       lead to unpredictable meta-information values
+     + [1d] Check internal coding of gamma angle for rotated lat/lon grids
      + [1d] Keep track of memory usage for all repositories used in fxtr_storage
      + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
-     + [1d] Implement 'azimut_class' as a named operator (instead of poper)
+     + [2d] Update imported COSMO modules
      + [2d] Unified interface to decide when two fields represent the same quantity
        (used in field_compare, get_ic_field, get_fields, ...)
      + [2d] Introduce in fxtr_operator_support an operator to compute the scalar product
        of a vector field with the gradient of a scalar field; use it in
        geostrophic_wind() and  geostrophic_vorticity_advection()
-     + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
      + [3d] Re-structure read_location_additional()
      + [3d] Clean-up support_misc
        > Replace parse_operator_definition(), parse_transformation() and
@@ -130,8 +130,6 @@
        > decoding of model type and model name in support_grib1 similar to
          support_grib2 (table based, use common table where possible)
        > externalize look-up table for model name
-     + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
-       32 bits (possible in fortran 2008), real_in_byte set accordingly
 
 ---------
 ##### Code optimization <a name="code_optimization"></a>
@@ -148,7 +146,7 @@
 
      + [-> vXXXXXX] [jmb;2w] [issue #39]
        Overlap unpacking and collect steps
-       > huge potential speedup (C1: 300s over 1500s, CE: 1550s over 4000s)
+       > considerable potential speedup (C1: 300s over 1500s, CE: 1550s over 4000s)
      + [-> vXXXXXX] [jmb;1w] [issue #42]
        Optimize inner loop parallelism
        > gp_partitioning should be only set for operators supporting this mode
@@ -178,12 +176,12 @@
           Our implementation is quite simple and it is based on grib_api. There has been
           some talk of releasing the code as it is or to provide a patch to grib_api, but
           nothing has been decided so far.]
-     + [1w] Evaluate implementation of MPI based parallelization
      + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
      + [1-2w;with CSCS support] Evaluation of ScaleMP software, to use multiple
        nodes as a single virtual shared memory system
        > more threads (but how is the scaling?)
        > relax the constraints on both available memory and memory throughput
+     + [2-4w] MPI based parallelism
 
 ###### Priority low
 
@@ -251,7 +249,7 @@
        > tiles (fxtr, GRIB1/2, NC)
        > coding of EPS perturbation (GRIB2)
        > coding of EPS quantiles difference (GRIB2)
-       > coding of EPS probabilities eith respect to reference distribution (GRIB2)
+       > coding of EPS probabilities with respect to reference distribution (GRIB2)
      + [1w; request from Daniel] Consolidate support of gridded observations
        > add support for satellite and radar (meta-information, GRIB1/2)
        > correct setting in support_grib1:decode_product_origin and transcode_grib1_pds
@@ -286,6 +284,8 @@
        > coding of isentropic and pv surfaces (GRIB1) (?)
        > generalized height coordinates UUID (GRIB1) (?)
        > unstructured grid (GRIB1) (?)
+     + [2d] Make pressure@p-levels and height@h-levels automatically available when
+       computing a new field; remove ad hoc solution in write_l2e.
      + [1w; request from SRNWP-I] Adaptor for SRNWP interoperability
        > Full tests and necessary modifications
        > Extend regression suite (see mail M.Bush)
@@ -313,17 +313,6 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> vXXXXXX] [jmb;1w;CORSO-A,INCA,BAFU,DATA4WEB;to be evaluated] [issue #30]
-       Add support for combining location dependent height correction and lateral
-       weighted average
-       > output at specified locations: new location_to_gridpoint algorithm,
-         keep multiple grid points for each location during data reduction,
-         automatically compute weighted average in the last processing iteration
-       > output on an external grid: new type of data reduction declared in
-         in/out file definition (refers to some INCORE HSURF), keep multiple
-         copies of each grid point during data reduction (one copy for each
-         contributed target grid point), automatically compute weighted average
-         in the last processing iteration
      + [-> vXXXXXX][1w] [issue #49]
        New import / export format for temporary files
        > instead of GRIB
@@ -343,19 +332,32 @@
 
 ###### Priority medium
 
-     + [1d;bap;request by Data for Web] EPS based geometric median
      + [2d] Automatic generation of short names and (internal) dictionary entries
        for unrecognized fields
      + [3d;request from waa] Transfer COSMO smoother() in fieldextra
-
-###### Priority low
-
-     + [2d] Make pressure@p-levels and height@h-levels automatically available when
-       computing a new field; remove ad hoc solution in write_l2e.
-     + [2d] Evaluate coupling of fieldextra with COSMO observation operators library
      + [3d] Support bitmap for coding/decoding undefined values in GRIB 1
        (introduce global switch in &GlobalSettings to choose mode of undef coding;
         default value is bitmap)
+     + [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] 
+       Add support for combining location dependent height correction and lateral
+       weighted average
+       > output at specified locations: new location_to_gridpoint algorithm,
+         keep multiple grid points for each location during data reduction,
+         automatically compute weighted average in the last processing iteration
+       > output on an external grid: new type of data reduction declared in
+         in/out file definition (refers to some INCORE HSURF), keep multiple
+         copies of each grid point during data reduction (one copy for each
+         contributed target grid point), automatically compute weighted average
+         in the last processing iteration
+     + [4-8w] Full support of unstructured ICON grid
+       > adapt interface (e.g. imin, jmin)
+       > remove any implicit assumption on regular grid
+       > add support for vector fields (VN interpolation â~@¦)
+       > add support for more fieldextra operators
+
+###### Priority low
+
+     + [2d] Evaluate coupling of fieldextra with COSMO observation operators library
      + [2w] Consolidate horizontal re-gridding
        > mask to select source point (e.g. source has same characteristics as target)
        > consolidate weighted average and exp-weight by using a weighting function
@@ -365,11 +367,6 @@
        > consolidate 'dominant' by using exactly the number of classes present in the
          source data set for building the histogram
        > introduce spline based interpolation (from coarse to fine)
-     + [4-8w] Full support of unstructured ICON grid
-       > adapt interface (e.g. imin, jmin)
-       > remove any implicit assumption on regular grid
-       > add support for vector fields (VN interpolation â~@¦)
-       > add support for more fieldextra operators
 
 
 ---------
@@ -379,6 +376,8 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
+     + [<1d] Check that iteration keywords are properly ordered in namelist
+       (copy&paste easily leads to mixing iteration keywords) 
      + [3d] Consolidate and simplify access to INCORE
        > how to make computation of derived fields more intuitive (ask led) ?
        > on-demand computation of derived field use the information of 'use_tag'
@@ -393,8 +392,6 @@
 
 ###### Priority medium
 
-     + [<1d] Check that iteration keywords are properly ordered in namelist
-       (copy&paste easily leads to mixing iteration keywords) 
      + [1d] Consolidate usage of operators supporting multiple options for parent fields
        (an exception should be raised when the choice is ambigous, use_tag should
         be used to discriminate between different possibilities; see e.g. relhum)
@@ -408,16 +405,13 @@
      + [3d] Simplify usage of dictionaries
        > only allow default_dictionary and output_dictionary
        > evaluate merging gme / cosmo / icon dictionaries
+     + [8-16w;external resources] Namelist generator
+       > provide easier access to 'standard' applications
+       > in Python
 
 ###### Priority low
 
      + [3d] Make namelist and resources case independant (i.e. normalize all strings)
-     + [2d;required by waa] Add mechanism to automatically create a set of location
-       oriented output on the basis of a single namelist (use list of locations and
-       add a special keyword in the out_file name) (note: it probably makes more
-       sense to add a software layer to generate the namelist, instead of building
-       this functionality in fieldextra - this would also support other cases where
-       a namelist block is repeated with small modifications)
 
 
 ---------
@@ -428,7 +422,7 @@
 
      + [-> 12.4.0] [1w;with support of CSCS] [issue #48]
        Intel compiler for regression suite
-       > Consider also OPenMP problems
+       > Consider also ifort OpenMP issues
      + [-> 12.4.0] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.15.0
