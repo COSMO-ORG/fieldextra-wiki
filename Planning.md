@@ -494,9 +494,8 @@
 
      + [-> 12.4.0] [jmb/bap;2w] [issue #11]
        Provide more problem based solutions
-       > extend cookbook (monitoring product ...)
-       > reference file describing as many applications as possible, with keywords
-         and link to namelists (collect usage from users)
+       > large set of examples, illustrating as many applications as possible, 
+         based on small input files, including documented namelist and input
 
 ###### Priority medium
 
