@@ -8,7 +8,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.0.0](#v12.0.0)
 * [v12.1.0](#v12.1.0)
 * [v12.2.0](#v12.2.0)
-* [v12.3.0](#v12.3.0)
+* [v12.3.0](#v12.3.0), [v12.3.1](#v12.3.1)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -334,5 +334,25 @@ _See file admin/HISTORY for a detailed list!_
 * Workaround for unreliable time to solution when initializing large arrays
 * Additional tips on namelist optimization in README.user
 * See HISTORY for a full list of modifications
+
+
+<a name="v12.3.1"></a>
+### v12.3.1, released on 17.08.2016 
+*Products*
+* Add support to process INCA input   
+  (in GRIB)
+* Add support to generate LAGRANTO compatible output   
+  (in NetCDF)
+
+*Operators*
+* Update EDP
+  (processing of ICON model)   
+* New OMEGA_SLOPE
+  (to use fieldextra as FLEXPAR pre-processor)   
+
+*Others*
+* Consolidate regression suite
+* Correct critical bug introduced in 12.3.0
+* Other bug corrections (see HISTORY)
 
 

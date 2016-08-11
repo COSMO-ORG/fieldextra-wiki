@@ -1,7 +1,6 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.3.1** : July 1st 2016
 * **v12.4.0** : November 25th 2016
 * **vXXXXXX** : 2017 Q1
 
@@ -296,10 +295,6 @@
 
 ###### Priority high
 
-     + [-> 12.3.1] [jmb;3d;INCA;to be evaluated] [issue #28] 
-       Use GRIB 1 to communicate between INCA and fieldextra
-       * Adapt meta-information in INCA export (pds)
-       * Introduce model_type = 'inca' in fieldextra
      + [-> 12.4.0] [jmb;2w] Support NetCDF on input
        Part of project Sinergia
        Required to use grins in the test environment to compare NetCDF files.
