@@ -315,6 +315,10 @@
        > support for arbitrary list of points (list of locations)
        > implementation: Fortran unformatted files, each field & validation date
          coded using an extended ty_gb_field type
+     + [-> vXXXXXX][1w] [issue #60]
+       Facilitate interface with R language codes
+       > Discuss with MeteoSwiss R specialists
+       > Add export to 'native' R format, new fx tool ...
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
