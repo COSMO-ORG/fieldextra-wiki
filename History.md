@@ -337,7 +337,7 @@ _See file admin/HISTORY for a detailed list!_
 
 
 <a name="v12.3.1"></a>
-### v12.3.1, released on 17.08.2016 
+### v12.3.1, released on 12.08.2016 
 *Products*
 * Add support to process INCA input   
   (in GRIB)
