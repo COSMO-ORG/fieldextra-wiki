@@ -1,7 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.4.0** : November 25th 2016
+* **v12.3.2** : September 30th 2016
+* **v12.4.0** : December 31st 2016
 * **vXXXXXX** : 2017 Q1
 
 #### Agreed milestones
@@ -42,7 +43,7 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [bap;3d] [issue #2]
+     + [-> vXXXXXX] [bap;3d] [issue #2]
        Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
@@ -415,15 +416,15 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [1w;with support of CSCS] [issue #48]
-       Intel compiler for regression suite
-       > Consider also ifort OpenMP issues
-     + [-> 12.4.0] [jmb/bap;2w] [issue #29]
+     + [-> 12.3.2] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.15.0
        > Check / close issue with coding of mars related local keys (SUP-1441)
        > In relation with COSMO GRIB 2 policy
          (final decision about env., docu on web, technical test suite)
+     + [-> 12.4.0] [1w;with support of CSCS] [issue #48]
+       Intel compiler for regression suite
+       > Consider also ifort OpenMP issues
      + [-> 12.4.0] [jmb/bap;2w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
