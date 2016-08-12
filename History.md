@@ -345,9 +345,9 @@ _See file admin/HISTORY for a detailed list!_
   (in NetCDF)
 
 *Operators*
-* Update EDP
+* Update EDP   
   (processing of ICON model)   
-* New OMEGA_SLOPE
+* New OMEGA_SLOPE   
   (to use fieldextra as FLEXPAR pre-processor)   
 
 *Others*
