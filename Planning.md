@@ -1,9 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.3.2** : September 30th 2016
-* **v12.4.0** : December 31st 2016
-* **vXXXXXX** : 2017 Q1
+* **v12.3.2** : October 15th 2016
+* **v12.4.0** : January 31st 2017
+* **vXXXXXX** : 2017 Q2
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -52,9 +52,9 @@
      + [-> vXXXXXX] [jmb;3d] [issue #8]
        Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
-     + [3d] Consolidate access to INCORE
-       > unified access to incore fields; curently access is provided by one of
-         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
+     + [1d] Check that all meta-information of a multi-levels field are
+       consistent (e.g. units, origin ...); otherwise, vertical operators may
+       lead to unpredictable meta-information values
      + [1w] Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
        > Always use iundef for 'undefined' (currently -1 is used in some cases);
@@ -68,12 +68,12 @@
      + [1d] Operator new_field_id: check that dictionary characteristics are compatible
        with actual properties of field (in particular tri and genproc_type)
      + [1d] Systematic check of staggering information in all operators
-     + [1d] Check that all meta-information of a multi-levels field are
-       consistent (e.g. units, origin ...); otherwise, vertical operators may
-       lead to unpredictable meta-information values
      + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
      + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
      + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
+     + [3d] Consolidate access to INCORE
+       > unified access to incore fields; curently access is provided by one of
+         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
      + [1w] Re-organize ty_fld_origin and ty_fld_product
        > this is required to support observations
        > field_origin should contain all meta-information which is not essential
@@ -93,6 +93,10 @@
        > see README.cosmo_api
        > see minutes of 18.12.2013 meeting
        > should be discussed at the COSMO TAG level
+     + [16-32w] Full code review, update/rewrite memory management
+       > to support very large problems (>2.E7 hgrid size, >100 members)
+       > to better use processor cache and to reduce memory stress 
+       > to make the code GPU capable
 
 ###### Priority low
 
@@ -406,8 +410,10 @@
        > only allow default_dictionary and output_dictionary
        > evaluate merging gme / cosmo / icon dictionaries
      + [8-16w;external resources] Namelist generator
-       > provide easier access to 'standard' applications
-       > in Python
+       > provide easy access to 'standard' applications
+       > including GUI
+       > possible financial support from DWD
+         (private communication D.Majewski COSMO GM 2016)
 
 ###### Priority low
 
@@ -420,7 +426,7 @@
 
 ###### Priority high
 
-     + [-> 12.3.2] [jmb/bap;2w] [issue #29]
+     + [-> 12.4.0] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.15.0
        > Check / close issue with coding of mars related local keys (SUP-1441)
