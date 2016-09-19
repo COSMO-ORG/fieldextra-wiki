@@ -432,6 +432,7 @@
        > Check / close issue with coding of mars related local keys (SUP-1441)
        > In relation with COSMO GRIB 2 policy
          (final decision about env., docu on web, technical test suite)
+       > Manage code in GitHub subtree (to be evaluated, see APN blog about subtree)
      + [-> 12.4.0] [1w;with support of CSCS] [issue #48]
        Intel compiler for regression suite
        > Consider also ifort OpenMP issues
