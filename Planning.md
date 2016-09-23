@@ -2,8 +2,9 @@
 
 #### Release planning
 * **v12.3.2** : October 15th 2016
-* **v12.4.0** : January 31st 2017
-* **vXXXXXX** : 2017 Q2
+* **v12.3.3** : November 15th 2016
+* **v13.0.0** : February 17th 2017
+* **vXXXXXX** : 2017 Q3
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -300,7 +301,7 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [jmb;2w] Support NetCDF on input
+     + [-> 13.0.0] [jmb;2w] Support NetCDF on input
        Part of project Sinergia
        Required to use grins in the test environment to compare NetCDF files.
        Also required for processing of gridded observations (radar, satellite),
@@ -426,17 +427,17 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [jmb/bap;2w] [issue #29]
+     + [-> 12.3.3] [jmb/bap;2w] [issue #29]
        Update GRIB API environment
        > Based on ECMWF release 1.15.0
        > Check / close issue with coding of mars related local keys (SUP-1441)
        > In relation with COSMO GRIB 2 policy
          (final decision about env., docu on web, technical test suite)
        > Manage code in GitHub subtree (to be evaluated, see APN blog about subtree)
-     + [-> 12.4.0] [1w;with support of CSCS] [issue #48]
+     + [-> 13.0.0] [1w;with support of CSCS] [issue #48]
        Intel compiler for regression suite
        > Consider also ifort OpenMP issues
-     + [-> 12.4.0] [jmb/bap;2w] [issue #10]
+     + [-> 13.0.0] [jmb/bap;2w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
@@ -499,7 +500,7 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [jmb/bap;2w] [issue #11]
+     + [-> 13.0.0] [jmb/bap;2w] [issue #11]
        Provide more problem based solutions
        > large set of examples, illustrating as many applications as possible, 
          based on small input files, including documented namelist and input
@@ -521,8 +522,8 @@
 
 ###### Priority high
 
-     + [-> 12.4.0] [issue #12]
-       Planning beyond 12.4.0
+     + [-> 13.0.0] [issue #12]
+       Planning beyond 13.0.0
        > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
        > possible significant developments : code consolidation, code optimization, NetCDF input, full ICON support
        NOTE: wish from waa to focus on input optimization
