@@ -8,7 +8,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.0.0](#v12.0.0)
 * [v12.1.0](#v12.1.0)
 * [v12.2.0](#v12.2.0)
-* [v12.3.0](#v12.3.0), [v12.3.1](#v12.3.1)
+* [v12.3.0](#v12.3.0), [v12.3.1](#v12.3.1), [v12.3.2](#v12.3.2)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -355,4 +355,21 @@ _See file admin/HISTORY for a detailed list!_
 * Correct critical bug introduced in 12.3.0
 * Other bug corrections (see HISTORY)
 
+
+<a name="v12.3.2"></a>
+### v12.3.2, released on 06.10.2016 
+*Products*
+* Support 'levelOfMaxWind' and 'typeOfEnsembleForecast'
+* Support NetCDF standard name for hybrid sigma pressure
+
+*Operators*
+* Consolidate tiled operators (upscaling)
+* New 'skip_time' and 'toper_mask' (recommended alternative to 'ignore_tri')
+* Extends 'sum', 'inverse' and 'ratio' to support an additional constant term
+
+*Others*
+* fx tools : add support for input with mixed GRIB and with discontinuous layers
+* Correction of a critical bug : make constant field attribute a dynamic feature   
+  (e.g. computation of tropopause height incorrectly produced a constant field)
+* Other correction of bugs
 
