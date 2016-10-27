@@ -25,9 +25,14 @@
 ---------
 
 ###### Priority high
+     + [3d] Consolidate computation of product halo in fxtr_control:set_data_reduction
+       > currently the algorithm is not 100% robust, e.g. when neighbourhood 
+         probability or use_operator is used
+       > halo may be overestimated, leading to a too large memory footprint;
+         this should be catched, and the user should have the opportunity to
+         set a halo manually
 
 ###### Priority medium
-
      + [3d] Computation of neighbourhood in regridding algorithm does not take into
        account metric terms (euclidian distance in target coordinates system is used);
        this is a problem when interpolating to a (rotated) lat/lon grid with grid pole
