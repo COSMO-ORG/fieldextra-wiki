@@ -155,7 +155,7 @@
        Optimize inner loop parallelism
        > gp_partitioning should be only set for operators supporting this mode
        > in some cases, parallelism on field loop would be beneficially replaced
-         by parallelism on gp loop (e.g. point operator)
+         by parallelism on gp loop (e.g. point operator, vertical operator)
      + [-> vXXXXXX] [jmb/CSCS;1w] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
