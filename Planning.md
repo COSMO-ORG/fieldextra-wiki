@@ -529,10 +529,11 @@
      + [-> 13.0.0] [issue #12]
        Planning beyond 13.0.0
        > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
-       > possible significant developments : code consolidation, code optimization, NetCDF input, full ICON support
-       NOTE: wish from waa to focus on input optimization
+       > evaluate software life cycle in view of future applications  
+         (e.g. horizontal grid with O(10^7) points, new hardware architectures)
+       > possible significant developments : code consolidation, full ICON support,
+         IO optimisation, MPI parallelism, re-write of memory management
 
 ###### Priority medium
 
 ###### Priority low
-
