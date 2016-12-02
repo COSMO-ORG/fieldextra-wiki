@@ -9,6 +9,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.1.0](#v12.1.0)
 * [v12.2.0](#v12.2.0)
 * [v12.3.0](#v12.3.0), [v12.3.1](#v12.3.1), [v12.3.2](#v12.3.2)
+* [v12.4.0](#v12.4.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -372,4 +373,25 @@ _See file admin/HISTORY for a detailed list!_
 * Correction of a critical bug : make constant field attribute a dynamic feature   
   (e.g. computation of tropopause height incorrectly produced a constant field)
 * Other correction of bugs
+
+
+<a name="v12.4.0"></a>
+### v12.4.0, released on 02.12.2016 
+*Products*
+* Correct some GRIB 1 and GRIB 2 codes
+
+*Operators*
+* New operator to compute the 2d advection of an arbitrary tracer
+* Extend out_shuffle_time to filter input fields on the basis of the reference year
+* Automatic generation of HEIGHT on full levels when HEIGHT on half levels is present
+
+*Optimization*
+* Optimization of collect field step (in particular for EPS)
+
+*Others*
+* Externalize & consolidate GRIB API environment (-> common COSMO environment)
+* Consolidate versioning of external resources
+* Consolidate installation step (documentation, setup scripts)
+* Correction of bugs and miscelleanous consolidations
+
 

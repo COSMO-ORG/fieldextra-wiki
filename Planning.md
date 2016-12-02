@@ -1,9 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.4.0** : November 30th 2016
-* **v13.0.0** : March 31st 2017
-* **vXXXXXX** : 2017 Q3
+* **v13.0.0** : April 30th 2017
+* **v13.1.0** : August 31st 2017
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -48,13 +47,13 @@
 
 ###### Priority high
 
-     + [-> vXXXXXX] [bap;3d] [issue #2]
+     + [-> 13.1.0] [bap;3d] [issue #2]
        Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> vXXXXXX] [jmb;3d] [issue #8]
+     + [-> 13.1.0] [jmb;3d] [issue #8]
        Add global memory monitoring of non instrumented libraries
        (currently icontool, rttov)
      + [1d] Check that all meta-information of a multi-levels field are
@@ -108,7 +107,6 @@
      + [1d] Check internal coding of gamma angle for rotated lat/lon grids
      + [1d] Keep track of memory usage for all repositories used in fxtr_storage
      + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
-     + [2d] Update imported COSMO modules
      + [2d] Unified interface to decide when two fields represent the same quantity
        (used in field_compare, get_ic_field, get_fields, ...)
      + [2d] Introduce in fxtr_operator_support an operator to compute the scalar product
@@ -153,24 +151,23 @@
 
 ###### Priority high
 
-     + [-> vXXXXXX] [jmb;2w] [issue #39]
-       Overlap unpacking and collect steps
-       > considerable potential speedup (C1: 300s over 1500s, CE: 1550s over 4000s)
-     + [-> vXXXXXX] [jmb;1w] [issue #42]
+     + [-> 13.1.0] [jmb/CSCS;3d] [issue #40]
+       Detailed code profiling of COSMO-NExT system
+       > Find possible bottlenecks, optimize
+     + [-> 13.1.0] [jmb;1w] [issue #42]
        Optimize inner loop parallelism
        > gp_partitioning should be only set for operators supporting this mode
        > in some cases, parallelism on field loop would be beneficially replaced
          by parallelism on gp loop (e.g. point operator, vertical operator)
-     + [-> vXXXXXX] [jmb/CSCS;1w] [issue #40]
-       Detailed code profiling of COSMO-NExT system
-       > Find possible bottlenecks, optimize
+     + [-> 13.1.0] [jmb;3w] [issue #39]
+       Optimization of input
+       > reading and decoding input records is sequential
+       > possible approaches: read in advance, parallel read of part files...
+       > considerable potential speedup
 
 ###### Priority medium
 
      + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
-     + [2-3w] I/O optimization, file based
-       > Asynchronous read (read in advance)
-       > Parallel read, in particular of partial model output
      + [1w] Evaluate use of accelerator (GPU)
        > [mikko.partio@fmi.fi:
           We decode GRIB 1 and GRIB 2 simple packing with GPU's.
@@ -218,7 +215,14 @@
 
 ###### Priority high
 
-     + [-> vXXXXXX] [jmb;1w] [issue #9]
+     + [-> v13.0.0] [jmb;1d] [issue #97]
+       Consolidate operator new_field_id
+       > When the new identity already exist in internal storage, fieldextra
+         should try to merge the modified field with the existing field
+         (for each time slot, keeping the instance of the field which is
+         defined for this time slot, and raising an exception when this is
+         not possible).
+     + [-> 13.1.0] [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
      + [2d] Add/consolidate support for
@@ -305,8 +309,9 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;2w] Support NetCDF on input
-       Part of project Sinergia
+     + [-> 13.0.0] [jmb;3w] [issue #22]
+       Support NetCDF on input.
+       Part of project Sinergia.
        Required to use grins in the test environment to compare NetCDF files.
        Also required for processing of gridded observations (radar, satellite),
        for interoperability with other MCH groups, for EMPA, for in-memory
@@ -318,13 +323,9 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> vXXXXXX][1w] [issue #49]
-       New import / export format for temporary files
-       > instead of GRIB
-       > support for arbitrary list of points (list of locations)
-       > implementation: Fortran unformatted files, each field & validation date
-         coded using an extended ty_gb_field type
-     + [-> vXXXXXX][1w] [issue #60]
+     + [-> 13.0.0] [bap;2d] [issue #99]
+       Support regions defined by multiple polygons
+     + [-> v13.1.0][1w] [issue #60]
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
        > Add export to 'native' R format, new fx tool ...
@@ -347,6 +348,11 @@
      + [3d] Support bitmap for coding/decoding undefined values in GRIB 1
        (introduce global switch in &GlobalSettings to choose mode of undef coding;
         default value is bitmap)
+     + [1w] New import / export format for temporary files
+       > instead of GRIB
+       > support for arbitrary list of points (list of locations)
+       > implementation: Fortran unformatted files, each field & validation date
+         coded using an extended ty_gb_field type
      + [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] 
        Add support for combining location dependent height correction and lateral
        weighted average
@@ -431,17 +437,14 @@
 
 ###### Priority high
 
-     + [-> 12.3.3] [jmb/bap;2w] [issue #29]
-       Update GRIB API environment
-       > Based on ECMWF release 1.15.0
-       > Check / close issue with coding of mars related local keys (SUP-1441)
-       > In relation with COSMO GRIB 2 policy
-         (final decision about env., docu on web, technical test suite)
-       > Manage code in GitHub subtree (to be evaluated, see APN blog about subtree)
-     + [-> 13.0.0] [1w;with support of CSCS] [issue #48]
+     + [-> 13.0.0] [jmb;2d] [issue #96]
+       Update COSMO GRIB API resources
+       > Using vendor distribution 1.16.0
+       > With definition files provided by DWD
+     + [-> 13.0.0] [1w;with support of CSCS/DWD] [issue #48]
        Intel compiler for regression suite
        > Consider also ifort OpenMP issues
-     + [-> 13.0.0] [jmb/bap;2w] [issue #10]
+     + [-> 13.0.0] [jmb/bap;3w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
@@ -453,6 +456,7 @@
        > Reduce size of tests when meaningfull (but keep some large tests)
        > Integrate in new distributed environment (use Jenkins?)
        > Use / merge with COSMO model regression suite (?)
+     + [-> 13.0.0] [jmb;1d] Externalise icontools [issue #93]
 
 ###### Priority medium
 
@@ -504,10 +508,15 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb/bap;2w] [issue #11]
+     + [-> 13.0.0] [jmb/bap;1w] [issue #11]
        Provide more problem based solutions
        > large set of examples, illustrating as many applications as possible, 
          based on small input files, including documented namelist and input
+     + [-> 13.0.0] [jmb;2d] [issue #92]
+       Update some documentation
+       > FirstContact.pdf, Overview.pdf
+       > INSTALLATION (add information on how to install with existing libraries)
+       > New: minimal introduction to git / GitHub, to support code development
 
 ###### Priority medium
 
@@ -526,8 +535,8 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [issue #12]
-       Planning beyond 13.0.0
+     + [-> 13.0.0] [jmb;3d] [issue #12]
+       Planning beyond 13.1.0
        > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
        > evaluate software life cycle in view of future applications  
          (e.g. horizontal grid with O(10^7) points, new hardware architectures)
