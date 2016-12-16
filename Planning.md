@@ -329,6 +329,8 @@
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
        > Add export to 'native' R format, new fx tool ...
+     + [3d] Cross-section along some arbitrary polygonal line
+       > NetCDF output
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
