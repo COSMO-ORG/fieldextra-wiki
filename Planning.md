@@ -329,6 +329,8 @@
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
        > Add export to 'native' R format, new fx tool ...
+     + [1-3d; request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
+       Operator to compute maximum sunshine duration
      + [3d] Cross-section along some arbitrary polygonal line
        > NetCDF output
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
