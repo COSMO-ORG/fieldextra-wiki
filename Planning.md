@@ -325,6 +325,8 @@
        > follow CF standard
      + [-> 13.0.0] [bap;2d] [issue #99]
        Support regions defined by multiple polygons
+     + [-> 13.0.0] [jmb;2d] [issue #101]
+       Relative Sunshine Duration for IFS
      + [-> v13.1.0][1w] [issue #60]
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
