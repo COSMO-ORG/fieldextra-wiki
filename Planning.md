@@ -325,14 +325,16 @@
        > follow CF standard
      + [-> 13.0.0] [bap;2d] [issue #99]
        Support regions defined by multiple polygons
-     + [-> 13.0.0] [jmb;2d] [issue #101]
-       Relative Sunshine Duration for IFS
+     + [-> 13.0.0] [jmb; 1-3d] [issue #101]
+       [Request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
+       Operator to compute maximum sunshine duration
      + [-> v13.1.0][1w] [issue #60]
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
        > Add export to 'native' R format, new fx tool ...
-     + [1-3d; request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
-       Operator to compute maximum sunshine duration
+     + [1d] Add possibility to filter fields at start of each processing iteration
+       on the basis of the time characteristics
+       > new timelist, timestart, timeend, timeincr
      + [3d] Cross-section along some arbitrary polygonal line
        > NetCDF output
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
