@@ -323,7 +323,7 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> 13.0.0] [bap;2d] [issue #99]
+     + [ok 13.0.0] [bap;2d] [issue #99]
        Support regions defined by multiple polygons
      + [-> 13.0.0] [jmb; 1-3d] [issue #101]
        [Request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
