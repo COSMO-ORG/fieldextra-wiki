@@ -389,7 +389,7 @@ _See file admin/HISTORY for a detailed list!_
 * Optimization of collect field step (in particular for EPS)
 
 *Others*
-* Externalize & consolidate GRIB API environment (-> common COSMO environment)
+* __Externalize & consolidate GRIB API environment (-> common COSMO environment)__
 * Consolidate versioning of external resources
 * Consolidate installation step (documentation, setup scripts)
 * Correction of bugs and miscelleanous consolidations
