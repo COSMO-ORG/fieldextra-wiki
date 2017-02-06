@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.0.0** : April 30th 2017
-* **v13.1.0** : August 31st 2017
+* **v13.0.0** : June 15th 2017
+* **v13.1.0** : October 31st 2017
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
