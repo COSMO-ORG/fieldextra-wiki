@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.0.0** : June 15th 2017
-* **v13.1.0** : October 31st 2017
+* **v13.0.0** : August 31st 2017
+* **v13.1.0** : Decmber 31st 2017
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -323,8 +323,6 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [ok 13.0.0] [bap;2d] [issue #99]
-       Support regions defined by multiple polygons
      + [-> 13.0.0] [jmb; 1-3d] [issue #101]
        [Request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
        Operator to compute maximum sunshine duration
