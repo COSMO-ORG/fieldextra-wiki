@@ -154,7 +154,7 @@
      + [-> 13.1.0] [jmb/CSCS;3d] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
-     + [-> 13.1.0] [jmb;1w] [issue #42]
+     + [-> 13.0.0] [jmb;1w] [issue #42]
        Optimize inner loop parallelism
        > gp_partitioning should be only set for operators supporting this mode
        > in some cases, parallelism on field loop would be beneficially replaced
@@ -164,6 +164,10 @@
        > reading and decoding input records is sequential
        > possible approaches: read in advance, parallel read of part files...
        > considerable potential speedup
+     + [3d] Move sorting along time dimension from store_field() to generate_output()
+       > in case the input records are sorted in decreasing date, the current 
+         implementation is very inefficient: records are internally re-shuffled
+         for each new contributing time plan (this is the case for some IFS files)
 
 ###### Priority medium
 
