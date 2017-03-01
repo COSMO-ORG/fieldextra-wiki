@@ -494,7 +494,7 @@
 ###### Priority medium
 
      + [2d] Improve grins
-       > standard output: extend level information, add EPS information, format
+       > standard output: extend level information, format
        > evaluate current options, ask users for feedback
        > add option to produce a sorted TOC, using short name and level as keys
          (modify fxtr to print short name and level as 2 first values when this
