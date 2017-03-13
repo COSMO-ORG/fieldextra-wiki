@@ -219,16 +219,11 @@
 
 ###### Priority high
 
-     + [-> v13.0.0] [jmb;1d] [issue #97]
-       Consolidate operator new_field_id
-       > When the new identity already exist in internal storage, fieldextra
-         should try to merge the modified field with the existing field
-         (for each time slot, keeping the instance of the field which is
-         defined for this time slot, and raising an exception when this is
-         not possible).
      + [-> 13.1.0] [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
+       > add latest rttov library release
+     + [1w] Replace grib api with eccode
      + [2d] Add/consolidate support for
        > multi-layers snow model (fxtr, GRIB1/2, NC)
        > coding of kilometric grids (GRIB2 - Need of WMO extension?)
