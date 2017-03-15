@@ -325,6 +325,13 @@
      + [-> 13.0.0] [jmb; 1-3d] [issue #101]
        [Request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
        Operator to compute maximum sunshine duration
+     + [-> 13.0.0, only undef] [jmb; 3d] [issue #116]
+       [request from led; for R&D, for seamless forecast, for radar verification]
+       Graceful handling of missing input files in a temporal serie; option to fill
+       gaps with constant values, with previous value (persistence), with
+       interpolated values, or with undef (use temporal operator; set values,
+       field_trange and field_origin). Also, do not raise an exception when some
+       fields are missing for some time slots.
      + [-> v13.1.0][1w] [issue #60]
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
@@ -338,12 +345,6 @@
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
          into account land-sea mask (Christoph Spirig will provide the algorithm)
-     + [1w; request from led; for R&D, for seamless forecast, for radar verification]
-       Graceful handling of missing input files in a temporal serie; option to fill
-       gaps with constant values, with previous value (persistence), with
-       interpolated values, or with undef (use temporal operator; set values,
-       field_trange and field_origin). Also, do not raise an exception when some
-       fields are missing for some time slots.
 
 ###### Priority medium
 
