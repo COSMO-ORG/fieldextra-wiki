@@ -47,6 +47,14 @@
 
 ###### Priority high
 
+     + [-> 13.0.0] [jmb;1w] [issue #117]
+       Consolidated usage of meta-information undef value
+       > Define iundef (rundef) as the smallest integer (real) which can be represented
+       > Always use iundef for 'undefined' (currently -1 is used in some cases);
+         this requires for all meta-information: (1) consistent translation between
+         GRIB and internal representation, in both directions, (2) for other format,
+         translation from undef to output representation (backward compatibility!),
+         (3) consistent translation from user defined value in internal representation.
      + [-> 13.1.0] [bap;3d] [issue #2]
        Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
@@ -59,13 +67,6 @@
      + [1d] Check that all meta-information of a multi-levels field are
        consistent (e.g. units, origin ...); otherwise, vertical operators may
        lead to unpredictable meta-information values
-     + [1w] Consolidated usage of meta-information undef value
-       > Define iundef (rundef) as the smallest integer (real) which can be represented
-       > Always use iundef for 'undefined' (currently -1 is used in some cases);
-         this requires for all meta-information: (1) consistent translation between
-         GRIB and internal representation, in both directions, (2) for other format,
-         translation from undef to output representation (backward compatibility!),
-         (3) consistent translation from user defined value in internal representation.
 
 ###### Priority medium
 
@@ -332,15 +333,33 @@
        interpolated values, or with undef (use temporal operator; set values,
        field_trange and field_origin). Also, do not raise an exception when some
        fields are missing for some time slots.
-     + [-> v13.1.0][1w] [issue #60]
+     + [-> 13.0.0] [jmb;3d] [issue #118]
+       Cross-section along some arbitrary polygonal line
+       > NetCDF output
+     + [-> TBD] [1w] [issue #60]
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
        > Add export to 'native' R format, new fx tool ...
+     + [-> TBD] [1w] [issue #49]
+       New import / export format for temporary files
+       > instead of GRIB
+       > support for arbitrary list of points (list of locations)
+       > implementation: Fortran unformatted files, each field & validation date
+         coded using an extended ty_gb_field type
+     + [-> TBD] [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] [issue #30] 
+       Add support for combining location dependent height correction and lateral
+       weighted average
+       > output at specified locations: new location_to_gridpoint algorithm,
+         keep multiple grid points for each location during data reduction,
+         automatically compute weighted average in the last processing iteration
+       > output on an external grid: new type of data reduction declared in
+         in/out file definition (refers to some INCORE HSURF), keep multiple
+         copies of each grid point during data reduction (one copy for each
+         contributed target grid point), automatically compute weighted average
+         in the last processing iteration
      + [1d] Add possibility to filter fields at start of each processing iteration
        on the basis of the time characteristics
        > new timelist, timestart, timeend, timeincr
-     + [3d] Cross-section along some arbitrary polygonal line
-       > NetCDF output
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
@@ -354,22 +373,6 @@
      + [3d] Support bitmap for coding/decoding undefined values in GRIB 1
        (introduce global switch in &GlobalSettings to choose mode of undef coding;
         default value is bitmap)
-     + [1w] New import / export format for temporary files
-       > instead of GRIB
-       > support for arbitrary list of points (list of locations)
-       > implementation: Fortran unformatted files, each field & validation date
-         coded using an extended ty_gb_field type
-     + [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] 
-       Add support for combining location dependent height correction and lateral
-       weighted average
-       > output at specified locations: new location_to_gridpoint algorithm,
-         keep multiple grid points for each location during data reduction,
-         automatically compute weighted average in the last processing iteration
-       > output on an external grid: new type of data reduction declared in
-         in/out file definition (refers to some INCORE HSURF), keep multiple
-         copies of each grid point during data reduction (one copy for each
-         contributed target grid point), automatically compute weighted average
-         in the last processing iteration
      + [4-8w] Full support of unstructured ICON grid
        > adapt interface (e.g. imin, jmin)
        > remove any implicit assumption on regular grid
