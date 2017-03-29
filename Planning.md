@@ -302,6 +302,9 @@
      + [1w; request from SRNWP-I] Adaptor for SRNWP interoperability
        > Full tests and necessary modifications
        > Extend regression suite (see mail M.Bush)
+     + [1w] Support one second time granularity 
+       > currently one minute is the smallest granularity
+       > useful for model output expressed in time steps
 
 ---------
 ##### New features <a name="new_feature"></a>
