@@ -326,16 +326,16 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> 13.0.0] [jmb; 1-3d] [issue #101]
+     + [ok 13.0.0] [jmb; 1-3d] [issue #101]
        [Request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
        Operator to compute maximum sunshine duration
-     + [-> 13.0.0, only undef] [jmb; 3d] [issue #116]
+     + [ok 13.0.0] [jmb; 3d] [issue #116]
        [request from led; for R&D, for seamless forecast, for radar verification]
        Graceful handling of missing input files in a temporal serie; option to fill
-       gaps with constant values, with previous value (persistence), with
-       interpolated values, or with undef (use temporal operator; set values,
-       field_trange and field_origin). Also, do not raise an exception when some
-       fields are missing for some time slots.
+       gaps with previous value (persistence), with interpolated values, or with
+       undef (use temporal operator; set values, field_trange and field_origin). 
+       Also, do not raise an exception when some fields are missing for some
+       time slots.
      + [-> 13.0.0] [jmb;3d] [issue #118]
        Cross-section along some arbitrary polygonal line
        > NetCDF output
