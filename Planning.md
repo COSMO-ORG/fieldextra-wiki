@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.0.0** : August 31st 2017
-* **v13.1.0** : Decmber 31st 2017
+* **v13.0.0** : October 31st 2017
+* **v13.1.0** : March 1st 2018
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -224,6 +224,8 @@
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
        > add latest rttov library release
+     + [-> 13.1.0] [jmb;2d] [issue #130]
+       Update algorithms to compute HPBL and BRN (according to COSMO)
      + [1w] Replace grib api with eccode
      + [2d] Add/consolidate support for
        > multi-layers snow model (fxtr, GRIB1/2, NC)
@@ -256,7 +258,6 @@
      + [2d] Extend logical mask syntax (implemented in 'build_condition_mask')
        > DEFINED for fields /= rundef (e.g. DEFINED(TOT_PREC))
        > support comparison between two fields (e.g. f1 < f2)
-     + [2d] Update algorithms to compute HPBL and BRN (according to COSMO)
      + [2d] Review gradient(), calc_sqrt(), and metric_coefs(); remove some restrictions
      + [2d] Add/consolidate support for
        > tiles (fxtr, GRIB1/2, NC)
@@ -336,7 +337,7 @@
        undef (use temporal operator; set values, field_trange and field_origin). 
        Also, do not raise an exception when some fields are missing for some
        time slots.
-     + [-> 13.0.0] [jmb;3d] [issue #118]
+     + [-> 13.1.0] [jmb;3d] [issue #118]
        Cross-section along some arbitrary polygonal line
        > NetCDF output
      + [-> TBD] [1w] [issue #60]
