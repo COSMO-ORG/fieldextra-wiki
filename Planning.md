@@ -450,10 +450,6 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;2d] [issue #96]
-       Update COSMO GRIB API resources
-       > Using vendor distribution 1.16.0
-       > With definition files provided by DWD
      + [-> 13.0.0] [1w;with support of CSCS/DWD] [issue #48]
        Intel compiler for regression suite
        > Consider also ifort OpenMP issues
