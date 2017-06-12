@@ -295,7 +295,7 @@
 ###### Priority low
 
      + [2d] Add/consolidate support for
-       > coding of isentropic and pv surfaces (GRIB1) (?)
+       > coding of pv surfaces (GRIB1) (?)
        > generalized height coordinates UUID (GRIB1) (?)
        > unstructured grid (GRIB1) (?)
      + [2d] Make pressure@p-levels and height@h-levels automatically available when
