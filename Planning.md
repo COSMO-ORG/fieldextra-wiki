@@ -70,12 +70,12 @@
 
 ###### Priority medium
 
-     + [1d] Operator new_field_id: check that dictionary characteristics are compatible
-       with actual properties of field (in particular tri and genproc_type)
      + [1d] Systematic check of staggering information in all operators
      + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
      + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
      + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
+     + [2d] GRIB 2 implementation
+       > systematically use grib_is_missing() and grib_set_missing()
      + [3d] Consolidate access to INCORE
        > unified access to incore fields; curently access is provided by one of
          incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
