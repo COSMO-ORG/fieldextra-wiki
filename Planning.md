@@ -464,11 +464,11 @@
        > Reduce size of tests when meaningfull (but keep some large tests)
        > Integrate in new distributed environment (use Jenkins?)
        > Use / merge with COSMO model regression suite (?)
-     + [-> 13.0.0] [jmb;1d] Externalise icontools [issue #93]
 
 ###### Priority medium
 
      + [1d] Check in Makefile that compiler supports nested OMP (minimum release value)
+     + [2d] Externalise icontools [issue #93]
 
 ###### Priority low
 
