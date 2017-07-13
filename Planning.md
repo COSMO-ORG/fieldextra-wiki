@@ -403,11 +403,12 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
-     + [<1d] Check that iteration keywords are properly ordered in namelist
-       (copy&paste easily leads to mixing iteration keywords) 
-     + [1d] Consolidate usage of operators supporting multiple options for parent fields
+     + [-> 13.0.0] [jmb;1d] [issue #134]
+       Consolidate usage of operators supporting multiple options for parent fields
        (an exception should be raised when the choice is ambigous, use_tag should
         be used to discriminate between different possibilities; see e.g. relhum or tw)
+     + [<1d] Check that iteration keywords are properly ordered in namelist
+       (copy&paste easily leads to mixing iteration keywords) 
      + [3d] Consolidate and simplify access to INCORE
        > how to make computation of derived fields more intuitive (ask led) ?
        > on-demand computation of derived field use the information of 'use_tag'
