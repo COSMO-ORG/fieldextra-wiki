@@ -326,16 +326,6 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [ok 13.0.0] [jmb; 1-3d] [issue #101]
-       [Request from Thomas Jordi for IFS; -> 2017Q2; Jira issue APNDEV-34] 
-       Operator to compute maximum sunshine duration
-     + [ok 13.0.0] [jmb; 3d] [issue #116]
-       [request from led; for R&D, for seamless forecast, for radar verification]
-       Graceful handling of missing input files in a temporal serie; option to fill
-       gaps with previous value (persistence), with interpolated values, or with
-       undef (use temporal operator; set values, field_trange and field_origin). 
-       Also, do not raise an exception when some fields are missing for some
-       time slots.
      + [-> 13.1.0] [jmb;3d] [issue #118]
        Cross-section along some arbitrary polygonal line
        > NetCDF output
@@ -403,10 +393,6 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
-     + [-> 13.0.0] [jmb;1d] [issue #134]
-       Consolidate usage of operators supporting multiple options for parent fields
-       (an exception should be raised when the choice is ambigous, use_tag should
-        be used to discriminate between different possibilities; see e.g. relhum or tw)
      + [<1d] Check that iteration keywords are properly ordered in namelist
        (copy&paste easily leads to mixing iteration keywords) 
      + [3d] Consolidate and simplify access to INCORE

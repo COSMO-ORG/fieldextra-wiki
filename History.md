@@ -11,6 +11,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.3.0](#v12.3.0), [v12.3.1](#v12.3.1), [v12.3.2](#v12.3.2)
 * [v12.4.0](#v12.4.0)
 * [v12.5.0](#v12.5.0)
+* [v12.6.0](#v12.6.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -414,6 +415,52 @@ _See file admin/HISTORY for a detailed list!_
 *Others*
 * Miscelleanous code consolidations  
   (BLK_TABLE as input, n2geog cache, GRIB 2 local table version, field level...)
+* Correction of bugs
+
+
+<a name="v12.6.0"></a>
+### v12.5.0, released on 21.02.2017 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in poor**
+**performances of GRIB 2 parallel write (ticket SUP-2089 at ECMWF).**
+
+*Products*
+* Update ECMWF GRIB API to 1.20.0, add support for adaptative entropy coding
+* Add GRIB API definitions for pollen and COSMO 5.05+
+* Add GRIB 2 support for interquantile range
+* Add GRIB 1 support for ECMWF EFI and for ECMWF large data set
+* Add GRIB 1 support for isentropic and PV surfaces
+* Add support of isothermal surfaces
+* Add support of COSMO-IT-EPS
+* Add option to produce simplified NetCDF output
+* More consistent setting of constant fields meta-data    
+  (now also controlled by out_type_mapcst)
+
+*Operators*
+* New operator to compute maximum and relative sunshine duration   
+  (with or without horizon effect)
+* Consolidate thermodynamic operators   
+  (wet bulb temperature, quantities computed at 2m above ground...)
+* Add support for cloning missing input files   
+* Add support for interpolation in the time dimension   
+  (new toper "fill_undef")
+* Consolidate support for processing inhomogeneous data in the time dimension   
+  (remove ignore_tri, introduce keep_time...)
+* Consolidate implementation of toper   
+  (handling of undefined, meta-data of transformed field...)
+* New toper "mask_all"   
+  (together with toper_mask supports selective setting of undefined values)
+* Consolidate implementation of new_field_id   
+  (merge with pre-existing field, extended meta-data resetting)
+* Extend functionality of set_leadtime, set_time_range and set_level_property
+
+*Others*
+* Extend grins default output
+* Consolidation of dictionary usage   
+  (short name derivation, complement missing meta-data with dictionary information)
+* Consolidate user interface   
+  (namelist parsing, ambiguous definition of parents...)
+* Consolidate and extend README.user
 * Correction of bugs
 
 
