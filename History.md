@@ -419,10 +419,10 @@ _See file admin/HISTORY for a detailed list!_
 
 
 <a name="v12.6.0"></a>
-### v12.5.0, released on 21.02.2017 
+### v12.6.0, released on 25.07.2017 
 
-**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in poor**
-**performances of GRIB 2 parallel write (ticket SUP-2089 at ECMWF).**
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
 
 *Products*
 * Update ECMWF GRIB API to 1.20.0, add support for adaptative entropy coding
