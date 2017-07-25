@@ -59,7 +59,7 @@
     Applications:   COSMO-ME EPS, COSMO-IT EPS
     Platform:       CRAY-XC30 / SUSE 11.3 / gfortran 4.8.2 (ECMWF)
                     HAL (HP cluster) / RH 6.7 / gfortran 4.8.5, pgi 17.5 (COMET)
-    Focal point:    Francesca Marcucci (marcucci@meteoam.it)
+    Focal point:    Francesca Marcucci (francesca.marcucci@aeronautica.difesa.it)
     Users:          Marco Alemanno
 
 .*RHM*
