@@ -48,14 +48,6 @@
     Users:          JM.Bettems (developer), P.Baumann (developer), A.Walser,
                     D.Leuenberger, A.Pauling, M.Buzzi, S.Trefalt
 
-.*RHM*
-    Applications:   COSMO-RU, COSMO-RU-ART and COSMO-RU2-EPS post-processing,
-                    COSMO-RU data assimilation
-    Platform:       Intel cluster (1) / SUSE 11.1 / Intel Fortran 12.1
-                    (1) RSC TORNADO, see http://rscgroup.ru/
-    Focal point:    Denis Blinov (denisblinov@ya.ru)
-    Users:          D.Blinov, D.Alferov, E.Astakhova, M.Shatunova, A.Kirsanov, M.Nikitin
-
 .*NMA*
     Applications:   COSMO pre-proc: re-grid radar composite to rotated lat/lon grid
                     COSMO post-proc: interpolate COSMO-7 output on geog. lat/lon grid
@@ -69,3 +61,11 @@
                     HAL (HP cluster) / RH 6.7 / gfortran 4.8.5, pgi 17.5 (COMET)
     Focal point:    Francesca Marcucci (marcucci@meteoam.it)
     Users:          Marco Alemanno
+
+.*RHM*
+    Applications:   COSMO-RU, COSMO-RU-ART and COSMO-RU2-EPS post-processing,
+                    COSMO-RU data assimilation
+    Platform:       Intel cluster (1) / SUSE 11.1 / Intel Fortran 12.1
+                    (1) RSC TORNADO, see http://rscgroup.ru/
+    Focal point:    Denis Blinov (denisblinov@ya.ru)
+    Users:          D.Blinov, D.Alferov, E.Astakhova, M.Shatunova, A.Kirsanov, M.Nikitin
