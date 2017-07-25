@@ -1,3 +1,9 @@
+.*Arpa Piemonte*
+    Applications:   None
+    Platform:       ---
+    Focal point:    Massimo Milelli (massimo.milelli@arpa.piemonte.it)
+    Users:          ---
+
 .*Arpae-SIMC*
     Applications:   COSMO-LEPS, COSMO-2I-EPS and IFS product generator
     Platform:       CRAY-XC30 / SUSE 11.3 / gfortran 4.8.2 (ECMWF)
