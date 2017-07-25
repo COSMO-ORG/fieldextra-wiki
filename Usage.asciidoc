@@ -1,8 +1,8 @@
-.*ARPA-SIMC*
-    Applications:   COSMO-LEPS and IFS product generator
+.*Arpae-SIMC*
+    Applications:   COSMO-LEPS, COSMO-2I-EPS and IFS product generator
     Platform:       CRAY-XC30 / SUSE 11.3 / gfortran 4.8.2 (ECMWF)
-                    Linux Fedora 20 (ARPA)
-    Focal point:    Andrea Montani (amontani@arpa.emr.it)
+                    Linux Fedora 20 and 24 (Arpae)
+    Focal point:    Andrea Montani (amontani@arpae.it)
     Users:          A.Montani, C.Marsigli
 
 .*DWD*
@@ -35,10 +35,10 @@
 .*MCH*
     Applications:   INCA pre-processing, KENDA pre-processing, COSMO pre-processing,
                     COSMO & IFS product generator, COSMO-ART & Pollen post-processing
-    Platform:       CRAY-XE6 / SUSE 11.1 / gfortran 4.8.2
+    Platform:       CRAY CS-Storm / Red Hat Enterprise 6.7 / gfortran 4.9.3
     Focal point:    Jean-Marie Bettems (jean-marie.bettems@meteoswiss.ch)
-    Users:          JM.Bettems (developer), P.Baumann (developer), A.Walser, A.Pauling,
-                    A.C.Letestu, M.Buzzi, S.Trefalt, L.Mayoraz
+    Users:          JM.Bettems (developer), P.Baumann (developer), A.Walser,
+                    D.Leuenberger, A.Pauling, M.Buzzi, S.Trefalt
 
 .*RHM*
     Applications:   COSMO-RU, COSMO-RU-ART and COSMO-RU2-EPS post-processing,
