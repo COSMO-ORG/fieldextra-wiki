@@ -33,8 +33,8 @@
     Users:          J.Linkowska, D.Wòjcik, A.Mazur
 
 .*IMS*
-    Applications:   TERRA standalone pre-processing
-                    (possibly more in the future)
+    Applications:   COSMO & IFS product generator
+                    Pre-processing for DA and for verification
     Platform:       SGI, AMD Opteron 6276 / SUSE 11.3 / gfortran 4.6.1
     Focal point:    Pavel Khain (khainp@ims.gov.il)
     Users:          P.Khain, A.Shtivelman
