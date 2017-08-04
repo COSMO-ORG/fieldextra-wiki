@@ -65,7 +65,8 @@
 .*RHM*
     Applications:   COSMO-RU, COSMO-RU-ART and COSMO-RU2-EPS post-processing,
                     COSMO-RU data assimilation
-    Platform:       Intel cluster (1) / SUSE 11.1 / Intel Fortran 12.1
-                    (1) RSC TORNADO, see http://rscgroup.ru/
+    Platform:       Intel cluster (1) / SUSE 11.2 / Intel Fortran 15.0.3
+                    (1) RSC Tornado Cluster Architecture'2011, see
+                    http://www.rscgroup.ru/en/our-projects/203-superkompyuter-rsk-tornado-v-rosgidromet
     Focal point:    Denis Blinov (denisblinov@ya.ru)
     Users:          D.Blinov, D.Alferov, E.Astakhova, M.Shatunova, A.Kirsanov, M.Nikitin
