@@ -29,7 +29,7 @@
 .*IMGW*
     Applications:   COSMO post-processing, PP CELO (verification)
     Platform:       ??? / Red Hat Enterprise 5.4 and 6.5 / gfortran 4.4.7
-    Focal point:    TBD
+    Focal point:    Andrzej Mazur (Andrzej.Mazur@imgw.pl)
     Users:          J.Linkowska, D.Wòjcik, A.Mazur
 
 .*IMS*
