@@ -155,11 +155,6 @@
      + [-> 13.1.0] [jmb/CSCS;3d] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
-     + [ok 13.0.0] [jmb;1w] [issue #42]
-       Optimize inner loop parallelism
-       > gp_partitioning should be only set for operators supporting this mode
-       > in some cases, parallelism on field loop would be beneficially replaced
-         by parallelism on gp loop (e.g. point operator, vertical operator)
      + [-> 13.1.0] [jmb;3w] [issue #39]
        Optimization of input
        > reading and decoding input records is sequential
@@ -416,8 +411,7 @@
        is not robust with respect to rounding errors (selected grid point may
        jump with infinitely small differences of geo. coordinates); such grid
        points should be flagged
-     + [2d] Simplify usage of dictionaries
-       > evaluate merging gme / cosmo / icon dictionaries
+     + [2d] Evaluate merging gme / cosmo / icon dictionaries
      + [8-16w;external resources] Namelist generator
        > provide easy access to 'standard' applications
        > including GUI
