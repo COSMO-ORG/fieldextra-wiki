@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.0.0** : October 31st 2017
-* **v13.1.0** : March 1st 2018
+* **v13.0.0** : January 31st 2018
+* **v13.1.0** : August 31st 2018
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -47,7 +47,7 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;1w] [issue #117]
+     + [-> 13.1.0] [jmb;1w] [issue #117]
        Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
        > Always use iundef for 'undefined' (currently -1 is used in some cases);
@@ -61,15 +61,17 @@
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-     + [-> 13.1.0] [jmb;3d] [issue #8]
-       Add global memory monitoring of non instrumented libraries
-       (currently icontool, rttov)
      + [1d] Check that all meta-information of a multi-levels field are
        consistent (e.g. units, origin ...); otherwise, vertical operators may
        lead to unpredictable meta-information values
 
 ###### Priority medium
 
+     + [-> TBD] [1w] [issue #8]
+       Consolidate memory monitoring
+       > Add global memory monitoring of non instrumented libraries
+         (currently icontool, rttov)
+       > Keep track of memory usage for all repositories used in fxtr_storage
      + [1d] Systematic check of staggering information in all operators
      + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
      + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
@@ -106,7 +108,6 @@
 ###### Priority low
 
      + [1d] Check internal coding of gamma angle for rotated lat/lon grids
-     + [1d] Keep track of memory usage for all repositories used in fxtr_storage
      + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
      + [2d] Unified interface to decide when two fields represent the same quantity
        (used in field_compare, get_ic_field, get_fields, ...)
@@ -160,6 +161,8 @@
        > reading and decoding input records is sequential
        > possible approaches: read in advance, parallel read of part files...
        > considerable potential speedup
+     + [-> 13.1.0] [jmb;3d] [issue #137]
+       Support of frame (e.g. for interpolation of pollen information used as LBC)
      + [3d] Move sorting along time dimension from store_field() to generate_output()
        > in case the input records are sorted in decreasing date, the current 
          implementation is very inefficient: records are internally re-shuffled
@@ -168,6 +171,7 @@
 ###### Priority medium
 
      + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
+     + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
      + [1w] Evaluate use of accelerator (GPU)
        > [mikko.partio@fmi.fi:
           We decode GRIB 1 and GRIB 2 simple packing with GPU's.
@@ -182,7 +186,6 @@
           Our implementation is quite simple and it is based on grib_api. There has been
           some talk of releasing the code as it is or to provide a patch to grib_api, but
           nothing has been decided so far.]
-     + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
      + [1-2w;with CSCS support] Evaluation of ScaleMP software, to use multiple
        nodes as a single virtual shared memory system
        > more threads (but how is the scaling?)
@@ -221,13 +224,12 @@
        > add latest rttov library release
      + [-> 13.1.0] [jmb;2d] [issue #130]
        Update algorithms to compute HPBL and BRN (according to COSMO)
-     + [1w] Replace grib api with eccode
-     + [2d] Add/consolidate support for
-       > multi-layers snow model (fxtr, GRIB1/2, NC)
-       > coding of kilometric grids (GRIB2 - Need of WMO extension?)
-     + [2w] Review L2E, N_TUPLE, BLK_TABLE, XLS_TABLE, FLD_TABLE and DAT_TABLE
-       > extend L2E? create a new format for profiles? use existing format (XLS, NetCDF)?
-       > are FLD_TABLE / DAT_TABLE obsolete?
+     + [-> 13.1.0] [jmb,Tanja;4w] [issue #135]
+       Review and consolidate all output format (except GRIB1, GRIB2, NetCDF)
+       > introduce uniform ASCII format for obs and model
+       > consider GeoTIFF (fortran library available by Davide Cesari)
+       > are L2E / FLD_TABLE / DAT_TABLE obsolete?
+       > create a new format for profiles? use existing format (XLS, NetCDF)?
        > declare out_type_undefcode as string, to allow 'NaN', '' or other literal
          string to flag undefined values
        > uniform header (in addition: when present, vcoord on a single line)
@@ -244,7 +246,10 @@
          (2) csv (but keep a single user interface).
        > optimize XLS_TABLE csv output (a factor of at least 2 can be achieved)
        > XLS_TABLE with all possible data mapping (?)
-         (some clients wish for same format as observations)
+     + [-> 13.1.0] [jmb;3d] Replace grib api with eccode
+     + [2d] Add/consolidate support for
+       > multi-layers snow model (fxtr, GRIB1/2, NC)
+       > coding of kilometric grids (GRIB2 - Need of WMO extension?)
 
 ###### Priority medium
 
@@ -321,7 +326,7 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> 13.1.0] [jmb;3d] [issue #118]
+     + [-> 13.0.0] [jmb;3d] [issue #118]
        Cross-section along some arbitrary polygonal line
        > NetCDF output
      + [-> TBD] [1w] [issue #60]
@@ -448,13 +453,9 @@
 ###### Priority medium
 
      + [1d] Check in Makefile that compiler supports nested OMP (minimum release value)
-     + [2d] Externalise icontools [issue #93]
+     + [-> TBD] [2d] Externalise icontools [issue #93]
 
 ###### Priority low
-
-     + [2d] Setup script to build the GRIB API definition files for a specified
-       local center, using COSMO definition files as template
-
 
 
 ---------
@@ -524,12 +525,14 @@
 ###### Priority high
 
      + [-> 13.0.0] [jmb;3d] [issue #12]
-       Planning beyond 13.1.0
-       > feedback from users : APN, CRS, H.Asensio, M.Denhard ...
+       Fieldextra life cycle
+       > stakeholders: MeteoSwiss, COSMO (in particular DWD, USAM, ARPAE)
+       > collect feedback from users 
        > evaluate software life cycle in view of future applications  
          (e.g. horizontal grid with O(10^7) points, new hardware architectures)
        > possible significant developments : code consolidation, full ICON support,
          IO optimisation, MPI parallelism, re-write of memory management
+       > do not forget to remove unused features
 
 ###### Priority medium
 
