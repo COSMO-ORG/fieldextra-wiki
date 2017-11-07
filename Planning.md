@@ -9,8 +9,8 @@
 
 #### Code development
 * [Bug corrections](#bug)
-* [Code consolidation](#code_consolidation)
 * [Code optimization](#code_optimization)
+* [Code consolidation](#code_consolidation)
 * [Feature consolidation](#feature_consolidation)
 * [New features](#new_feature)
 * [User interface](#interface)
@@ -24,14 +24,14 @@
 ---------
 
 ###### Priority high
+
+###### Priority medium
      + [3d] Consolidate computation of product halo in fxtr_control:set_data_reduction
        > currently the algorithm is not 100% robust, e.g. when neighbourhood 
          probability or use_operator is used
        > halo may be overestimated, leading to a too large memory footprint;
          this should be catched, and the user should have the opportunity to
          set a halo manually
-
-###### Priority medium
      + [3d] Computation of neighbourhood in regridding algorithm does not take into
        account metric terms (euclidian distance in target coordinates system is used);
        this is a problem when interpolating to a (rotated) lat/lon grid with grid pole
@@ -39,106 +39,6 @@
 
 ###### Priority low
 
-
-
----------
-##### Code consolidation <a name="code_consolidation"></a>
----------
-
-###### Priority high
-
-     + [-> 13.1.0] [jmb;1w] [issue #117]
-       Consolidated usage of meta-information undef value
-       > Define iundef (rundef) as the smallest integer (real) which can be represented
-       > Always use iundef for 'undefined' (currently -1 is used in some cases);
-         this requires for all meta-information: (1) consistent translation between
-         GRIB and internal representation, in both directions, (2) for other format,
-         translation from undef to output representation (backward compatibility!),
-         (3) consistent translation from user defined value in internal representation.
-     + [-> 13.1.0] [bap;3d] [issue #2]
-       Consolidated wind shear operators
-       > surface boundaries specified as namelist arguments
-       > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
-       > consider using the same kernel in procedures wind_shear() and
-         wind_shear_differential()
-     + [1d] Check that all meta-information of a multi-levels field are
-       consistent (e.g. units, origin ...); otherwise, vertical operators may
-       lead to unpredictable meta-information values
-
-###### Priority medium
-
-     + [-> TBD] [1w] [issue #8]
-       Consolidate memory monitoring
-       > Add global memory monitoring of non instrumented libraries
-         (currently icontool, rttov)
-       > Keep track of memory usage for all repositories used in fxtr_storage
-     + [1d] Systematic check of staggering information in all operators
-     + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
-     + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
-     + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
-     + [2d] GRIB 2 implementation
-       > systematically use grib_is_missing() and grib_set_missing()
-     + [3d] Consolidate access to INCORE
-       > unified access to incore fields; curently access is provided by one of
-         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
-     + [1w] Re-organize ty_fld_origin and ty_fld_product
-       > this is required to support observations
-       > field_origin should contain all meta-information which is not essential
-         for the correct behaviour of fieldextra - should be renamed to
-         field_additional_minfo
-       > field_additional_minfo should be splitted in data depending only on field
-         and data depending on field and validation date
-       > rename sc_pcat_{radar,satellite} to sc_pcat_obs 
-         (use new 'class' to differentiate)
-     + [1w] Systematically check and track fields units
-     + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
-       32 bits (possible in fortran 2008), real_in_byte set accordingly
-     + [2-4w] Common library of services for COSMO software, which is efficient for all
-       COSMO codes (incl. ICON) and which minimizes the number of modules to import
-       for accessing a requested functionality
-       > would replace the currently imported COSMO modules
-       > see README.cosmo_api
-       > see minutes of 18.12.2013 meeting
-       > should be discussed at the COSMO TAG level
-     + [16-32w] Full code review, update/rewrite memory management
-       > to support very large problems (>2.E7 hgrid size, >100 members)
-       > to better use processor cache and to reduce memory stress 
-       > to make the code GPU capable
-
-###### Priority low
-
-     + [1d] Check internal coding of gamma angle for rotated lat/lon grids
-     + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
-     + [2d] Unified interface to decide when two fields represent the same quantity
-       (used in field_compare, get_ic_field, get_fields, ...)
-     + [2d] Introduce in fxtr_operator_support an operator to compute the scalar product
-       of a vector field with the gradient of a scalar field; use it in
-       geostrophic_wind() and  geostrophic_vorticity_advection()
-     + [3d] Re-structure read_location_additional()
-     + [3d] Clean-up support_misc
-       > Replace parse_operator_definition(), parse_transformation() and
-         parse_prototype() with a generic procedure, replace corresponding
-         types with a generic type
-     + [3d] Clean-up fxtr_control
-       > handle io specifications as field specifications:
-         introduce io_spec, extend io_spec_default, extend only_for_inout(),
-         add populate_io_spec()
-       > default format for generic output should be set in the corresponding
-         write routine and not in this module
-       > less module variables, use procedure arguments instead
-     + [1w] Replace POINTER with ALLOCATABLE in TYPE when possible (safer)
-     + [1w] Review stack usage
-       > Evaluate compiler options
-         (e.g. Intel -heap-arrays, see http://software.intel.com/
-         sites/products/documentation/doclib/stdxe/2013/composerxe/compiler/fortran-lin/
-         GUID-0C5CC04A-C8CB-49BF-9382-03799AFD688B.htm)
-       > Avoid silent stacksize overflow (could lead to invisible corrupted data)
-     + [1w] GRIB 1 / GRIB 2 implementation
-       > support_grib1 error handling similar to support_grib2 (more verbose)
-       > write_grib1 error handling similar to write_grib2 (more verbose)
-       > decoding of model type and model name in support_grib1 similar to
-         support_grib2 (table based, use common table where possible)
-       > externalize look-up table for model name
 
 ---------
 ##### Code optimization <a name="code_optimization"></a>
@@ -172,6 +72,12 @@
 
      + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
      + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
+     + [16-32w] Full code review, update/rewrite memory management
+       > to support very large problems (>2.E7 hgrid size, >100 members)
+       > to better use processor cache and to reduce memory stress 
+       > to make the code GPU capable
+       > review stack usage, avoid silent stacksize overflow
+         (could lead to invisible corrupted data)
      + [1w] Evaluate use of accelerator (GPU)
        > [mikko.partio@fmi.fi:
           We decode GRIB 1 and GRIB 2 simple packing with GPU's.
@@ -190,7 +96,7 @@
        nodes as a single virtual shared memory system
        > more threads (but how is the scaling?)
        > relax the constraints on both available memory and memory throughput
-     + [2-4w] MPI based parallelism
+     + [2-4w] Introduce MPI based parallelism
 
 ###### Priority low
 
@@ -200,7 +106,7 @@
        > Load balance optimization
        (note that load balance and memory footprint optimization can also be
         achieved by using temporary files for temporal reduction)
-     + [with CSCS support] I/O optimization, im memory communication
+     + [with CSCS support] I/O optimization, in memory communication
        > Some possibilities :
          - In-memory communication using a NetCDF framework available at CSCS
            (require to implement NetCDF input, which would be a side benefit)
@@ -211,6 +117,97 @@
          Sinergia could be available beginning 2015)
        > Evaluate potential performance gains
        > Evaluate ADIOS API
+
+
+---------
+##### Code consolidation <a name="code_consolidation"></a>
+---------
+
+###### Priority high
+
+     + [-> 13.1.0] [jmb;1w] [issue #117]
+       Consolidated usage of meta-information undef value
+       > Define iundef (rundef) as the smallest integer (real) which can be represented
+       > Always use iundef for 'undefined' (currently -1 is used in some cases);
+         this requires for all meta-information: (1) consistent translation between
+         GRIB and internal representation, in both directions, (2) for other format,
+         translation from undef to output representation (backward compatibility!),
+         (3) consistent translation from user defined value in internal representation.
+     + [-> 13.1.0] [jmb;3d] Replace grib api with eccode
+     + [-> 13.1.0] [bap;3d] [issue #2]
+       Consolidated wind shear operators
+       > surface boundaries specified as namelist arguments
+       > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
+       > consider using the same kernel in procedures wind_shear() and
+         wind_shear_differential()
+
+###### Priority medium
+
+     + [-> TBD] [1w] [issue #8]
+       Consolidate memory monitoring
+       > Add global memory monitoring of non instrumented libraries
+         (currently icontool, rttov)
+       > Keep track of memory usage for all repositories used in fxtr_storage
+     + [2d] GRIB 2 implementation
+       > systematically use grib_is_missing() and grib_set_missing()
+     + [2d] Clean-up copen_c.c, add compatibility with Mac OS X (statfs --> statvfs ?)
+     + [2d] Split fxtr_operator_generic (e.g. level reduction or not, cache or not)
+     + [2d] Replace call to external C procedures with BIND (see mail Oli on 22.09.14)
+     + [3d] Consolidate access to INCORE
+       > unified access to incore fields; curently access is provided by one of
+         incore%*, incore_fields(:), get_incore_field(), get_incore_with_tag()
+     + [1w] Re-organize ty_fld_origin and ty_fld_product
+       > this is required to support observations
+       > field_origin should contain all meta-information which is not essential
+         for the correct behaviour of fieldextra - should be renamed to
+         field_additional_minfo
+       > field_additional_minfo should be splitted in data depending only on field
+         and data depending on field and validation date
+       > rename sc_pcat_{radar,satellite} to sc_pcat_obs 
+         (use new 'class' to differentiate)
+     + [2w] KIND specified for all REAL and all INTEGER, REAL explicitely set to
+       32 bits (possible in fortran 2008), real_in_byte set accordingly
+     + [2d] Introduce in fxtr_operator_support an operator to compute the scalar product
+       of a vector field with the gradient of a scalar field; use it in
+       geostrophic_wind() and  geostrophic_vorticity_advection()
+
+###### Priority low
+
+     + [2d] Unified interface to decide when two fields represent the same quantity
+       (used in field_compare, get_ic_field, get_fields, ...)
+     + [3d] Re-structure read_location_additional()
+     + [3d] Clean-up support_misc
+       > Replace parse_operator_definition(), parse_transformation() and
+         parse_prototype() with a generic procedure, replace corresponding
+         types with a generic type
+     + [3d] Clean-up fxtr_control
+       > handle io specifications as field specifications:
+         introduce io_spec, extend io_spec_default, extend only_for_inout(),
+         add populate_io_spec()
+       > default format for generic output should be set in the corresponding
+         write routine and not in this module
+       > less module variables, use procedure arguments instead
+     + [1w] Replace POINTER with ALLOCATABLE in TYPE when possible (safer)
+     + [1w] GRIB 1 / GRIB 2 implementation
+       > support_grib1 error handling similar to support_grib2 (more verbose)
+       > write_grib1 error handling similar to write_grib2 (more verbose)
+       > decoding of model type and model name in support_grib1 similar to
+         support_grib2 (table based, use common table where possible)
+       > externalize look-up table for model name
+     + [2w; support by F. Prill required] Consolidate ICON support
+       > integrate memory reservation and monitoring
+       > introduce graceful exception handling in icon tools
+         (currently exceptions detected in icon tools generate a program stop)
+       > introduce integrated measurement of omp speedup
+       > add information on grid point neighbourhood for global grid
+     + [2-4w] Common library of services for COSMO software, which is efficient for all
+       COSMO codes (incl. ICON) and which minimizes the number of modules to import
+       for accessing a requested functionality
+       > would replace the currently imported COSMO modules
+       > see README.cosmo_api
+       > see minutes of 18.12.2013 meeting
+       > should be discussed at the COSMO TAG level
+
 
 ---------
 ##### Feature consolidation <a name="feature_consolidation"></a>
@@ -246,65 +243,29 @@
          (2) csv (but keep a single user interface).
        > optimize XLS_TABLE csv output (a factor of at least 2 can be achieved)
        > XLS_TABLE with all possible data mapping (?)
-     + [-> 13.1.0] [jmb;3d] Replace grib api with eccode
-     + [2d] Add/consolidate support for
-       > multi-layers snow model (fxtr, GRIB1/2, NC)
-       > coding of kilometric grids (GRIB2 - Need of WMO extension?)
+     + [1d] Check that all meta-information of a multi-levels field are
+       consistent (e.g. units, origin ...); otherwise, vertical operators may
+       lead to unpredictable meta-information values
 
 ###### Priority medium
 
-     + [1d] Implement numberOfVgridUsed
-       (old ivctype; set lowest_full_level and sc_vc_type_* ...)
-     + [2d] Extend logical mask syntax (implemented in 'build_condition_mask')
-       > DEFINED for fields /= rundef (e.g. DEFINED(TOT_PREC))
-       > support comparison between two fields (e.g. f1 < f2)
+     + [1d] Systematic check of staggering information in all operators
+     + [1w] Systematically check and track fields units
      + [2d] Review gradient(), calc_sqrt(), and metric_coefs(); remove some restrictions
-     + [2d] Add/consolidate support for
-       > tiles (fxtr, GRIB1/2, NC)
-       > coding of EPS perturbation (GRIB2)
-       > coding of EPS quantiles difference (GRIB2)
-       > coding of EPS probabilities with respect to reference distribution (GRIB2)
-     + [1w; request from Daniel] Consolidate support of gridded observations
-       > add support for satellite and radar (meta-information, GRIB1/2)
-       > correct setting in support_grib1:decode_product_origin and transcode_grib1_pds
-         (MSG : NEW: pds(4) = 150 [satellite]
-                     pds(2) = 252, pds(7) = 1 - 8
-                                 OLD: pds(7), PDS(10)                pds(2) = 205
-                                            4  1 SEVIRI 4 IR3.9
-                                            4  2 SEVIRI 5 WV6.2
-                                            4  3 SEVIRI 6 WV7.3
-                                            4  4 SEVIRI 7 IR8.7
-                                            4  5 SEVIRI 8 IR9.7
-                                            4  6 SEVIRI 9 IR10.8
-                                            4  7 SEVIRI 10 IR12.1
-                                            4  8 SEVIRI 11 IR13.4
-                     pds(41) = 1 - 4
-                               1 cloudy brightness temperature
-                               2 clear-sky brightness temperature
-                               3 cloudy radiance
-                               4 clear-sky radiance                     )
-       > consistent values of model_name and model_type (namelist, resources ...)
-       > distinct dictionary? if yes, automatic detection of dictionary (grins)
-     + [2w; support by F. Prill required] Consolidate ICON support
-       > integrate memory reservation and monitoring
-       > introduce graceful exception handling in icon tools
-         (currently exceptions detected in icon tools generate a program stop)
-       > introduce integrated measurement of omp speedup
-       > add information on grid point neighbourhood for global grid
+     + Use analytical formula to compute hydrostatique inter-/extrapolation
+       (mail U.Blahak 09.2017, implemented in INT2LM)
 
 ###### Priority low
 
-     + [2d] Add/consolidate support for
-       > generalized height coordinates UUID (GRIB1) (?)
-       > unstructured grid (GRIB1) (?)
+     + [1d] Check internal coding of gamma angle for rotated lat/lon grids
      + [2d] Make pressure@p-levels and height@h-levels automatically available when
        computing a new field; remove ad hoc solution in write_l2e.
      + [1w; request from SRNWP-I] Adaptor for SRNWP interoperability
        > Full tests and necessary modifications
        > Extend regression suite (see mail M.Bush)
-     + [1w] Support one second time granularity 
-       > currently one minute is the smallest granularity
-       > useful for model output expressed in time steps
+     + Evaluate use of COSMO observation operators library
+     + Evaluate use of Davide GIS library
+
 
 ---------
 ##### New features <a name="new_feature"></a>
@@ -333,6 +294,31 @@
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
        > Add export to 'native' R format, new fx tool ...
+     + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
+       forecasts
+       > new bi-linear interpolation algorithm for location_to_gridpoint, taking
+         into account land-sea mask (Christoph Spirig will provide the algorithm)
+
+###### Priority medium
+
+     + [1d] Implement numberOfVgridUsed
+       (old ivctype; set lowest_full_level and sc_vc_type_* ...)
+     + [2d] Add/consolidate support for
+       > tiles (fxtr, GRIB1/2, NC)
+       > coding of EPS perturbation (GRIB2)
+       > coding of generic EPS quantiles difference (GRIB2)
+       > coding of EPS probabilities with respect to reference distribution (GRIB2)
+       > multi-layers snow model (fxtr, GRIB1/2, NC)
+       > coding of kilometric grids (GRIB2 - Need of WMO extension?)
+     + [2d] Extend logical mask syntax (implemented in 'build_condition_mask')
+       > DEFINED for fields /= rundef (e.g. DEFINED(TOT_PREC))
+       > support comparison between two fields (e.g. f1 < f2)
+     + [2d] Automatic generation of short names and (internal) dictionary entries
+       for unrecognized fields
+     + [3d;request from waa] Transfer COSMO smoother() in fieldextra
+     + [3d] Support bitmap for coding undefined values in GRIB 1
+       (introduce global switch in &GlobalSettings to choose mode of undef coding;
+        default value is bitmap)
      + [-> TBD] [1w] [issue #49]
        New import / export format for temporary files
        > instead of GRIB
@@ -350,31 +336,32 @@
          copies of each grid point during data reduction (one copy for each
          contributed target grid point), automatically compute weighted average
          in the last processing iteration
-     + [1d] Add possibility to filter fields at start of each processing iteration
-       on the basis of the time characteristics
-       > new timelist, timestart, timeend, timeincr
-     + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
-       forecasts
-       > new bi-linear interpolation algorithm for location_to_gridpoint, taking
-         into account land-sea mask (Christoph Spirig will provide the algorithm)
-
-###### Priority medium
-
-     + [2d] Automatic generation of short names and (internal) dictionary entries
-       for unrecognized fields
-     + [3d;request from waa] Transfer COSMO smoother() in fieldextra
-     + [3d] Support bitmap for coding/decoding undefined values in GRIB 1
-       (introduce global switch in &GlobalSettings to choose mode of undef coding;
-        default value is bitmap)
+     + [1w; request from Daniel] Consolidate support of gridded observations
+       > add support for satellite and radar (meta-information, GRIB1/2)
+       > correct setting in support_grib1:decode_product_origin and transcode_grib1_pds
+         (MSG : NEW: pds(4) = 150 [satellite]
+                     pds(2) = 252, pds(7) = 1 - 8
+                                 OLD: pds(7), PDS(10)                pds(2) = 205
+                                            4  1 SEVIRI 4 IR3.9
+                                            4  2 SEVIRI 5 WV6.2
+                                            4  3 SEVIRI 6 WV7.3
+                                            4  4 SEVIRI 7 IR8.7
+                                            4  5 SEVIRI 8 IR9.7
+                                            4  6 SEVIRI 9 IR10.8
+                                            4  7 SEVIRI 10 IR12.1
+                                            4  8 SEVIRI 11 IR13.4
+                     pds(41) = 1 - 4
+                               1 cloudy brightness temperature
+                               2 clear-sky brightness temperature
+                               3 cloudy radiance
+                               4 clear-sky radiance                     )
+       > consistent values of model_name and model_type (namelist, resources ...)
+       > distinct dictionary? if yes, automatic detection of dictionary (grins)
      + [4-8w] Full support of unstructured ICON grid
        > adapt interface (e.g. imin, jmin)
        > remove any implicit assumption on regular grid
        > add support for vector fields (VN interpolation â~@¦)
        > add support for more fieldextra operators
-
-###### Priority low
-
-     + [2d] Evaluate coupling of fieldextra with COSMO observation operators library
      + [2w] Consolidate horizontal re-gridding
        > mask to select source point (e.g. source has same characteristics as target)
        > consolidate weighted average and exp-weight by using a weighting function
@@ -384,6 +371,14 @@
        > consolidate 'dominant' by using exactly the number of classes present in the
          source data set for building the histogram
        > introduce spline based interpolation (from coarse to fine)
+
+###### Priority low
+
+     + [2d] Add/consolidate support for
+       > generalized height coordinates UUID (GRIB1) (?)
+     + [1w] Support time granularity up to 1 second
+       > currently one minute is the smallest granularity
+       > useful for model output expressed in time steps
 
 
 ---------
@@ -416,7 +411,7 @@
        is not robust with respect to rounding errors (selected grid point may
        jump with infinitely small differences of geo. coordinates); such grid
        points should be flagged
-     + [2d] Evaluate merging gme / cosmo / icon dictionaries
+     + [2d] Evaluate merging cosmo & icon dictionaries
      + [8-16w;external resources] Namelist generator
        > provide easy access to 'standard' applications
        > including GUI
@@ -425,6 +420,7 @@
 
 ###### Priority low
 
+     + [1d] Diagnostic from field operator: use extend tag 'procedure [operator]: '
      + [3d] Make namelist and resources case independant (i.e. normalize all strings)
 
 
@@ -435,7 +431,7 @@
 ###### Priority high
 
      + [-> 13.0.0] [1w;with support of CSCS/DWD] [issue #48]
-       Intel compiler for regression suite
+       Intel compiler for regression suite (or PGI, or ...)
        > Consider also ifort OpenMP issues
      + [-> 13.0.0] [jmb/bap;3w] [issue #10]
        Consolidate regression suite
@@ -488,8 +484,6 @@
 ###### Priority low
 
      + [3d] New fxderive [--epsmean | --epsmedian | --quantile --percentile=p]
-       > add possibility to keep the list of short names when deriving the
-         file content with grins
 
 ---------
 ##### Documentation <a name="docu"></a>
@@ -514,8 +508,8 @@
 ###### Priority low
 
      + [2w] Documentation in LaTeX
-     > Write a tutorial (use intro ppt as basis, COSMO technical report)
-     > README.user as full feature document (COSMO Part VI documentation)
+       > Write a tutorial (use intro ppt as basis, COSMO technical report)
+       > README.user as full feature document (COSMO Part VI documentation)
 
 
 ---------
@@ -531,7 +525,7 @@
        > evaluate software life cycle in view of future applications  
          (e.g. horizontal grid with O(10^7) points, new hardware architectures)
        > possible significant developments : code consolidation, full ICON support,
-         IO optimisation, MPI parallelism, re-write of memory management
+         IO optimisation, MPI parallelism, re-write of memory management...
        > do not forget to remove unused features
 
 ###### Priority medium
