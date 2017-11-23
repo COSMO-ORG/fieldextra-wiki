@@ -1,7 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.0.0** : January 31st 2018
+* **v12.7.0** : December 19th 2017
+* **v13.0.0** : March 31st 2018
 * **v13.1.0** : August 31st 2018
 
 #### Agreed milestones
@@ -273,6 +274,11 @@
 
 ###### Priority high
 
+     + [-> 12.7.0] [jmb;3d] [issue #118]
+       Cross-section along some arbitrary polygonal line
+       > NetCDF output
+     + [-> 12.7.0] [bap;1d] [issue #140]
+       Time operator to filter time on time condition
      + [-> 13.0.0] [jmb;3w] [issue #22]
        Support NetCDF on input.
        Part of project Sinergia.
@@ -287,9 +293,6 @@
        > define set of dimensions supported
        > define required / optional meta-information
        > follow CF standard
-     + [-> 13.0.0] [jmb;3d] [issue #118]
-       Cross-section along some arbitrary polygonal line
-       > NetCDF output
      + [-> TBD] [1w] [issue #60]
        Facilitate interface with R language codes
        > Discuss with MeteoSwiss R specialists
@@ -388,6 +391,8 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
+     + [-> 13.0.0] [jmb/bap;5d] [issue #148]
+       Improve namelist structure
      + [<1d] Check that iteration keywords are properly ordered in namelist
        (copy&paste easily leads to mixing iteration keywords) 
      + [3d] Consolidate and simplify access to INCORE
@@ -430,10 +435,11 @@
 
 ###### Priority high
 
+     + [-> 13.0.0] [jmb/bap;2w] [issue #149]
+       Continuous adptation of operational environment
      + [-> 13.0.0] [1w;with support of CSCS/DWD] [issue #48]
-       Intel compiler for regression suite (or PGI, or ...)
-       > Consider also ifort OpenMP issues
-     + [-> 13.0.0] [jmb/bap;3w] [issue #10]
+       Additional compiler for regression suite (ifort, PGI ...)
+     + [-> 13.0.0] [jmb/bap;4w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
@@ -491,7 +497,7 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb/bap;1w] [issue #11]
+     + [-> 13.0.0] [jmb/bap;2w] [issue #11]
        Provide more problem based solutions
        > large set of examples, illustrating as many applications as possible, 
          based on small input files, including documented namelist and input
