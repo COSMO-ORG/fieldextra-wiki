@@ -475,6 +475,8 @@
      + [5d] New tool to extract data from model output at specified locations
        and for specified fields (and ...), used within R to facilitate access
        to archived model data (see mail Andreas Pauling)
+     + Adapt all tools to support ICON on native grid
+       (problem: automatic access to NetCDF file describing the icosahedral grid)
 
 ###### Priority medium
 
