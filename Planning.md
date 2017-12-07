@@ -477,6 +477,9 @@
        to archived model data (see mail Andreas Pauling)
      + Adapt all tools to support ICON on native grid
        (problem: automatic access to NetCDF file describing the icosahedral grid)
+     + Adapt all tools to use the same packing algorithm on output as on input
+       (best solution is to add a fieldextra functionality for that, e.g.
+        out_type_packing = "keep")
 
 ###### Priority medium
 
