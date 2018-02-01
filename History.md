@@ -12,6 +12,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.4.0](#v12.4.0)
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
+* [v12.7.0](#v12.7.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -462,6 +463,40 @@ _See file admin/HISTORY for a detailed list!_
   (namelist parsing, ambiguous definition of parents...)
 * Consolidate and extend README.user
 * Correction of bugs
+
+
+<a name="v12.7.0"></a>
+### v12.7.0, released on 02.02.2018 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* New subset type 'frame of width frame_ngp'
+* New subset type 'vertical slice'
+* Full support of originating center 'Roma'
+* Add support for cosmo_d2 and cosmo_d2-eps
+* Add support for ART products
+* Add support of surface types 'mass density exceeds the specified value'
+* Consolidate GRIB 1 support (bitmap, some field short names)
+
+*Operators*
+* New toper 'date_of_min', 'date_of_max', 'value_at_date'
+* New poper 'stretch'
+* New mode 'linear in height' for some vertical interpolation operator
+* Vertical operators 'find_*' may be restricted to a user specified layer 
+
+*Others*
+* New enable_exit_status to control exit process status
+* Improve OpenMP performances
+  (in particular parallel execution of toper, poper, voper)
+* Code consolidation
+  (domain subset processing, no more limitations on number of locations,
+  more robust implementation of out_type_mapcst, remove tmp1_dictionary...
+  and tmp1_gp_partitioning..., and more)
+* Correction of bugs
+  (in particular generation of file name when multiple time stamps are used)
+
 
 
 
