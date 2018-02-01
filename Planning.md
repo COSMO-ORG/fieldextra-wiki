@@ -1,9 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.7.0** : December 19th 2017
-* **v13.0.0** : March 31st 2018
-* **v13.1.0** : August 31st 2018
+* **v12.8.0** : May 2018
+* **v13.0.0** : September 2018
+* **v13.1.0** : Q1 2019
 
 #### Agreed milestones
 * **2015Q3, Sinergia** : NetCDF on input
@@ -62,8 +62,6 @@
        > reading and decoding input records is sequential
        > possible approaches: read in advance, parallel read of part files...
        > considerable potential speedup
-     + [-> 13.1.0] [jmb;3d] [issue #137]
-       Support of frame (e.g. for interpolation of pollen information used as LBC)
      + [3d] Move sorting along time dimension from store_field() to generate_output()
        > in case the input records are sorted in decreasing date, the current 
          implementation is very inefficient: records are internally re-shuffled
@@ -274,12 +272,7 @@
 
 ###### Priority high
 
-     + [-> 12.7.0] [jmb;3d] [issue #118]
-       Cross-section along some arbitrary polygonal line
-       > NetCDF output
-     + [-> 12.7.0] [bap;1d] [issue #140]
-       Time operator to filter time on time condition
-     + [-> 13.0.0] [jmb;3w] [issue #22]
+     + [-> 12.8.0] [jmb;3w] [issue #22]
        Support NetCDF on input.
        Part of project Sinergia.
        Required to use grins in the test environment to compare NetCDF files.
@@ -331,14 +324,6 @@
      + [-> TBD] [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] [issue #30] 
        Add support for combining location dependent height correction and lateral
        weighted average
-       > output at specified locations: new location_to_gridpoint algorithm,
-         keep multiple grid points for each location during data reduction,
-         automatically compute weighted average in the last processing iteration
-       > output on an external grid: new type of data reduction declared in
-         in/out file definition (refers to some INCORE HSURF), keep multiple
-         copies of each grid point during data reduction (one copy for each
-         contributed target grid point), automatically compute weighted average
-         in the last processing iteration
      + [1w; request from Daniel] Consolidate support of gridded observations
        > add support for satellite and radar (meta-information, GRIB1/2)
        > correct setting in support_grib1:decode_product_origin and transcode_grib1_pds
@@ -436,7 +421,7 @@
 ###### Priority high
 
      + [-> 13.0.0] [jmb/bap;2w] [issue #149]
-       Continuous adptation of operational environment
+       Continuous adaptation of operational environment
      + [-> 13.0.0] [1w;with support of CSCS/DWD] [issue #48]
        Additional compiler for regression suite (ifort, PGI ...)
      + [-> 13.0.0] [jmb/bap;4w] [issue #10]
@@ -502,11 +487,11 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb/bap;2w] [issue #11]
+     + [-> 12.8.0] [jmb/bap;2w] [issue #11]
        Provide more problem based solutions
        > large set of examples, illustrating as many applications as possible, 
          based on small input files, including documented namelist and input
-     + [-> 13.0.0] [jmb;2d] [issue #92]
+     + [-> 12.8.0] [jmb;2d] [issue #92]
        Update some documentation
        > FirstContact.pdf, Overview.pdf
        > INSTALLATION (add information on how to install with existing libraries)
@@ -538,6 +523,8 @@
        > possible significant developments : code consolidation, full ICON support,
          IO optimisation, MPI parallelism, re-write of memory management...
        > do not forget to remove unused features
+     + [-> 13.0.0] [jmb;3d] [issue #152]
+       Fieldextra licensing issues 
 
 ###### Priority medium
 
