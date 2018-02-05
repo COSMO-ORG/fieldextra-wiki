@@ -484,7 +484,7 @@ _See file admin/HISTORY for a detailed list!_
 * New toper 'date_of_min', 'date_of_max', 'value_at_date'
 * New poper 'stretch'
 * New mode 'linear in height' for some vertical interpolation operator
-* Vertical operators 'find_*' may be restricted to any user specified layer 
+* Vertical operators 'find_*' may be restricted to any user specified interval 
 
 *Others*
 * New enable_exit_status to control exit process status
