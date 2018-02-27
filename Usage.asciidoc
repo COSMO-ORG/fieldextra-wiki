@@ -14,7 +14,8 @@
 .*DWD*
     Applications:   Clear Air Turbulence (Eddy Dissipation Parameter EDDP),
                     Wind/T/QNH and FABEC for German Flight Control,
-                    ICON subdomain on regular grid, TIGGE LAM, verification
+                    ICON-EPS, ICON subdomain on regular grid,
+                    TIGGE LAM, verification
     Platform:       Cray (Linux Cluster) / SUSE Linux ES 11 / ifort 15.0.1.133
     Focal point:    Hermann Asensio (Hermann.Asensio@dwd.de)
     Users:          H.Asensio, A.Barleben (developer), V.Stauch, F.Fundel, 
