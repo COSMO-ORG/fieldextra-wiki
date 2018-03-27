@@ -1,8 +1,8 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.8.0** : May 2018
-* **v13.0.0** : September 2018
+* **v12.8.0** : June 2018
+* **v13.0.0** : November 2018
 * **v13.1.0** : Q1 2019
 
 #### Agreed milestones
@@ -436,6 +436,8 @@
        > Reduce size of tests when meaningfull (but keep some large tests)
        > Integrate in new distributed environment (use Jenkins?)
        > Use / merge with COSMO model regression suite (?)
+     + [-> 13.0.0] [jmb/APND;1w] [issue #159]
+       > CMake based installation and packaging
 
 ###### Priority medium
 
@@ -491,11 +493,6 @@
        Provide more problem based solutions
        > large set of examples, illustrating as many applications as possible, 
          based on small input files, including documented namelist and input
-     + [-> 12.8.0] [jmb;2d] [issue #92]
-       Update some documentation
-       > FirstContact.pdf, Overview.pdf
-       > INSTALLATION (add information on how to install with existing libraries)
-       > New: minimal introduction to git / GitHub, to support code development
 
 ###### Priority medium
 
