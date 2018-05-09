@@ -506,6 +506,7 @@ _See file admin/HISTORY for a detailed list!_
 **poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
 
 *Products*
+* Recognize icon-eps
 * Consolidate some ASCII output (XLS_TABLE, DAT_TABLE, and FLD_TABLE)
 
 *Operators*
@@ -515,6 +516,7 @@ _See file admin/HISTORY for a detailed list!_
 *Others*
 * New fxdestagger
 * Consolidated and extended cookbook
+* Update documentation
 * Correction of bugs    
   (in particular related to vertical operator in product using multiple EPS members)
 
