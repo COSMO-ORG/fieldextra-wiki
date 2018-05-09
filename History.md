@@ -13,6 +13,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
 * [v12.7.0](#v12.7.0)
+* [v12.7.1](#v12.7.1)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -496,6 +497,27 @@ _See file admin/HISTORY for a detailed list!_
   and tmp1_gp_partitioning..., and more)
 * Correction of bugs
   (in particular generation of file name when multiple time stamps are used)
+
+
+<a name="v12.7.1"></a>
+### v12.7.1, released on 09.05.2018 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* Consolidate some ASCII output (XLS_TABLE, DAT_TABLE, and FLD_TABLE)
+
+*Operators*
+* Point operator can now be iterated up to 5 times (poper ... poper5)
+* Modified behaviour of set_vcoord
+
+*Others*
+* New fxdestagger
+* Consolidated and extended cookbook
+* Correction of bugs    
+  (in particular related to vertical operator in product using multiple EPS members)
+
 
 
 
