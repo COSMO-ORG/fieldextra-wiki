@@ -493,6 +493,9 @@
        Provide more problem based solutions
        > large set of examples, illustrating as many applications as possible, 
          based on small input files, including documented namelist and input
+     + [2w] Better integrate docu in GitHub (ask Carlos)
+       > README.user integrated in GitHub with MarkDown language
+       > cookbook integrated with active links to README.user for namelist keys
 
 ###### Priority medium
 
@@ -502,7 +505,6 @@
 
      + [2w] Documentation in LaTeX
        > Write a tutorial (use intro ppt as basis, COSMO technical report)
-       > README.user as full feature document (COSMO Part VI documentation)
 
 
 ---------
