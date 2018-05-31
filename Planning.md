@@ -132,6 +132,8 @@
          GRIB and internal representation, in both directions, (2) for other format,
          translation from undef to output representation (backward compatibility!),
          (3) consistent translation from user defined value in internal representation.
+       > systematically use grib_is_missing() and grib_set_missing() when working
+         with GRIB 2 meta-information
      + [-> 13.1.0] [jmb;3d] Replace grib api with eccode
      + [-> 13.1.0] [bap;3d] [issue #2]
        Consolidated wind shear operators
