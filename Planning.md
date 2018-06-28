@@ -62,6 +62,7 @@
        > reading and decoding input records is sequential
        > possible approaches: read in advance, parallel read of part files...
        > considerable potential speedup
+     + [5d] Evaluate and implement thread safe NetCDF write (currently within CRITICAL)
      + [3d] Move sorting along time dimension from store_field() to generate_output()
        > in case the input records are sorted in decreasing date, the current 
          implementation is very inefficient: records are internally re-shuffled
