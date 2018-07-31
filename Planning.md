@@ -383,11 +383,15 @@
        Improve namelist structure
      + [<1d] Check that iteration keywords are properly ordered in namelist
        (copy&paste easily leads to mixing iteration keywords) 
-     + [3d] Consolidate and simplify access to INCORE
-       > how to make computation of derived fields more intuitive (ask led) ?
+     + [3d] Consolidate and simplify usage of INCORE
+       > check & improve diagnostics 
+         (e.g. multi-time levels usage)
+       > remove 'compare_with' and 'merge_with' operators (?)
+         (can be replaced with poper=..., with less limitations than INCORE usage)
+       > make computation of derived fields more intuitive (led)
+       > propagate tags defined in INCORE
        > on-demand computation of derived field use the information of 'use_tag'
          when choice of parent is ambiguous (instead of reference_field)
-       > propagate tags defined in INCORE
        > make sure that get_incore_field() returns the correct HSURF field 
          (currently the selection is based on grid compatibility and unicity,
           but it is not automatic that the returned HSURF corresponds to the
@@ -459,9 +463,6 @@
      + [<1d] add option --record to fxfilter, to select a specific record
      + [1d] grins default dictionary should be dictionary_default.txt
      + [3d] New fxcompare tool
-       > consolidate support of time loop in relation with INCORE output
-       > consolidate 'compare_with' operator, in particular to compare fields
-         at the same validation times
      + [5d] New tool to extract data from model output at specified locations
        and for specified fields (and ...), used within R to facilitate access
        to archived model data (see mail Andreas Pauling)
