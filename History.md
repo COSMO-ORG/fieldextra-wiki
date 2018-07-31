@@ -519,6 +519,7 @@ _See file admin/HISTORY for a detailed list!_
 * Correction of bugs    
   (in particular related to vertical operator in product using multiple EPS members)
 
+
 <a name="v12.7.2"></a>
 ### v12.7.2, released on 23.05.2018 
 
@@ -526,7 +527,10 @@ _See file admin/HISTORY for a detailed list!_
 **poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
 
 *Products*
-* GRIB2: scaleFactorOfLowerLimit=-1 and scaleFactorOfUpperLimit=-1 are correctly coded
+*Others*
+* Correction of bugs    
+  (GRIB2 : correct coding of scaleFactorOfLowerLimit=-1 and scaleFactorOfUpperLimit=-1)
+
 
 <a name="v12.7.3"></a>
 ### v12.7.3, released on 02.07.2018 
@@ -535,7 +539,8 @@ _See file admin/HISTORY for a detailed list!_
 **poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
 
 *Others*
-* increased mx_inout from 10000 to 20000
+* Increases maximum allowed number of in_file/out_file pairs
+
 
 <a name="v12.7.4"></a>
 ### v12.7.4, released on 23.07.2018 
@@ -544,5 +549,5 @@ _See file admin/HISTORY for a detailed list!_
 **poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
 
 *Others*
-* consolidate "stop_flag" implementation (now also interrupts any input wait loop)
+* The "stop_flag" now immediately interrupts any wait loop
 
