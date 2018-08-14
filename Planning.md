@@ -356,10 +356,8 @@
      + [2w] Consolidate horizontal re-gridding
        > consolidate user interface
          + same for in_regrid as for out_regrid
-         + remove "in_regrid_all" and "regrid" 
-           (filter in in_regrid_method has the same purpose)
          + split *_regrid_method in *_regrid_method and *_regrid_method_source
-         + full support of field specific methods
+         + add interface to support multiple methods, with applicability depending on field
        > consolidate weighted average and exp-weight by using a weighting function
          which is flat in the neighbourhood of the target grid point (to not over-
          emphasize the influence of the nearest grid point when interpolating from
