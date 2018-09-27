@@ -12,7 +12,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.4.0](#v12.4.0)
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
-* [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4)
+* [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -551,3 +551,11 @@ _See file admin/HISTORY for a detailed list!_
 *Others*
 * The "stop_flag" now immediately interrupts any wait loop
 
+<a name="v12.7.5"></a>
+### v12.7.5, released on 27.09.2018 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Others*
+* Increases maximum allowed number of input files
