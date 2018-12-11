@@ -12,8 +12,12 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.4.0](#v12.4.0)
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
+<<<<<<< HEAD
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4)
 * [v12.8.0](#v12.8.0)
+=======
+* [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
+>>>>>>> 01e5fed73a673a31584480163e04ce7d10c3074b
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -553,12 +557,19 @@ _See file admin/HISTORY for a detailed list!_
 * The "stop_flag" now immediately interrupts any wait loop
 
 
-<a name="v12.8.0"></a>
-### v12.8.0, released on 14.12.2018 
+<a name="v12.7.5"></a>
+### v12.7.5, released on 27.09.2018 
+>>>>>>> 01e5fed73a673a31584480163e04ce7d10c3074b
 
 **ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
 **poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
 
+*Others*
+* Increases maximum allowed number of input files
+
+
+<a name="v12.8.0"></a>
+### v12.8.0, released on 14.12.2018 
 *Products*
 * Add NetCDF import
 * Consolidate NetCDF export
@@ -589,4 +600,3 @@ _See file admin/HISTORY for a detailed list!_
 * Some code re-structuration    
   (support_gis, support_vertical_mesh, fxtr_write_obsolete)
 * Correction of bugs
-
