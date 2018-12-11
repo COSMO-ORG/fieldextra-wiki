@@ -1,12 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v12.8.0** : June 2018
-* **v13.0.0** : November 2018
-* **v13.1.0** : Q1 2019
-
-#### Agreed milestones
-* **2015Q3, Sinergia** : NetCDF on input
+* **v13.0.0** : February - March 2019
+* **v13.1.0** : May 2019
+* **v13.2.0** : July 2019
 
 #### Code development
 * [Bug corrections](#bug)
@@ -45,31 +42,24 @@
 ##### Code optimization <a name="code_optimization"></a>
 ---------
 
- Remark about MeteoSwiss COSMO NExT system:
- * Both COSMO-1 (grid size 1158x774x80) and COSMO-E (grid size about 520x350x60x20) are
-   a postprocessing challenge for time critical production: (1) data throughput between
-   COSMO and fieldextra, (2) memory footprint, (3) stack usage, (4) time to solution.
- * Furthermore, the KENDA system presents additional challenges due to the large amount
-   of simultaneous I/O. In this case, a ScaleMP solution could be beneficial.
-
 ###### Priority high
 
+     + [-> 13.0.0] [jmb;3d] [issue #174]
+       Evaluate and implement thread safe NetCDF write (currently within CRITICAL)
      + [-> 13.1.0] [jmb/CSCS;3d] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
      + [-> 13.1.0] [jmb;3w] [issue #39]
        Optimization of input
        > reading and decoding input records is sequential
-       > possible approaches: read in advance, parallel read of part files...
-       > considerable potential speedup
-     + [5d] Evaluate and implement thread safe NetCDF write (currently within CRITICAL)
+       > proposed approache: read in advance
+
+###### Priority medium
+
      + [3d] Move sorting along time dimension from store_field() to generate_output()
        > in case the input records are sorted in decreasing date, the current 
          implementation is very inefficient: records are internally re-shuffled
          for each new contributing time plan (this is the case for some IFS files)
-
-###### Priority medium
-
      + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
      + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
      + [16-32w] Full code review, update/rewrite memory management
@@ -96,7 +86,7 @@
        nodes as a single virtual shared memory system
        > more threads (but how is the scaling?)
        > relax the constraints on both available memory and memory throughput
-     + [2-4w] Introduce MPI based parallelism
+     + [2-4w] Introduce MPI based parallelism (maybe at product level first)
 
 ###### Priority low
 
@@ -125,7 +115,11 @@
 
 ###### Priority high
 
-     + [-> 13.1.0] [jmb;1w] [issue #117]
+     + [-> 13.0.0] [jmb;3d] [issue #136]
+       Replace grib api with eccode
+     + [-> 13.0.0] [jmb;3d] [issue #174]
+       Update NetCDF library
+     + [jmb;1w] [issue #117]
        Consolidated usage of meta-information undef value
        > Define iundef (rundef) as the smallest integer (real) which can be represented
        > Always use iundef for 'undefined' (currently -1 is used in some cases);
@@ -135,17 +129,16 @@
          (3) consistent translation from user defined value in internal representation.
        > systematically use grib_is_missing() and grib_set_missing() when working
          with GRIB 2 meta-information
-     + [-> 13.1.0] [jmb;3d] Replace grib api with eccode
-     + [-> 13.1.0] [bap;3d] [issue #2]
+
+###### Priority medium
+
+     + [bap;3d] [issue #2]
        Consolidated wind shear operators
        > surface boundaries specified as namelist arguments
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
-
-###### Priority medium
-
-     + [-> TBD] [1w] [issue #8]
+     + [1w] [issue #8]
        Consolidate memory monitoring
        > Add global memory monitoring of non instrumented libraries
          (currently icontool, rttov)
@@ -217,14 +210,8 @@
 
 ###### Priority high
 
-     + [-> 13.1.0] [jmb;1w] [issue #9]
-       Consolidate computation of SYNSAT products
-       > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
-       > add latest rttov library release
-     + [-> 13.1.0] [jmb;2d] [issue #130]
-       Update algorithms to compute HPBL and BRN (according to COSMO)
-     + [-> 13.1.0] [jmb,Tanja;4w] [issue #135]
-       Review and consolidate all output format (except GRIB1, GRIB2, NetCDF)
+     + [-> 13.0.0] [jmb,Tanja;4w] [issue #135]
+       Review and consolidate all ASCII output format
        > introduce uniform ASCII format for obs and model
        > consider GeoTIFF (fortran library available by Davide Cesari)
        > are L2E / FLD_TABLE / DAT_TABLE obsolete?
@@ -245,12 +232,18 @@
          (2) csv (but keep a single user interface).
        > optimize XLS_TABLE csv output (a factor of at least 2 can be achieved)
        > XLS_TABLE with all possible data mapping (?)
-     + [1d] Check that all meta-information of a multi-levels field are
-       consistent (e.g. units, origin ...); otherwise, vertical operators may
-       lead to unpredictable meta-information values
+     + [jmb;1w] [issue #9]
+       Consolidate computation of SYNSAT products
+       > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
+       > add latest rttov library release
+     + [jmb;2d] [issue #130]
+       Update algorithms to compute HPBL and BRN (according to COSMO)
 
 ###### Priority medium
 
+     + [1d] Check that all meta-information of a multi-levels field are
+       consistent (e.g. units, origin ...); otherwise, vertical operators may
+       lead to unpredictable meta-information values
      + [1d] Systematic check of staggering information in all operators
      + [1w] Systematically check and track fields units
      + [2d] Review gradient(), calc_sqrt(), and metric_coefs(); remove some restrictions
@@ -262,9 +255,6 @@
      + [1d] Check internal coding of gamma angle for rotated lat/lon grids
      + [2d] Make pressure@p-levels and height@h-levels automatically available when
        computing a new field; remove ad hoc solution in write_l2e.
-     + [1w; request from SRNWP-I] Adaptor for SRNWP interoperability
-       > Full tests and necessary modifications
-       > Extend regression suite (see mail M.Bush)
      + Evaluate use of COSMO observation operators library
      + Evaluate use of Davide GIS library
 
@@ -275,24 +265,11 @@
 
 ###### Priority high
 
-     + [-> 12.8.0] [jmb;3w] [issue #22]
-       Support NetCDF on input.
-       Part of project Sinergia.
-       Required to use grins in the test environment to compare NetCDF files.
-       Also required for processing of gridded observations (radar, satellite),
-       for interoperability with other MCH groups, for EMPA, for in-memory
-       communication (special NetCDF library available at CSCS), for R&D,
-       for the CLM community... (but the StC has decided that fieldextra is not
-       supported/available for the CLM community).
-       EMPA would be interested using fieldextra for postprocessing of model output
-       once this feature is available.
-       > define set of dimensions supported
-       > define required / optional meta-information
-       > follow CF standard
-     + [-> TBD] [1w] [issue #60]
-       Facilitate interface with R language codes
-       > Discuss with MeteoSwiss R specialists
-       > Add export to 'native' R format, new fx tool ...
+     + [4-8w] Full support of unstructured ICON grid
+       > adapt interface (e.g. imin, jmin)
+       > remove any implicit assumption on regular grid
+       > add support for vector fields (VN interpolation â~@¦)
+       > add support for more fieldextra operators
      + [1d;bap;request from Christoph Spirig] Support ECMWF monthly and seasonal
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
@@ -318,13 +295,13 @@
      + [3d] Support bitmap for coding undefined values in GRIB 1
        (introduce global switch in &GlobalSettings to choose mode of undef coding;
         default value is bitmap)
-     + [-> TBD] [1w] [issue #49]
+     + [1w] [issue #49]
        New import / export format for temporary files
        > instead of GRIB
        > support for arbitrary list of points (list of locations)
        > implementation: Fortran unformatted files, each field & validation date
          coded using an extended ty_gb_field type
-     + [-> TBD] [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] [issue #30] 
+     + [jmb;1w;CORSO-A,DATA4WEB;to be evaluated] [issue #30] 
        Add support for combining location dependent height correction and lateral
        weighted average
      + [1w; request from Daniel] Consolidate support of gridded observations
@@ -348,11 +325,6 @@
                                4 clear-sky radiance                     )
        > consistent values of model_name and model_type (namelist, resources ...)
        > distinct dictionary? if yes, automatic detection of dictionary (grins)
-     + [4-8w] Full support of unstructured ICON grid
-       > adapt interface (e.g. imin, jmin)
-       > remove any implicit assumption on regular grid
-       > add support for vector fields (VN interpolation â~@¦)
-       > add support for more fieldextra operators
      + [2w] Consolidate horizontal re-gridding
        > consolidate user interface
          + same for in_regrid as for out_regrid
@@ -386,6 +358,7 @@
        Improve namelist structure
      + [<1d] Check that iteration keywords are properly ordered in namelist
        (copy&paste easily leads to mixing iteration keywords) 
+     + [2d] Evaluate merging cosmo & icon dictionaries
      + [3d] Consolidate and simplify usage of INCORE
        > check & improve diagnostics 
          (e.g. multi-time levels usage)
@@ -411,12 +384,6 @@
        is not robust with respect to rounding errors (selected grid point may
        jump with infinitely small differences of geo. coordinates); such grid
        points should be flagged
-     + [2d] Evaluate merging cosmo & icon dictionaries
-     + [8-16w;external resources] Namelist generator
-       > provide easy access to 'standard' applications
-       > including GUI
-       > possible financial support from DWD
-         (private communication D.Majewski COSMO GM 2016)
 
 ###### Priority low
 
@@ -430,11 +397,13 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb/bap;2w] [issue #149]
+     + [-> 13.0.0] [2d] Externalise icontools [issue #93]
+     + [-> 13.0.0] [3d] Update icontools  and add barycentric interpolation [issue #170]
+     + [-> 13.2.0] [jmb/bap;2w] [issue #149]
        Continuous adaptation of operational environment
-     + [-> 13.0.0] [1w;with support of CSCS/DWD] [issue #48]
+     + [-> 13.2.0] [1w;with support of CSCS/DWD] [issue #48]
        Additional compiler for regression suite (ifort, PGI ...)
-     + [-> 13.0.0] [jmb/bap;4w] [issue #10]
+     + [-> 13.2.0] [jmb/bap;4w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
@@ -446,13 +415,12 @@
        > Reduce size of tests when meaningfull (but keep some large tests)
        > Integrate in new distributed environment (use Jenkins?)
        > Use / merge with COSMO model regression suite (?)
-     + [-> 13.0.0] [jmb/APND;1w] [issue #159]
+     + [-> 13.2.0] [jmb/APND;1w] [issue #159]
        > CMake based installation and packaging
 
 ###### Priority medium
 
      + [1d] Check in Makefile that compiler supports nested OMP (minimum release value)
-     + [-> TBD] [2d] Externalise icontools [issue #93]
 
 ###### Priority low
 
@@ -463,20 +431,19 @@
 
 ###### Priority high
 
+     + [2w] Re-write in Python
+     + [3d] New fxcompare tool
      + [<1d] add option --record to fxfilter, to select a specific record
      + [1d] grins default dictionary should be dictionary_default.txt
-     + [3d] New fxcompare tool
-     + [5d] New tool to extract data from model output at specified locations
-       and for specified fields (and ...), used within R to facilitate access
-       to archived model data (see mail Andreas Pauling)
-     + Adapt all tools to support ICON on native grid
-       (problem: automatic access to NetCDF file describing the icosahedral grid)
      + Adapt all tools to use the same packing algorithm on output as on input
        (best solution is to add a fieldextra functionality for that, e.g.
         out_type_packing = "keep")
 
 ###### Priority medium
 
+     + [5d] New tool to extract data from model output at specified locations
+       and for specified fields (and ...), used within R to facilitate access
+       to archived model data (see mail Andreas Pauling)
      + [2d] Improve grins
        > standard output: extend level information, format
        > evaluate current options, ask users for feedback
@@ -484,7 +451,8 @@
          (modify fxtr to print short name and level as 2 first values when this
           option is used, in wrapper script pipe fxtr output to sort
           -k1,1 -k2.1nb,2.5nb ... or something similar)
-     + [2w] Re-write in Python
+     + Adapt all tools to support ICON on native grid
+       (problem: automatic access to NetCDF file describing the icosahedral grid)
 
 ###### Priority low
 
@@ -496,10 +464,6 @@
 
 ###### Priority high
 
-     + [-> 12.8.0] [jmb/bap;2w] [issue #11]
-       Provide more problem based solutions
-       > large set of examples, illustrating as many applications as possible, 
-         based on small input files, including documented namelist and input
      + [2w] Better integrate docu in GitHub (ask Carlos)
        > README.user integrated in GitHub with MarkDown language
        > cookbook integrated with active links to README.user for namelist keys
@@ -520,7 +484,7 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;3d] [issue #12]
+     + [-> 13.2.0] [jmb;3d] [issue #12]
        Fieldextra life cycle
        > stakeholders: MeteoSwiss, COSMO (in particular DWD, USAM, ARPAE)
        > collect feedback from users 
@@ -529,7 +493,7 @@
        > possible significant developments : code consolidation, full ICON support,
          IO optimisation, MPI parallelism, re-write of memory management...
        > do not forget to remove unused features
-     + [-> 13.0.0] [jmb;3d] [issue #152]
+     + [-> 13.2.0] [jmb;3d] [issue #152]
        Fieldextra licensing issues 
 
 ###### Priority medium
