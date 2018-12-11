@@ -42,6 +42,7 @@
 
 .*MCH*
     Applications:   INCA pre-processing, KENDA pre-processing, COSMO pre-processing,
+                    upscaling COSMO from 1.1km to 2.2km grid,
                     COSMO & IFS product generator, COSMO-ART & Pollen post-processing,
                     radar post-processing
     Platform:       CRAY CS-Storm / Red Hat Enterprise 6.7 / gfortran 4.9.3
