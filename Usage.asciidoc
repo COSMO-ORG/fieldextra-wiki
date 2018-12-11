@@ -45,7 +45,7 @@
                     upscaling COSMO from 1.1km to 2.2km grid,
                     COSMO & IFS product generator, COSMO-ART & Pollen post-processing,
                     radar post-processing
-    Platform:       CRAY CS-Storm / Red Hat Enterprise 6.7 / gfortran 4.9.3
+    Platform:       CRAY CS-Storm / Red Hat Enterprise 7.3 / gfortran 5.4.0
     Focal point:    Jean-Marie Bettems (jean-marie.bettems@meteoswiss.ch)
     Users:          JM.Bettems (developer), P.Baumann (developer), A.Walser,
                     D.Leuenberger, A.Pauling, M.Buzzi, S.Trefalt
