@@ -565,6 +565,10 @@ _See file admin/HISTORY for a detailed list!_
 
 <a name="v12.8.0"></a>
 ### v12.8.0, released on 14.12.2018 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
 *Products*
 * Add NetCDF import
 * Consolidate NetCDF export
