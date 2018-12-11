@@ -13,6 +13,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4)
+* [v12.8.0](#v12.8.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -550,4 +551,42 @@ _See file admin/HISTORY for a detailed list!_
 
 *Others*
 * The "stop_flag" now immediately interrupts any wait loop
+
+
+<a name="v12.8.0"></a>
+### v12.8.0, released on 14.12.2018 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* Add NetCDF import
+* Consolidate NetCDF export
+* Add support of EPS spread products
+* Add support of non standard use of GRIB 2 second surface (e.g. COSMO HHL)
+
+*Operators*
+* Extend lateral re-gridding     
+  (generalized distance, filter set of contributing grid points)
+* New operators for QV_SAT and QV_SAT_2M
+* New operator to compute the maximum or the minimum of two fields
+* New operator to project a field on a staggered grid
+
+*Tools*
+* All fx tools compatible with NetCDF / GRIB 1 / GRIB 2 / BLK_TABLE    
+  (option -N cosmo | -N extpar required when working with NetCDF)
+* New grins --ntuple
+* New grins --toc
+
+*Documentation*
+* New cookbook   
+  (with 55 commented cases)
+* Improve some diagnostics
+
+*Others*
+* Reduce binary size    
+  (now 2/3 smaller)
+* Some code re-structuration    
+  (support_gis, support_vertical_mesh, fxtr_write_obsolete)
+* Correction of bugs
 
