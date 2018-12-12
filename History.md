@@ -587,6 +587,8 @@ _See file admin/HISTORY for a detailed list!_
   (option -N cosmo | -N extpar required when working with NetCDF)
 * New grins --ntuple
 * New grins --toc
+* upscaling from fine to collocated coarse grid  
+  (./test_mch/test_upscaling.nl)
 
 *Documentation*
 * New cookbook   
