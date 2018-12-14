@@ -587,8 +587,8 @@ _See file admin/HISTORY for a detailed list!_
   (option -N cosmo | -N extpar required when working with NetCDF)
 * New grins --ntuple
 * New grins --toc
-* upscaling from fine to collocated coarse grid  
-  (./test_mch/test_upscaling.nl)
+* New tool for upscaling model output from fine to collocated coarse grid
+* New tool for rendering Fortran namelist from a more structured definition
 
 *Documentation*
 * New cookbook   
