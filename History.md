@@ -588,7 +588,7 @@ _See file admin/HISTORY for a detailed list!_
 * New grins --ntuple
 * New grins --toc
 * New tool for upscaling model output from fine to collocated coarse grid
-* New tool for rendering Fortran namelist from a structured definition
+* New tool for rendering complex Fortran namelist from a more structured definition
 
 *Documentation*
 * New cookbook   
