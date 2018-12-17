@@ -564,7 +564,7 @@ _See file admin/HISTORY for a detailed list!_
 
 
 <a name="v12.8.0"></a>
-### v12.8.0, released on 14.12.2018 
+### v12.8.0, released on 17.12.2018 
 
 **ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
 **poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
@@ -587,7 +587,7 @@ _See file admin/HISTORY for a detailed list!_
   (option -N cosmo | -N extpar required when working with NetCDF)
 * New grins --ntuple
 * New grins --toc
-* New tool for upscaling model output from fine to collocated coarse grid
+* New tool for upscaling model output from fine to collocated coarser grid
 * New tool for rendering complex Fortran namelist from a more structured definition
 
 *Documentation*
