@@ -121,7 +121,7 @@
        Update NetCDF library
      + [jmb;1w] [issue #117]
        Consolidated usage of meta-information undef value
-       > Define iundef (rundef) as the smallest integer (real) which can be represented
+       > Define iundef as the smallest integer which can be represented
        > Always use iundef for 'undefined' (currently -1 is used in some cases);
          this requires for all meta-information: (1) consistent translation between
          GRIB and internal representation, in both directions, (2) for other format,
