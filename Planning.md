@@ -210,28 +210,13 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb,Tanja;4w] [issue #135]
+     + [jmb,Tanja] 
        Review and consolidate all ASCII output format
-       > introduce uniform ASCII format for obs and model
-       > consider GeoTIFF (fortran library available by Davide Cesari)
-       > are L2E / FLD_TABLE / DAT_TABLE obsolete?
-       > create a new format for profiles? use existing format (XLS, NetCDF)?
-       > declare out_type_undefcode as string, to allow 'NaN', '' or other literal
-         string to flag undefined values
-       > uniform header (in addition: when present, vcoord on a single line)
-       > missing value code in header
-       > model name in header
-       > correctly flag meta-information which is undefined
-         (e.g. probability threshold high is reported as -1.E-6 in cvs ouput when not
-          defined, which could be misleading)
-       > re-evaluate meta-information (block keader, additional info with v=2)
-       > format independent level information (do not use get_legacy_level())
-       > support verbosity setting (or versioning)
-       > split fxtr_write_generic:write_xls_table in two routines:
-         (1) old atab
-         (2) csv (but keep a single user interface).
-       > optimize XLS_TABLE csv output (a factor of at least 2 can be achieved)
-       > XLS_TABLE with all possible data mapping (?)
+       > new ASCII_TABLE layout (line_label="time_location_level")
+       > improve support of meta-information when mixing products
+     + [jmb,Tanja] 
+       Review and consolidate all ASCII output format
+       > remove BLK_TABLE (obsolete), DAT_TABLE, FLD_TABLE and XLS_TABLE
      + [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
@@ -241,6 +226,11 @@
 
 ###### Priority medium
 
+     + [jmb,Tanja] 
+       Review and consolidate all ASCII output format
+       > consider GeoTIFF (fortran library available by Davide Cesari)
+       > declare out_type_undefcode as string, to allow 'NaN', '' or other literal
+         string to flag undefined values
      + [1d] Check that all meta-information of a multi-levels field are
        consistent (e.g. units, origin ...); otherwise, vertical operators may
        lead to unpredictable meta-information values
