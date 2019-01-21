@@ -213,16 +213,16 @@
      + [jmb,Tanja] 
        Consolidate ASCII_TABLE output 
        > new ASCII_TABLE layout (line_label="time_location_level")
-       > improve support of meta-information when mixing products
-       > introduce fusedt (?)
+       > improve support of meta-information when mixing PDF products
+       > new out_type_undeflabel, to allow 'NaN', '' or other literal
+         string to flag undefined values
+     + [jmb] 
+       Remove BLK_TABLE (obsolete option), DAT_TABLE, FLD_TABLE and XLS_TABLE
      + [jmb,Tanja] 
        Review and consolidate BLK_TABLE output 
-       > similar header as ASCII _TABLE
-       > data header
+       > global & data header
        > efficiency
-     + [jmb] 
-       Review and consolidate all ASCII output format
-       > remove BLK_TABLE (obsolete type), DAT_TABLE, FLD_TABLE and XLS_TABLE
+       > code clean-up
      + [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
@@ -233,11 +233,9 @@
 ###### Priority medium
 
      + [jmb,Tanja] 
-       Review and consolidate all ASCII output format
+       Review and consolidate ASCII output format
        > consider GeoTIFF (fortran library available by Davide Cesari)
        > just on time for some ASCII_TABLE layout (?)
-       > declare out_type_undefcode as string, to allow 'NaN', '' or other literal
-         string to flag undefined values
      + [1d] Check that all meta-information of a multi-levels field are
        consistent (e.g. units, origin ...); otherwise, vertical operators may
        lead to unpredictable meta-information values
