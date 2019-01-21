@@ -215,14 +215,9 @@
        > new ASCII_TABLE layout (line_label="time_location_level")
        > improve support of meta-information when mixing PDF products
        > new out_type_undeflabel, to allow 'NaN', '' or other literal
-         string to flag undefined values
+         string to flag undefined values (?)
      + [jmb] 
        Remove BLK_TABLE (obsolete option), DAT_TABLE, FLD_TABLE and XLS_TABLE
-     + [jmb,Tanja] 
-       Review and consolidate BLK_TABLE output 
-       > global & data header
-       > efficiency
-       > code clean-up
      + [jmb;1w] [issue #9]
        Consolidate computation of SYNSAT products
        > see modifications in COSMO release 5.3, procedure prepare_rttov_input()
@@ -232,6 +227,11 @@
 
 ###### Priority medium
 
+     + [jmb,Tanja] 
+       Review and consolidate BLK_TABLE output 
+       > global & data header
+       > efficiency
+       > code clean-up
      + [jmb,Tanja] 
        Review and consolidate ASCII output format
        > consider GeoTIFF (fortran library available by Davide Cesari)
