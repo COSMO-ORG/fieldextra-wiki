@@ -13,7 +13,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
-* [v12.8.0](#v12.8.0)
+* [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -601,4 +601,22 @@ _See file admin/HISTORY for a detailed list!_
 * Some code re-structuration    
   (support_gis, support_vertical_mesh, fxtr_write_obsolete)
 * Correction of bugs
+
+
+<a name="v12.8.1"></a>
+### v12.8.1, released on 22.01.2019 
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* consolidate ASCII export (new ASCII_TABLE, remove L2E)
+
+*Documentation*
+* improve name of some namelist variables
+
+*Others*
+* introduce new robust definition of undefined flag for real values
+* repair makefile profiling target
+* correction of bugs
 
