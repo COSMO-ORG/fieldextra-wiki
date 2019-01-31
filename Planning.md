@@ -115,8 +115,6 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;3d] [issue #136]
-       Replace grib api with eccode
      + [-> 13.0.0] [jmb;3d] [issue #174]
        Update NetCDF library
      + [jmb;1w] [issue #117]
