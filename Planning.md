@@ -267,6 +267,8 @@
        forecasts
        > new bi-linear interpolation algorithm for location_to_gridpoint, taking
          into account land-sea mask (Christoph Spirig will provide the algorithm)
+     + [3d] add possibility to restrict any operator to some geographical subdomain
+        (e.g. region, frame; with identity operator outside of the subdomain)
 
 ###### Priority medium
 
