@@ -644,8 +644,9 @@ _See file admin/HISTORY for a detailed list!_
 <a name="v12.8.4"></a>
 ### v12.8.4, released on 07.03.2019
 
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
 *Products*
 * out_type_prefered_tunits only sets unit of time range
 
-**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
-**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
