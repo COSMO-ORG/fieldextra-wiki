@@ -136,6 +136,10 @@
        > in GRIB 2, only use short names WSHEAR_INT and WSHEAR_DIFF
        > consider using the same kernel in procedures wind_shear() and
          wind_shear_differential()
+     + [jmb;1d] 
+       Introduce a second optional argument to the class of hoper sqmax..., taking the
+       value 'tiled' or 'shifted' (i.e. one would have hoper='sqmax,r', or 
+       hoper='sqmax,r,tiled', or hoper='sqmax,r,shifted')
      + [1w] [issue #8]
        Consolidate memory monitoring
        > Add global memory monitoring of non instrumented libraries
