@@ -1,9 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.0.0** : March 2019
-* **v13.1.0** : June 2019
-* **v13.2.0** : November 2019
+* **v13.0.0** : April 2019
+* **v13.1.0** : July 2019
+* **v13.2.0** : December 2019
 
 #### Code development
 * [Bug corrections](#bug)
