@@ -13,7 +13,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
-* [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1)
+* [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1), [v12.8.2](#v12.8.2), [v12.8.3](#v12.8.3), [v12.8.4](#v12.8.4) 
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -619,4 +619,34 @@ _See file admin/HISTORY for a detailed list!_
 * introduce new robust definition of undefined flag for real values
 * repair makefile profiling target
 * correction of bugs
+
+<a name="v12.8.2"></a>
+### v12.8.2, released on 01.03.2019
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* remove spurious blank line in grins output
+
+*Others*
+* preprocessor flag to explicitly set the reading buffer to 4MiB in the GRIB1 library
+
+<a name="v12.8.3"></a>
+### v12.8.3, released on 06.03.2019
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Others*
+* new out_type_prefered_tunits to set prefered time unit
+
+<a name="v12.8.4"></a>
+### v12.8.4, released on 07.03.2019
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* out_type_prefered_tunits only sets unit of time range
 
