@@ -44,8 +44,6 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;3d] [issue #174]
-       Evaluate and implement thread safe NetCDF write (currently within CRITICAL)
      + [-> 13.1.0] [jmb/CSCS;3d] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
@@ -115,8 +113,6 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [jmb;3d] [issue #174]
-       Update NetCDF library
      + [jmb;1w] [issue #117]
        Consolidated usage of meta-information undef value
        > Define iundef as the smallest integer which can be represented
@@ -214,7 +210,6 @@
 
      + [jmb,Tanja] 
        Consolidate ASCII_TABLE output 
-       > new ASCII_TABLE layout (line_label="time_location_level")
        > improve support of meta-information when mixing PDF products
        > new out_type_undeflabel, to allow 'NaN', '' or other literal
          string to flag undefined values (?)
@@ -238,6 +233,15 @@
        Review and consolidate ASCII output format
        > consider GeoTIFF (fortran library available by Davide Cesari)
        > just on time for some ASCII_TABLE layout (?)
+     + [jmb] 
+       Improve handling of NetCDF dimensions
+       > keep original dimension names when possible
+       > add possibility for user defined dimension names
+     + [jmb] 
+       Add minimal support for unregistred field names
+       (to support e.g. fxfilter or other simple operations)
+       > use NetCDF variable name when present
+       > use UNKNOWN_i, i=1...n otherwise
      + [1d] Check that all meta-information of a multi-levels field are
        consistent (e.g. units, origin ...); otherwise, vertical operators may
        lead to unpredictable meta-information values
@@ -353,8 +357,6 @@
 ###### Priority high
 
      + [-> PERM] Improve clarity of diagnostic
-     + [-> 13.0.0] [jmb/bap;5d] [issue #148]
-       Improve namelist structure
      + [<1d] Check that iteration keywords are properly ordered in namelist
        (copy&paste easily leads to mixing iteration keywords) 
      + [2d] Evaluate merging cosmo & icon dictionaries
@@ -396,8 +398,6 @@
 
 ###### Priority high
 
-     + [-> 13.0.0] [2d] Externalise icontools [issue #93]
-     + [-> 13.0.0] [3d] Update icontools  and add barycentric interpolation [issue #170]
      + [-> 13.2.0] [jmb/bap;2w] [issue #149]
        Continuous adaptation of operational environment
      + [-> 13.2.0] [1w;with support of CSCS/DWD] [issue #48]
