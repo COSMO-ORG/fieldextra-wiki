@@ -13,7 +13,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.5.0](#v12.5.0)
 * [v12.6.0](#v12.6.0)
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
-* [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1), [v12.8.2](#v12.8.2), [v12.8.3](#v12.8.3), [v12.8.4](#v12.8.4) 
+* [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1), [v12.8.2](#v12.8.2), [v12.8.3](#v12.8.3), [v12.8.4](#v12.8.4), [v12.8.5](#v12.8.5) 
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -650,3 +650,11 @@ _See file admin/HISTORY for a detailed list!_
 *Products*
 * out_type_prefered_tunits only sets unit of time range
 
+<a name="v12.8.5"></a>
+### v12.8.5, released on 13.05.2019
+
+**ATTENTION: poor OpenMP performances of GRIB API 1.20.0, resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* admit unlimited usage of Swiss Coordinates transformation formula
