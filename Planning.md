@@ -3,7 +3,8 @@
 #### Release planning
 * **v13.0.0** : April 2019
 * **v13.1.0** : July 2019
-* **v13.2.0** : February 2020
+* **v13.2.0** : January 2020
+* **v13.3.0** : April 2020
 
 #### Code development
 * [Bug corrections](#bug)
