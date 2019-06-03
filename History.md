@@ -14,6 +14,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.6.0](#v12.6.0)
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
 * [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1), [v12.8.2](#v12.8.2), [v12.8.3](#v12.8.3), [v12.8.4](#v12.8.4), [v12.8.5](#v12.8.5), [v12.8.6](#v12.8.6) 
+* [v13.0.0](#v13.0.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -668,3 +669,48 @@ _See file admin/HISTORY for a detailed list!_
 *Products*
 * extend the definition domain in geographical latlon for transformations to Swiss
   coordinates
+
+<a name="v13.0.0"></a>
+### v13.0.0, released on 06.06.2019 
+
+**ATTENTION: poor OpenMP performances of ecCodes 2.10.9 resulting in**
+**poor performances of GRIB 2 parallel write (ECMWF ticket SUP-2089).**
+
+*Products*
+* consolidate GRIB 1 support
+  (buffer size, control of cached memory pages, support of constant fields special coding)
+* consolidate NetCDF support
+  (compression, nc4 / nc3 / nc3 with 64bits offset, optional unlimited time dimension)
+* extend ASCII_TABLE output format
+  (blank separator, profile oriented mode)
+* consolidate support of COSMO GRIB 2 conventions used to code height field
+* add full support of ITAF models
+  (cosmo-me, cosmo-me-eps, cosmo-it, cosmo-it-eps)
+* extend domain of validity of Swiss coordinates
+
+*Operators*
+* consolidate usage of level_class
+* new operator to compute HHL from HFL
+  (new mode of operator "intpl_k2khalf")
+* add bi-linear interpolation option to lateral regridding operator
+* add barycentric interpolation option to lateral regridding operator (ICON grid only)
+* add new option to field reduction obtained by spatial averaging
+  (--> add flexibility to the choice of the reduced grid)
+* consolidate and extend handling of vertical coordinates
+  (support projection from one vertical coordinates system to another)
+
+*Tools*
+* consolidate fx_upscaling tool
+* new grins option to display horizontal grid information
+  (--hgrid)
+
+*Documentation*
+* extend cookbook
+
+*Others*
+* new repeat mode to avoid repeating successful operations in case of restart
+* update GRIB API library to ecCodes v2.10.9
+* update NetCDF library to v4.4.0
+* update icontools library to v2.3.6
+* correction of bugs
+
