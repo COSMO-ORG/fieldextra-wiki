@@ -1,8 +1,10 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.1.0** : August 2019
-* **v13.2.0** : January 2020
+* **v13.1.0** : July 22, 2019
+* **v13.2.0** : September 15, 2019
+* **v13.3.0** : January 31, 2020
+* **v13.4.0** : April 30, 2020
 
 #### Code development
 * [Bug corrections](#bug)
@@ -43,10 +45,10 @@
 
 ###### Priority high
 
-     + [-> 13.1.0] [jmb/CSCS;3d] [issue #40]
+     + [-> 13.2.0] [jmb/CSCS;3d] [issue #40]
        Detailed code profiling of COSMO-NExT system
        > Find possible bottlenecks, optimize
-     + [-> 13.1.0] [jmb;3w] [issue #39]
+     + [-> 13.2.0] [jmb;3w] [issue #39]
        Optimization of input
        > reading and decoding input records is sequential
        > proposed approache: read in advance
