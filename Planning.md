@@ -61,13 +61,37 @@
          for each new contributing time plan (this is the case for some IFS files)
      + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
      + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
-     + [16-32w] Full code review, update/rewrite memory management
+     + [1w] Optimize fxtr_control
+       > use on-line cache of processed namelist
+       > review algorithms
+       > code profiling to detect possible optimizations
+     + [1-2w;with CSCS support] Evaluation of ScaleMP software, to use multiple
+       nodes as a single virtual shared memory system
+       > more threads (but how is the scaling?)
+     + [with CSCS support] I/O optimization
+       In memory communication, avoid unnecessary encoding / decoding cycle
+       > Some possibilities :
+         - In-memory communication using a NetCDF framework available at CSCS
+           (require to implement NetCDF input, which would be a side benefit)
+         - In-memory communication with ADIOS API (support: Jean Favre)
+         - In-memory communication with OASIS coupler
+
+###### Priority low
+
+     + Extend just on time mode
+       > Just on time also when time operator is used (at least a sub-category)
+       > Memory footprint optimization
+       > Load balance optimization
+       (note that load balance and memory footprint optimization can also be
+        achieved by using temporary files for temporal reduction)
+     + [2-4w] Introduce MPI based parallelism (maybe at product level first)
+     + Full code review, update/rewrite memory management
        > to support very large problems (>2.E7 hgrid size, >100 members)
        > to better use processor cache and to reduce memory stress 
        > to make the code GPU capable
        > review stack usage, avoid silent stacksize overflow
          (could lead to invisible corrupted data)
-     + [1w] Evaluate use of accelerator (GPU)
+     + Evaluate use of accelerator (GPU)
        > [mikko.partio@fmi.fi:
           We decode GRIB 1 and GRIB 2 simple packing with GPU's.
           The reason why we don't already do the encoding in GPUs is that decoding is
@@ -81,31 +105,6 @@
           Our implementation is quite simple and it is based on grib_api. There has been
           some talk of releasing the code as it is or to provide a patch to grib_api, but
           nothing has been decided so far.]
-     + [1-2w;with CSCS support] Evaluation of ScaleMP software, to use multiple
-       nodes as a single virtual shared memory system
-       > more threads (but how is the scaling?)
-       > relax the constraints on both available memory and memory throughput
-     + [2-4w] Introduce MPI based parallelism (maybe at product level first)
-
-###### Priority low
-
-     + Extend just on time mode
-       > Just on time also when time operator is used (at least a sub-category)
-       > Memory footprint optimization
-       > Load balance optimization
-       (note that load balance and memory footprint optimization can also be
-        achieved by using temporary files for temporal reduction)
-     + [with CSCS support] I/O optimization, in memory communication
-       > Some possibilities :
-         - In-memory communication using a NetCDF framework available at CSCS
-           (require to implement NetCDF input, which would be a side benefit)
-         - In-memory communication with ADIOS API (support: Jean Favre)
-         - In-memory communication with OASIS coupler
-         The first and second options are the prefered one, also because they are
-         compatible with the Sinergia project where Oli is involved (resources from
-         Sinergia could be available beginning 2015)
-       > Evaluate potential performance gains
-       > Evaluate ADIOS API
 
 
 ---------
