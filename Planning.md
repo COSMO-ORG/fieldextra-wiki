@@ -59,7 +59,6 @@
        > in case the input records are sorted in decreasing date, the current 
          implementation is very inefficient: records are internally re-shuffled
          for each new contributing time plan (this is the case for some IFS files)
-     + [3d] Optimize stab_lookup (search algorithm, create different storage classes)
      + [1w] Avoid using strings as much as possible (tag component of ty_fld_id ...)
      + [1w] Optimize fxtr_control
        > use on-line cache of processed namelist
