@@ -45,9 +45,6 @@
 
 ###### Priority high
 
-     + [-> 13.2.0] [jmb/CSCS;3d] [issue #40]
-       Detailed code profiling of COSMO-NExT system
-       > Find possible bottlenecks, optimize
      + [-> 13.2.0] [jmb;3w] [issue #39]
        Optimization of input
        > reading and decoding input records is sequential
@@ -55,6 +52,12 @@
 
 ###### Priority medium
 
+     + Memory management optimization
+       > an estimated 20-30% of total time of COSMO-1E production is for memory access
+         (see https://github.com/COSMO-ORG/fieldextra/issues/235)
+       > in prepare_data() replace ty_out_store:values(n_gp,n_fd,n_vd) with something like
+         field(n_fd)%values(n_gp,n_vd) and perform on-demand copies independently for each 
+         field
      + [3d] Move sorting along time dimension from store_field() to generate_output()
        > in case the input records are sorted in decreasing date, the current 
          implementation is very inefficient: records are internally re-shuffled
