@@ -2,7 +2,7 @@
 
 #### Release planning
 * **v13.1.0** : October 15 2019
-* **v13.2.0** : December 15, 2019
+* **v13.2.0** : December 23, 2019
 * **v13.3.0** : March 31, 2020
 * **v13.4.0** : September 30, 2020
 
