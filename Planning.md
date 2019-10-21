@@ -1,7 +1,6 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.1.0** : October 15 2019
 * **v13.2.0** : December 31, 2019
 * **v13.3.0** : February 28, 2020
 * **v13.4.0** : August 31, 2020
@@ -485,16 +484,15 @@
 
 ###### Priority high
 
-     + [-> 13.2.0] [jmb;3d] [issue #12]
+     + [-> 13.3.0] [jmb;3d] [issue #12]
        Fieldextra life cycle
        > stakeholders: MeteoSwiss, COSMO (in particular DWD, USAM, ARPAE)
-       > collect feedback from users 
        > evaluate software life cycle in view of future applications  
          (e.g. horizontal grid with O(10^7) points, new hardware architectures)
        > possible significant developments : code consolidation, full ICON support,
          IO optimisation, MPI parallelism, re-write of memory management...
        > do not forget to remove unused features
-     + [-> 13.2.0] [jmb;3d] [issue #152]
+     + [-> 13.4.0] [jmb;3d] [issue #152]
        Fieldextra licensing issues 
 
 ###### Priority medium

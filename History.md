@@ -15,6 +15,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.7.0](#v12.7.0), [v12.7.1](#v12.7.1), [v12.7.2](#v12.7.2), [v12.7.3](#v12.7.3), [v12.7.4](#v12.7.4), [v12.7.5](#v12.7.5)
 * [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1), [v12.8.2](#v12.8.2), [v12.8.3](#v12.8.3), [v12.8.4](#v12.8.4), [v12.8.5](#v12.8.5), [v12.8.6](#v12.8.6) 
 * [v13.0.0](#v13.0.0)
+* [v13.1.0](#v13.1.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -713,4 +714,46 @@ _See file admin/HISTORY for a detailed list!_
 * update NetCDF library to v4.4.0
 * update icontools library to v2.3.6
 * correction of bugs
+
+<a name="v13.1.0"></a>
+### v13.1.0, released on 25.10.2019 
+
+*Products*
+* consolidate NetCDF import
+* consolidate support of Swiss coordinates (LV95)
+* add full support of cosmo-1e, cosmo-2e, cosmo-il, cosmo-ile
+
+*Operators*
+* extend the set of operators compatible with "field=__ALL__"
+* five successive voper calls can now be made in each iteration
+* consolidate vertical operators find_*, intpl_k2theta, and intpl_k2pv
+  (new rule when top part of profile is degenrate)
+* consolidate vertical operators find_*
+  (introduce better control of target suface location)
+* new point operator "poper=replace_def,value" (replace defined values)
+* new input/output operator "in_crop_size=value" (cut frame)
+* new input/output operator "in_vgrid_target=tag" (reset vcoord info)
+* add multiple options to compute K0INDEX
+* new operator to compute temperature and pressure thickness of reference atmosphere
+* new operators to compute RH_ICE_2M, RH_MIX_EC_2M, GRH
+* new operator to compute balanced PP and QX fields (from INT2LM)
+
+*Tools*
+* new fx tools option "-N inca" (compatibility with NetCDF produced by INCA)
+* new grins --vgrid (vertical coordinates characteristics)
+* consolidate fx_upscaling tool (GRIB 2, EPS or determinist)
+
+*Documentation*
+* new section about namelist optimization in README.user
+
+*Others*
+* update ecCodes to v2.14.1
+* improve some diagnostics
+* improve build-in profiling
+* optimization of some internal procedures
+* introduce OpenMP thread affinity policy (optimization)
+* hoper in in_field is now computed in parallel (optimization)
+* integrate in Jenkins (automatic build and test)
+* correction of bugs
+  (in particular for domain with nj > ni, and for voper=find_nonzero)
 
