@@ -222,6 +222,8 @@
        > add latest rttov library release
      + [jmb;2d] [issue #130]
        Update algorithms to compute HPBL and BRN (according to COSMO)
+     + [jmb;2d]
+       Improve multi-models support (default_model_name ...)
 
 ###### Priority medium
 
