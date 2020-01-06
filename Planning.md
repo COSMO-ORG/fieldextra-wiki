@@ -1,9 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.2.0** : December 31, 2019
-* **v13.3.0** : February 28, 2020
-* **v13.4.0** : August 31, 2020
+* **v13.2.0** : February 28, 2020
+* **v13.3.0** : May 31, 2020
+* **v13.4.0** : October 31, 2020
 
 #### Code development
 * [Bug corrections](#bug)
@@ -401,11 +401,11 @@
 
 ###### Priority high
 
-     + [-> 13.2.0] [jmb/bap;2w] [issue #149]
+     + [-> 13.3.0] [jmb/bap;2w] [issue #149]
        Continuous adaptation of operational environment
-     + [-> 13.2.0] [1w;with support of CSCS/DWD] [issue #48]
+     + [-> 13.3.0] [1w;with support of CSCS/DWD] [issue #48]
        Additional compiler for regression suite (ifort, PGI ...)
-     + [-> 13.2.0] [jmb/bap;4w] [issue #10]
+     + [-> 13.3.0] [jmb/bap;4w] [issue #10]
        Consolidate regression suite
        > Add tests of fx tools
        > Only compare min, max, mean, std, #missing
@@ -417,7 +417,7 @@
        > Reduce size of tests when meaningfull (but keep some large tests)
        > Integrate in new distributed environment (use Jenkins?)
        > Use / merge with COSMO model regression suite (?)
-     + [-> 13.2.0] [jmb/APND;1w] [issue #159]
+     + [-> 13.3.0] [jmb/APND;1w] [issue #159]
        > CMake based installation and packaging
 
 ###### Priority medium
@@ -486,7 +486,7 @@
 
 ###### Priority high
 
-     + [-> 13.3.0] [jmb;3d] [issue #12]
+     + [-> 13.4.0] [jmb;3d] [issue #12]
        Fieldextra life cycle
        > stakeholders: MeteoSwiss, COSMO (in particular DWD, USAM, ARPAE)
        > evaluate software life cycle in view of future applications  
