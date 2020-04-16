@@ -16,6 +16,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v12.8.0](#v12.8.0), [v12.8.1](#v12.8.1), [v12.8.2](#v12.8.2), [v12.8.3](#v12.8.3), [v12.8.4](#v12.8.4), [v12.8.5](#v12.8.5), [v12.8.6](#v12.8.6) 
 * [v13.0.0](#v13.0.0)
 * [v13.1.0](#v13.1.0)
+* [v13.2.0](#v13.2.0)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -756,4 +757,27 @@ _See file admin/HISTORY for a detailed list!_
 * integrate in Jenkins (automatic build and test)
 * correction of bugs
   (in particular for domain with nj > ni, and for voper=find_nonzero)
+
+<a name="v13.2.0"></a>
+### v13.2.0, released on 20.04.2020 
+
+*Products*
+* extend functionalities of ASCII_TABLE output
+
+*Operators*
+* possibility to define symbolic constants in &GlobalSettings
+
+*Tools*
+* additional options for grins
+* additional options for fx_clone
+* new fx_archive_extract
+* consolidate fx_upscaling
+
+*Others*
+* implement parallel import
+* improve OMP speedup of operators
+* new "stop_timestamp" to help debug namelist
+* new "out_type_undef_fatal" to raise a fatal exception when undef are detected
+* correction of bugs (in particular: hydrostatic extrapolation, GRIB 2 coding of interquantiles)
+
 

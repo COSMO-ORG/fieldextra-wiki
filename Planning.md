@@ -1,9 +1,9 @@
 ### Fieldextra planning, with priorities and assigned tasks
 
 #### Release planning
-* **v13.2.0** : February 28, 2020
-* **v13.3.0** : May 31, 2020
-* **v13.4.0** : October 31, 2020
+* **v13.3.0** : June 30, 2020
+* **v13.4.0** : December 31, 2020
+* **v13.5.0** : April 30, 2021
 
 #### Code development
 * [Bug corrections](#bug)
@@ -43,11 +43,6 @@
 ---------
 
 ###### Priority high
-
-     + [-> 13.2.0] [jmb;3w] [issue #39]
-       Optimization of input
-       > reading and decoding input records is sequential
-       > proposed approache: read in advance
 
 ###### Priority medium
 
