@@ -17,6 +17,7 @@ _See file admin/HISTORY for a detailed list!_
 * [v13.0.0](#v13.0.0)
 * [v13.1.0](#v13.1.0)
 * [v13.2.0](#v13.2.0)
+* [v13.2.1](#v13.2.1)
 
 <a name="v11.0.0"></a>
 ### v11.0.0, released on 21.12.2012 
@@ -780,4 +781,26 @@ _See file admin/HISTORY for a detailed list!_
 * new "out_type_undef_fatal" to raise a fatal exception when undef are detected
 * correction of bugs (in particular: hydrostatic extrapolation, GRIB 2 coding of interquantiles)
 
+<a name="v13.2.1"></a>
+### v13.2.1, released on 17.07.2020
+
+*Products*
+* add support for addtional model name "inca-1e", "icon" with generatingProcessIdentifier in [4,12]
+* consolidate BLK_TABLE output
+
+*Operators*
+* new global operator to merge a set of files representing a field defined on distinct spatial patches
+
+*Tools*
+* consolidate setup and regression scripts
+* consolidate grins output
+* consolidate fx_upscaling tool
+* consolidate fx_archive_extract tool
+* new fx_split_merge tool
+
+*Others*
+* add some absolute timing information
+* add support of MacOS
+* consolidate internal grib1 library
+* update internal icontools library
 
