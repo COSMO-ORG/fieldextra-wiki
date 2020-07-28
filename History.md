@@ -784,9 +784,9 @@ _See file admin/HISTORY for a detailed list!_
 
 <a name="v13.2.1"></a>
 ### v13.2.1, released on 17.07.2020
-### Private MeteoSwiss release
+*Private MeteoSwiss release*
 
 <a name="v13.2.2"></a>
 ### v13.2.2, released on 28.07.2020
-### Private MeteoSwiss release
+*Private MeteoSwiss release*
 
