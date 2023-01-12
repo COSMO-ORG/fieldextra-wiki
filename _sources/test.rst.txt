@@ -3,3 +3,9 @@
 
 .. nl:namelist:: Test
 
+bla bli
+
+blubb
+
+:nl:nl:`Test`
+

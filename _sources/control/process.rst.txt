@@ -600,20 +600,20 @@ time or eps keyword.
 This default behaviour does not support the case where multiple time
 levels or multiple EPS members are required to compute the output
 fields (e.g. use of :py:attr:`&Process.toper`, computation of EPS derived fields). For 
-this reason the default rule can be changed by the usage of :py:attr:`&Process:tlag`
+this reason the default rule can be changed by the usage of :py:attr:`&Process.tlag`
 or :py:attr:`&Process.out_group_eps`, as explained below.
 
 .. py:attribute:: tlag
     :type: <start time>[,<stop time>[,<increment>]]
 
 
-    The variable :py:attr:`&Process:tlag` defines a set of times through an implicit time loop;
+    The variable :py:attr:`&Process.tlag` defines a set of times through an implicit time loop;
     the following conditions must be respected:
 
     *  start time <= 0, start time <= stop time, increment > 0
     *  0 must be part of the set of time
    
-    The set of times defined through :py:attr:`&Process:tlag` specifies the set of input files
+    The set of times defined through :py:attr:`&Process.tlag` specifies the set of input files
     contributing to each output, expressed as time differences relatively
     to the time stamp defined for each concerned output:
 
@@ -628,7 +628,7 @@ or :py:attr:`&Process.out_group_eps`, as explained below.
    
     Two optional syntax are also supported:
 
-    * When :py:attr:`&Process:tlag` is only defined through <start time>, the other components
+    * When :py:attr:`&Process.tlag` is only defined through <start time>, the other components
       take the values ::     
 
         <stop time> = 0
@@ -648,10 +648,10 @@ or :py:attr:`&Process.out_group_eps`, as explained below.
     (:py:attr:`&Process.toper`), when the fields in each output file are the result of some
     temporal transformation, but a unique output file is desired for each
     time level; in this situation, it is important to make sure that the
-    set of contributing times specified by :py:attr:`&Process:tlag` is compatible with the
+    set of contributing times specified by :py:attr:`&Process.tlag` is compatible with the
     set of times levels required by :py:attr:`&Process.toper`, as specified in :py:attr:`&Process.toper` argument.
    
-    Note that :py:attr:`&Process:tlag` can only be set when both :py:attr:`&Process.in_file` and :py:attr:`&Process.out_file` are
+    Note that :py:attr:`&Process.tlag` can only be set when both :py:attr:`&Process.in_file` and :py:attr:`&Process.out_file` are
     defined as generic name, with a time keyword. 
 
 .. py:attribute:: out_group_eps
