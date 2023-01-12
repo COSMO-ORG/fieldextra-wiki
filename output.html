@@ -1,0 +1,942 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Description of some GRIB1 conventions" href="grib1.html" /><link rel="prev" title="Description of support files" href="support.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Description of output format - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="control/intro.html">Control file</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="control/runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Description of support files</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="description-of-output-format">
+<span id="chapter-7"></span><h1>Description of output format<a class="headerlink" href="#description-of-output-format" title="Permalink to this heading">#</a></h1>
+<section id="incore">
+<span id="section-7-1"></span><h2>INCORE<a class="headerlink" href="#incore" title="Permalink to this heading">#</a></h2>
+<p>Pseudo output type used as global internal storage.
+See description of ‘out_type’ for further information.</p>
+</section>
+<section id="inspect">
+<span id="section-7-2"></span><h2>INSPECT<a class="headerlink" href="#inspect" title="Permalink to this heading">#</a></h2>
+<p>Pseudo output type used to extract the characteristics of the records contained
+in the associated input files.</p>
+<p>The information produced is defined by the settings in &amp;InspectSpecification
+and is stored in ASCII file fieldextra.inspect, in current working directory.</p>
+<p>If select_record is not set (or is 0), information on all records found in input
+files is produced.</p>
+<p>For each record, the information is displayed as a set of lines and of multi-lines
+blocks. Multi-lines blocks are used for : print_rec_vcoord, select_data_column (if
+not used with select_data_row), select_data_row (if not used with select_data_column),
+print_rec_data. A single information line is used for each of : print_rec_pds,
+print_rec_gds, print_experiment_version, print_rec_format. All remaining information
+is packed in a single line.</p>
+<p>When the only output in a namelist is the INSPECT pseudo-output, fewer consistency
+checks are performed in fieldextra and field transcoding is inactive. This supports
+a more transparent inspection of the input records. A contrario, this means that the
+INSPECT output produced in combination with other output reports interpreted values.</p>
+</section>
+<section id="n-tuple">
+<span id="section-7-3"></span><h2>N_TUPLE<a class="headerlink" href="#n-tuple" title="Permalink to this heading">#</a></h2>
+<p>Spezialized ASCII output, line oriented, each line representing an event (multiple
+fields at a single point). Coupled with the use of the <a href="#id1"><span class="problematic" id="id2">*</span></a>_filter operators supports
+examining the model sub-space defined by some conditions on the model fields (e.g.
+find the locations where a certain amount of super-saturation is achieved).</p>
+<p>Conditions for using this format:
+(1) all fields are available on the same set of levels with same level type, OR</p>
+<blockquote>
+<div><p>all fields are single level fields,                                      OR
+all multi-level fields are available on a single common level.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>all fields are uniquely defined by name and level information.</p></li>
+</ol>
+<p>Depending on the mix of single and multiple level fields, an n-tuple is
+composed by:
+all available fields at a specified lat/lon/level and time,</p>
+<blockquote>
+<div><p>when only multi-level fields are available;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>all available fields at a specified lat/lon and time,</dt><dd><p>when single level fields are present.</p>
+</dd>
+</dl>
+<p>N-tuples containing undefined values are skipped.</p>
+<p>The following options are supported: out_type_snapshot, out_type_replace,
+out_type_mapcst, out_type_fmt, out_type_undefcode, out_type_alternate_name,
+out_type_nousetag, out_type_prodinfo, out_type_stdlongitude, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; slice not suported
+&gt; all fields must represent the same product, and not be probability fields
+&gt; EPS members must be from the same member
+&gt; staggered fields are not supported (re-grid fields if necessary)</p>
+</section>
+<section id="meteog">
+<span id="section-7-4"></span><h2>METEOG<a class="headerlink" href="#meteog" title="Permalink to this heading">#</a></h2>
+<p>Spezialized ASCII output to list the temporal evolution of a single parameter
+at selected locations.</p>
+<p>The following options are supported: out_type_snapshot, out_type_mapcst,
+out_type_fmt, out_type_text1, out_type_text2, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; locations list is required
+&gt; staggered fields are not supported (re-grid fields if necessary)
+&gt; all fields must represent the same product
+&gt; EPS members must be from the same member
+&gt; the temporal resolution of the output must not be smaller than one hour</p>
+</section>
+<section id="ascii-table">
+<span id="section-7-5"></span><h2>ASCII_TABLE<a class="headerlink" href="#ascii-table" title="Permalink to this heading">#</a></h2>
+<p>Generic ASCII output, table oriented, with columns indexed by location and/or
+field. ASCI_TABLE output is by default expressed as csv separated data and can
+easily be read by MS Excel or automatic routines.</p>
+<p>Should be used instead of DAT_TABLE, FLD_TABLE and XLS_TABLE for location based
+output. When the output is defined on a rectangular (sub-)domain, use BLK_TABLE
+instead.</p>
+<p>Five options for the arrangement of output values are possible; the option
+is choosen by the namelist out_type_line_label:
+location_time       = one new line for each location and each validation</p>
+<blockquote>
+<div><p>time (outer loop on location), different fields in
+different columns</p>
+</div></blockquote>
+<dl class="simple">
+<dt>time_location       = one new line for each location and each validation</dt><dd><p>time (outer loop on time), different fields in
+different columns</p>
+</dd>
+<dt>time_location_level = one new line for each location, each validation time</dt><dd><p>and each level (outer loop on time, inner loop on
+levels), different fields (incl. EPS / pdf infos)
+in different columns; requires unique set of levels</p>
+</dd>
+<dt>field_time          = one new line for each field and each validation</dt><dd><p>time (outer loop on field), different locations in
+different columns</p>
+</dd>
+<dt>time_field          = one new line for each field and each validation</dt><dd><p>time (outer loop on time), different locations in
+different columns</p>
+</dd>
+<dt>time                = one new line for each validation time, one new column</dt><dd><p>for each location and each validation time (outer loop
+on locations)</p>
+</dd>
+</dl>
+<p>Default value is “location_time”.</p>
+<p>In addition, four options for the file header can be chosen, controlled by
+namelist out_type_legend:
+none     = no header at all
+standard = standard header
+detailed = currently same as “standard”
+extra    = minimal header in data file, full header as extra file
+Default value is “none” (if out_type_line_label is not set or
+out_type_line_label=location_time) or “standard” otherwise.</p>
+<p>Multiple aspects of the output can be tailored by using one of the
+supported out_type_* (see below).</p>
+<p>When defined, the tag instead of the name of the field is used (this
+behaviour can be changed by setting out_type_nousetag to true).</p>
+<p>The following options are supported: out_type_snapshot, out_type_mapcst,
+out_type_line_label, out_type_legend, out_type_separator, out_type_fmt,
+out_type_pdfinfo, out_type_epsminfo, out_type_locinfo,
+out_type_undefcode, out_type_text1, out_type_text2, out_type_stdlongitude,
+out_type_fusedt, out_type_alternate_name, out_type_nousetag, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; grid points or locations list is required
+&gt; staggered fields are not supported (re-grid fields if necessary)</p>
+</section>
+<section id="fld-table-obsolete">
+<span id="section-7-6"></span><h2>FLD_TABLE (obsolete)<a class="headerlink" href="#fld-table-obsolete" title="Permalink to this heading">#</a></h2>
+<p>Generic ASCII output, table oriented, with columns indexed by fields descriptor.</p>
+<p>The number of columns is defined by the repetitor of the format expressed
+in out_type_fmt, or is 12 when no repetitor is present. When more data
+than the number of columns is present, lines are wrapped.</p>
+<p>The following options are supported: out_type_snapshot, out_type_verbosity,
+out_type_dwhhack, out_type_mminfo, out_type_pdfinfo, out_type_epsminfo,
+out_type_mapcst, out_type_fmt, out_type_undefcode, out_type_file_header,
+out_type_text1, out_type_stdlongitude, out_type_alternate_name,
+out_type_nousetag, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; grid points or locations list is required
+&gt; staggered fields are not supported (re-grid fields if necessary)</p>
+</section>
+<section id="dat-table-obsolete">
+<span id="section-7-7"></span><h2>DAT_TABLE (obsolete)<a class="headerlink" href="#dat-table-obsolete" title="Permalink to this heading">#</a></h2>
+<p>Generic ASCII output, table oriented, with columns indexed by validation dates.</p>
+<p>The number of columns is defined by the repetitor of the format expressed
+in out_type_fmt, or is 12 when no repetitor is present. When more data
+than the number of columns is present, lines are wrapped.</p>
+<p>The following options are supported: out_type_snapshot, out_type_verbosity,
+out_type_mminfo, out_type_pdfinfo, out_type_epsminfo, out_type_mapcst,
+out_type_fmt, out_type_undefcode, out_type_file_header, out_type_text1,
+out_type_stdlongitude, out_type_alternate_name, out_type_nousetag, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; grid points or locations list is required
+&gt; staggered fields are not supported (re-grid fields if necessary)</p>
+</section>
+<section id="xls-table-obsolete">
+<span id="section-7-8"></span><h2>XLS_TABLE (obsolete)<a class="headerlink" href="#xls-table-obsolete" title="Permalink to this heading">#</a></h2>
+<p>Generic ASCII output, table oriented, with columns indexed by location or
+by location and field.</p>
+<p>XLS_TABLE output can either be expressed as MS Excel compatible csv
+data, or as column oriented fixed format data. The active variant is
+defined by the value of &lt;out_type_separator&gt;. Moreover, the csv variant
+supports additional customizing.</p>
+<p>When present, the tag instead of the name of the field is used in the file
+header. In the fixed format option, the width of the field used for this
+information is set to the minimum value not producing any truncation.</p>
+<p>The following options are supported: out_type_snapshot, out_type_verbosity,
+out_type_depreciated, out_type_pdfinfo, out_type_epsminfo, out_type_mminfo,
+out_type_prodinfo, out_type_noundef, out_type_dupcst, out_type_mapcst, out_type_fmt,
+out_type_separator, out_type_cheader, out_type_fusedt, out_type_locinfo,
+out_type_undefcode, out_type_file_header, out_type_text1, out_type_stdlongitude,
+out_type_alternate_name, out_type_nousetag, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; slice not suported
+&gt; all fields must represent the same product
+&gt; staggered fields are not supported (re-grid fields if necessary)</p>
+</section>
+<section id="blk-table">
+<span id="section-7-9"></span><h2>BLK_TABLE<a class="headerlink" href="#blk-table" title="Permalink to this heading">#</a></h2>
+<p>Generic ASCII output, block oriented, suited for listing sections of 2D fields.</p>
+<p>Each 2D field is printed in a single multi-lines block. The number of values per
+line is defined by the repetitor in out_type_fmt value. Per default the order of
+the values in a multi-lines block is the same as in the input data, but can be
+modified by setting out_type_scanmode.</p>
+<p>Each multi-lines block is preceded by a one line header defining the data.
+When present the tag instead of the name of the field is used in this header.</p>
+<p>A main header defining some common characteristics is produced at the start
+of the file. Each line of the main header follows the pattern “key: value”.</p>
+<p>For a given field, validation dates for which the field has never been defined
+are skipped.</p>
+<p>Verbosity level in {0, 1, 2, 3 4} is supported:
+&gt; verbosity 1: add information on data dimension, data format, missing value</p>
+<blockquote>
+<div><p>code, grid size in main header;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>&gt; verbosity 2: add information on horizontal coordinates in main header, add</dt><dd><p>information on type of statistical processing, number of EPS
+members in block header;</p>
+</dd>
+</dl>
+<p>&gt; verbosity 3: add information on vertical coordinates in main header;
+&gt; verbosity 4: add information on extracted and printed fields in main header.</p>
+<p>The format of the block header for the highest verbosity is:
+&gt; option +mminfo set :
+YYYY MM DD HH mm tri stime etime field_tag field_level model_type product_cat
+&gt; option +mminfo not set :
+YYYY MM DD HH tri stime etime field_tag field_level model_type product_cat
+where:
+YYYY MM DD HH mm  is the validation date
+tri stime etime   is the type of statistical processing, the start of</p>
+<blockquote>
+<div><p>the time interval, and the end of the time interval;
+expressed in minute when option +mminfo is set, in
+hour otherwise</p>
+</div></blockquote>
+<dl>
+<dt>field_tag         is the field tag, as specified in the namelist, or</dt><dd><p>the field short name, as specified in the dictionary</p>
+</dd>
+<dt>field_level       is the field level, abbreviated as nnnnnCCCC, or -1</dt><dd><p>for surface fields or unrecognized level, with nnnn
+the level value, and CCCC the level type :</p>
+<blockquote>
+<div><p>gk    generalized height
+k    hybrid level
+hPa    pressure level, in [hPa]</p>
+</div></blockquote>
+<p>masl    height above mean sea level, in [m]
+magl    height above ground level, in [m]</p>
+<blockquote>
+<div><p>tt    constant temperature, in [cK]
+th    constant potential temperature, in [cK]
+pv    constant PV level, units in [mPVU]
+den    constant density level, units in [mugm-3] (10**-6 g/m**3)</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>model_type        model type (e.g. cosmo, ifs)
+product_cat       product category (e.g. determinist, eps_member)</p>
+<p>The following options are supported: out_type_snapshot, out_type_justontime,
+out_type_replace, out_type_dupcst, out_type_mapcst, out_type_noundef, out_type_fmt,
+out_type_file_header, out_type_text1, out_type_depreciated,
+out_type_scanmode, out_type_verbosity, out_type_mminfo, out_type_prodinfo,
+out_type_alternate_name, out_type_nousetag, out_type_stdlongitude,
+out_type_undefcode (can be overriden on a field basis with set_undefcode),
+out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; (verbosity &lt; 1) all fields must represent the same product
+&gt; slice not suported
+&gt; when a domain subset is specified via a list of grid points or locations,
+or a via a frame, the output is computed on the smallest possible compact
+subdomain containing the specified subset, and values at supplementary
+points are set to undefined.</p>
+</section>
+<section id="tmpl-base">
+<span id="section-7-10"></span><h2>TMPL_BASE<a class="headerlink" href="#tmpl-base" title="Permalink to this heading">#</a></h2>
+<p>Generic ASCII output, based on a pre-defined template.
+May be used in particular for creating XML files.</p>
+<p>Output is produced by replacing data containers in a user specified template.
+The template can be any file, and is declared via the namelist variable
+out_type_template.</p>
+<p>A data container is a string enclosed between &lt;model&gt; and &lt;/model&gt; tags.
+Data containers must not be split on multiple lines.
+No quotation mark must appear in the definition of the data containers.
+The enclosed string specifies the data to put at that location.
+The enclosed string has the form:
+key:key_attributes
+Key attributes has the form:
+[attribute_name_1=]attribute_value_1, attribute_name_2=attribute_value_2, …
+Blanks within  key:key_attributes  are ignored.
+Missing attribute values are supported (equivalent to missing attribute).
+The whole string &lt;model&gt;key:key_attributes&lt;/model&gt; is replaced in the specified
+template by the corresponding value.</p>
+<p>Comments, including multi-lines comments, may be defined in the user specified
+template; they are enclosed between &lt;!– and –&gt; tags. No substitution takes
+place within a comment.</p>
+<p>Field values are produced according to the format defined by ‘out_type_fmt’
+(default is G13.5). Undefined values are set to the numerical value defined by
+‘out_type_undefcode’.</p>
+<p>Action taken when finding unresolved data container is controled by the value
+of out_type_nomatch_action. The default action is to raise an exception, but
+these data container can also be ignored or replaced by NA flags. This feature
+supports filling TMPL_BASE output by multiple fieldextra calls (e.g. to
+generate multi-models products).</p>
+<p>This type of output can be used in particular to create XML files (XML comments
+are respected, but the XML syntax of the produced file is not checked).</p>
+<p>Supported keys and attributes are:</p>
+<ol class="arabic">
+<li><dl>
+<dt>Grid point geolocation</dt><dd><p>(derived from input data; height in [m], lat/lon in [deg])</p>
+<dl>
+<dt>grid_point_height:[location_name=]location_name, [location_group=location_group,]</dt><dd><p>[model_name=model_name]</p>
+</dd>
+<dt>grid_point_latitude:[location_name=]location_name, [location_group=location_group,]</dt><dd><p>[model_name=model_name]</p>
+</dd>
+<dt>grid_point_longitude:[location_name=]location_name, [location_group=location_group,]</dt><dd><blockquote>
+<div><p>[model_name=model_name]</p>
+</div></blockquote>
+<p>&gt; location_name refers to a location name or a location identifier
+(when location_group is missing), and location_group refers to
+a location group</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>User defined text</dt><dd><p>(values defined by out_type_text1, out_type_text2):</p>
+<p>user_text1:[model_name=model_name]
+user_text2:[model_name=model_name]</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Missing value code</dt><dd><p>(value defined by out_type_undefcode):</p>
+<p>missing_value_code:[model_name=model_name]</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Product</dt><dd><p>(derived from input data, e.g. determinist from cosmo-7 model):</p>
+<p>product:[model_name=model_name] [product_category=product_category]</p>
+<blockquote>
+<div><dl class="simple">
+<dt>&gt; product_category in</dt><dd><p>determinist
+eps_member
+eps_mean
+eps_perturbation
+eps_spread
+eps_standard_deviation
+eps_standard_deviation_normed
+eps_quantile
+eps_quantile_difference
+eps_probability
+nbh_probability
+stat_probability
+eps_probability_refdist
+eps_extreme_forecast_index
+eps_shift_of_tail_index
+radar
+satellite
+all</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Ensemble size</dt><dd><p>(derived from input data, defined only when common to all generated fields)</p>
+<p>ensemble_size:[model_name=model_name]</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Ensemble member ID</dt><dd><p>(derived from input data, defined only when common to all generated fields)</p>
+<p>ensemble_member_id:[model_name=model_name]</p>
+</dd>
+</dl>
+</li>
+</ol>
+<dl>
+<dt>Experiment tag</dt><dd><p>(derived from input data, or user specified in &amp;GlobalSettings):</p>
+<p>experiment_tag:[model_name=model_name]</p>
+</dd>
+</dl>
+<ol class="arabic" start="8">
+<li><dl>
+<dt>Base date of model run</dt><dd><p>(derived from input data):</p>
+<dl class="simple">
+<dt>base_date:[format=format,] [model_name=model_name]</dt><dd><dl class="simple">
+<dt>&gt; format in {xsd(XML Schema Definition, default), iso, std10, std12}</dt><dd><p>xsd:   YYYY-MM-DDTHH:mm:ss+00:00
+iso:   YYYY-MM-DD  HH:mm  +0:00
+std10: YYYYMMDDHH
+std12: YYYYMMDDHHmm</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Validation date of field</dt><dd><p>(derived from input data):</p>
+<dl>
+<dt>validation_date:[lead_time_idx=]lead_time_idx, [format=format,]</dt><dd><blockquote>
+<div><p>[model_name=model_name]</p>
+</div></blockquote>
+<dl class="simple">
+<dt>&gt; lead_time_idx refers to the index of the validation time</dt><dd><p>validation times are sorted in increasing values, starting at 1</p>
+</dd>
+<dt>&gt; format in {xsd(XML Schema Definition, default), iso, std10, std12}</dt><dd><p>xsd:   YYYY-MM-DDTHH:mm:ss+00:00 (XML Schema Definition)
+iso:   YYYY-MM-DD  HH:mm  +0:00
+std10: YYYYMMDDHH
+std12: YYYYMMDDHHmm</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><p>Field value
+(derived from input data):</p>
+<dl>
+<dt>field:[tag=]tag,</dt><dd><p>[level=level,] [level_units=level_units,] [level_class=level_class,]
+[product_category=product_category] [model_name=model_name]
+[eps_member=eps_member,] [prob_interval=prob_interval,]
+[prob_threshold_up=prob_threshold_up,]
+[quantile=quantile  OR  quantile=quantile1/quantile2,]
+[ref_quantile=order/number,] [efi_order=p_fcast/p_climate,]
+[location_group=location_group,] [filter_on_vdate=filter_on_vdate,]
+location_name=location_name, lead_time_idx=ltime_idx</p>
+<blockquote>
+<div><p>&gt; tag refers to a field tag or field name, as defined in namelist
+&gt; level is an integer, is interpreted according to level_units
+and level_class
+&gt; level_units can only be used in association with level;
+supported values and default values of level_units are described in 4.3.3
+(do not put quotation mark around level_units value!)
+&gt; supported values and default values of level_class are described in 4.3.3
+(do not put quotation mark around level_class value!)
+&gt; supported values and default values of product_category are described in 4.3.3
+(do not put quotation mark around product_category value!)
+&gt; eps_member is an integer, defining a member of an EPS system
+&gt; prob_interval is a string (see prob_interval in 4.3.5)
+defining a probability interval
+&gt; quantile, quantile1, quantile2 are real numbers defining each a
+quantile associated with a probability distribution function;
+the form  quantile=quantile1/quantile2 is used when working with
+the difference between the field for quantile1 and the field for
+quantile2
+&gt; ref_quantile is used to specify the probability to consider: order
+is the order of the quantile in the reference distribution used
+to define the probability interval, and number is the total number
+of quantiles in the reference distribution.
+&gt; efi_order is used to specify the shift of tail index to consider:
+p_fcast and p_climate are integer numbers representing the
+percentile of the forecast and of the climate distributions
+&gt; location_name refers to a location name or a location identifier
+(when location_group is missing), and location_group refers to
+a location group
+&gt; filter_on_vdate is used to filter values associated with some
+validation dates by setting the values to undef in the template.
+filter_on_vdate is expressed as a list of hours, between 0 and 24,
+separated by ‘&amp;’; only validation dates with matching hours are kept
+(e.g. use filter_on_vdate=00&amp;12 to only keep midnight and midday)
+&gt; lead_time_idx refers to the index of the validation time
+(validation times are sorted in increasing values, starting at 1)</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Notes:
+&gt; In the previous list, model_name refers to the value of default_model_name</p>
+<blockquote>
+<div><p>defined in &amp;GlobalSettings.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>&gt; For backward compatibility at MeteoSwiss, model_tag can be used in place</dt><dd><p>of model_name.</p>
+</dd>
+</dl>
+<p>The following options are supported: out_type_snapshot, out_type_template,
+out_type_nomatch_action, out_type_fmt, out_type_undefcode, out_type_text1,
+out_type_text2, out_type_mapcst, out_type_stdlongitude, out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; locations list is required
+&gt; staggered fields are not supported (re-grid fields if necessary)</p>
+</section>
+<section id="grib1">
+<span id="section-7-11"></span><h2>GRIB1<a class="headerlink" href="#grib1" title="Permalink to this heading">#</a></h2>
+<p>Generic binary output, based on the WMO FM 92-IX Ext. GRIB specifications.</p>
+<p>The following points about handling of undefined (or missing) values have
+to be considered:
+&gt; Bitmap section is correctly interpreted in input records (except for
+records originating from ECMWF using the large data set coding, in
+which case the corresponding record is skipped and an exception is
+raised).
+&gt; Bitmap section is never generated in output records. Two approaches
+are proposed with fieldextra:
+(1) missing values are set to a number which differs from all possible</p>
+<blockquote>
+<div><p>values of the field, but which is coded as a normal value in the GRIB 1
+record. The choice of this number is made by the user, by setting
+poper=’replace_undef,value’ in the last processing iteration. Any
+downstream program using the produced GRIB 1 record has to be
+explicitely configured to interpret the chosen number as a
+missing value flag.
+A drawback of this method is that precision may be lost when
+coding a record with a missing value far away from the range
+of defined values.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>missing values are set to a number which is automatically chosen to
+minimize the loss of precision while coding the record, and the missing
+value itself is coded in the local part of the product definition section
+(see section 8.10 for more details).
+A drawback of this method is that downstream programs have to be
+modified to be aware of this local modification of the GRIB 1 product
+definition section.</p></li>
+</ol>
+<p>For a given field, validation dates for which the field has never been defined
+are skipped.</p>
+<p>The following options are supported: out_type_snapshot, out_type_justontime,
+out_type_replace, out_type_alternate_name, out_type_nogridincr, out_type_novcoord,
+out_type_transcode, out_type_noundef, out_type_mapcst, out_type_dupcst,
+out_type_prefered_tunits, out_type_scanmode, out_type_stdlongitude, out_type_toc,
+out_type_packing (can be overriden on a field basis with set_packing),
+out_type_alternate_code (can be set on a field basis with use_alternate_code),
+out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; slice not suported
+&gt; when a domain subset is specified via a list of grid points or locations,
+or a via a frame, or via a non dense rectangle, the output is computed on
+the smallest possible compact subdomain containing the specified subset,
+and values at supplementary points are set to undefined.</p>
+</section>
+<section id="grib2">
+<span id="section-7-12"></span><h2>GRIB2<a class="headerlink" href="#grib2" title="Permalink to this heading">#</a></h2>
+<p>Generic binary output, based on the WMO FM 92 GRIB Edition 2 specifications.</p>
+<p>Fieldextra complies with the COSMO GRIB2 Policy (see
+<a class="reference external" href="http://www2.cosmo-model.org/content/model/documentation/grib/grib_policy.htm">http://www2.cosmo-model.org/content/model/documentation/grib/grib_policy.htm</a>).</p>
+<p>Limitation of the current implementation:
+&gt; supported product templates: 0, 1, 2, 5, 6, 8, 9, 10, 11, 12, 20, 31,</p>
+<blockquote>
+<div><p>32, 33, 40, 41, 42, 43, 44, 45, 46, 47,
+48, 49, 57, 58, 67, 68</p>
+</div></blockquote>
+<dl class="simple">
+<dt>&gt; supported surface types: 1, 2, 3, 4, 5, 6, 7, 8, 10, 20, 21, 22, 100,</dt><dd><p>101, 102, 103, 104, 105, 106, 107, 109, 150,
+160, 161, 162, 163, 164, 165, 166
+(local COSMO)
+192, 193, 194, 201, 202 203, 204, 205</p>
+</dd>
+</dl>
+<p>&gt; the information on the characteristics of the statistical processing
+is limited (only typeOfTimeIncrement 1 and 2 are supported, all but
+the outermost time range are ignored).
+&gt; the values of the parameters of the chemical distribution function
+associated with templates 57, 58, 67, 68 are not coded
+&gt; supported local use section: COSMO default, COSMO LEPS, COSMO DWD</p>
+<p>For a given field, validation dates for which the field has never been defined
+are skipped.</p>
+<p>Values of localTablesVersion and masterTablesVersion are set separately,
+for each record, and is the maximum of the values found at the following
+places: in the input record, in the dictionary, and in the internal
+fieldextra tables.</p>
+<p>The following options are supported: out_type_snapshot, out_type_justontime,
+out_type_replace, out_type_alternate_name, out_type_template,
+out_type_novcoord, out_type_noundef, out_type_dupcst, out_type_mapcst,
+out_type_prefered_tunits, out_type_scanmode, out_type_stdlongitude, out_type_toc,
+out_type_packing (can be overriden on a field basis with set_packing),
+out_cost.</p>
+<p>A GRIB 2 record is generated by ecCodes on the basis of a sample
+file (specified by grib2_sample or out_type_template); this sample
+file contains a generic GRIB 2 record, filled with dummy or static
+values. This file may be used to set some ‘exotic’ values in the produced
+GRIB 2 record. Note however that the choice of the GRIB 2 sample is crucial;
+a sample incompatible with ecCodes definition files or with the produced
+record may result in a program exception, or, in the worst case, in the
+silent production of a bogus record (as a general rule, the shorter the
+sample the better).</p>
+<p>The following limitations on the usage of this output are:
+&gt; slice not suported
+&gt; when a domain subset is specified via a list of grid points or locations,
+or a via a frame, or via a non dense rectangle, the output is computed on
+the smallest possible compact subdomain containing the specified subset,
+and values at supplementary points are set to undefined.</p>
+</section>
+<section id="netcdf">
+<span id="section-7-13"></span><h2>NETCDF<a class="headerlink" href="#netcdf" title="Permalink to this heading">#</a></h2>
+<p>Generic binary output, based on the Network Common Data Form (NetCDF) and
+the Climate and Forecast (CF) Metadata Convention, version 1.6 (see
+<a class="reference external" href="http://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.pdf">http://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.pdf</a>),
+with the following additions to the CF conventions:
+* dimensions: slice, ensemble perturbation member
+* variable attributes: ‘ensemble_size’, ‘short_name’, ‘vector_basis’</p>
+<p>Fields are packed into multi-dimensional arrays. Horizontal dimensions are
+either (x,y) or slice, where slice dimension takes values in [0,1] and
+represents the coordinates along a curvilinear segment on the earth.
+Up to three other dimensions are supported, namely z, t and the EPS
+perturbation number. By default, relevant dimensions are used even if
+degenerate (e.g. a single 850hPa level will be packed into an array
+with a z dimension); this behaviour may be modified by setting
+out_type_nodegeneratedim to true. Except for the time dimension and the
+slice dimensions which are always unique, multiple dimensions may be defined
+in the same output to describe fields defined on different coordinate systems
+(e.g. mass point and Arakawa-C grid). No time dimension is associated with
+constant fields, and no z dimension is associated with single level fields
+(constant and single level characteritics are defined in active dictionary).</p>
+<p>Time bounds for time dimension, and the associated field attribute
+‘cell_methods’, are generated on demand when out_type_timebnds is set
+to true. Time bounds are only supported when all fields are defined for
+the same time range (for non trivial time range and for all validation
+times separately), and when, for all fields separately, the type of time
+range is the same for all validation dates.</p>
+<p>Bounds for the z dimension, and the associated field attribute ‘cell_methods’,
+are automatically generated when a field is defined for a layer (i.e. the
+spatial extension is specified by two surfaces). Because the type of vertical
+reduction used to obtain the layer value is most of the time not known, the
+cell_method value is set to the generic value ‘interval’ (non CF compliant).</p>
+<p>When a field with a slice dimension is coded, the slice variables ‘lat’, ‘lon’,
+‘topo’ and ‘length’ are produced; in particular, the variable ‘length’ is the
+length of the slice from slice start in [m]. Furthermore, if locations are
+used to define the slice, labels are generated at the position of the control
+points using the location description (as defined in location_list). In this
+case, the variable ‘label’ is produced; this variable takes the value 0 where
+no label is available, otherwise it takes for value the index of the label in
+the attribute ‘labels’ of the ‘slice’ variable.</p>
+<p>A ‘units’ and ‘long_name’ attribute is associated with each field, but no
+‘standard_name’; the long_name and the units are taken from the active
+dictionary and may each be re-defined by the user (set_description,
+set_units). Also, when distinct from the NetCDF variable name, the field
+short name (as defined in the active dictionary) is stored in the attribute
+‘short_name’.</p>
+<p>A ‘source’ attribute is automatically associated which each field when
+probability related information is present (e.g. probability threshold) or,
+when the product category differ from the one defined in the global attribute.
+A comment attribute may also be associated with each field (set_comment).</p>
+<p>The global attributes ‘Conventions’, ‘ConventionsURL’, ‘institution’,
+‘source’ and ‘history’ are always present and automatically generated. In
+addition, the global attributes ‘title’ and ‘comment’ are set to the value
+of the namelist variables out_type_text1 and out_type_text2 when present.</p>
+<p>The following options are supported: out_type_snapshot, out_type_justontime,
+out_type_nodegeneratedim, out_type_dupcst, out_type_mapcst,
+out_type_noundef, out_type_autoncname, out_type_timebnds, out_type_novcoord,
+out_type_ncformat, out_type_ncdeflate, out_type_ncshuffle, out_type_simplenc,
+out_type_ncunlimitedtime, out_type_lagranto, out_type_text1, out_type_text2,
+out_type_toc, out_type_stdlongitude, out_type_alternate_name, out_type_nousetag,
+out_cost.</p>
+<p>The following limitations on the usage of this output are:
+&gt; when a domain subset is specified via a list of grid points or locations,
+or a via a frame, or via a non dense rectangle, the output is computed on
+the smallest possible compact subdomain containing the specified subset,
+and values at supplementary points are set to undefined.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="grib1.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Description of some GRIB1 conventions</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="support.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Description of support files</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Description of output format</a><ul>
+<li><a class="reference internal" href="#incore">INCORE</a></li>
+<li><a class="reference internal" href="#inspect">INSPECT</a></li>
+<li><a class="reference internal" href="#n-tuple">N_TUPLE</a></li>
+<li><a class="reference internal" href="#meteog">METEOG</a></li>
+<li><a class="reference internal" href="#ascii-table">ASCII_TABLE</a></li>
+<li><a class="reference internal" href="#fld-table-obsolete">FLD_TABLE (obsolete)</a></li>
+<li><a class="reference internal" href="#dat-table-obsolete">DAT_TABLE (obsolete)</a></li>
+<li><a class="reference internal" href="#xls-table-obsolete">XLS_TABLE (obsolete)</a></li>
+<li><a class="reference internal" href="#blk-table">BLK_TABLE</a></li>
+<li><a class="reference internal" href="#tmpl-base">TMPL_BASE</a></li>
+<li><a class="reference internal" href="#grib1">GRIB1</a></li>
+<li><a class="reference internal" href="#grib2">GRIB2</a></li>
+<li><a class="reference internal" href="#netcdf">NETCDF</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

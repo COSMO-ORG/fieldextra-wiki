@@ -1,0 +1,625 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Supported products and data representations" href="products.html" /><link rel="prev" title="Introduction" href="introduction.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Program usage - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="control/intro.html">Control file</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="control/runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="program-usage">
+<h1>Program usage<a class="headerlink" href="#program-usage" title="Permalink to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fieldextra</span> <span class="n">control_file</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">control_file</span></code> contains Fortran namelists controlling
+the execution of the code</p>
+<section id="input-data">
+<h2>Input data<a class="headerlink" href="#input-data" title="Permalink to this heading">#</a></h2>
+<p><strong>COMPULSORY:</strong></p>
+<ul class="simple">
+<li><p>Control file:
+ASCII file containing Fortran 90 namelists defining program behaviour.</p></li>
+<li><p>Field dictionaries:
+ASCII file(s) containing definition of field names and characteristics.</p></li>
+<li><p>Data files:
+collection of files containing input fields, coded in NetCDF (CF convention),
+GRIB edition 1 or 2, or as BLK_TABLE release 1.8 or higher.</p></li>
+</ul>
+<p><strong>OPTIONAL:</strong></p>
+<ul class="simple">
+<li><p>Definition of geographical locations:
+ASCII file.</p></li>
+<li><p>Definition of additional locations characteristics:
+ASCII file(s), used e.g. to store MOS and Kalman coefficients.</p></li>
+<li><p>Definition of geographical regions:
+ASCII file.</p></li>
+<li><p>ecCodes definition files:
+set of ASCII files used to code/decode GRIB 2 records.</p></li>
+<li><p>GRIB 2 sample file:
+GRIB 2 file used to create a new GRIB 2 record.</p></li>
+<li><p>RTTOV coefficient files:
+binary files(s), used e.g. to compute simulated brightness temperatures .</p></li>
+<li><p>ICON grid description:
+NetCDF file, used to decode ICON fields defined on native grid.</p></li>
+<li><p>AdaBoost coefficients:
+ASCII file(s).</p></li>
+<li><p>Content of program internal storage:
+Fortran unformatted binary file.</p></li>
+</ul>
+</section>
+<section id="output-data">
+<h2>Output data<a class="headerlink" href="#output-data" title="Permalink to this heading">#</a></h2>
+<p><strong>ALWAYS:</strong></p>
+<ul class="simple">
+<li><p>Program diagnostic:
+written to the standard output (controlled by the value of verbosity).</p></li>
+<li><p>additional diagnostic and profiling :
+written in file fieldextra.diagnostic (controlled by the value of additional_diagnostic and additional_profiling).</p></li>
+<li><p>Data files:
+GRIB 1, GRIB 2, NetCDF or formatted ASCII output as specified in program control file.</p></li>
+</ul>
+<p><strong>OPTIONAL:</strong></p>
+<ul class="simple">
+<li><p>Information for repeat mode (see enable_repeat_mode):
+written in ASCII file fieldextra.rmode</p></li>
+<li><p>Diagnostic on locations:
+written in ASCII file fieldextra.location.</p></li>
+<li><p>Diagnostic on regions:
+written in ASCII files fieldextra.region, fieldextra.region.stencil_1, …</p></li>
+<li><p>Diagnostic on slices:
+written in ASCII file fieldextra.slice.</p></li>
+<li><p>Characteristics of input records:
+written in ASCII file fieldextra.inspect (used by fxtools).</p></li>
+<li><p>Table of content of GRIB and NetCDF output:
+written in ASCII file, using the same base name as the associated output.</p></li>
+<li><p>Content of program internal storage:
+Fortran unformatted binary file.</p></li>
+</ul>
+</section>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this heading">#</a></h2>
+<p>To use fieldextra it may be necessary to relax system limits imposed on size of stack,
+both for sequential mode and for OpenMP mode. A typical set of command lines to apply
+on a Linux or UNIX system is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unlimit</span>
+<span class="n">setenv</span> <span class="n">OMP_STACKSIZE</span> <span class="mi">500</span><span class="n">M</span>   <span class="p">(</span><span class="n">OpenMP</span> <span class="n">stack</span> <span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="diagnostic">
+<h2>Diagnostic<a class="headerlink" href="#diagnostic" title="Permalink to this heading">#</a></h2>
+<p>Information on usage, operations and exceptions is written on standard output. The
+amount of information depends on the level of verbosity (verbosity in &amp;RunSpecification).
+Warnings inform on potential problems, whereas alerts are issued when a problem has
+been definitely identified. The last diagnostic line summarizes the status of the
+program, and is one of:</p>
+<ul class="simple">
+<li><p>‘Exception detected in program’</p></li>
+<li><p>‘Program stopped by user’           (but program successful up to that point)</p></li>
+<li><p>‘Program successfully completed’    (does not preclude warnings)</p></li>
+</ul>
+<p>Additional information is also produced in file fieldextra.diagnostic; the amount
+of information is controlled by additional_diagnostic in &amp;RunSpecification. When
+additional_diagnostic is true, special diagnostic may also be produced in the files
+fieldextra.slice, fieldextra.location and fieldextra.region* .</p>
+<p>Basic code profiling, on timing and memory usage, is always available in the file
+fieldextra.diagnostic; a more detailed code profiling can be produced by setting
+addtional_profiling to true in &amp;RunSpecification.</p>
+<p>When testing a new namelist, it is recommended to set verbosity to ‘high’,
+additional_diagnostic to true, and strict_usage to true.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<section id="memory-footprint">
+<h3>Memory footprint<a class="headerlink" href="#memory-footprint" title="Permalink to this heading">#</a></h3>
+<p>Carefully crafting the namelist when working with large output set
+may drastically reduce the memory footprint of the program. The
+following points should be considered:</p>
+<ul class="simple">
+<li><p>manually set the estimated output size (in_size_field) when using one of INCLUDE_ALL or EXCLUDE selection mode, or when using field=__ALL__;</p></li>
+<li><p>explicitely specify the list of levels to extract when processing multi-level fields (i.e. avoid levlist=-1);</p></li>
+<li><p>use time loop construct on output to group data by validation date;</p></li>
+<li><p>when all validation dates are collected in the same output, and no
+temporal operator is used:</p>
+<ul>
+<li><p>choose an output supporting append mode (GRIB1, GRIB2, NetCDF, BLK_TABLE),
+and define the namelist to allow just on time mode;</p></li>
+<li><p>if this is not possible, and the output is limited to a set of
+locations or grid points, but has a high memory footprint because
+of operator inhibitting data reduction on input, use a temporary
+GRIB buffer (GRIB file used first as output, then as input);
+just on time mode will be used in the production of this GRIB
+buffer, and data reduction will be available when the GRIB buffer
+is read to produce the definitive output;</p></li>
+</ul>
+</li>
+<li><p>when all validation dates are collected in the same output, and some
+temporal operators are used on a (small) subset of the contributing
+fields, prohibiting just on time mode:</p>
+<ul>
+<li><p>use a set of temporary GRIB buffer to collect the fields which are
+transformed in time, defining one output for each validation date,
+and collect these transformed fields from the temporary file in a
+second step;</p></li>
+</ul>
+</li>
+<li><p>when dispatching a small number of fields from a single input into
+multiple output, with other files also contributing to each of
+these output, use INCORE storage as buffer, or, if not possible,
+process the common input first (in_read_first=.TRUE.); this sorting
+of input files supports a progressive memory allocation of each of
+the concerned output, which may reduce the memory footprint of the
+program;</p></li>
+<li><p>the programatic sorting of input files may result in opening multiple
+output concurrently, unnecessarily; in such a case, forcing the read
+order by setting in_read_order may drastically reduce the memory
+footprint; the following example illustrates this point:</p>
+<ul>
+<li><p>ofile_a uses data from ifile_a_00 and ifile_a_01,
+ofile_b uses data from ifile_b_00 and ifile_b_01,
+00 and 01 are time stamps;
+the programatic sorting means that files are read in the order
+ifile_a_00, ifile_b_00, ifile_a_01, ifile_b_01, which results in
+opening and allocating memory for ofile_a and ofile_b concurrently;
+by setting in_read_order, the read order may be changed to
+ifile_a_00, ifile_a_01, ifile_b_00, ifile_b_01, which results in
+the sequential production of ofile_a and ofile_b;</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="time-to-solution">
+<h3>Time to solution<a class="headerlink" href="#time-to-solution" title="Permalink to this heading">#</a></h3>
+<p>A way to improve the time to solution for a specific namelist is to
+enable OpenMP parallellism. The following points should be considered
+(see 2.6 for more detailed instructions):</p>
+<ul class="simple">
+<li><p>producing one output for each validation date, instead of all validation
+dates packed in the same file, will help improve OpenMP load balance,
+because of the smaller computation blocks;</p></li>
+<li><p>for the same reason, when all validation dates are collected in the same
+output, designing the namelist to support just on time mode will help
+improve OpenMP load balance; when some temporal operators are active,
+consider the use of temporary GRIB buffer (as explained in 2.5.1);</p></li>
+<li><p>set out_cost for each product, to improve the load balance;</p></li>
+<li><p>experiment with n_ompthread_collect, n_ompthread_generate, and
+out_cost_expensive to find the optimal solution for your problem
+(set additional_profiling to true and use the detailed profiling
+acvailable in fieldextra.diagnostic).</p></li>
+</ul>
+<p>An important point to consider when crafting the namelist is to avoid
+duplicate expensive operations. Consider in particuler the following:</p>
+<ul class="simple">
+<li><p>define your products on the smallest required subdomain (you can use
+imin…, region_bbox, out_regrid_target to restrict the domain);</p></li>
+<li><p>for products limited to a set of locations or grid points, define the
+lateral operators (hoper) in the first processing iterations, before
+any possible expensive computations (but not in the in_field iteration,
+which is not computed in parallel); this will support early data reduction,
+minimizing the points where the expensive operators are computed;</p></li>
+<li><p>if you need an expensive product on different overlapping subdomains,
+in different output, consider producing this product on a common
+domain in a temporary GRIB buffer, and using this GRIB buffer in
+a second step to cut out the different output from the common domain.
+The trade-off between the additional IO and the reduced computation
+costs should be evaluated, but the balance is certainly positive when
+the production of the expensive product significantly reduces the
+amount of data (e.g. computation of brigthness temperature).</p></li>
+<li><p>if you compute an expensive product defined for a single time level,
+which requires at the same time some parents fields on all time levels
+(e.g. to first compute a temporal reduction like a 24h mean), consider
+the use of a temporary GRIB buffer for the temporal reduction (so that
+expensive operators will only be computed for the time level of interest).</p></li>
+</ul>
+</section>
+<section id="shared-memory-multitasking">
+<span id="section-2-6"></span><h3>Shared memory multitasking<a class="headerlink" href="#shared-memory-multitasking" title="Permalink to this heading">#</a></h3>
+<p>Shared memory multitasking is implemented with OpenMP directives; both
+parallel prodution of output and parallellization of the computation
+algorithms used during the production of each output is available.</p>
+<p>To enable shared memory multitasking the program has to be compiled with
+the ‘omp’ target (e.g. gmake mode=opt,omp) and fieldextra has to be called
+in such a way that multitasking is permitted (this is system dependent).</p>
+<p>Configuration of code parallelism is controled by n_ompthread_total,
+n_ompthread_collect, n_ompthread_generate, out_production_granularity,
+and out_cost_expensive, all defined in &amp;RunSpecification, and out_cost
+defined in each &amp;Process associated with a new product defined in the
+namelist.</p>
+<p>The total number of threads used by the program is defined by the value of
+n_ompthread_total, and should not be larger than the number of shared
+memory cores available on the platform you are using. The parallelization
+used to collect input records in internal storage, including a possible
+in_regrid operation, is controled by the value of n_ompthread_collect.
+The parallelization used to create each product is controled by the
+value of n_ompthread_generate. Both the collect step and the generate
+step support nested parallelism, with at most 3 levels of nesting and
+at most 2 active levels. More precisely:
+* The number of output processed concurrently in the collect step, where
+decoded records are dispatched in output specific storage, is
+n_ompthread_collect. For each output, any regrid operator applied in
+this step may use up to INT(n_ompthread_total/n_ompthread_collect)
+threads; this latter parallelism is currently only implemented for
+interpolation from the ICON grid.
+* The number of output processed concurrently in the generate step,
+where each product is created, is n_ompthread_generate. In the
+production of each output, the applied operators are parallelized
+with INT(n_ompthread_total/n_ompthread_generate) OpenMP threads.
+In some cases, e.g. when out_group_eps is set, multiple output are
+created from the same internal storage; this is done in parallel
+using INT(n_ompthread_total/n_ompthread_generate) threads.</p>
+<p>The operators which are parallelized in the generate step are:</p>
+<ul class="simple">
+<li><p>(class 0) transfer or computation of fields at the start of a new iteration (see 4.3)</p></li>
+<li><p>(class 1) lateral transformation of a field (hoper)</p></li>
+<li><p>(class 1) re-gridding of all fields associated with a specific output</p></li>
+<li><p>(class 2) vertical transformation of a field (voper)</p></li>
+<li><p>(class 2) temporal transformation of a field (toper)</p></li>
+<li><p>(class 2) local transformation of a field (poper,poper2 … poper5)</p></li>
+</ul>
+<p>Each one of these operators is paralellized with the policy described
+below, using INT(n_ompthread_total/n_ompthread_generate) OpenMP threads.</p>
+<p>Class 0 operators: two cases are considered within the same parallel
+region:</p>
+<ol class="arabic simple">
+<li><p>transfer of fields from one iteration to the next and operators
+supporting grid points space partitioning: a partitioning of the grid
+point space is applied, and the transformation is implemented with an
+outer do-loop running on all these partitions; this do-loop is executed
+in parallel.</p></li>
+<li><p>operators not supporting grid points space partitioning: this is
+implemented within the same parallel region but with an outer do-loop
+running on all concerned fields; this do-loop is executed in parallel.</p></li>
+</ol>
+<p>Class 1 operators: the operator is implemented with an outer do-loop
+running on all fields part of the current processing iteration; this
+do-loop is executed in parallel. For this class of operators, it is
+beneficial to group as much operations as possible in the same iteration.</p>
+<p>Class 2 operators: a partitioning of the grid point space is applied,
+and the operator is implemented with an outer do-loop running on all
+these partitions; this do-loop is executed in parallel.</p>
+<p>To facilitate the load balance of the production in the generate step, it is
+advised to specify the relative cost of each product by setting out_cost value.
+This is meaningful in particular when cumulated times used by each product, as
+reported in the file fieldextra.diagnostic (with additional_profiling=true),
+span a large range of values. A rule of thumb is to set the value of out_cost
+to the order of magnitude of the real cost, normalized in a way to get a value
+of 1 for the cheapest products.</p>
+<p>The parallel production of output is periodically activated, each time a
+set of input files associated with the same validation date has been
+processed, and each time N input files have been processed since the
+last activation. The value of N controls the balance between the speedup
+of the generate step and the memory footprint of the program: a large value
+potentially leads to more output being prepared concurrently in the same
+iteration, meaning a higher production speedup but also a larger memory
+footprint. The value of N is controlled by out_production_granularity:</p>
+<ul>
+<li><div class="line-block">
+<div class="line">sequential code:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">out_production_granularity</span></code></div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">OpenMP code:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">out_production_granularity</span> <span class="pre">*</span> <span class="pre">n_ompthread_generate</span></code></div>
+<div class="line">The default value of out_production_granularity is 1.</div>
+</div>
+</li>
+</ul>
+<p>Too few output generated in each iteration is an indication that
+increasing out_production_granularity may improve the OpenMP speedup.</p>
+<p>In some situations, the partitioning of the OpenMP threads defined by
+n_ompthread_generate is not flexible enough. This is in particular the
+case for production of a mix of products with a small number of expensive
+products, with well parallelized algorithms, benefiting from a small
+n_ompthread_generate (i.e. a large number of threads for the operators),
+and many cheap products, benefitting from a large n_ompthread_generate.
+To cope with such situations, it is possible to define a second value
+for n_ompthread_generate, and to use this second value to compute
+‘expensive’ products. More precisely:</p>
+<ol class="arabic simple">
+<li><p>all ‘expensive’ products, with out_cost &gt;= out_cost_expensive, are
+computed first, using n_ompthread_generate(2);</p></li>
+<li><p>all other products are computed next using n_ompthread_generate(1).</p></li>
+</ol>
+<p>There is no definitive rules to define the optimal configuration of a specific
+problem; this depends in particular on the underlying hardware architecture.
+Setting additional_profiling to true and analyzing the profiling of the code
+in the file fieldextra.diagnostic should help define an optimal configuration.</p>
+<p>One should keep in mind that the more threads and the more levels of parallelism,
+the larger the overhead of the parallelization and the larger the memory
+footprint.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="products.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Supported products and data representations</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="introduction.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Introduction</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Program usage</a><ul>
+<li><a class="reference internal" href="#input-data">Input data</a></li>
+<li><a class="reference internal" href="#output-data">Output data</a></li>
+<li><a class="reference internal" href="#environment">Environment</a></li>
+<li><a class="reference internal" href="#diagnostic">Diagnostic</a></li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#memory-footprint">Memory footprint</a></li>
+<li><a class="reference internal" href="#time-to-solution">Time to solution</a></li>
+<li><a class="reference internal" href="#shared-memory-multitasking">Shared memory multitasking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

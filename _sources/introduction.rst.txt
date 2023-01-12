@@ -1,0 +1,115 @@
+************
+Introduction
+************
+
+Fieldextra is a generic tool to manipulate NWP model data and gridded 
+observations; simple data processing and more complex data operations are
+supported, for example: selecting data satisfying some complex condition,
+comparing or merging multiple fields, horizontal and vertical re-gridding,
+computation of regional means, computation of stability indices, computation
+of neighbourhood and EPS probabilities. A rich set of output format is
+proposed. 
+
+Currently fieldextra supports NetCDF, GRIB 1, GRIB 2 and ASCII import.
+A special focus of fieldextra is the compatibility with the COSMO model,
+but support for other models is also present (IFS, ICON, GME) and many
+operations are generic and can be applied to any model. Both determinist
+and EPS systems are supported. Support for gridded observations is available.
+
+Fieldextra accepts multiple data representation types: latitude/longitude
+coordinates, rotated or not, Swiss coordinates, Gauss-Boaga coordinates,
+with the possibility to re-grid fields on input and/or on output. However,
+except for some limited support of the ICON grid (see the description of
+operator in_regrid_method='from_unstructured_grid'), only regular grids 
+are considered.
+
+Fieldextra is normally expecting input files organized as the standard
+output of COSMO; in particular it is assumed that each input file
+contains:
+
+* fields with same validation date,
+* fields from a single EPS member (if relevant),
+* multi level fields with a unique level type each.
+
+Moreover, some COSMO file name conventions are relied upon (coding of 
+date and time, file name extension, file name convention for constant
+fields). It is nevertherless possible to work with almost any input,
+but more information has to be specified in the program control file
+(e.g. the size of the different dimensions available in an input file).
+
+
+
+Fieldextra is designed as a toolbox, with production as primary target.
+A set of primitive operations are provided, which can be combined in any 
+meaningful way. During execution the input files are read once only, but
+as many output files as desired are produced. The program is controlled by a
+collection of Fortran namelists, stored in a control data file. Comprehensive
+checks of user defined parameters are performed, and a rich set of diagnostic
+is produced. A lot of effort has been invested to optimize both the memory
+footprint and the execution time, and to offer a robust well written and well
+tested code.
+
+Fieldextra is reasonably modular. It is easy to add new operators to compute
+fields, to add suppport for new regular grids, to add new interpolation
+algorithms or new output types.
+
+
+
+The program is written in Fortran, and fully respects the Fortran 95 standard.
+In addition, some Fortran 2003/2008 features have been introduced:
+
+modules:
+
+* ``USE``, ``INTRINSIC :: ISO_FORTRAN_ENV``
+* ``COMPILER_VERSION``
+* ``COMPILER_OPTIONS``
+* ``FILE_STORAGE_SIZE``
+* ``CHARACTER_STORAGE_SIZE``
+
+intrinsics:
+
+* ``COMMAND_ARGUMENT_COUNT``, ``GET_COMMAND_ARGUMENT``
+* ``FLUSH``
+* ``MOVE_ALLOC``
+* ``NEW-LINE``
+* ``TRANSFER``
+
+input/output:
+
+* ``OPEN( ... ACCESS='STREAM' ... )``
+* ``INQUIRE( ... SIZE= ...)``
+* ``READ( ... iomsg= ... )``
+
+others:
+
+* pointer to procedure
+* ``CLASS`` statement
+* ``BLOCK`` construct
+
+(See `here <http://fortranwiki.org/fortran/show/Fortran+2008+status>`_ for a
+table listing the support of new fortran features by different 
+compilers).
+
+Some modules of the COSMO model code are integrated in the source tree, after
+necessary adaptations to guarantee a correct performance of the code (see
+README.cosmo_api for a detailed description of the interface between both
+codes). 
+
+The package also contains 
+
+* a modified GRIB 1 / utility library based on the old DWD GRIB1 library
+* a library to support native ICON grid
+
+The following external static libraries are required: 
+
+* ECMWF ecCodes to support GRIB 2 decoding and encoding
+* the libaec library to support adaptive entropy coding compression in GRIB 2
+* the jasper library to support jpeg compression in GRIB 2
+* the UCAR NetCDF library to support decoding and encoding of NetCDF files
+* the NWP SAF RTTOV library to simulate satellite radiances.
+
+Shared memory multitasking is available and implemented with OpenMP
+directives (see 2.6 below).
+
+Fieldextra has been tested on multiple platforms and with multiple compilers
+(SGI Origin, IBM Power, Cray Opteron/gnu, Cray Opteron/intel ...). 

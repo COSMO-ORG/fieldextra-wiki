@@ -1,0 +1,337 @@
+*************
+Program usage
+*************
+::
+  
+  fieldextra control_file
+
+where ``control_file`` contains Fortran namelists controlling 
+the execution of the code
+
+
+Input data
+==========
+
+**COMPULSORY:**
+
+* Control file:
+  ASCII file containing Fortran 90 namelists defining program behaviour.
+* Field dictionaries:
+  ASCII file(s) containing definition of field names and characteristics.
+* Data files:
+  collection of files containing input fields, coded in NetCDF (CF convention),
+  GRIB edition 1 or 2, or as BLK_TABLE release 1.8 or higher.
+
+**OPTIONAL:**
+
+* Definition of geographical locations:
+  ASCII file.
+* Definition of additional locations characteristics:
+  ASCII file(s), used e.g. to store MOS and Kalman coefficients.
+* Definition of geographical regions:
+  ASCII file.
+* ecCodes definition files:
+  set of ASCII files used to code/decode GRIB 2 records.
+* GRIB 2 sample file:
+  GRIB 2 file used to create a new GRIB 2 record.
+* RTTOV coefficient files:
+  binary files(s), used e.g. to compute simulated brightness temperatures .
+* ICON grid description:
+  NetCDF file, used to decode ICON fields defined on native grid.
+* AdaBoost coefficients:
+  ASCII file(s).
+* Content of program internal storage:
+  Fortran unformatted binary file.
+
+
+Output data
+===========
+
+**ALWAYS:**
+
+* Program diagnostic:
+  written to the standard output (controlled by the value of verbosity).
+* additional diagnostic and profiling : 
+  written in file fieldextra.diagnostic (controlled by the value of additional_diagnostic and additional_profiling).
+* Data files:
+  GRIB 1, GRIB 2, NetCDF or formatted ASCII output as specified in program control file.
+
+**OPTIONAL:**
+
+* Information for repeat mode (see enable_repeat_mode):
+  written in ASCII file fieldextra.rmode
+* Diagnostic on locations:
+  written in ASCII file fieldextra.location.
+* Diagnostic on regions:
+  written in ASCII files fieldextra.region, fieldextra.region.stencil_1, ...
+* Diagnostic on slices:
+  written in ASCII file fieldextra.slice.
+* Characteristics of input records:
+  written in ASCII file fieldextra.inspect (used by fxtools).
+* Table of content of GRIB and NetCDF output:
+  written in ASCII file, using the same base name as the associated output.
+* Content of program internal storage:
+  Fortran unformatted binary file.
+
+
+Environment
+===========
+
+To use fieldextra it may be necessary to relax system limits imposed on size of stack,
+both for sequential mode and for OpenMP mode. A typical set of command lines to apply
+on a Linux or UNIX system is: ::
+
+    unlimit                     
+    setenv OMP_STACKSIZE 500M   (OpenMP stack size)
+
+
+Diagnostic
+==========
+
+Information on usage, operations and exceptions is written on standard output. The
+amount of information depends on the level of verbosity (verbosity in &RunSpecification).
+Warnings inform on potential problems, whereas alerts are issued when a problem has
+been definitely identified. The last diagnostic line summarizes the status of the
+program, and is one of:
+
+* 'Exception detected in program'
+* 'Program stopped by user'           (but program successful up to that point)
+* 'Program successfully completed'    (does not preclude warnings)
+
+Additional information is also produced in file fieldextra.diagnostic; the amount
+of information is controlled by additional_diagnostic in &RunSpecification. When
+additional_diagnostic is true, special diagnostic may also be produced in the files
+fieldextra.slice, fieldextra.location and fieldextra.region* .
+
+Basic code profiling, on timing and memory usage, is always available in the file
+fieldextra.diagnostic; a more detailed code profiling can be produced by setting
+addtional_profiling to true in &RunSpecification.
+
+When testing a new namelist, it is recommended to set verbosity to 'high', 
+additional_diagnostic to true, and strict_usage to true.
+
+
+Resources
+=========
+
+Memory footprint
+----------------
+
+Carefully crafting the namelist when working with large output set
+may drastically reduce the memory footprint of the program. The
+following points should be considered:
+
+* manually set the estimated output size (in_size_field) when using one of INCLUDE_ALL or EXCLUDE selection mode, or when using field=__ALL__;
+* explicitely specify the list of levels to extract when processing multi-level fields (i.e. avoid levlist=-1);
+* use time loop construct on output to group data by validation date;
+* when all validation dates are collected in the same output, and no
+  temporal operator is used:
+  
+  * choose an output supporting append mode (GRIB1, GRIB2, NetCDF, BLK_TABLE), 
+    and define the namelist to allow just on time mode;
+  * if this is not possible, and the output is limited to a set of
+    locations or grid points, but has a high memory footprint because
+    of operator inhibitting data reduction on input, use a temporary
+    GRIB buffer (GRIB file used first as output, then as input);
+    just on time mode will be used in the production of this GRIB
+    buffer, and data reduction will be available when the GRIB buffer
+    is read to produce the definitive output;
+* when all validation dates are collected in the same output, and some
+  temporal operators are used on a (small) subset of the contributing
+  fields, prohibiting just on time mode:
+
+  * use a set of temporary GRIB buffer to collect the fields which are
+    transformed in time, defining one output for each validation date,
+    and collect these transformed fields from the temporary file in a
+    second step;
+* when dispatching a small number of fields from a single input into
+  multiple output, with other files also contributing to each of
+  these output, use INCORE storage as buffer, or, if not possible,
+  process the common input first (in_read_first=.TRUE.); this sorting
+  of input files supports a progressive memory allocation of each of
+  the concerned output, which may reduce the memory footprint of the
+  program;
+* the programatic sorting of input files may result in opening multiple
+  output concurrently, unnecessarily; in such a case, forcing the read
+  order by setting in_read_order may drastically reduce the memory
+  footprint; the following example illustrates this point:
+
+  * ofile_a uses data from ifile_a_00 and ifile_a_01, 
+    ofile_b uses data from ifile_b_00 and ifile_b_01,
+    00 and 01 are time stamps;
+    the programatic sorting means that files are read in the order
+    ifile_a_00, ifile_b_00, ifile_a_01, ifile_b_01, which results in
+    opening and allocating memory for ofile_a and ofile_b concurrently; 
+    by setting in_read_order, the read order may be changed to
+    ifile_a_00, ifile_a_01, ifile_b_00, ifile_b_01, which results in
+    the sequential production of ofile_a and ofile_b;
+
+Time to solution
+----------------
+
+A way to improve the time to solution for a specific namelist is to
+enable OpenMP parallellism. The following points should be considered
+(see 2.6 for more detailed instructions):
+
+* producing one output for each validation date, instead of all validation
+  dates packed in the same file, will help improve OpenMP load balance,
+  because of the smaller computation blocks;
+* for the same reason, when all validation dates are collected in the same 
+  output, designing the namelist to support just on time mode will help
+  improve OpenMP load balance; when some temporal operators are active,
+  consider the use of temporary GRIB buffer (as explained in 2.5.1);
+* set out_cost for each product, to improve the load balance; 
+* experiment with n_ompthread_collect, n_ompthread_generate, and
+  out_cost_expensive to find the optimal solution for your problem
+  (set additional_profiling to true and use the detailed profiling
+  acvailable in fieldextra.diagnostic).
+
+An important point to consider when crafting the namelist is to avoid
+duplicate expensive operations. Consider in particuler the following:
+
+* define your products on the smallest required subdomain (you can use
+  imin..., region_bbox, out_regrid_target to restrict the domain);
+* for products limited to a set of locations or grid points, define the
+  lateral operators (hoper) in the first processing iterations, before
+  any possible expensive computations (but not in the in_field iteration,
+  which is not computed in parallel); this will support early data reduction,
+  minimizing the points where the expensive operators are computed; 
+* if you need an expensive product on different overlapping subdomains,
+  in different output, consider producing this product on a common
+  domain in a temporary GRIB buffer, and using this GRIB buffer in
+  a second step to cut out the different output from the common domain.
+  The trade-off between the additional IO and the reduced computation
+  costs should be evaluated, but the balance is certainly positive when
+  the production of the expensive product significantly reduces the 
+  amount of data (e.g. computation of brigthness temperature).
+* if you compute an expensive product defined for a single time level, 
+  which requires at the same time some parents fields on all time levels
+  (e.g. to first compute a temporal reduction like a 24h mean), consider
+  the use of a temporary GRIB buffer for the temporal reduction (so that
+  expensive operators will only be computed for the time level of interest).
+
+.. _section 2.6:
+
+Shared memory multitasking
+--------------------------
+
+Shared memory multitasking is implemented with OpenMP directives; both
+parallel prodution of output and parallellization of the computation
+algorithms used during the production of each output is available.
+
+To enable shared memory multitasking the program has to be compiled with 
+the 'omp' target (e.g. gmake mode=opt,omp) and fieldextra has to be called 
+in such a way that multitasking is permitted (this is system dependent). 
+
+Configuration of code parallelism is controled by n_ompthread_total,
+n_ompthread_collect, n_ompthread_generate, out_production_granularity,
+and out_cost_expensive, all defined in &RunSpecification, and out_cost
+defined in each &Process associated with a new product defined in the
+namelist.
+
+The total number of threads used by the program is defined by the value of
+n_ompthread_total, and should not be larger than the number of shared
+memory cores available on the platform you are using. The parallelization
+used to collect input records in internal storage, including a possible
+in_regrid operation, is controled by the value of n_ompthread_collect.
+The parallelization used to create each product is controled by the
+value of n_ompthread_generate. Both the collect step and the generate
+step support nested parallelism, with at most 3 levels of nesting and
+at most 2 active levels. More precisely:
+* The number of output processed concurrently in the collect step, where
+decoded records are dispatched in output specific storage, is
+n_ompthread_collect. For each output, any regrid operator applied in
+this step may use up to INT(n_ompthread_total/n_ompthread_collect)
+threads; this latter parallelism is currently only implemented for
+interpolation from the ICON grid.
+* The number of output processed concurrently in the generate step,
+where each product is created, is n_ompthread_generate. In the
+production of each output, the applied operators are parallelized
+with INT(n_ompthread_total/n_ompthread_generate) OpenMP threads.
+In some cases, e.g. when out_group_eps is set, multiple output are
+created from the same internal storage; this is done in parallel
+using INT(n_ompthread_total/n_ompthread_generate) threads.
+
+
+The operators which are parallelized in the generate step are:
+
+* (class 0) transfer or computation of fields at the start of a new iteration (see 4.3)
+* (class 1) lateral transformation of a field (hoper)
+* (class 1) re-gridding of all fields associated with a specific output
+* (class 2) vertical transformation of a field (voper)
+* (class 2) temporal transformation of a field (toper)
+* (class 2) local transformation of a field (poper,poper2 ... poper5)
+
+Each one of these operators is paralellized with the policy described
+below, using INT(n_ompthread_total/n_ompthread_generate) OpenMP threads.
+
+Class 0 operators: two cases are considered within the same parallel
+region:
+
+#. transfer of fields from one iteration to the next and operators
+   supporting grid points space partitioning: a partitioning of the grid
+   point space is applied, and the transformation is implemented with an
+   outer do-loop running on all these partitions; this do-loop is executed
+   in parallel.
+#. operators not supporting grid points space partitioning: this is
+   implemented within the same parallel region but with an outer do-loop
+   running on all concerned fields; this do-loop is executed in parallel.
+
+Class 1 operators: the operator is implemented with an outer do-loop 
+running on all fields part of the current processing iteration; this
+do-loop is executed in parallel. For this class of operators, it is
+beneficial to group as much operations as possible in the same iteration.
+
+Class 2 operators: a partitioning of the grid point space is applied,
+and the operator is implemented with an outer do-loop running on all
+these partitions; this do-loop is executed in parallel.
+
+
+To facilitate the load balance of the production in the generate step, it is
+advised to specify the relative cost of each product by setting out_cost value.
+This is meaningful in particular when cumulated times used by each product, as
+reported in the file fieldextra.diagnostic (with additional_profiling=true), 
+span a large range of values. A rule of thumb is to set the value of out_cost
+to the order of magnitude of the real cost, normalized in a way to get a value
+of 1 for the cheapest products.
+
+The parallel production of output is periodically activated, each time a
+set of input files associated with the same validation date has been 
+processed, and each time N input files have been processed since the
+last activation. The value of N controls the balance between the speedup
+of the generate step and the memory footprint of the program: a large value
+potentially leads to more output being prepared concurrently in the same
+iteration, meaning a higher production speedup but also a larger memory
+footprint. The value of N is controlled by out_production_granularity:
+
+* | sequential code: 
+  | ``N = out_production_granularity``
+* | OpenMP code: 
+  | ``N = out_production_granularity * n_ompthread_generate``
+  | The default value of out_production_granularity is 1.
+
+Too few output generated in each iteration is an indication that
+increasing out_production_granularity may improve the OpenMP speedup.
+
+In some situations, the partitioning of the OpenMP threads defined by
+n_ompthread_generate is not flexible enough. This is in particular the
+case for production of a mix of products with a small number of expensive
+products, with well parallelized algorithms, benefiting from a small
+n_ompthread_generate (i.e. a large number of threads for the operators),
+and many cheap products, benefitting from a large n_ompthread_generate.
+To cope with such situations, it is possible to define a second value
+for n_ompthread_generate, and to use this second value to compute
+'expensive' products. More precisely:
+
+#. all 'expensive' products, with out_cost >= out_cost_expensive, are
+   computed first, using n_ompthread_generate(2);
+#. all other products are computed next using n_ompthread_generate(1).
+
+There is no definitive rules to define the optimal configuration of a specific
+problem; this depends in particular on the underlying hardware architecture.
+Setting additional_profiling to true and analyzing the profiling of the code
+in the file fieldextra.diagnostic should help define an optimal configuration.
+
+One should keep in mind that the more threads and the more levels of parallelism,
+the larger the overhead of the parallelization and the larger the memory
+footprint.

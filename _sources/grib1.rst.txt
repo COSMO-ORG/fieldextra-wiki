@@ -1,0 +1,216 @@
+*************************************
+Description of some GRIB1 conventions
+*************************************
+
+Due to limitations of the GRIB 1 standard, local extensions have been defined to
+code some additional information. Fieldextra relies on some de facto conventions
+used within the COSMO consortia to correctly decode the processed input records.
+
+
+COSMO: coding of model name
+===========================
+
+Standard
+..........................................................................
+Based on pds(3) [center] and pds(4) [generatingProcessIdentifier]
+..........................................................................
+
+COSMO-LEPS
+..........................................................................
+Based on pds(3) [center], pds(23) [subCentre] and
+                            pds(4) [generatingProcessIdentifier]
+    pds(3) == Roma or COSMO, pds(23) == ECMWF, pds(4) = 131
+..........................................................................
+
+
+COSMO: coding of product category
+=================================
+
+Standard
+..........................................................................
+            pds         37        39                45
+..........................................................................
+determinist          254,255   
+EPS control         -------------- NA --------------
+EPS member           253                 
+EPS mean             1         17,43         
+EPS perturbation     28        61            
+EPS stddev           1         18,44,46      
+EPS quantile         5         117,143           1
+EPS quantile diff    5         117,143           3
+EPS probability      5         16            
+neighbourhood prob.  201       16            
+probability, derived
+    from stat. model 
+    MOS logreg         204                         1
+    MOS extlogreg      204                         1
+..........................................................................
+Note: when multiple values of pds(39) are listed, this is used to
+        discriminate between weigthed and unweighted products
+Note: both weighted and unweighted EPS perturbation are coded in
+        the same way
+
+COSMO-LEPS
+..........................................................................
+            pds         37        39                45
+..........................................................................
+determinist         -------------- NA --------------
+EPS control          1         9,10          
+EPS member           28        11            
+EPS mean          |   
+EPS perturbation  |   
+EPS stddev        |  
+EPS quantile      |  Same as standard coding
+EPS quantile diff |
+EPS probability   |
+..........................................................................
+
+
+COSMO: coding of EPS member information
+=======================================
+
+Standard
+..........................................................................
+EPS mean           pds(51) = total number of members, pds(52) = member id
+EPS perturbation   pds(43) = total number of members, pds(42) = member id
+..........................................................................
+
+COSMO-LEPS
+..........................................................................
+EPS mean           pds(43) = total number of members, pds(42) = member id
+EPS perturbation   pds(43) = total number of members, pds(42) = member id
+..........................................................................
+
+
+COSMO: coding of quantile information
+=====================================
+
+Standard
+..........................................................................
+the p of the p-quantile is coded in pds(46)
+for quantiles difference, pds(46) and pds(47) are used
+..........................................................................
+
+
+COSMO: coding of probability information
+========================================
+
+Standard
+..........................................................................
+pds(45) defines the range for which the probability is computed:
+    pds(45) == 1 : larger than a specified threshold
+    pds(45) == 2 : smaller than a specified threshold
+    pds(45) == 3 : between threshold1 and threshold2
+the threshold(s) values(s) are coded in pds(44,46,47):
+    REAL(pds(46) * 10**pds(44) [low] and REAL(pds(47) * 10**pds(44) [high]
+..........................................................................
+
+
+COSMO: coding of experiment tag (local information)
+===================================================
+
+Standard
+..........................................................................
+EPS control, EPS member    pds(47)
+Others                     pds(41)
+..........................................................................
+
+COSMO-LEPS
+..........................................................................
+EPS control, EPS member    pds(41)
+Others                     pds(41)
+..........................................................................
+
+
+COSMO: coding of element number (local information)
+===================================================
+
+Standard (non COSMO-LEPS products)
+..........................................................................
+Determinist                pds(41)
+EPS control, EPS member    pds(41)
+..........................................................................
+
+
+COSMO: coding of vertical coordinate parameters and of reference atmosphere
+===========================================================================
+
+This information is coded in the gds of each record, as a set of gds values
+trailing the definition of the grid. The coding convention has been modified 
+many times. The corresponding gds values are:
+
+* Old coding (prior to COSMO v2.14)
+        p0sl, t0sl, dt0lp, vcfl, vc(1), ..., vc(ke+1)
+
+* Old coding (introduced with COSMO v2.14)
+        p0sl, t0sl, dt0lp, vcfl, vc(1), ..., vc(ke+1), vctyp 
+        [, svc1, svc2, nfltvc, delta_t, h_scal]
+
+* New coding (introduced with COSMO v3.18)
+    vctyp, ke, p0sl, t0sl, dt0lp, vcfl, vc(1), ..., vc(ke+1)
+    [, svc1, svc2, nfltvc] [, delta_t, h_scal]
+
+    -> Interpretation of vctyp
+        vctyp   1  pressure based, old ref. atm. (based on dT/dlnp = const)
+                2  height based, old ref. atm. (based on dT/dlnp = const)
+                3  SLEVE (n=1), old ref. atm. (based on dT/dlnp = const)
+            101  pressure based, new ref. atm. (asymptotically isothermal stratosphere)
+            102  height based, new ref. atm. (asymptotically isothermal stratosphere)
+            103  SLEVE (n=1), new ref. atm. (asymptotically isothermal stratosphere)
+            104  SLEVE (n=1.35), new ref. atm. (asymptotically isothermal stratosphere)
+
+    -> Optional information
+        svc1, svc2, nfltvc : only defined for vctyp={3,103,104}
+        delta_t, h_scal : only defined for vctyp={101,102,103,104}
+
+* Generalized vertical coordinates
+    nlev, numberOfVGridUsed and uuidOfVGrid(1:4)
+    (no analytic formulation of vcoord coded in GRIB record in this case)
+
+    -> this information is available if, and only if, the associated surface type
+        is 'generalized vertical coordinates'
+
+
+    Where: vctyp : type of vert. coord and type of reference atmosphere
+        ke : number of full levels
+        p0sl, t0sl, dt0lp : coefficients defining the reference atmosphere
+        vcfl : level where hybrid coord. are flat
+        vc() : coefficients defining the model levels
+        svc1, svc2, nfltvc : coefficients defining SLEVE transformation
+        delta_t, h_scal : additional coefficients defining the reference atmosphere
+
+
+Coding of undefined values
+==========================
+(see also section 7.11)
+
+Besides the use of bitmap (which is currently not supported in feldextra) there
+is no standard way to code undefined values in a GRIB 1 output. Furthermore, any
+numerical value used to flag undefined in a 2d field has to be carefully chosen
+in order not to lose too much precision in the GRIB 1 packing process. 
+For this reason, a local extension has been defined to optimally set and code
+undefined values:
+
+* undef flag is a real number constructed by choosing
+    a value which has the same order of magnitude as
+    one of the data set extrema
+* if the data set maxima is positive, the undef flag
+    is larger than the maxima; otherwise, it is smaller
+    than the minima (after considering a possible scaling
+    factor)
+* undef_flag is coded in pds(35-36):
+    undef_flag = sign_m * 0.99 * 10**(sign_e*exponent)
+        pds(35), bit 0: sign_m (0: positive, 1: negative)
+        pds(35), bit 1: sign_e (0: positive, 1: negative)
+        pds(36)       : exponent
+* usage of this mechanism is signaled by a pds(35)
+    value differing both from 0 and from 255
+* to cope with rounding error, a tolerance is applied
+    when checking data against undef_flag:
+        undef_eps = 10**(exponent-1)
+
+The price to pay for this extension is the incompatibility of the so produced
+GRIB 1 with any tool which has not been consequently adapted. To swicth off
+this feature, it is possible to explicitely set the undefined flag to a user
+chosen value with the operator poper='replace_undef,VALUE' (note however that 
+the problem remains to communicate this value to any downstream tool).

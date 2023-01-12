@@ -1,0 +1,65 @@
+********************
+Description of tools
+********************
+
+To simplify the use of fieldextra for some common tasks, a set of so-called fx tools
+are provided. Each of these tools is a wrapper script, which accepts a limited set 
+of arguments, and use fieldextra as computation engine. The fieldextra namelist is
+generated on the fly by the wrapper script, depending on the specified arguments.
+
+The following tools are found in the ./tools subdirectory of the distribution package:
+
+*  grins
+
+  This program lists the table of content of the specified GRIB file.
+  Different type of information can be displayed, according to the
+  value of OPTIONS. A specific record can be selected.
+  Without options, record number, field name, level, initial date, and
+  time are printed.
+
+*  fxclone
+
+  This program makes a copy of the specified GRIB file, modifying the
+  global attributes of each record according to the specified options.
+
+*  fxdestagger
+
+  This program de-stagger all fields found in input file, making a
+  copy of the input file containg all original fields, but interpolated
+  on the grid associated with the specified reference field.
+
+*  fxfilter
+
+  This program filters the records found in the specified GRIB file on
+  the basis of the specified options.
+
+*  fxcrop
+
+  This program crops all the records of the specified GRIB file to the
+  specified subdomain.
+
+*  fxconvert
+
+  This program converts the specified GRIB file to the specified format;
+  the output format GRIB 1, GRIB 2, and NetCDF are supported.
+
+More details on each tool can be obtained by calling the tool with the
+option --help .
+
+
+
+Other tools are also available for some special requirements:
+
+* fx_upscaling
+  (require Python 3.6)
+
+  A wrapper script is provided for the complex upscaling task applied at
+  MeteoSwiss to upscale the whole model output from the 1.1 km grid to a
+  collocated 2.2 km grid.
+* nl_rendering
+  (require Python 3.6 and the jinja2 template designer)
+
+  Complex namelist defining many products at the same time may be difficult to
+  edit and to debug. The nl_rendering tool supports organizing complex namelists 
+  in a hierarchical way; the tool generates a pure Fortran namelist from the
+  structured definition.

@@ -1,0 +1,176 @@
+****************************
+Handling of meta-information
+****************************
+
+ Each 2-dimensional field is associated with a set of meta-information describing the
+ characteristics of the field. For each input record, the set of meta-information
+ depends on the input format and on the way the record has been created. Some
+ information is required for a correct processing of the field (e.g. horizontal grid),
+ other is optional.
+
+ When processing an input record, fieldextra decodes most of the meta-information 
+ and keeps it in internal storage, after a possible translation to an internal
+ representation (to be input format neutral). Missing or incomplete information
+ may be supplemented with user specified information and dictionary information.
+ Furthermore, meta-information may be programatically updated when computing a
+ new field or applying some operators, relying in particular on the information
+ defined in the active dictionary.
+
+ The set of meta-information created in the output depends on the type of output.
+ If necessary, the information is translated from the internal representation to
+ the output specific representation. For some meta-information, missing values may 
+ be supplemented by values defined in the active dictionary.
+
+
+ Local meta-information, in the sense of information which is defined in the
+ GRIB local use section, is simply transfered from the input to the output.
+ When a new field is computed, the local meta-information of the derived field
+ is taken from the local meta-information of the main parent. 
+ Two exceptions to this rule:
+  1. local meta-information internally flaged as 'volatile' is erased after
+     the field has been identified, and re-created on the basis of the active
+     dictionary at the very end of the last processing iteration.
+     Currently declared as volatile:
+       COSMO model: localElementNumber, localInformationNumber, marsType
+  2. on a field basis, the value of localInformationNumber may be declared as
+     significant, instead of volatile, by setting localInfoNumberUse in the
+     active dictionary. In this case, the decoded value is kept, and transfered
+     across any processing iterations. Furthermore, the value is programatically
+     set by some operators (e.g. when localInfoNumberUse=numberOfClasses for
+     some field, applying poper='azimut_class' results in localInformationNumber
+     being set to the number of classes for this field).
+
+ As explained below, the user has always the possibility to reset any 
+ local meta-information by using auxiliary_metainfo in &GlobalSettings, 
+ out_auxiliary_metainfo in &Process, or set_auxiliary_metainfo in &Process.
+
+
+ The user has the possibility to define some default meta-information, to supplement
+ _missing_ information in the input records:
+   in &GlobalSettings :          default_model_name, default_product_category
+   in &ModelSpecification :      vertical_coordinate_* 
+   in &Process (io definition) : default_product_category
+
+ Furthermore, the user has the possibility to explicitely set some meta-information,
+ re-setting any previous value. In this latter case, depending on the operator, the 
+ information may be reset just after decoding a record, before any processing, or
+ before generating the output data, after all other processing (in this latter case, 
+ the user value has precedence over any programatically set values and over any
+ values defined in the active dictionary):
+   > to re-set values of decoded records, before any processing :
+     in &ModelSpecification :        earth_axis_large, earth_axis_small (GRIB 1 input)
+                                     vertical_coordinate_* (reset if set_vcoord=.T. or
+                                     vertical_coordinate_reset=.T.)
+     in &Process (field iteration) : set_units, set_vcoord, set_level_property,
+                                     set_reference_date, set_leadtime,
+                                     set_trange_type, set_time_range,
+                                     set_genproc_type, set_product_category,
+                                     set_epsmember_identity, set_auxiliary_metainfo
+   > to re-set values just before generating the output data :
+     in &GlobalSettings :            originating_center, production_status, 
+                                     genproc_type, auxiliary_metainfo
+     in &Process (io definition) :   out_model_name, 
+                                     out_genproc_type, out_product_category,
+                                     out_vertical_coordinate, out_auxiliary_metainfo
+     in &Process (field iteration) : set_units, set_level_property,
+                                     set_reference_date, set_leadtime,
+                                     set_trange_type, 
+                                     set_genproc_type, set_product_category,
+                                     set_epsmember_identity, set_auxiliary_metainfo
+
+
+ The meta-information processing flow is summarized in the following picture:
+
+  ** input data **
+         |
+         |
+  ++ decode record ++
+  translate information to internal representation
+  (auxiliary meta-information is not interpreted)
+         |
+         |
+  GRIB 1 record ?
+  yes: use specified defaults         [earth_axis_*]
+         |
+         |
+  missing or partial information ? 
+  yes: use specified defaults         [default_model_name -> model name, model type, center;
+                                       default_product_category; vertical_coordinate_*     ]
+       use dictionary information     [type of generating process; 
+                                       type of statistical processing;
+         |                             field level                                         ]
+         |
+         |
+  regrid operator ?
+  yes: programatically set            [horizontal grid]
+         |
+         |
+  ++ collect record ++
+  re-init volatile information        [localInformationNumber; localElementNumber; marsType;
+         |                             forecastProbabilityNumber; totalNumberOfForecastProbabilities]
+         |
+         |
+  in_field: set_* ?
+  yes: reset information              [set_units; set_vcoord; set_level_property;
+         |                             set_reference_date; set_trange_type; set_time_range;
+         |                             set_leadtime; set_product_category; set_epsmember_identity;
+         |                             set_genproc_type; set_auxiliary_metainfo                  ]
+         |
+  ++ processing iterations ++
+  compute new field ?
+  no: transfer information
+  yes: use main parent,
+       use dictionary,                [level]
+       programatically set 
+         |
+         |
+  column operator ?
+  yes: programatically set            [level]
+         |
+         |
+  temporal operator ?
+  yes: programatically set            [time range information]
+         |
+         |
+  reset field identity ?
+  yes: programatically set            [short name, units]
+         |
+         |
+  ++ prepare output ++
+  postprocessing operator ?
+  yes: programatically set            [as coded in chosen postprocessing operator]
+         |
+         |
+  regrid operator ?
+  yes: programatically set            [horizontal grid]
+         |
+         |
+  volatile ?
+  programatically set                 [marsType]
+  from dictionary                     [localInformationNumber; localElementNumber]
+         |
+         |
+  Settings in &GlobalSettings ?
+  yes: reset information              [originating_center; production_status; 
+                                       genproc_type, auxiliary_metainfo      ]
+  Settings in &Process (io def)?
+  yes: reset information              [out_model_name; 
+                                       out_genproc_type; out_product_category;
+                                       out_vertical_coordinate; out_auxiliary_metainfo]
+
+  Settings in &Process (fld def)?
+  yes: reset information              [set_units; set_level_property; 
+                                       set_reference_date; set_leadtime;
+         |                             set_trange_type; set_product_category;
+         |                             set_epsmember_identity; 
+         |                             set_genproc_type; set_auxiliary_metainfo      ]
+         |
+         |
+  ++ generate output ++
+  silently discard information not supported by output type
+         |
+  translate information to type compatible representation
+  (GRIB 1 : use dictionary to translate level)
+         |
+         |
+  ** output data **

@@ -1,0 +1,168 @@
+
+:py:mod:`&NetCDFImport`
+=======================
+
+.. py:module:: &NetCDFImport
+    
+    This namelist block is optional, but must be unique.
+
+    It is used to specify missing attributes associated with imported
+    NetCDF file. It is ignored when no NetCDF file is imported.
+
+.. py:attribute:: varname_translation 
+    :type: "nc_var_1:short_name_1", "nc_var_2:short_name_2" ...
+
+    Translation table for NetCDF variables.
+
+    A list of NetCDF variable names (nc_var) and of associated field short
+    names (short_name) is provided, following the pattern described above.
+    This information supersedes any other method to associate NetCDF variable
+    names with field short names (by use of variable name or variable 
+    short_name attribute).
+    
+    The following short names have a special signification:
+
+    ``'__IGNORE__'``
+        the associated NetCDF variable will be ignored without issuing any warning or exception.
+    
+    ``'__VCOORD_COSMO__'`` 
+        the associated NetCDF variable contains information about
+        the vertical coordinates coefficients, as used by the
+        COSMO model (the variable must be associated with a single
+        z dimension):
+        
+        * the size of the variable is the number of levels plus one
+        * the values of the variable are the vertical coord. coefficients
+        * the attributes of the variable define the (optional) sleve coefficients and the reference atmosphere
+
+
+.. py:attribute:: var_default_attribute 
+    :type: "nc_var_1:attribute_list_1", "nc_var_2:attribute_list_2" ...
+
+    Default attributes for NetCDF variables.
+    
+    A list of NetCDF variable names (nc_var) and of associated attributes
+    (attribute_list) is provided, following the pattern described above.
+    The attribute_list is a blank separated list of key/values
+    "key=value key=value ..."
+    with key one of:
+
+    vector_basis
+        vector basis for vector field; value one of {native, geographic}
+    time_cell_method
+        time range type; value one of
+        {point, sum, maximum, minimum, mean,
+        root_mean_square, standard_deviation}
+    time_cell_bnds_in_min  
+        time range interval, relative to the validation date,
+        expressed in minutes; value is
+        [x,y]   where y is some integer
+        x is either -infinite or some integer (-infinite
+        means that interval starts at reference date)
+
+    The user specified values are only used when the corresponding
+    attributes are not available in the imported NetCDF data. 
+    
+    When nc_var is set to ``"__ALL__"``, the associated attributes are
+    associated with all NetCDF variables; ``"__ALL__"`` has lower precedence
+    than any specific variable name.
+
+.. py:attribute:: dim_default_attribute
+    :type: "nc_dim_1:attribute_list_1", "nc_dim_2:attribute_list_2" ...
+    
+    Default attributes for NetCDF dimensions.
+    
+    A list of NetCDF dimension names (nc_dim) and of associated attributes
+    (attribute_list) is provided, following the pattern described above.
+    The attribute_list is a blank separated list of key/values
+    "key=value key=value ..."
+    with key one of:
+
+    force_default
+        by default, user specified values are only considered
+        when the corresponding attributes are not available
+        in the imported NetCDF data; this can be changed by 
+        setting force_default to "true".
+    axis
+        axis associated with dimension, one of
+            {x, y, z, pseudo_z, t, eps} 
+        
+        where 
+        
+        * "pseudo_z" is for a fake z-dimension not associated with z-coordinates (e.g. used in COSMO for HORIZON sectors) 
+        * "eps" is for EPS perturbation number
+
+
+    value
+        method to get dimension values, one of 
+            {index} (means dimension values are the same as dimension index)
+    bounds
+        method to get dimension bounds, one of
+
+        aligned_cells_from_first
+            dimension values (v1, v2 ... vN) specify
+            cells boundaries, cells are contiguous, cell
+            dimension delta is constant, and bounds are 
+            v1, v1+delta, v2, v2+delta ... vN, vN+delta
+        aligned_cells_from_0
+            dimension values (v1, v2 ... vN) specify
+            cells boundaries, cells are contiguous, 
+            and bounds are    0, v1, v1, v2, ... 
+        centered_cells_from_0
+            dimension values specify cells centers, cells
+            are contiguous, and boundary of first cell
+            is 0
+        
+    bounds_usage
+        usage of bounds for variable associated with dimension, one of
+            {always} (means that any variable using this dimension has a non-trivial cell method)
+
+    units
+        units associated with dimension,
+
+        * for time dimension, one of {absolute_time_as_yyyymmdd}
+        * for other dimensions, one of
+
+          {degree_east, degree_e, degree_north, degree_n, degree,
+          meter_north, meter_n, meter_east, meter_e, meter, m,
+          centimeter, cm, millimeter, mm, pascal, pa, hectopascal,
+          hpa, kelvin, k, centikelvin, ck, celsius, mpvu, none   }
+
+    standard_name
+        for z dimension, the following standard names are registred:
+            {air_pressure,
+            height_above_reference_ellipsoid, height, 
+            atmosphere_sigma_coordinate,
+            hybrid_sigma_pressure,
+            atmosphere_hybrid_sigma_pressure_coordinate,
+            atmosphere_hybrid_height_coordinate,
+            atmosphere_sleve_coordinate,
+            atmosphere_generalized_height_based_coordinate,
+            air_temperature,
+            air_potential_temperature, 
+            ertel_potential_vorticity,   
+            depth, depth_below_geoid}
+
+    ensemble_size
+        for eps dimension, integer value
+    
+    When nc_dim is set to ``"__ALL__"``, the associated attributes are
+    associated with all NetCDF dimensions; ``"__ALL__"`` has lower precedence
+    than any specific dimension name.
+    
+    .. note:: 
+        Note about ``"value=index"``
+
+        The NetCDF CF conventions state that the values of any dimension "dim" are
+        defined by the values of the variable dim(dim).
+        It is possible to process non complient NetCDF files (e.g. level in COSMO output)
+        which consider the dimension value as the dimension index.
+    
+    .. note:: 
+        Note about ``"units=absolute_time_as_yyyymmdd"``
+
+        The NetCDF CF conventions state that the units attribute of the time dimension
+        follows the template:
+        "units since reference_time"  where  reference_time=YYYY-MM-DD [HH:MM:SS [TZ]] where  TZ is the time zone
+        It is possible to process non complient NetCDF files (e.g. COSMO EXTPAR output)
+        which use 'absolute_time_as_yyyymmdd' for time values.

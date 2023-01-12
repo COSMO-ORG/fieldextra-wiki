@@ -1,0 +1,16 @@
+*******
+Lexicon
+*******
+
+
+... under construction ...
+
+
+INCORE:       special permanent internal storage, which can be used both as input and 
+              output (see 4.3.1, 4.3.2, 8.1)
+
+just on time mode: data is stored and processed independently for each validation
+                   date, but order of data in output file respects natural order;
+                   automatically triggered if no temporal operators are used and
+                   other conditions are satisfied, but can also be explicitely 
+                   controlled on an output basis (see 2, 4.3.2, out_type_justontime)

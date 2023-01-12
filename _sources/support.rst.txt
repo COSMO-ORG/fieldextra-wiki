@@ -1,0 +1,758 @@
+****************************
+Description of support files
+****************************
+
+dictionary
+==========
+
+All blank lines and all lines beginning with an exclamation mark are ignored.
+The first interpreted lines define the name of the dictionary and the type of model.
+All following interpreted lines define the set of key/values.
+
+a. Global information
+    The first interpreted lines define global information valid for all keys of
+    the current dictionary.
+
+        DICTIONARY_NAME 'name'          (any string)
+        MODEL_TYPE 'type'               (e.g. cosmo, ifs, gme; blank is allowed)
+        PRODUCT_CATEGORY 'cat1,...'     (optional; e.g. 'determinist'; blank is allowed)
+        GRIB2_MASTER_TABLE_VERSION nn   (optional; e.g. 11; blank is allowed)
+        GRIB2_LOCAL_TABLE_VERSION vv    (optional; e.g. 1; blank is allowed only when
+                                            no local code is used)
+
+    The dictionary name is used to refer to a specific dictionary in the namelist of
+    fieldextra. The model type is used to interpret local values in the dictionary and
+    in input records. Furthermore, in combination with PRODUCT_CATEGORY, this information
+    is used to define the products compatible with the current dictionary.
+
+    Both DICTIONARY_NAME and MODEL_TYPE entries are compulsory. Empty value of MODEL_TYPE
+    is supported and means any possible value (e.g. for dictionary refering to observations,
+    for default dictionary valid for any model).
+
+    The PRODUCT_CATEGORY entry is optional; it refers to a comma separated list of
+    compatible product categories (see description of default_product_category in
+    README.user for a list of supported values). Empty value is supported and means
+    any possible value.
+
+    The values of GRIB2_MASTER_TABLE_VERSION and GRIB2_LOCAL_TABLE_VERSION refer to the
+    minimal version of the GRIB 2 tables which are required to interpret the GRIB 2
+    information used in the current dictionary.
+
+b. Key / values (repeated as many times as necessary)
+    The values associated whith each key are grouped into 5 lines:
+
+    Line 1 (Key)
+        + Key is the field short name (no embedded blanks)
+    Line 2 (Units, description)
+        + Units are the physical units of the field
+        + Description is the field (long) name
+    Line 3 (set of GRIB 1 attributes as key=value)
+        + The first surface is the top surface, the second surface (if any) is the bottom surface,
+        in a geographic meaning
+    Line 4 (set of GRIB 2 attributes as key=value)
+        + Some GRIB 2 attributes, such as the surface value or the central wave number, are coded
+        with the two integers scaleFactorOf... and scaledValueOf..., the attribute value being
+        10**(-scaleFactorOf...) * scaledValueOf... ; in the dictionary below, scaleFactorOf...
+        is named 'factor...' and scaledValueOf... is named 'value...'
+        + The first surface is the top surface, the second surface (if any) is the bottom surface,
+        in a geographic meaning
+    Line 5 (other field characteristics, expressed as a set of key=value)
+        + constant: true if the field is constant in time (associated validation date is ignored)
+        + singleLevel: true if the field is a single level field
+        + passiveSfc2: second surface of associated field is passive when:
+                        (1) singleLevel=false
+                        (2) passiveSfc2=true
+                        (3) first surface is indexed model level
+                        (4) second surface is either undefined or not associated with any value
+                    Passive second surface means that the second surface information is only 
+                    used for documenting the level characteristics (incl. vertical coefficients)
+                    and is not considered when matching levels. More precisely, for passive
+                    second surface:
+                    > the surface type is removed by import and reset by export;
+                    > when processing GRIB 2 records, it is expected that the vertical
+                        coordinate coefficients are coded as value of the second fix surface;
+                        this is considered both by import and export.
+                        If found in input record, the coefficients are transfered in the
+                        output record; otherwise, if suitable vertical coefficients are
+                        available from another source (e.g. namelist), they will be used.
+                    This non standard use of the GRIB 2 second surface is expected by the
+                    COSMO model for the height of the half levels.
+        + soilModel: true if the field belongs to the soil model
+                    (soil, vegetation... but also snow and lake)
+        + vCompIndex: order of vector component, or -1 if not a 2d vector field
+                    (vector basis as defined by bit 5 of GRIB code table 7)
+        + associatedVComp: short name of of associated vector component, for 2d vector fields
+        + associatedMLev: short name of multi-level field which can be associated to build a full vertical profile.
+        + parent: short name of main parent field (if any).
+                When the operator to compute the field requires a lateral halo around the target area,
+                the size of this halo has to be specified; in this case the string format is:
+                                main_parent_key:halo_size
+                A halo size of 999 means the full field has to be provided.
+        + rttovId: string characterizing the RTTOV coefficient file used to compute the associated field;
+                the full name of the coefficients file is rtcoef_<rttovID>.dat, and the file should
+                be accessible at the location rttov_coefs_path specified in &GlobalResource.
+        + rttovChan: channel number in RTTOV coefficient file; required to compute the associated field.
+        + multiTLevParent: true if multiple time levels of (some of) the parent fields are required.
+        + localInfoNumberUse: meaning of GRIB 2 localInformationNumber, if any; if localInformationNumber
+                is used for something different than just differentiating different fields representing 
+                the same physical quantity, this should be documented here. The value of localInfoNumberUse
+                can be any meaningful string; however, if the corresponding characteristics is computed in
+                fieldextra, a pre-defined value has to be used. Currently this is the case for:
+                            poper=azimut_class <--> localInfoNumberUse=numberOfClasses
+        + keyUsedInProgram: when set, the short name which has to be used in any namelist and any resource
+                files is the one defined by 'keyUsedInProgram', and not the original key. 
+
+    Algorithm used to derive the field short name associated with a GRIB record:
+        + list of matching dictionary entries is derived according to the rules below
+        + GRIB 1 attributes are used when working with GRIB 1 records, GRIB 2 attributes
+        are used when working with GRIB 2 records
+        + dictionary attributes explicitely defined only match when the same value is
+        available in the decoded record
+        + missing dictionary attributes, or dictionary attributes with values set to -1,
+        always match (wildcard)
+        + entry with highest explicit matches is selected (i.e. wildcards have lower
+        priority)
+        + a short name is associated with a record if, and only if, a unique dictionary
+        entry can be associated with the decoded record
+        
+
+
+    Detailed format of each line:
+    -----------------------------------------------------------------------------------------------------------------------
+    Line1: Short name (string)
+    -----------------------------------------------------------------------------------------------------------------------
+    Line2: Description (fixed format according to template: A20,2X,A140)
+    Units                Name
+    AAAAAAAAAAAAAAAAAAA  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...
+    -----------------------------------------------------------------------------------------------------------------------
+    Line3: GRIB 1 information, blank separated key=value groups
+            key :   table parameter alternateTable alternateParameter
+            type : integer   integer        integer            integer
+        required:     yes       yes             no                 no
+        default:      -1        -1             -1                 -1
+    
+            key : typeLevel valueSfc1 valueSfc2 timeRangeType localElemNumber
+            type :   integer   integer   integer       integer         integer
+        required:        no       no         no            no              no
+        default:        -1       -1         -1            -1              -1
+    -----------------------------------------------------------------------------------------------------------------------
+    Line4: GRIB 2 information, blank separated key=value groups
+            key : discipline category parameter statProcType typeSfc1 factorSfc1 valueSfc1 typeSfc2 factorSfc2 valueSfc2
+            type :    integer  integer   integer      integer  integer    integer   integer  integer    integer   integer
+        required:       yes       yes       yes           no      no          no        no       no         no        no
+        default:        -1        -1        -1           -1      -1           0        -1       -1          0        -1
+    
+            key : typeGenProc satelliteSeries satelliteNumber instrumentType factorWaveNumber valueWaveNumber
+            type :     integer         integer         integer        integer          integer         integer
+        required:          no              no              no             no               no              no
+        default:          -1              -1              -1             -1                0              -1
+
+            key : constituentType aerosolType modeNumber distFuncType localInfoNumber
+            type :         integer     integer    integer      integer         integer
+        required:              no          no         no           no              no
+        default:              -1          -1         -1           -1              -1
+    -----------------------------------------------------------------------------------------------------------------------
+    Line5: additional information on field characteristics, blank separated key=value groups
+            key : constant singleLevel passiveSfc2 soilModel vCompIndex associatedVComp associatedMLev 
+            type :  logical     logical     logical   logical    integer          string         string 
+        required:      yes         yes          no       yes        no              no             no      
+        default:        F           F           F         F        -1              ''             ''      
+    
+            key :   parent rttovId rttovChan multiTLevParent localInfoNumberUse keyUsedInProgram
+            type :   string  string   integer         logical             string           string
+        required:       no      no        no              no                 no               no
+        default:       ''      ''        -1               F                 ''               ''
+    -----------------------------------------------------------------------------------------------------------------------
+
+
+    
+location_list 
+=============
+
+All blank lines and all lines beginning with an exclamation mark are ignored.
+All other lines are interpreted.
+
+A location is defined by two lines:
+
+The first line follows a fixed format and contains the fields described below; any text
+added after these fields is ignored:
+    Id:            unique string defining location (must not contain any column character)
+    Description:   description of the location (station name,...)
+    Region:        region description (e.g. used in LM_GPPA output for stations clustering)
+    Flags:         string consisting of 10 characters which can be individually set to the
+                    values 'Y' (yes), 'N' (no), and '_' (undefined),respectively, and which
+                    have the following meanings
+            Flags(1):    dd not representative
+            Flags(2):    ff not representative
+            Flags(3):    Kalman filter available
+            Flags(4):    MOS based on multilinear regression available
+            Flags(5):    MOS based on logistic regression available
+            Flags(6):    MOS based on extended logistic regression available
+            Flags(7-10): unused
+    Lon:           longitude of location, in (-180.0,180.0) [deg]
+    Lat:           latitude of location, in (-90.0,90.0) [deg]
+    Alt:           location altitude [m]
+    gpi/gpj:       index of associated LM grid point (automatic association if set to 0)
+    gph:           height of associated LM grid point (only if gpi/gpj explicitely specified)
+
+The second line is a comma-separated list of location aliases. These are unique strings of
+the form '<group>:<name>', which may be used in the namelist alternatively to the station id.
+With these aliases it is possible to assign one location to several groups. In order to select
+data at all locations belonging to one particular group, it is sufficient to specify the name
+of the group in the namelist. Each group specifier must only be used once within the list of
+aliases associated with a certain location. Skipping this line is allowed.
+
+ATTENTION: Fieldextra recognizes the group specifier 'WMO' and tries to interpret the
+            related location names as 5-digit WMO numbers. Thus one should use this
+            group specification consistently. The recognition of the string 'WMO' is
+            case-independent.
+ATTENTION: The location id, group, and name must not start with the character '_'.
+
+
+
+location_list_additional 
+========================
+
+All blank lines and all lines beginning with an exclamation mark are ignored.
+The first interpreted lines define the kind of content, and are pairs
+of keyword and value. These header lines are subdivided into two categories:
+
+(a) Obligatory header lines, common to all files defining additional location information
+    These are currently the two lines
+
+                    Kind_of_specification <string>
+                    Nbr_lines_per_block <integer>
+
+    The first header line must always contain the 'Kind_of_specification' definition.
+
+(b) Additional header lines, depending on the 'Kind_of_specification'
+    These must follow all obligatory header lines and may be in arbitrary order.
+
+The rest of the file is composed of a series of blocks, one per location. Each
+block starts with a line describing the location and continues with a set of
+lines describing the associated parameters.
+The format of both lines depends on the 'Kind_of_specification'. Each location is recognized by
+a tag (either its id or alias), which must be defined in the location_list file.
+
+Possible kind of specifications:
+
+(1) skyview_horizon:
+        skyview factor in directions south, west, north, east and total, followed by
+        horizon in directions south, west, north, east
+
+        Keywords values:
+                Kind_of_specification: skyview_horizon
+                Nbr_lines_per_block: 2
+
+        Line format:
+                block header: 1 string (location tag)
+                second block line: 9 real numbers, blank separated
+
+
+(2) KF_coefficients:
+        Kalman filter coefficients
+        Additional header lines:
+                Nbr_stations <integer>
+                Date <integer, kind=kind_idate>
+                Model <string>
+                Parameter <string>
+                Error_model <string>
+        Keywords values:
+                Kind_of_specification: KF_coefficients
+                Nbr_lines_per_block: <n_lines_per_block>
+                Nbr_stations: <n_kf_stations>
+                Date: <kf_rdate>, format YYMMDDHHmm
+                Model: <kf_model_name>
+                Parameter: <kf_target_field>
+                Error_model: '1,<kf_predictor_field>'  (the error model is a comma-separated list of
+                                                        predictors, which must be enclosed in inverted
+                                                        commas in order to be correctly interpreted by 
+                                                        the program;
+                                                        currently only a linear error model is supported,
+                                                        which uses the constant 1 and the field that will
+                                                        be corrected as predictors)
+
+        Parameter and kf_predictor_field naming convention:
+                See below.
+
+        Line format:
+                block header: 1 string (location tag), 3 real numbers (grid point coordinates latitude,
+                            longitude, height), blank separated
+                block lines > 1: 1 integer of kind=kind_idate (validation date in format <YYMMDDHHmm>),
+                                2 real numbers (Kalman coefficients c0 and c1), blank separated
+
+        The Kalman filter correction is given by c0*1 + c1*kf_predictor_field.
+
+
+(3) MOS_coefficients_mlr:
+        MOS coefficients based on multiple linear regression
+        Additional header lines:
+                Nbr_stations <integer>
+                Date <integer, kind=kind_idate>
+                Model <string>
+                Parameter <string>
+                Forecast_model <string>
+                Transformation <string> ( for mos_predictor_field_1 in Forecast_model )
+                Transformation <string> ( for mos_predictor_field_2 in Forecast_model )
+                ...
+                Transformation <string> ( for mos_predictor_field_n in Forecast_model )
+                Backtransformation <string>
+                Missing_value_code <real>
+                Threshold <empty>
+        Keywords values:
+                Kind_of_specification: MOS_coefficients
+                Nbr_lines_per_block: <n_lines_per_block>
+                Nbr_stations: <n_mos_stations>
+                Date: <mos_rdate>, format YYMMDDHHmm
+                Model: <mos_model_name>
+                Parameter: <mos_target_field>
+                Forecast_model: '1,<mos_predictor_field_1>,...,<mos_predictor_field_n>'
+                                (the forecast model is a comma-separated list of n predictors
+                                which must be enclosed in inverted commas in order to be correctly
+                                interpreted by the program; the currently implemented predictors are
+                                the constant 1 and a list of n predictor fields)
+                Transformation:
+                            'prototype=<prototype_spec_1>, \
+                            prototype=<prototype_spec_2>, \
+                            threshold=<threshold>'
+                            The values of the transformed predictor field x is computed according to
+                            prototype_spec[12]:
+                            1. "pow_pol;p0,p1,c"
+                                pow_pol: x |-> (p0 + p1 * x)**c
+                                            |-> undefined          if condition (*) applies
+                            2. "ln_pow_pol;p0,p1,c"
+                                ln_pow_pol: x |-> ln[(p0 + p1 * x)**c]
+                                                |-> undefined       if condition (*) or (**) applies
+                            p0, p1, c, and threshold are real numbers, and
+                            the transformation is evaluated as
+                            x |-> name_1(x) if x < threshold, and name_2(x) otherwise
+                Backtransformation: analogous to Transformation
+                            prototype_spec[12]: may be one of
+                            1. "inv_of_pow_pol;p0,p1,c"
+                                x |-> (x**(1/c) - p0) / p1
+                                    |-> undefined                  if condition (*) or (***) applies
+                                inverse of pow_pol
+                            2. "inv_of_ln_pow_pol;p0,p1,exp"
+                                x |-> (exp(x/c) - p0) / p1
+                                    |-> undefined                  if condition (*) or (***) applies
+                            (*)   one of {x, p0, p1, c} is undefined
+                            (**)  p0 + p1 * x < 0
+                            (***) p1 != 0 and c != 0
+                Missing_value_code: <mos_undefcode>
+                Threshold: the keyword is defined for mos_mlr without value specification to preserve
+                            consistency of the format of the coefficient files of MOS methods
+
+        Parameter and predictor naming convention:
+                See below.
+
+        Line format:
+                block header: 1 string (location tag), 3 real numbers (grid point coordinates
+                            latitude, longitude, height), blank separated
+                block lines > 1: 1 integer of kind=kind_idate (validation date in format
+                                <YYMMDDHHmm>), n+1 real numbers (MOS coefficients c_0, ..., c_n
+                                related to each predictor in Forecast_model), blank separated
+
+        The MOS estimation is given by
+        Backtransformation[c_0 + 
+                        c_1 * Transformation_1(mos_predictor_field_1) + ... + 
+                        c_n * Transformation_n(mos_predictor_field_n)        ]
+
+
+(4) MOS_coefficients_global:
+    MOS coefficients based on global multiple linear regression, valid for virtual station '__GRID__'
+    with coordinates (0.0, 0.0, 0), representing the entire grid
+    
+    Additional header lines:
+                Nbr_stations 1
+                Date <integer, kind=kind_idate>
+                Model <string>
+                Parameter <string>
+                Forecast_model <string>
+                Transformation <string> ( for mos_predictor_field_1 in Forecast_model )
+                Transformation <string> ( for mos_predictor_field_2 in Forecast_model )
+                ...
+                Transformation <string> ( for mos_predictor_field_n in Forecast_model )
+                Backtransformation <string>
+                Missing_value_code <real>
+                Threshold <empty>
+    Keywords values:
+                Kind_of_specification: MOS_coefficients_global
+                Nbr_lines_per_block: <n_lines_per_block>
+                Nbr_stations: <n_mos_stations>
+                Date: <mos_rdate>, format YYMMDDHHmm
+                Model: <mos_model_name>
+                Parameter: <mos_target_field>
+                Forecast_model: '1,<mos_predictor_field_1>,...,<mos_predictor_field_n>'
+                                (the forecast model is a comma-separated list of n+1 predictors
+                                which must be enclosed in inverted commas in order to be correctly
+                                interpreted by the program; the currently implemented predictors are 
+                                the constant 1 and a list of n predictor fields)
+                Transformation: 
+                            'prototype=<prototype_spec_1>, \
+                                prototype=<prototype_spec_2>, \
+                                threshold=<threshold>'
+                                The values of the transformed predictor field x is computed according to
+                                prototype_spec[12]:
+                                1. "pow_pol;p0,p1,c"
+                                pow_pol: x |-> (p0 + p1 * x)**c
+                                            |-> undefined          if condition (*) applies
+                                2. "ln_pow_pol;p0,p1,c"
+                                ln_pow_pol: x |-> ln[(p0 + p1 * x)**c]
+                                            |-> undefined       if condition (*) or (**) applies
+                                p0, p1, c, and threshold are real numbers, and
+                                the transformation is evaluated as
+                                x |-> name_1(x) if x < threshold, and name_2(x) otherwise
+                Backtransformation: analogous to Transformation
+                                prototype_spec[12]: may be one of
+                                1. "inv_of_pow_pol;p0,p1,c"
+                                x |-> (x**(1/c) - p0) / p1
+                                    |-> undefined                  if condition (*) or (***) applies
+                                inverse of pow_pol
+                                2. "inv_of_ln_pow_pol;p0,p1,exp"
+                                x |-> (exp(x/c) - p0) / p1
+                                    |-> undefined                  if condition (*) or (***) applies
+                            (*)   one of {x, p0, p1, c} is undefined
+                            (**)  p0 + p1 * x < 0
+                            (***) p1 != 0 and c != 0
+                Missing_value_code: <mos_undefcode>
+                Threshold: the keyword is defined for mos_global without value specification to preserve
+                        consistency of the format of the coefficient files of MOS methods
+
+                                
+    Parameter and predictor naming convention:
+                See below.
+
+    Line format:
+                block header: __GRID__ 0.0 0.0 0.0 (id and grid point coordinates of virtual station representing
+                                                    the entire grid)
+                block lines > 1: 1 integer of kind=kind_idate (validation date in format <YYMMDDHHmm>),
+                                n+1 real numbers (MOS coefficients c_0, ..., c_n related to each predictor
+                                in Forecast_model), blank separated
+
+    The MOS estimation is given by
+    Backtransformation[c_0 + 
+                        c_1 * Transformation_1(mos_predictor_field_1) + ... + 
+                        c_n * Transformation_n(mos_predictor_field_n)        ]
+
+
+(5) MOS_coefficients_logreg:
+    MOS coefficients based on logistic regression
+    Additional header lines:
+                Nbr_stations <integer>
+                Date <integer, kind=kind_idate>
+                Model <string>
+                Parameter <string>
+                Forecast_model <string>
+                Transformation <string> ( for mos_predictor_field_1 in Forecast_model )
+                Transformation <string> ( for mos_predictor_field_2 in Forecast_model )
+                ...
+                Transformation <string> ( for mos_predictor_field_n in Forecast_model )
+                Backtransformation <string>
+                Missing_value_code <real>
+                Threshold <real>
+    Keywords values:
+                Kind_of_specification: MOS_coefficients_logreg
+                Nbr_lines_per_block: <n_lines_per_block>
+                Nbr_stations: <n_mos_stations>
+                Date: <mos_rdate>, format YYMMDDHHmm
+                Model: <mos_model_name>
+                Parameter: <mos_target_field>
+                Forecast_model: '1,<mos_predictor_field_1>,...,<mos_predictor_field_n>'
+                                (the forecast model is a comma-separated list of n+1 predictors
+                                which must be enclosed in inverted commas in order to be correctly
+                                interpreted by the program; the currently implemented predictors are 
+                                the constant 1 and a list of n predictor fields)
+                Transformation: 
+                            'prototype=<prototype_spec_1>, \
+                                prototype=<prototype_spec_2>, \
+                                threshold=<threshold>'
+                                The values of the transformed predictor field x is computed according to
+                                prototype_spec[12]:
+                                1. "pow_pol;p0,p1,c"
+                                pow_pol: x |-> (p0 + p1 * x)**c
+                                            |-> undefined          if condition (*) applies
+                                2. "ln_pow_pol;p0,p1,c"
+                                ln_pow_pol: x |-> ln[(p0 + p1 * x)**c]
+                                            |-> undefined       if condition (*) or (**) applies
+                                p0, p1, c, and threshold are real numbers, and
+                                the transformation is evaluated as
+                                x |-> name_1(x) if x < threshold, and name_2(x) otherwise
+                            (*)   one of {x, p0, p1, c} is undefined
+                            (**)  p0 + p1 * x < 0
+                Backtransformation: "inv_of_logit"
+                                    inv_of_logit: x |-> 1.0 / ( 1.0 + EXP(-x) )
+                Missing_value_code: <mos_undefcode>
+                Threshold: <mos_threshold>
+
+    Parameter and predictor naming convention:
+                See below.
+
+    Line format:
+                block header: 1 string (location tag), 3 real numbers (grid point coordinates latitude,
+                            longitude, height), blank separated
+                block lines > 1: 1 integer of kind=kind_idate (validation date in format <YYMMDDHHmm>),
+                                n+1 real numbers (MOS coefficients c_0, ..., c_n related to each predictor
+                                in Forecast_model), blank separated
+
+    The MOS estimation of the probability of threshold exceedance is given by
+    Backtransformation[c_0                                                 +
+                        c_1 * Transformation_1(mos_predictor_field_1) + ... +
+                        c_n * Transformation_n(mos_predictor_field_n)        ]
+
+
+(6) MOS_coefficients_extlogreg:
+    MOS coefficients based on extended logistic regression
+    Additional header lines:
+                Nbr_stations <integer>
+                Date <integer, kind=kind_idate>
+                Model <string>
+                Parameter <string>
+                Forecast_model <string>
+                Transformation <string> ( for mos_predictor_field_1 in Forecast_model )
+                Transformation <string> ( for mos_predictor_field_2 in Forecast_model )
+                ...
+                Transformation <string> ( for mos_predictor_field_n in Forecast_model )
+                Transformation <string> ( for the threshold predictor '__THRESHOLD__' in Forecast_model )
+                Backtransformation <string>
+                Missing_value_code <real>
+                Threshold <empty>
+    Keywords values:
+                Kind_of_specification: MOS_coefficients_extlogreg
+                Nbr_lines_per_block: <n_lines_per_block>
+                Nbr_stations: <n_mos_stations>
+                Date: <mos_rdate>, format YYMMDDHHmm
+                Model: <mos_model_name>
+                Parameter: <mos_target_field>
+                Forecast_model: '1,<mos_predictor_field_1>,...,<mos_predictor_field_n>,__THRESHOLD__'
+                                (the forecast model is a comma-separated list of n+2 predictors
+                                which must be enclosed in inverted commas in order to be correctly
+                                interpreted by the program; the currently implemented predictors are 
+                                the constant 1, a list of n field predictors, and one threshold predictor,
+                                which is represented by the field name '__THRESHOLD__')
+                Transformation: 
+                            'prototype=<prototype_spec_1>, \
+                                prototype=<prototype_spec_2>, \
+                                threshold=<threshold>'
+                                The values of the transformed predictor field x is computed according to
+                                prototype_spec[12]:
+                                1. "pow_pol;p0,p1,c"
+                                pow_pol: x |-> (p0 + p1 * x)**c
+                                            |-> undefined          if condition (*) applies
+                                2. "ln_pow_pol;p0,p1,c"
+                                ln_pow_pol: x |-> ln[(p0 + p1 * x)**c]
+                                            |-> undefined       if condition (*) or (**) applies
+                                p0, p1, c, and threshold are real numbers, and
+                                the transformation is evaluated as
+                                x |-> name_1(x) if x < threshold, and name_2(x) otherwise
+                            (*)   one of {x, p0, p1, c} is undefined
+                            (**)  p0 + p1 * x < 0
+                Backtransformation: "inv_of_logit"
+                                    inv_of_logit: x |-> 1.0 / ( 1.0 + EXP(-x) )
+                Missing_value_code: <mos_undefcode>
+                Threshold: <empty>
+
+                                
+    Parameter and predictor naming convention:
+                See below.
+
+    Line format:
+                block header: 1 string (location tag), 3 real numbers (grid point coordinates latitude,
+                            longitude, height), blank separated
+                block lines > 1: 1 integer of kind=kind_idate (validation date in format <YYMMDDHHmm>),
+                                n+2 real numbers (MOS coefficients c_0, ..., c_n, c_(n+1) related to each 
+                                predictor in Forecast_model), blank separated
+
+    The MOS estimation of the probability of threshold exceedance is given by
+    Backtransformation[c_0                                                     + 
+                        c_1     * Transformation_1(mos_predictor_field_1) + ... +
+                        c_n     * Transformation_n(mos_predictor_field_n)       +
+                        c_(n+1) * Transformation(__THRESHOLD__)                  ]
+
+
+    Note:
+    In files for 'KF_coefficients', 'MOS_coefficients_mlr', 'MOS_coefficients_global',
+    'MOS_coefficients_logreg' and 'MOS_coefficients_extlogreg' the naming convention
+    for parameter and predictor fields is as follows:
+        In the most simple case, just the field name can be given to define the target field
+        and the predictor fields: all levels of a multi-level field and each member of an 
+        ensemble prediction system can then be corrected with the same set of coefficients.
+        If individual corrections or estimations have to be applied to each level of a
+        multi-level field or to a specific eps member field, a unique field tag of the form
+        
+            <field_name>[@<level_value><unit>][@member<eps_member>]
+
+        can be set for the target field and the predictor fields to define the appropriate 
+        coefficients. Fieldextra will always check the availability of level- or
+        eps-member-specific coefficients before applying level- or eps-member-independent
+        corrections.
+
+        Tags are currently only supported for multi-level fields of the level classes listed
+        below.
+
+            level_class    unit
+            -------------------
+            z_agl          magl
+            z_amsl         masl
+            p              hPa
+            k              k       (hybrid)
+            gk             gk      (generalized height)
+
+        The algorithm that computes the correction or estimation explicitely looks for the
+        availability of the predictor fields in the current iteration.
+        If no predictor field tag has been given in the fieldextra namelist as argument to the 
+        transformation operator, only the field names are used to select the predictor fields;
+        otherwise, the predictor tag given in the namelist are additionally used.
+
+.. _section 6.4:
+
+region_list
+===========
+
+This file is used to specify geographical regions.
+
+Multiple sets of regions may be defined in the same file.
+Within each set, the regions must not overlap.
+
+Each region is defined by one or more non overlapping polygons. Each polygon
+is defined by its summits, expressed in geographical latitude and longitude.
+Multiple sets of non overlapping regions may be defined; a tag is associated with 
+each region set, and another tag is associated with each region.
+
+Each polygon is defined in this file by a block of 3 lines :
+- the first line specifies the tag of the region set, the number of summits 
+    defining the polygon, the tag of the region, and (optionnaly) the description
+    of the region (within quotation marks when composed of multiple words).
+- the second line lists the geog. latitude of the polygon's summits, in fixed
+    format, expressed in (-90.,90.) [deg]
+- the third line lists the geog. longitude of the polygon's summits, in fixed
+    format, expressed in (0.360.) [deg]
+In particuler, polygons sharing the same region set tag and region tag belong
+to the same region.
+
+Following limitations exist on the choice of the region tag and region set tag:
+- the use of the character ':' is prohibited
+- the string length of the region tag must not exceed ln_reg_name
+    (as defined in fxtr_definition)
+- the string length of the region set tag must not exceed ln_loc_group
+    (as defined in fxtr_definition)
+- region set tag must differ from all location groups defined in the
+    active location list
+
+All blank lines and all lines beginning with an exclamation mark are ignored.
+
+See the description of 'region_list' in section 4.1 for more details.
+
+.. _section 6.5:
+
+slice_list
+==========
+
+This file is used to specify slices to produced vertical cross-sections.
+
+Each slice is defined by a broken line, with control points expressed either
+as geographical latitude/longitude, or as locations (refering to the active
+location_list file), or as grid coordinates. Segments between control points
+are either along earth (sphere) geodesic, or along straight line in grid
+coordinate space. A slice is discretized according to the values of the keys
+"slice_to_gridpoint" and "slice_resolution_factor"; it is also possible to
+upscale (smooth) the fields along the slice by setting "slice_upscaling_factor".
+Each slice is recognized by a unique tag. Currently, only NETCDF output is
+compatible with slices (with a specific slice dimension and associated
+attributes, see 7.13 in README.user).
+
+Each slice is defined in this file by a block of 3 or 4 lines, depending on
+the way the control points are specified:
+- the first line is a user specified description of the slice
+- the second line specifies the tag associated with the slice, the number of
+    control points defining the slice, and the algorithm used to build the slice.
+    The following algorithms are supported:
+        geodesic_latlon_slice, geodesic_loc_slice, 
+        geodesic_ij_slice, straight_ij_slice
+        where:
+        the first part of the string specifies the type of segments
+        between the control points ('geodesic': geodesic along earth 
+        great circles, 'straight': straight line in model coordinates),
+        the second part of the string specifies how control points are
+        expressed ('latlon_slice': as geographical lat/lon, 'ij_slice':
+        as model coordinates, 'loc_slice': as location).
+- for 'latlon_slice' : the third line lists the geog. latitude of the control points,
+    in fixed format, expressed in (-90.,90.) [deg]; the fourth line lists the geog.
+    longitude of the control points, in fixed format, expressed in (0.360.) [deg]
+- for 'ij_slice' : the third line lists the i-coordinates of the control points,
+    in fixed format; the fourth line lists the j-coordinates of the control points,
+    in fixed format.
+- for 'loc_slice' : the third line lists the locations, using the aliases
+    defined in the active location_list file.
+
+All blank lines and all lines beginning with an exclamation mark are ignored.
+
+
+adaboost_coefs
+==============
+
+Coefficents for AdaBoost classifier algorithm.
+The first line after the comment block is the generic name of the classifier algorithm.
+The second line after the comment block list the names of the classified fields;
+multiple names are comma separated.
+The following two lines are the number of base classifiers and the number of features.
+The next line is the kind of the base classifier; supported values are 
+DThresholdClassifier and DecisionTreeClassifier.
+The next line is a comma separated list describing all feature names; information about 
+the level is coded as 'field#level', where level refers to the index of a model surface.
+All the following lines but the last two describe the parameters of each base classifier.
+The last two lines are used to specify the probability mapping function.
+
+Each base classifier characteristics are coded according to the following rules:
+    The first value on each line determines the kind of classifier:               
+        THR = Threshold Classifier                               
+        DTR = Decision Tree Classifier                           
+    ----------------------------------------------------------------------------
+    Line describing THR classifier:
+        THR val_1 val_2 val_3 voting_weight
+        val_1        : index of the feature (first feature has index zero)   
+        val_2        : threshold value                                       
+        val_3        : indicate which region is assigned to the event class
+        voting_weight: voting weight of the associated classifier
+    ----------------------------------------------------------------------------
+    Line describing DTR classifier:
+        DTR class_1 class_2 class_3 voting_weight
+        class_i      : values describing individual node classifiers, e.g.
+                        THR val_1 val_2 val_3 
+        voting_weight: voting weight of the associated classifier
+
+Probability mapping function f(x) is used to normalize the raw value of the
+classifier x. This function is defined by the last two lines according to:
+    MFC a0 a1 a2  --> coefficients for the function               
+                    f(x)=a0+a1*x+a2*x^2                         
+    MFT t1 t2     --> if x < t1 then f(x)=0                       
+                    if t1 < x < t2 then f(x)=a0+a1*x+a2*x^2     
+                    if x > t2 then f(x)=a0+a1*t2+a2*t2^2      
+
+Kind of classifier:
+1. Threshold Classifier
+    The data is classified according to only one single threshold. Samples above
+    the threshold are in one class, samples below the threshold in the other class.
+2. Decision Tree Classifier
+    This classifier consists of three individual threshold classifiers. The first
+    one is called 'root classifier' the second one is the 'left child classifier',
+    the third one is called 'right child classifier'. A sample first gets classified
+    by the root. If it is classified as an 'event' it is handed over to the left child,
+    in the other case to the right child. The corresponding child classifier calculates
+    the resulting classification.
+
+Example with Threshold Classifier as Base Classifier:
+    ! Comment 1
+    ! Comment 2
+    AdaBoostClassifier
+    C_TSTORM
+    2
+    7
+    DThresholdClassifier
+    LAT,LONG,HEIGHT,DAYOFYEAR,TIME,PMSL,T#16
+    THR 7 264.645 -0.542653 0.171028
+    THR 5 101695 -0.6134 0.461628
+    MFC 0.6688 -4.2163 6.4126
+    MFT 0.4 0.6
+
+Example of a line describing a Decision Tree Classifier:
+    DTR THR 4 12.5 0.73389 THR 3 258.5 -0.68592 THR 41 -6.0766 -0.59423 1.26233

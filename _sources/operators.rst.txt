@@ -1,0 +1,1536 @@
+.. _chapter 5:
+
+*******************************
+Operators to compute new fields
+*******************************
+
+There are three options to derive new meteorological fields within the
+same class of products:
+
+1.  use an operator which is univoquely defined by the name of the new
+    field to compute (e.g. RELHUM). These operators are triggered by
+    using the name of the field in the corresponding processing iteration
+    (e.g. tmp1_field='RELHUM'). All associated parent fields must be 
+    present in the previous iteration, and the name of the main parent
+    must be defined in the active dictionary.
+    Such operators belong to the n to 1 transformation category. The list
+    of currently implemented operators is available in 5.1 below, and in
+    README.user.locale.
+    When multiple operators are available for the same field, the operator
+    used by fieldextra depends on the main parent declared in the active 
+    dictionary or set through use_tag.
+2.  use an operator directly defined by its name, by setting appropriately
+    the value of use_operator. The list of parent fields must be explicitely
+    declared by setting the value of use_tag, the first element of the list
+    being the main parent. All associated parent fields must be present in
+    the previous iteration. The name of the new field is declared as usual
+    (e.g. tmp1_field=...) but must correspond to the name coded in the
+    associated procedure.
+    Such operators belong to the n to 1 transformation category. The list
+    of currently implemented operators is available in 5.2 below, and in
+    README.user.locale.
+3.  For more complex and specific transformations, use a postprocessing
+    operator by setting appropriately the value of out_postproc_module.
+    This option is only available after the last processing iteration,
+    and all associated parent fields must be present in the last 
+    iteration.
+    Such operators belong to the n to n transformation category. The list
+    of currently implemented operators is available in 5.3 below, and in
+    README.user.locale.
+
+The implementation of new operators is described in README.developer. Worth
+noting here is the separation between operators of common interest, 
+implemented in fxtr_operator_generic and described below, and operators of
+local interest only, implemented in the local version of fxtr_operator_specific
+and described in README.user.locale.
+
+
+Meteorological operators
+========================
+               
+(Activated by short name of field and dictionary content)
+
+field     operator description
+            list of parent fields (first in the list is the main parent)
+
+constant fields (produced in INCORE)
+------------------------------------
+
+RLAT      latitude in true geog. system [deg. N];
+            RLAT = f(gds)  
+                at least one input field required in INCORE
+RLON      longitude in true geog. system [deg. E];
+            RLON = f(gds) 
+                at least one input field required in INCORE
+
+SWISS_WE  West to East swiss coord. [m]
+            SWISS_WE = f(gds) 
+                at least one input field required in INCORE
+SWISS_SN  South to North swiss coord. [m]
+            SWISS_SN = f(gds) 
+                at least one input field required in INCORE
+
+BOAGAW_WE West to East Gauss-Boaga coord., west sector [m]
+            BOAGAW_WE = f(gds) 
+                at least one input field required in INCORE
+BOAGAW_SN South to North Gauss-Boaga coord., west sector [m]
+            BOAGAW_SN = f(gds) 
+                at least one input field required in INCORE
+BOAGAE_WE West to East Gauss-Boaga coord., east sector [m]
+            BOAGAE_WE = f(gds) 
+                at least one input field required in INCORE
+BOAGAE_SN South to North Gauss-Boaga coord., east sector [m]
+            BOAGAE_SN = f(gds) 
+                at least one input field required in INCORE
+
+HSURF     surface height [m]
+            HSURF = FIS / g 
+                FIS: [required in INCORE]
+
+**COSMO model, vertical coord. coefficients available, hybrid coordinates**
+
+HHL       height of half level above msl [m];
+            HHL(k) = f(HSURF, gds)
+                HSURF: [required in INCORE, from COSMO]
+
+HFL       height of full level above msl [m];
+            HFL(k) = f(HSURF, gds)
+                HSURF: [required in INCORE, from COSMO]
+
+P0FL      pressure of reference atmosphere on full levels [Pa];
+            P0FL(k) = f(HSURF, gds)
+                HSURF: [required in INCORE, from COSMO]
+    
+soil and surface
+----------------
+    
+RHO_SNOW  fresh snow density in [kg/m**3];
+        RHO_SNOW = RHO_FRESH_SNOW(T), WHERE(mask=true)
+                RHO_FRESH_SNOW()  from Canadian land surface scheme
+                mask = TOT_PREC > 0 and TOT_SNOW > 0.8*TOT_PREC and T < 3[C]
+                T    = T_2M            where T_2M > 0[C] or T @ 850[hPa] is not defined
+                        T @ 850 [hPa]   elsewhere
+                T_2M: scale = 1.0 (in [K]), time averaged
+                T @ 850 [hPa]: scale = 1.0 (in [K]), time averaged
+                TOT_PREC: accumulated in time
+                TOT_SNOW: accumulated in time
+                    Validity range of all parents must be the same, and
+                    be at least 6 hour and at most 24 hour
+
+    This is based on the approach available in the Canadian land surface scheme
+    (Canadian Meteorological and Oceanographic Society, Atmosphere-Ocean 43 (3),
+    2006, pp. 207-222), which has been refined by the RHM for the Soshi games.
+
+    The significant temperature entering in the computation of the snow density
+    is T @ 850hPa, except when not available or when the 2m temperature is larger
+    than 0C; in these latter cases, the 2m temperature is taken.
+    Fresh snow density is diagnosed where at least 80% of the total precipitation
+    is in form of snow, and at the same time, the significant temperature is
+    smaller than 3C. The value of snow density is not defined elsewhere.
+
+H_SNOW    snow depth in [m];
+            H_SNOW = W_SNOW / RHO_SNOW
+                RHO_SNOW:
+                W_SNOW:
+
+            fresh snow depth in [m];
+            H_SNOW = TOT_SNOW / RHO_SNOW
+            density of fresh snow should be computed with the operator
+            RHO_SNOW defined above.
+                RHO_SNOW:
+                TOT_SNOW:
+
+T_G       temperature at boundary between ground and atmosphere (in [Kelvin]);
+            for grid points above water and for grid points on land that are not
+            covered with snow:
+            T_G = T_SO(lev=0)
+            For snow covered land points:
+            T_G = T_SNOW + (1. - MIN(1.,W_SNOW/15.0)) * (T_SO(lev=0)-T_SNOW)
+                T_SNOW:
+                W_SNOW:               (in [mm])
+                T_S or T_SO(level 0):
+                FR_LAND:            
+
+mass field
+----------
+
+PS        surface pressure in [Pa]; 
+            P = EXP( LNSP ), where LNSP represents the natural logarithm
+            of the surface pressure
+                LNSP:  
+
+QNH       pressure reduced at sea level, based on standard atmosphere [Pa];
+            QNH = PS * ( T0 / (T0-alpha*HSURF) )**n
+                    with T0 = 288.15 [K], alpha = 0.0065 [K/m], n = 5.256;
+                    (in fact iterative version of this formula is used)
+                PS: scale = 1.0 (in [Pa])
+                HSURF: scale = 1.0 (in [m])
+
+P         pressure in [Pa]; 
+        *** derived from reference pressure, P0FL, and PP
+            COSMO model
+            P = PP + P0FL             (P0FL can be computed in incore storage)
+                PP:  scale = 100.0 (in [Pa])
+                P0FL: scale = 1.0 (in [Pa])
+        *** derived from surface pressure
+            IFS / GME models 
+            P = Ak + Bk * PS
+                PS: scale = 1.0 (in [Pa])
+                or
+            P = Ak + Bk * exp(LNSP)
+                LNSP:    
+
+PP        pressure deviation in [hPa]; 
+        *** derived from reference pressure, P0FL, and P
+            COSMO model
+            PP = 0.01 * (P - P0FL)      (P0FL can be computed in incore storage)
+                P :  scale = 1.0 (in [Pa])
+                P0FL: scale = 1.0 (in [Pa])
+
+PDIFF_CON pressure difference between cloud base and cloud top
+            PDIFF_CON(TOP_CON,BAS_CON,P) = P(BAS_CON) - P(TOP_CON)
+                TOP_CON: 
+                BAS_CON:
+                P:        scale = 1.0 (in [Pa]) 
+                                = 0.01 (in [hPa])
+
+FI        geopotential [m**2/s**2]:
+            FI = height * g, where g is the gravitational acceleration
+                HEIGHT: scale = 1.0 (HEIGHT in [m])
+                    or
+                HHL   : scale = 1.0 (HHL in [m])
+                    or
+                HFL   : scale = 1.0 (HFL in [m])
+
+FIS       geopotential at surface [m**2/s**2]:
+            FIS = surface_height * g, where g is the gravitational acceleration
+                HSURF: scale = 1.0 (HSURF in [m])
+
+HEIGHT     height [m]:
+        *** derived from geopotential
+            HEIGHT = FI / g, where g is the gravitational acceleration
+                FI: scale = 1.0 (FI in [m**2/s**2])
+                    ... must be defined on half level
+
+        *** derived from hydrostatic equation (IFS / GME model only)
+            HEIGHT(k) = f(T, QV, PS, FIS)
+                or
+            HEIGHT(k) = f(T, QV, LNSP, FIS)
+                T:      all levels between target level and lowest level (in[K]) 
+                QV:     all levels between target level and lowest level (in [kg/kg])
+                PS:     (in [Pa])
+            LNSP:    
+                FIS:     (in [m**2/s**2])
+
+HFL       height of full level above msl [m], COSMO hybrid coordinates:
+        *** derived from geopotential
+            HFL = FI / g, where g is the gravitational acceleration
+                FI: scale = 1.0 (FI in [m**2/s**2])
+                    ... must be defined on full level
+
+        *** derived from HHL (COSMO / ICON / GME model)
+            HFL(k) = 0.5 * [HHL(k)+HHL(k+1)]
+                HHL: scale = 1.0 (HFL in [m])
+
+        *** derived from HSURF (COSMO model,
+                                vertical coord. coefficients available)
+            HFL(k) = f(HSURF, gds)
+                HSURF: [required in INCORE, from COSMO]
+
+HHL       height of half level above msl [m], COSMO hybrid coordinates:
+        *** derived from geopotential
+            HHL = FI / g, where g is the gravitational acceleration
+                FI: scale = 1.0 (FI in [m**2/s**2])
+                    ... must be defined on half level
+
+        *** derived from HSURF (COSMO model,
+                                vertical coord. coefficients available)
+            HHL(k) = f(HSURF, gds)
+                HSURF: [required in INCORE, from COSMO]
+
+wind
+----
+
+OMEGA_SLOPE                                                   (IFS model only)
+            Component of OMEGA, expressed as [Pa s-1].
+            Defined by etadot * dp/deta, where etadot is ECMWF deta/dt, 
+            and etadot * dp/deta is an input needed by the program FLEXPART
+            (see https://www.flexpart.eu/).
+            ETADOT:
+            PS    :  [Pa]
+                or
+            ETADOT:
+            LNSP  :  
+
+DD        wind direction (in geog. coord.) [degree];
+            DD = 0.                           if U = V = 0.
+                180.0 + atan2(U, V)          otherwise
+            where U and V are wind components, either in geographical lat/lon reference
+            system or in native reference system (in this latter case the components
+            are first rotated from native to geographical reference system)
+                U:  
+                V:  
+
+FF        wind velocity;
+            FF = sqrt( U*U + V*V )
+                U:  scale = 1.0 (FF in [m/s]),   = 1.94 (FF in [knots])
+                V:  scale = 1.0 (FF in [m/s]),   = 1.94 (FF in [knots])
+
+DD_10M    10m-wind direction (in geog. coord.) [degree];
+            DD_10M = 0.                           if U_10M = V_10M = 0.
+                    180.0 + atan2(U_10M, V_10M)  otherwise
+            where U_10M and V_10M are 10m wind components in geographical
+            lat/lon reference system 
+                U_10M:  
+                V_10M:  
+
+FF_10M    10m-wind velocity;
+            FF_10M = sqrt( U_10M*U_10M + V_10M*V_10M )
+                U_10M:  scale = 1.0 (FF in [m/s]),   = 1.94 (FF in [knots])
+                V_10M:  scale = 1.0 (FF in [m/s]),   = 1.94 (FF in [knots])
+
+CFLDT     Courant-Friedrich-Levis number divided by the timestep [1/s]
+            CFLDT = abs(U)/dx + abs(V)/dy
+                When multiplied by the timestep of the actual simulation, it
+                corresponds to the CFL seen by the advection.
+                U: (on native mesh)
+                V: (on native mesh)
+
+WDIV_3D  3D divergence of wind, computed on model surface [s-1]
+            WDIV_3D(U,V,W,HEIGHT)
+                        U : (in [m/s], on k-surface, in native ref. system, staggered)
+                        V : (in [m/s], on k-surface, in native ref. system, staggered)
+                        W : (in [m/s], on model half levels)
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing WDIV_3D on level k, all listed fields must be available
+            on level k, HEIGHT and W must also be available on level k+1, U and V must
+            be available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+
+WDIV   horizontal divergence of wind, computed on model surface [s-1]
+            WDIV(U,V,W,HEIGHT)
+                        U : (in [m/s], on k-surface, in native ref. system, staggered)
+                        V : (in [m/s], on k-surface, in native ref. system, staggered)
+                        W : (in [m/s])
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing WDIV on level k, all listed fields must be available
+            on level k, HEIGHT and W must also be available on level k+1, U and V must
+            be available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+
+WDEF_H    deformation of horizontal wind fiel, computedd on model surface [s-1]
+            WDEF_H(U,V,HEIGHT) = sqrt((dU/dx - dV/dy)**2 + (dV/dy + dU/dx)**2)
+                        U : (in [m/s], on k-surface, in native ref. system, staggered)
+                        V : (in [m/s], on k-surface, in native ref. system, staggered)
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing WDEF_H on level k, all listed fields must be available
+            on level k, HEIGHT must also be available on level k+1, U and V must
+            be available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+
+WSHEAR    vertical wind shear [s-1]
+            WSHEAR(U,V,HEIGHT) = sqrt((dU/dz)**2 + (dV/dz)**2)
+                        U : (in [m/s], on k-surface, on base grid)
+                        V : (in [m/s], on k-surface, on base grid)
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing WSHEAR on level k, all listed fields must be available
+            on level k, HEIGHT must also be available on level k+1, U and V must
+            be available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+
+WSHEARL   vertical wind shear integrated between lowest model level and 3km
+            above sea level [s-1]
+            WSHEARL(U,V,HEIGHT) = (1/h)*SUM(|a-b|) over all layers between surface 
+                                and 3km, where a and b are two wind vectors of 
+                                neighbouring layers, and h is the thickness over all
+                                layers taken into account
+                        U : (in [m/s])
+                        V : (in [m/s])
+            HEIGHT or HHL : (in [m], on model half levels) 
+
+WSHEARM   vertical wind shear integrated between lowest model level and 6km
+            above sea level [s-1]
+            Calculated in the same way as WSHEARL.
+            Requires the same parent fields as WSHEARL
+
+WSHEARU   vertical wind shear integrated between 3km (or lowest model level
+            if the surface is above 3km altitude) and 6km [s-1]
+            Calculated in the same way as WSHEARL.
+            Requires the same parend fields as WSHEARL
+
+WSHEAR_0-1km   norm of vertical wind shear between lowest model level and
+                1km above sea level [m s-1]
+                U:  (in [m/s])
+                V:  (in [m/s])
+
+WSHEAR_0-3km   norm of vertical wind shear between lowest model level and
+                3km above sea level [m s-1]
+                U:  (in [m/s])
+                V:  (in [m/s])
+
+WSHEAR_0-6km   norm of vertical wind shear between lowest model level and
+                6km above sea level [m s-1]
+                U:  (in [m/s])
+                V:  (in [m/s])
+
+WSHEAR_3-6km   norm of vertical wind shear between 3km and 6km above
+                sea level [m s-1]
+                U:  (in [m/s])
+                V:  (in [m/s])
+
+ABSV        absolute vorticity on pressure surfaces [s-1]
+                        Vertical component of the absolute vorticity
+                        computed using smoothed wind fields on p-levels.
+                        This is a rough approximation of the "real" absolute vorticity,
+                        which is perpendicular to constant height levels.
+                U : (in [m/s], on p-surface, in native ref. system)
+                V : (in [m/s], on p-surface, in native ref. system)
+
+RELV        relative vorticity on pressure surfaces [s-1]
+                        Vertical component of the relative vorticity
+                        computed using smoothed wind fields on p-levels.
+                        This is a rough approximation of the "real" relative vorticity,
+                        which is perpendicular to constant height levels.
+                U : (in [m/s], on p-surface, in native ref. system)
+                V : (in [m/s], on p-surface, in native ref. system)
+
+POT_VORTIC  potential vorticity on model surface [K m2 kg-1 s-1]
+            POT_VORTIC  =  (1./rho) * [del Theta * ( curl v + 2 Omega )]
+                where rho       is the total air density
+                        del Theta is the gradient of the potential temperature
+                        curl v    is the curl of the wind
+                        2 Omega   is the Coriolis term
+                Effect of water loading is normally ignored, but can be included
+                by setting out_mode_ignore_wloading to false.
+                    QV : (in [kg/kg])
+                    QC : (in [kg/kg])
+                    QI : (in [kg/kg])
+                        U : (in [m/s], on k-surface, in native ref. system, staggered)
+                        V : (in [m/s], on k-surface, in native ref. system, staggered)
+                        W : (in [m/s])
+                        P : (in [Pa])
+                        T : (in [K])
+            HEIGHT or HHL : (in [m], on model half levels) 
+            ... only when out_mode_ignore_wloading=.F., depending on the list
+                specified in &ModelSpecification: one or more of
+                QR : (in [kg/kg])  
+                QS : (in [kg/kg])  
+                QG : (in [kg/kg])  
+                ...
+            When computing POT_VORTIC on level k, all listed fields must be available
+            on level k, W and HEIGHT must also be available on level k+1, U, V, P, T must
+            be available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+
+quasi-geostrophic approximation
+-------------------------------
+
+U_G        eastward component of geostrophic wind on model surface in native ref. system [m/s]
+V_G        northward component of geostrophic wind on model surface in native ref. system [m/s]
+            (U_G,V_G) = -1/(rho*f) (e_r) x (grad p)
+                where rho       is the total air density
+                        grad p    is the pressure gradient
+                        f         is the Coriolis factor 2 Omega sin(lat)
+                        e_r       is the radial base vector for spherical polar
+                                coordinates
+                Effect of water loading is normally ignored, but can be included
+                by setting out_mode_ignore_wloading to false.
+                        P : (in [Pa])
+                        T : (in [K])
+                    QC : (in [kg/kg])
+                    QV : (in [kg/kg])
+                    QI : (in [kg/kg])
+            HEIGHT or HHL : (in [m], on model half levels) 
+            ... only when out_mode_ignore_wloading=.F., depending on the list
+                specified in &ModelSpecification: one or more of
+                    QR : (in [kg/kg])  
+                    QS : (in [kg/kg])  
+                    QG : (in [kg/kg])  
+                ...
+            When computing U_G (respectively V_G) on level k, all listed fields must be
+            available on level k, HEIGHT must also be available on level k+1, P must be
+            available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+
+DD_G       direction of geostrophic wind (in geog. coord.) [degree];
+            DD_G = 0.                         if U_G = V_G = 0.
+                180.0 + atan2(U_G, V_G)      otherwise
+            where U_G and V_G are the components of the geostrophic wind, either in
+            geographical lat/lon reference system or in native reference system (in this
+            latter case the components are first rotated from native to geographical
+            reference system)
+                U_G: (in [m/s])
+                V_G: (in [m/s])
+
+FF_G       velocity of the geostrophic wind [m/s];
+            FF_G = sqrt( U_G*U_G + V_G*V_G )
+                U_G:  scale = 1.0 (FF_G in [m/s]),   = 1.94 (FF_G in [knots])
+                V_G:  scale = 1.0 (FF_G in [m/s]),   = 1.94 (FF_G in [knots])
+
+RELV_G      relative geostrophic vorticity on model surface [s-1]
+ABSV_G      absolute geostrophic vorticity on model surface [s-1]
+            RELV_G  =  [e_r * ( curl v_g )]
+            ABSV_G  =  [e_r * ( curl v_g + 2 Omega )]
+                where curl v_g  is the curl of the geostrophic wind v_g = (U_G,V_G)
+                        e_r       is the radial base vector for spherical polar
+                                coordinates
+                        2 Omega   is the Coriolis term
+                    U_G : (in [m/s], on k-surface, in native ref. system)
+                    V_G : (in [m/s], on k-surface, in native ref. system)
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing RELV_G (respectively ABSV_G) on level k, all listed fields
+            must be available on level k, HEIGHT must also be available on level k+1, U_G
+            and V_G must be available on at least one adjacent level (left or right
+            derivative in k is applied when k+1 or k-1 level is missing)
+
+RELV_ADV_G  relative geostrophic vorticity advection on model surface [s-1 m-1]
+ABSV_ADV_G  absolute geostrophic vorticity advection on model surface [s-1 m-1]
+            RELV_ADV_G  =  - [ v_g * grad RELV_G ]
+            ABSV_ADV_G  =  - [ v_g * grad ABSV_G ]
+                where v_g  is the geostrophic wind (U_G,V_G)
+                        grad RELV_G is the gradient of the relative geostrophic vorticity
+                        grad ABSV_G is the gradient of the absolute geostrophic vorticity
+                    RELV_G : (in [s-1], on k-surface)
+                    ABSV_G : (in [s-1], on k-surface)
+                    U_G : (in [m/s], on k-surface, in native ref. system)
+                    V_G : (in [m/s], on k-surface, in native ref. system)
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing RELV_ADV_G (respectively ABSV_ADV_G) on level k, all listed
+            fields must be available on level k, HEIGHT must also be available on level k+1,
+            RELV_ADV (respectively ABSV_ADV) must be available on at least one adjacent
+            level (left or right derivative in k is applied when k+1 or k-1 level is missing)
+
+THICK_ADV_G  geostrophic thickness advection for layer between two p-surfaces p1 < p2 [m s-1]
+            THICK_ADV_G  =  - [ v_g * grad ( h(p1) - h(p2) ) ]
+                where v_g  is the geostrophic wind (U_G,V_G)
+                        h(p) is the height of the p-surface
+            U_G : (in [m/s], on p-surface, in geog. ref. system)
+            V_G : (in [m/s], on p-surface, in geog. ref. system)
+            HEIGHT : (in [m], on pressure surface)
+            When computing THICK_ADV_G for the layer between the two p-surfaces p1 and p2
+            U_G, V_G, and HEIGHT must be available on p1 and p2. The value of THICK_ADV_G
+            is set to undefined if the directional shear of the geostrophic wind between p1
+            and p2 is larger than 90 degrees.
+
+radiation
+---------
+
+ASOD_SH   global (downward) shortwave radiation at surface level on horizontal
+            plane [W/m**2].
+            (1)  ASOD_SH = max( ASOB_SH / max((1.-ALB_RAD) , 1.e-10) , 0. )
+            Note: ASOB_SH is cumulated in time, ALB_RAD is instantaneous,
+                    which means this is only an approximation (but in most
+                    cases ALB_RAD does not vary strongly within the time
+                    scale of two model output)
+                ASOB_SH:     toper = tdelta 
+                ALB_RAD:    scale = 0.01 
+            (2) ASOD_SH = ASWDIFD_S + ASWDIR_SH
+                ASWDIR_SH:  toper = tdelta 
+                ASWDIFD_S:  toper = tdelta
+
+GLOB      global (downward) shortwave radiation at surface level [W/m**2];
+            on terrain following plane when radiative topo corrections are 
+            active, on horizontal plane otherwise.
+            (1)  GLOB = max( ASOB_S / max((1.-ALB_RAD) , 1.e-10) , 0. )
+            Note: ASOB_S is cumulated in time, ALB_RAD is instantaneous,
+                    which means this is only an approximation (but in most
+                    cases ALB_RAD does not vary strongly within the time
+                    scale of two model output)
+                ASOB_S:     toper = tdelta 
+                ALB_RAD:    scale = 0.01 
+            (2) GLOB = ASWDIFD_S + ASWDIR_S
+                ASWDIR_S:   toper = tdelta 
+                ASWDIFD_S:  toper = tdelta
+
+ASWDIR_S  (if radiative topo corrections are not active)
+ASWDIR_SH (if radiative topo corrections are active)
+            direct shortwave radiation at surface level on horizontal 
+            plane [W/m**2]; empirical model implemented following Perez et
+            al. (1992) and the code of Antoine Zelenka / MeteoSwiss.
+            Note 1: when available, it is recommended to use direct model output
+                    instead
+            Note 2: radiation_topo_corrected in &ModelSpecification must be defined
+            (1) when radiative topo corrections are not active
+                GLOB:     [W/m**2]
+                TD_2M:    [K]
+                HSURF:    [m]
+            (2) when radiative topo corrections are active
+                ASOD_SH:  [W/m**2]
+                TD_2M:    [K]
+                HSURF:    [m]
+
+ASWDIFD_S diffuse shortwave radiation at surface level [W/m**2]; empirical model
+            implemented following Perez et al. (1992) and the code of Antoine 
+            Zelenka / MeteoSwiss 
+            Note 1: when available, it is recommended to use direct model output
+                    instead
+            Note 2: radiation_topo_corrected in &ModelSpecification must be defined
+            (1) when radiative topo corrections are not active
+                GLOB:     [W/m**2]
+                TD_2M:    [K]
+                HSURF:    [m]
+            (2) when radiative topo corrections are active
+                ASOD_SH:  [W/m**2]
+                TD_2M:    [K]
+                HSURF:    [m]
+
+ASOD_SvX  (X=E,S,W,N)
+            global shortwave radiation on vertical oriented surfaces
+            at surface level [W/m**2]; model implemented following Perez
+            et al. (1987) and the code of Antoine Zelenka / MeteoSwiss
+            (1) when radiative topo corrections are not active
+                GLOB:       [W/m**2]
+                ASWDIR_S:   toper = tdelta [W/m**2]
+                ASWDIFD_S:  toper = tdelta [W/m**2]
+                ALB_RAD:    scale=0.01
+                HSURF:      [m]
+            (2) when radiative topo corrections are active
+                ASOD_SH:    [W/m**2]
+                ASWDIR_SH:  toper = tdelta [W/m**2]
+                ASWDIFD_S:  toper = tdelta [W/m**2]
+                ALB_RAD:    scale=0.01
+                HSURF:      [m]
+
+ATHD_S_TG  incoming longwave radiation at surface level, based on T(ground) [W/m**2];
+            Note that at grid points without snow: T(ground) = T(surf)
+            ATHD_S_TG = (1/emissivity) * (ATHB_S + emissivity*boltzman*T(ground)**4)
+                ATHB_S: toper = tdelta
+                T_G:
+
+ATHD_S_TS  incoming longwave radiation at surface level, based on T(surf) [W/m**2]
+            ATHD_S_TS = (1/emissivity) * (ATHB_S + emissivity*boltzman*T(surf)**4)
+                ATHB_S: toper = tdelta
+                T_S or T_SO(level 0):
+
+ATHD_S_T2M incoming longwave radiation at surface level, based on T_2M [W/m**2]
+            ATHD_S_T2M = (1/emissivity) * (ATHB_S + emissivity*boltzman*T_2M**4)
+                ATHB_S: toper = tdelta
+                T_2M:
+
+LUM       luminosity [klux];
+            LUM = 0.001 * EXP{ LOG(GLOB/0.013) / 0.963 }
+            (1) GLOB computed from radiation budget
+                ASOB_S:     toper = tdelta 
+                ALB_RAD:    scale = 0.01 
+            (2) GLOB computed from radiation components
+                ASWDIR_S:   toper = tdelta 
+                ASWDIFD_S:  toper = tdelta
+
+DURSUN_M  maximum sunshine duration [s];
+            Compute maximal sunshine duration, using solar geometry only; the
+            solar refraction in the atmosphere is not considered. When 
+            out_mode_sun_topo is true, the topography derived horizon is
+            considered and the parent field HORIZON must be present, otherwise
+            the horizon is defined everywhere with an elevation of 0 deg.
+            The parent field DURSUN must be present, and DURSUN_M is computed
+            for the same time intervals as DURSUN.
+            (1) out_mode_sun_topo = .false.
+                DURSUN:    [s]    
+            (2) out_mode_sun_topo = .true.
+                DURSUN:    [s]    
+                HORIZON: elevation in [degree], for n sectors coded as levels;
+                        all sectors (levels) must be present.
+
+DURSUN_R  relative sunshine duration [%];
+            When DURSUN_M is missing, DURSUN_M will be computed internally
+            on the fly (see description of DURSUN_M).
+            (1) DURSUN_M available in list of parents
+            DURSUN_R = 100. * DURSUN / DURSUN_M
+                DURSUN:    [s]   
+                DURSUN_M:  [s]
+            (2) DURSUN_M missing, out_mode_sun_topo = .false.
+                DURSUN:    [s]    
+            (3) DURSUN_M missing, out_mode_sun_topo = .true.
+                DURSUN:    [s]    
+                HORIZON: elevation in [degree], for n sectors coded as levels;
+                        all sectors (levels) must be present.
+
+thermodynamic quantities
+------------------------
+
+DEN       total density of air mixture (in [kg/m**3]).
+            Based on perfect gas law, pressure as sum of partial pressures.
+            Effect of water loading is normally ignored, but can be included
+            by setting out_mode_ignore_wloading to false.
+            DEN = f(T, P, QV, QC, QI, [QR, QS, QG ...])
+                T:  [K]
+                P:  [Pa]
+                QV:  [kg/kg]
+                QC:  [kg/kg]
+                QI:  [kg/kg]
+            ... only when out_mode_ignore_wloading=.F., depending on the list
+                specified in &ModelSpecification: one or more of
+                QR : [kg/kg]  
+                QS : [kg/kg]  
+                QG : [kg/kg]  
+                ...
+
+THETA    potential temperature (in [K])
+            THETA = T * (1.E5/P)**(pc_r_d/pc_c_p)
+                T:    (in [K])
+                P:    (in [Pa])
+
+THETA_2M 2m potential temperature (in [K])
+            The surface pressure is reduced hydrostatically to a 2 meter pressure,
+            using constant temperature T_2M; the previous formula for THETA is then used.
+                T_2M:   (in [K])
+                PS:     (in [P])
+
+THETAE    equivalent potential temperature (in [K])
+            THETAE = T * (1.E5/P)**(pc_r_d/pc_c_p) * exp((L*m)/(pc_c_p*T)),
+                where pc_r_d (gas constant for dry air), pc_c_p (specific 
+                heat), L (latent heat of water vapor) and m=QV/(1-QV)
+                T:  offset = 0. (in [K])
+                P:  offset = 0. (in [Pa])
+                QV: 
+
+THETAE_2M 2m-equivalent potential temperature (in [K])
+            The surface pressure is reduced hydrostatically to a 2 meter pressure,
+            using constant temperature T_2M; QV_2M is computed on the basis of this
+            reduced pressure and of TD_2M; the previous formula for THETAE is then used.
+                T_2M:  offset = 0. (in [K])
+                PS:    offset = 0. (in [P])
+                TD_2M: offset = 0. (in [K])
+
+THETA_V   virtual potential temperature (in [K])
+            THETA_V = T * (1.E5/P)**(pc_r_d/pc_cp_d) *       &
+                        (1+(((pc_r_v / pc_r_d) - 1.0)*QV/(1-QV))) ,
+                where pc_r_d (gas constant for dry air), pc_cp_d (specific
+                heat of dry air), pc_r_v (Gas constant for water vapor),
+                pc_r_d (Gas constant for dry air)
+                T:  offset = 0. (in [K])
+                P:  offset = 0. (in [Pa])
+                QV:
+
+THETA_V_2M  2-m virtual potential temperature (in [K])
+            The surface pressure is reduced hydrostatically to a 2 meter pressure,
+            using constant temperature T_2M; QV_2M is computed on the basis of this
+            reduced pressure and of TD_2M; the previous formula for THETA_V is then used.
+                T_2M:  offset = 0. (in [K])
+                PS:  offset = 0. (in [Pa])
+                TD_2M:
+
+TW        wet bulb temperature [K];
+            (1) If out_mode_tw_iterative = .TRUE., a secant method is used to solve the 
+                psychrometric equation (cf. Bohren and Albrecht, 1998, equation (6.72)).
+                Undefined values is produced where the secant method does not converge,
+                and a warning is generated. 
+            TW = f(T,P,QV)
+                T:      (in[K])
+                P:      (in[Pa])
+                QV:     (in[kg/kg])
+            (2) If out_mode_tw_iterative = .FALSE., an approximation formula is used
+                (as in cosmo pp_utilities:calsnowlmt, after after Egger/Joss).
+            TW = f(T,P,TD)
+                T:      (in[K])
+                P:      (in[Pa])
+                TD:     (in[kg/kg])
+                or
+            TW = f(T,P,td(QV,P))
+                T:      (in[K])
+                P:      (in[Pa])
+                QV:     (in[kg/kg])
+
+TW_2M     2m wet bulb temperature [K];
+            The surface pressure is reduced hydrostatically to a 2 meter pressure,
+            using constant temperature T_2M.
+            The algorithm is chosen in analogy to TW.
+            (1) If out_mode_tw_iterative = .TRUE., a secant method is used to solve the 
+                psychrometric equation (cf. Bohren and Albrecht, 1998, equation (6.72)).
+                Undefined values is produced where the secant method does not converge,
+                and a warning is generated. 
+            TW_2M = f(T_2M,PS,QV_2M)
+                T_2M:      (in[K])
+                PS:        (in[Pa])
+                QV_2M:     (in[kg/kg])
+            (2) If out_mode_tw_iterative = .FALSE., an approximation formula is used
+                (as in cosmo pp_utilities:calsnowlmt, after after Egger/Joss).
+            TW_2M = f(T_2M,PS,TD_2M)
+                T_2M:      (in[K])
+                PS:        (in[Pa])
+                TD_2M:     (in[kg/kg])
+                or
+            TW_2M = f(T_2M,PS,td(QV_2M,PS))
+                T_2M:      (in[K])
+                PS:        (in[Pa])
+                QV_2M:     (in[kg/kg])                
+
+TD        dew point temperature (in [Kelvin]);
+            TD = f(P,QV)
+                QV:
+                P: offset = 0. (in [Pa])
+
+TD_2M     2m-dew point temperature (in [Kelvin]);
+            The surface pressure is reduced hydrostatically to a 2 meter pressure,
+            using constant temperature T_2M, and the dew point is then calculated
+            using this reduced pressure and QV_2M; TD_2M is constraint to be 
+            smaller or equal to T_2M.
+            TD_2M = f(PS,QV_2M,T_2M)
+                QV_2M: (in [kg/kg])
+                PS:    (in [Pa])
+                T_2M:  (in [K])
+
+D_TD      dew point depression; 
+            D_TD = MAX(T - TD, 0)   where TD = f(P,QV)
+                QV:
+                T: offset = 0. (in [K])
+                P: offset = 0. (in [Pa])
+
+D_TD_2M   2m-dew point depression; 
+            Compute TD_2M using PS, QV_2M and T_2M (see TD_2M), and then 
+            compute the depression
+            D_TD_2M = MAX(T_2M - f(PS,QV_2M,T_2M), 0)
+                PS:    (in [Pa])
+                QV_2M: (in [kg/kg])
+                T_2M:  (in [K])
+            or
+            D_TD_2M = MAX(T_2M - TD_2M, 0)
+                TD_2M:
+                T_2M:
+
+ENTH      enthalpy (heat content) of air based on specific humidity and temperature
+            [J/kg];
+            ENTH = f(QV,T)
+                QV:     (in [kg/kg])
+                T:      (in[K])
+
+ENTH_2M   2m enthalpy (heat content) of air based on specific humidity and temperature
+            [J/kg];
+            ENTH_2M = f(QV_2M,T_2M)
+                QV_2M:     (in [kg/kg])
+                T_2M:      (in[K])
+
+QV        specific humidity based on pressure and dew point [kg/kg];
+            QV = f(TD,P)
+                TD:  (in[K])
+                P:   (in [Pa])
+
+QV_SAT    specific humidity at staturation [kg/kg];
+            The specific humidity at saturation uses the same formula as for the
+            computation of the specific humidity, but takes T instead of TD as first
+            argument.
+            QV_SAT = f(T,P)
+                T:   (in[K])
+                P:   (in [Pa])
+
+QV_2M     2m specific humidity based on surface pressure and dew point [kg/kg];
+            The surface pressure is reduced hydrostatically to a 2 meter pressure,
+            using constant temperature T_2M.
+            QV_2M = f(TD_2M,PS,T_2M)
+                TD_2M:  (in[K])
+                PS:     (in [Pa])
+                T_2M:   (in[K])
+
+QV_SAT_2M 2m specific humidity at saturation [kg/kg];
+            The specific humidity at saturation uses the same formula as for the
+            computation of the specific humidity, but takes T_2M instead of TD_2M
+            as first argument.
+            QV_SAT_2M = f(T_2M,PS,T_2M)
+                T_2M:   (in[K])
+                PS:     (in [Pa])
+
+MIXRAT    mixing ratio; 
+            MIXRAT = QV/(1-QV)
+                QV:     (in [kg/kg])
+
+MIXRAT_2M 2m mixing ratio;
+            MIXRAT_2M = QV_2M/(1-QV_2M)
+                QV_2M:  (in [kg/kg])
+
+RELHUM    relative humidity over water [%];
+            RELHUM = 100 * PVsat_water(TD)/PVsat_water(T)
+            (standard physical definition)
+                T: offset = 0. (in [K])
+                TD: offset = 0. (in [K])
+        or
+            RELHUM = 100 * QV/QVsat_water(T,P)
+            (COSMO definition, which is an approximation of WMO definition)
+                T: offset = 0. (in [K])
+                QV:
+                P: offset = 0. (in [Pa])
+
+RELHUM_2M 2m-relative humidity over water [%];
+            RELHUM = 100 * PVsat_water(TD_2M)/PVsat_water(T_2M)
+            (standard physical definition)
+                T_2M: offset = 0. (in [K])
+                TD_2M: offset = 0. (in [K])
+        or
+            RELHUM_2M = 100 * QV_2M/QVsat_water(T_2M,p2m(PS,T_2M))
+            (COSMO definition, which is an approximation of WMO definition)
+            where p2m is the surface pressure ihydrostatically reduced to a
+            2 meter pressure, using constant temperature T_2M.
+                T_2M: offset = 0. (in [K])
+                QV_2M:
+                PS: offset = 0. (in [Pa])
+
+RH_ICE    relative humidity over ice [%];
+            RH_ICE = 100 * QV/QVsat_ice(T,P)
+                T: offset = 0. (in [K])
+                QV:
+                P: offset = 0. (in [Pa])
+
+RH_MIX_EC  relative humidity over mixed phase [%];
+    Pressure of water vapor over mixed phase computed according to (see formula 1.11 ad 1.12)
+    http://www.ecmwf.int/sites/default/files/elibrary/2015/9208-part-i-observation-processing.pdf
+    In particular, RH_MIX_EC = RELHUM (if T > 0C) 
+                            = RH_ICE (if T < -23C).
+            RH_MIX_EC = 100 * QV/QVsat_mix(T,P)
+                T: offset = 0. (in [K])
+                QV:
+                P: offset = 0. (in [Pa])
+
+CLI_RATIO cloud ice ratio [%]
+            CLI_RATIO = 100. * (QI/(QI + QC))   
+                        where denominator larger than out_cloud_min, undef otherwise
+                QI:
+                QC:
+
+T_2M_SNOWC snow corrected 2m temperature;
+            T_2M_SNOWC = T_2M              if W_SNOW < 0.1
+                        = T(lowest level)   if W_SNOW > 0.1
+                W_SNOW, T_2M, T(lowest level):
+                T_2M, TD_2M: 
+
+TTOP_CON  temperature at cloud top
+            TTOP_CON = T(TOP_CON)
+                TOP_CON:
+                T:        offset = 0.0 (in [K])   
+
+HZEROCL   height of the zero degree Centigrade isotherm [m asl].
+
+            T is evaluated from 8000m agl down to the lowest model level;
+            HZEROCL is set to the height where zero degree Centigrade is 
+            reached for the first time. If T never reaches zero degree 
+            Centigrade, or the model atmosphere is too shallow, HZEROCL
+            is set to undefined.
+            When out_mode_h0cl_extrapolate is set to true, the algorithm also
+            considers zero degree Centigrade isotherm below lowest model level.
+            In this case, a constant lapse rate derived from the temperature at
+            the two lowest model levels is assumed, and the zero degree isotherm
+            is based on the extrapolated T profile. When the lapse rate is
+            negative, or when the zero degree Centigrade isotherm is lower
+            than 0 m asl, HZEROCL is set to undefined.
+
+            HZEROCL = f(T, HEIGHT, HSURF)
+                                T :  (in [K])
+            HEIGHT or HHL or HFL :  (in [m asl])
+                            HSURF :  (in [m asl])
+                ... both T and HEIGHT must be defined on same type of
+                    model levels (either full or half levels)
+
+HEATX      heat index (in [�K]): 
+                        A "discomfort" index resulting from a multiple regression
+                        analysis performed on data obtained in extensive bio-
+                        meteorological studies (Steadman R.G., 1979, Rothfusz L.P., 1990).
+                        Computed with or without adjustments by NOAA
+                        (http://www.crh.noaa.gov/gjt/Weather_Info/heat_index.php)
+                        Evaluated for
+                        T_2M > 80�F and RELHUM_2M > 40% if out_mode_adjusted = .F.
+                        T_2M > 80�F and RELHUM_2M >  0% if out_mode_adjusted = .T.
+                T_2M : offset = 0.     (conversion in �F in the code)
+                RELHUM_2M : offset = 0.
+                or
+                T_2M : offset = 0.     (conversion in �F in the code)
+                TD_2M : offset = 0.
+
+UTCI_SHADOW universal thermal climate index ( in [�K])
+                    "Discomfort index" developed in the framework of COST Action 730,
+                    based on multiple regression analysis on data obtained from
+                    a thermoregulation model (Jendritzky G. et al., 2009).
+                    Computed without contribution of direct incident shortwave
+                    radiation.
+                T_2M: in [K]
+                TD_2M: in [K]
+                ATHD_S: toper = tdelta, in [W/m**2]
+                ATHU_S: toper = tdelta, in [W/m**2]
+                ASWDIFD_S: toper = tdelta, in [W/m**2]
+                ASWDIFU_S: toper = tdelta, in [W/m**2]
+                FF_10M: in [m/s]
+
+UTCI_SUN   universal thermal climate index ( in [�K])
+                    Computed with contribution of direct incident shortwave radiation.
+                    Uses all parent fields of UTCI_SHADOW, and additionally
+                T_2M: in [K]
+                TD_2M: in [K]
+                ATHD_S: toper = tdelta, in [W/m**2]
+                ATHU_S: toper = tdelta, in [W/m**2]
+                ASWDIFD_S: toper = tdelta, in [W/m**2]
+                ASWDIFU_S: toper = tdelta, in [W/m**2]
+                ASWDIR_S: toper = tdelta, in [W/m**2]
+                FF_10M: in [m/s]
+
+precipitation and moisture transport
+------------------------------------
+
+TOT_PREC  Total precipitation;
+            TOT_PREC = linear combination of components
+                coefficients and components: as defined by precip_all in &ModelSpecification
+                                            (main parent is first element of list)
+
+TOT_GSP   Total grid-scale precipitation;
+            TOT_GSP  = linear combination of components
+                coefficients and components: as defined by precip_gridscale in &ModelSpecification
+                                            (main parent is first element of list)
+
+TOT_CON   Total convective precipitation;
+            TOT_CON = linear combination of components
+                coefficients and components: as defined by precip_convective in &ModelSpecification
+                                            (main parent is first element of list)
+
+TOT_SNOW  Total precipitation in snow;
+            TOT_SNOW = linear combination of components
+                coefficients and components: as defined by precip_snow in &ModelSpecification
+                                            (main parent is first element of list)
+
+TOT_RAIN  Total precipitation in rain;
+            TOT_RAIN = linear combination of components
+                coefficients and components: as defined by precip_rain in &ModelSpecification
+                                            (main parent is first element of list)
+
+CONV_PERCENT Percentage of total precipitation which are convective;
+            CONV_PERCENT = 100 * (linear combination of TOT_CON components/TOT_PREC)
+                coefficients and components for TOT_CON:
+                                as defined by precip_convective in &ModelSpecification
+                                (main parent is first element of list)
+                TOT_PREC:
+
+SNOW_PERCENT Percentage of total precipitation in snow [%];
+            SNOW_PERCENT = 100 * (linear combination of TOT_SNOW components/TOT_PREC)
+                coefficients and components for TOT_SNOW:
+                                as defined by precip_snow in &ModelSpecification
+                                (main parent is first element of list)
+                TOT_PREC:
+
+MCONV     horizontal moisture flux convergence on model surface [s-1]
+            MCONV(QV,U,V,W,HEIGHT)
+                    QV : (in [kg kg-1], on mass point grid)
+                        U : (in [m/s], on k-surface, in native ref. system, staggered)
+                        V : (in [m/s], on k-surface, in native ref. system, staggered)
+                        W : (in [m/s])
+            HEIGHT or HHL : (in [m], on model half levels) 
+            When computing MCONV on level k, all listed fields must be available
+            on level k, W and HEIGHT must also be available on level k+1, QV, U and V must
+            be available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing)
+            This algorithm requires height based vertical coordinates.
+
+Turbulence variables
+--------------------
+
+BRN       Bulk Richardson number (dimensionless quantity)
+            parent fields (T,P,QV) have to be available on all levels between 
+            the target level and the first level above surface
+            BRN = pc_g * (HEIGHT(target) - HSURF) *                           &
+                    (THETA_V(target) - THETA_V(bottom)) /                    &
+                    (THETA_V_avg * (U(target)**2 + V(target)**2)) ,
+                where pc_g (acceleration due to gravity), 
+                THETA_V_avg (average of THETA_V between target and bottom levels)
+            Note: to optimize the integral computing THETA_V_avg, it is
+                suggested to explicitely specify the list of produced levels
+                (levmin=..., levmax=...). This has for consequence to sort
+                the processing order according to this list.
+                            T :  (in [K])
+                            P :  (in [Pa])
+                        QV :
+                        HSURF :  (in [m])
+                HEIGHT or HHL :  (in [m], on model half levels) 
+                            U :  (in [m/s])
+                            V :  (in [m/s])
+        
+RI        Gradient Richardson number (dimensionless quantity)
+            RI = pc_g * (dTHETA/dz) / (THETA * WSHEAR**2)
+            where pc_g (acceleration due to gravity)
+                THETA : (in [K])
+                WSHEAR : (in [1/s])
+            This algorithm is only supported for the COSMO model. (CHECK THIS)
+
+HPBL      Height of the Planetary Boundary Layer (in [m])
+            HPBL is the height of the level above the surface where the 
+            BRN value grows above the critical value (0.22) 
+            BRN has to be available on all levels between the surface and 
+            5000 m above surface level 
+                        BRN :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model full levels) 
+
+CAT_DVT   Divergence trend term (in [1/s**2])
+            CAT_DVT = C * WDIV_trend
+            where
+            C  (scaling factor > 0.0, dimensionless quantity, see out_mode_dvt_scale)
+            For details on the choice of C see F. Binder, 2013 (ETHZ Master Thesis)
+            WDIV_trend (trend of divergence of horizontal wind, i.e.,
+                        (WDIV(t) - WDIV(t')) / (t - t'))
+                WDIV : toper = delta (in [1/s], factor 1/(t-t') is included in C)
+            This algorithm is only supported for the COSMO model.
+
+CAT_TI1   Ellrod and Knapp turbulence index 1 (in [1/s**2])
+            CAT_TI1 = WSHEAR * WDEF_H
+                WSHEAR : (in [1/s])
+                WDEF_H : (in [1/s])
+
+CAT_TI2   Ellrod and Knapp turbulence index 2 (in [1/s**2])
+            CAT_TI2 = WSHEAR * (WDEF_H - WDIV)
+                WSHEAR : (in [1/s])
+                WDEF_H : (in [1/s])
+                WDIV : (in [1/s])
+
+CAT_DTI   Divergence modified turbulence index (in [1/s**2])
+            CAT_DTI = CAT_TI1 + CAT_DVT
+                CAT_TI1 : (in [1/s**2])
+                CAT_DVT : (in [1/s**2])
+
+EDP       Eddy dissipation parameter for aviation meteorology (in [m**(2/3) s**(-1)]
+            ICON model only 
+            Calculate eddy dissipation parameter, based on the direct usage of the
+            prognostic turbulent kinetic energy, using a MY level 2.5 approach and
+            new scale interacting terms:
+            EDP = [(2*TKE)**1/2]/(len_scale*A)**1/3 + (DTKE_CON)**1/3 + (B*DTKE_HSH)**1/3
+                    len_scale : formulation according to MESINGER 1993
+                    A : dissipation-constant (16.6)
+                    B : scaling factor (1.0)
+            For a detailed description see Raschendorfer, Barleben
+            (2014, PROMET Jahr.39,Nr.2,23-35)
+                        TKE :
+                    DTKE_CON :
+                    DTKE_HSH :
+                HEIGHT or HHL :  (in [m], on model half levels) 
+
+>>> Turbulence: "Direct" approach 
+
+The following operators are limited to the COSMO model.
+Meaningful results are only produced when associated with a TKE
+formulation following Mellor and Yamada (1982) level 2.5.
+
+SIGMAX    Velocity fluctuation along the model x-axis (in [m/s]) 
+            Based on the direct usage of prognostic Turbulent Kinetic Energy,
+            using a Mellor and Yamada (1982) level 2.5 approach 
+            For detailed description see Szintai, 2010 (EPFL Thesis)
+                        TKE :
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            U : (in [m/s])
+                            V : (in [m/s])
+                        TKVM :
+                        TKVH :
+
+SIGMAY    Velocity fluctuation along the model y-axis (in [m/s])
+            Based on the direct usage of prognostic Turbulent Kinetic Energy,
+            using a Mellor and Yamada (1982) level 2.5 approach
+            For detailed description see Szintai, 2010 (EPFL Thesis)
+                        TKE :
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            U : (in [m/s])
+                            V : (in [m/s])
+                        TKVM :
+                        TKVH :
+
+SIGMAZ    Vertical velocity fluctuation (in [m/s])
+            Based on the direct usage of prognostic Turbulent Kinetic Energy,
+            using a Mellor and Yamada (1982) level 2.5 approach
+            For detailed description see Szintai, 2010 (EPFL Thesis)
+                        TKE :
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            U : (in [m/s])
+                            V : (in [m/s])
+                        TKVM :
+                        TKVH :
+
+LAGTIMEX  Lagrangian timescale along the model x-axis (in [s])
+            Based on the direct usage of prognostic Turbulent Kinetic Energy,
+            using a Mellor and Yamada (1982) level 2.5 approach
+            For detailed description see Szintai, 2010 (EPFL Thesis)
+                        TKE :
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            U : (in [m/s])
+                            V : (in [m/s])
+                        TKVM :
+                        TKVH :
+
+LAGTIMEY  Lagrangian timescale along the model y-axis (in [s])
+            Based on the direct usage of prognostic Turbulent Kinetic Energy,
+            using a Mellor and Yamada (1982) level 2.5 approach
+            For detailed description see Szintai, 2010 (EPFL Thesis)
+                        TKE :
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            U : (in [m/s])
+                            V : (in [m/s])
+                        TKVM :
+                        TKVH :
+
+LAGTIMEZ  Lagrangian timescale for vertical direction (in [s])
+            Based on the direct usage of prognostic Turbulent Kinetic Energy,
+            using a Mellor and Yamada (1982) level 2.5 approach
+            For detailed description see Szintai, 2010 (EPFL Thesis)
+                        TKE :
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            U : (in [m/s])
+                            V : (in [m/s])
+                        TKVM :
+                        TKVH :
+
+>>> Turbulence: Similarity approach 
+
+Above the PBL top all values are set to undefined.
+Neutral conditions and surface layer are ignored.
+
+SIGMAU    Along-wind velocity fluctuation (in [m/s])
+            Based on similarity theory considerations 
+            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                    AUMFL_S : (in [Pa]), toper = tdelta
+                    AVMFL_S : (in [Pa]), toper = tdelta
+                    ASHFL_S : (in [W/m2]), toper = tdelta
+
+SIGMAV    Cross-wind velocity fluctuation (in [m/s])
+            Based on similarity theory considerations
+            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                    AUMFL_S : (in [Pa]), toper = tdelta
+                    AVMFL_S : (in [Pa]), toper = tdelta
+                    ASHFL_S : (in [W/m2]), toper = tdelta
+
+SIGMAW    Vertical velocity fluctuation (in [m/s])
+            Based on similarity theory considerations
+            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                    AUMFL_S : (in [Pa]), toper = tdelta
+                    AVMFL_S : (in [Pa]), toper = tdelta
+                    ASHFL_S : (in [W/m2]), toper = tdelta
+
+LAGTIMEU  Along-wind Lagrangian timescale (in [s])
+            Based on similarity theory considerations
+            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                    AUMFL_S : (in [Pa]), toper = tdelta
+                    AVMFL_S : (in [Pa]), toper = tdelta
+                    ASHFL_S : (in [W/m2]), toper = tdelta
+
+LAGTIMEV  Cross-wind Lagrangian timescale (in [s])
+            Based on similarity theory considerations
+            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                    AUMFL_S : (in [Pa]), toper = tdelta
+                    AVMFL_S : (in [Pa]), toper = tdelta
+                    ASHFL_S : (in [W/m2]), toper = tdelta
+
+LAGTIMEW  Lagrangian timescale for vertical direction (in [s])
+            Based on similarity theory considerations
+            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+                HEIGHT or HHL : (in [m], on model half levels) 
+                            T : (in [K])
+                            P : (in [Pa])
+                            QV :
+                        HSURF : (in [m])
+                    AUMFL_S : (in [Pa]), toper = tdelta
+                    AVMFL_S : (in [Pa]), toper = tdelta
+                    ASHFL_S : (in [W/m2]), toper = tdelta
+
+indices
+-------
+
+CAPE_MU   convective available potential energy. Several parcels are lifted from 
+            different levels. Returned is the largest CAPE value achieved by the
+            most unstable parcel ascent.
+            Required parent fields:
+            CAPE_ML(T,P,QV,HEIGHT) = [for details look at lm_pp_utilities]
+                            T : (in [K])     [all levels required]
+                            P : (in [Pa])    [all levels required]
+                            QV : (in [kg/kg]) [all levels required]
+                HEIGHT or HHL : (in [m], on model half levels) 
+                        HSURF : (in [m])   
+
+CIN_MU    convective inhibition for the ascent of the most unstable parcel.
+            Requires the same parent fields as CAPE_MU.
+
+CAPE_ML   convective available potential energy, achieved by a parcel starting
+            from the computed mixing layer.
+            Requires the same parent fields as CAPE_MU.
+
+CIN_ML    convective inhibition for the ascent of a parcel starting at the mixing layer.
+            Requires the same parent fields as CAPE_MU.
+
+LCL_ML    mixed layer lifting condensation level above ground.
+            Requires the same parent fields as CAPE_MU.
+
+LFC_ML    mixed layer level of free convection above ground.
+            Requires the same parent fields as CAPE_MU.
+
+SI        Showalter index. A parcel starting at 850hPa is lifted along dry adiabatic
+            till it has reached dew point temperature; it is then further lifted
+            along moist adiabatic up to 500hPa. The temperature difference between
+            the parcel and the environment is returned.
+            Requires the same parent fields as CAPE_MU.
+
+SLI       surface lifted index. Similar to SI, except that the parcel start from 
+            the surface. 
+            Requires the same parent fields as CAPE_MU.
+
+KINDEX    K index 
+            KINDEX(T,P,QV) = (T850 - T500 + TD850 - DTD700)
+                T : (in [K])
+                P : (in [Pa])
+            QV : 
+
+KOINDEX   KO index (with modified levels: 850,760,625,450)
+            KOINDEX(T,P,QV) = 0.5 * (THETAE450 + THETAE625 - THETAE760 - THETAE850)
+                T : (in [K])
+                P : (in [Pa])
+            QV : 
+
+TTINDEX   Total-Totals index (TT-index) 
+            The index is based on the temperature, pressure and humidity on 
+                850hPa and on the temperature on 500hPa. The values are taken from
+                nearest model level
+            TT(T,P,QV) = 2*(T850-T500) - (T850-273) + (TD850(P,QV)-273)
+                T : (in [K])
+                P : (in [Pa])
+            QV : 
+
+SWEAT     Severe weather threat index
+            An index based on temperature, pressure, humidity and horizontal wind
+                components at 850hPa and 500hPa. Values are taken from the closest
+                model levels. The needed values are dew point on 850hPa (TD850), TT-
+                index (TT), horizontal wind velocity on 850hPa and 500hPa (FF850, 
+                FF500) and sinus of the angle between the wind vectors on 500hPa and
+                850hPa (s).
+            SWEAT(T,P,QV,U,V) = 12*(TD850(P,QV)-273) + 20*(TT(T,P,QV)-49) + 
+                                2*FF850(U,V)+FF500(U,V)+125*(s+0.2)
+                T : (in [K])
+                P : (in [Pa])
+            QV : 
+                U : (in [m/s])
+                V : (in [m/s])
+
+DCI       deep convection index (DCI)
+                The temperature, pressure and humidity fields are needed to compute
+                DCI. T850 is the temperature of the model level closest to 850hPa 
+                and TD850 the dew point temperature on 850hPa. SLI denotes the 
+                surface lifted index
+            DCI(T,P,QV) = (T850-273) + (TD850(P,QV)-273) - SLI
+                    T : (in [K])
+                    P : (in [Pa])
+                    QV : 
+        HEIGHT or HHL : (in [m], on model half levels) 
+
+ADEDO2    Adedokun 2 index: Lowering a parcel from 500hPa to surface moist
+                            adiabatically and comparing the wet bulb temperature
+                            of this parcel (THETAW_500S) with the wet bulb 
+                            temperature at surface (THETAW_S)
+            ADEDO2(T,P,QV) = THETAW_S(T,P,QV) - THETAW_500S(T,P,QV)
+                T : (in [K])
+                P : (in [Pa])
+            QV : 
+    
+Synthetic satellite images
+--------------------------
+
+Calculate synthetic satellite forward observation operator using
+the release 11 of the RTTOV library.
+
+Three different treatments of clouds are supported, as defined by
+out_mode_rttov_cloud:
+    no cloud (only clear sky product can be computed),
+    simple clouds (only cloud cover and cloud top information is used),
+    complex clouds (cloud types and cloud profiles information is used)
+
+The information on the satellite, the instrument and the channel to
+consider is taken from the active dictionary (rttovId, rttovChan),
+on the basis of the field name.
+
+The RTTOV coefficient file for the chosen satellite and instrument must
+be available at the place specified by user_settings%rttov_coefs_path
+(the name of the coefficient file is built on the basis of rttovId);
+furthermore, when the complex cloud treatment is active, the IR cloud
+scattering coefficient file must also be available.
+
+The channels represented in the cloud coefficient file must be the same
+as the channels represented in the RTTOV coefficient file.
+
+The following auxiliary fields are used as parents:
+    RTTOV_STYPE: surface type field: 0:land, 1:sea, 2:sea-ice ;
+                (COSMO with H_ICE) SOILTYP=9 && H_ICE>0.01 => RTTOV_STYPE=2
+    RTTOV_WTYPE: water type field: 0:fresh water, 1:ocean water ;
+                (COSMO with LAKE_DP) SOILTYP>=9 && DEPTH_LK=0 => RTTOV_WTYPE=1
+    RTTOV_FRSNOW: snow fraction field: between 0 and 1 ;
+                (COSMO) MIN(1.0, W_SNOW/cf_snow), with cf_snow = 0.015
+    ... for simple clouds treatment
+    RTTOV_TOPCLOUD: cloud top in hPa
+    RTTOV_FRCLOUD_TOT: total cloud fraction, between 0 and 1
+    ... for complex clouds treatment
+    RTTOV_FRCLOUD: cloud fraction profile: between 0 and 1 ;
+    RTTOV_CLOUD_1: cloud content profile, in g/m^3, for cloud category 'stratus continental'
+    RTTOV_CLOUD_3: cloud content profile, in g/m^3, for cloud category 'cumulus continental'
+    RTTOV_CLOUD_6: cloud content profile, in g/m^3, for cloud category 'cirrus'
+
+The release 11.2 of the RTTOV library is required
+(see https://nwpsaf.eu/deliverables/rtm/ for RTTOV documentation).
+
+Some optimization of the complex clouds forward operator is introduced 
+by ignoring any cloud columns with weights smaller than 1.E-4; a speedup
+of about 30% is achieved at the cost of a non significant degradation
+of the product quality (NWP SAF advice, see ticket id "gKqpbxFWT").
+
+
+
+
+The following products can be computed:
+
+(1) MSG cloudy brightness temperature, out_mode_rttov_cloud='complex'
+SYNMSG_BT_CL_IR10.8, SYNMSG_BT_CL_IR12.1, SYNMSG_BT_CL_IR13.4,
+SYNMSG_BT_CL_IR3.9 , SYNMSG_BT_CL_IR8.7 , SYNMSG_BT_CL_IR9.7 ,
+SYNMSG_BT_CL_WV6.2 , SYNMSG_BT_CL_WV7.3
+                P, T, QV: on model half levels
+                U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
+                RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
+                RTTOV_FRCLOUD, RTTOV_CLOUD_1, RTTOV_CLOUD_3, RTTOV_CLOUD_6:
+                on model full levels; P, T and QV must be available on 
+                all associated model half levels
+
+(2) MSG cloudy brightness temperature, out_mode_rttov_cloud='simple'
+SYNMSG_BT_CL_IR10.8, SYNMSG_BT_CL_IR12.1, SYNMSG_BT_CL_IR13.4,
+SYNMSG_BT_CL_IR3.9 , SYNMSG_BT_CL_IR8.7 , SYNMSG_BT_CL_IR9.7 ,
+SYNMSG_BT_CL_WV6.2 , SYNMSG_BT_CL_WV7.3
+                P, T, QV: on model full levels
+                U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
+                RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
+                RTTOV_TOPCLOUD, RTTOV_FRCLOUD_TOT:
+
+(3) MSG clear sky brightness temperature
+SYNMSG_BT_CS_IR10.8, SYNMSG_BT_CS_IR12.1, SYNMSG_BT_CS_IR13.4,
+SYNMSG_BT_CS_IR3.9 , SYNMSG_BT_CS_IR8.7 , SYNMSG_BT_CS_IR9.7 ,
+SYNMSG_BT_CS_WV6.2 , SYNMSG_BT_CS_WV7.3
+                P, T, QV: on model full levels
+                U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
+                RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
+
+
+Explanantion of MSG SEVIRI channels:
+rttovChan    lambda           Useful for                         Peak
+(coef file)  (micrometers)
+1            IR 3.9           Surface, clouds, wind fields       surface
+2            WV 6.2           Water vapor, high level clouds,    300 hPa
+3            WV 7.3           Water vapor                        500 hPa
+4            IR 8.7           Surface, clouds                    surface
+5            IR 9.7           Ozone                              surface + 50hPa
+6            IR 10.8          Surface, clouds, wind fields       surface
+7            IR 12.0          Surface, clouds, wind fields       surface
+8            IR 13.4          Cirrus cloud height                850 hPa
+
+
+Statistical post-processing
+---------------------------
+
+CN_TSTORM (normalized) probability for a thunderstrom to occur [%].
+            Algorithm is derived from AdaBoost classifier, and the values
+            are obtained by using the information in the corresponding
+            adaboost_coefs file (see 6.6 below).
+            The set of parent fields is described by the list of features
+            in this latter file. Two kind of classifier can be applied,
+            Threshold Classifier and Decision Tree Classifier, and the 
+            one applied is also defined in this file.
+            CN_TSTORM = CN_TSTORM(INPUT)
+                INPUT:      set of fields as defined by the list
+                            of 'standard' features in adaboost_coefs
+                            file ('standard' means not considering
+                            one of DAYOFYEAR, TIME, HEIGHT) 
+
+C_TSTORM  as CN_TSTORM, but value is the raw classifier output.
+            Its range is between 0 (no event) and 1 (event occurs).
+
+Generic operators
+-----------------
+
+Generic operators are characterized by a main parent which is arbitrary,
+and whose identity is set in the namelist.
+
+AD2D_TRACER   horizontal advection of TRACER on model surface.
+                AD2D_TRACER(tracer) = (u,v) * GRADIENT(tracer)
+                        TRACER : any scalar field 
+                                U : (in [m/s], on k-surface, in native ref. system, staggered)
+                                V : (in [m/s], on k-surface, in native ref. system, staggered)
+                    HEIGHT or HHL : (in [m], on model half levels)
+            TRACER is a generic field identity, which is declared in the namelist
+            by using "new_field_id" (e.g. to use THETAE as tracer, one should set
+            &Process tmp1_field ="THETAE", new_field_id="TRACER,K" / ).
+            When computing AD2D_TRACER on level k, all listed fields must be available
+            on level k, HEIGHT must also be available on level k+1, TRACER must be
+            available on at least one adjacent level (left or right derivative in k
+            is applied when k+1 or k-1 level is missing).
+            It is compulsory to use "set_units" or "new_field_id" to manually set
+            the field units of the resulting field.
+            This algorithm requires height based vertical coordinates.
+
+
+
+Named operators
+===============
+(Activated by setting 'use_operator' and 'use_tag')
+
+
+operator  operator description
+            list of parent fields (first in the list is the main parent)
+
+constant fields (produced in INCORE)
+------------------------------------
+
+qvsat   Specific water vapor content at saturation over water [kg/kg]
+        qvsat = qvsat(temperature, pressure)
+        Implemented for one of the two following cases:
+        a) parents in {T_2M, PS}
+            T_2M:  (in [K])
+            PS:    (in [Pa])
+        b) parents in {T, P}
+            T:     (in [K])
+            P:     (in [Pa])
+        In case a), the surface pressure is reduced hydrostatically to
+        a 2 meter pressure, using constant temperature T_2M.
+    
+
+
+Postprocessing operators
+========================
+
+None available (but see also README.user.locale)

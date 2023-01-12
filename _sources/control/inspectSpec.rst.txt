@@ -1,0 +1,230 @@
+:py:mod:`&InspectSpecification`
+===============================
+
+.. py:module:: &InspectSpecification
+
+    This namelist block is optional, but must be unique.
+
+    It is used to specify the information produced in relation with
+    out_type = 'INSPECT'. It is ignored when no such output is active.
+
+.. py:attribute:: digits_per_data
+    :type: integer
+    :value: 0 (meaning G12.4 is used as format)
+
+    Output data with digits_per_data decimal digits.
+
+.. py:attribute:: select_record
+    :type: integer
+    :value: 0 (all records)
+
+    Output only for record number select_record.
+
+.. py:attribute:: select_data_column
+    :type: integer
+    :value: 0 (no selection)
+
+    Print data of grid column select_data_column, may be combined with select_data_row.
+
+.. py:attribute:: select_data_row
+    :type: integer
+    :value: 0 (no selection)
+
+    Print data of grid row select_data_row, may be combined with select_data_column.
+
+.. py:attribute:: print_file_creation_date
+    :type: logical
+    :value: .FALSE.
+
+    Print creation date of file content.
+
+.. py:attribute:: print_experiment_version
+    :type: logical
+    :value: .FALSE.
+
+    Print experiment tag.
+
+.. py:attribute:: print_rec_number
+    :type: logical
+    :value: .TRUE.
+
+    Print record number.
+
+.. py:attribute:: print_rec_format
+    :type: logical
+    :value: .FALSE.
+
+    Print record format
+
+.. py:attribute:: print_rec_parameter_table
+    :type: logical
+    :value: .FALSE.
+
+    Print GRIB table version number.
+
+.. py:attribute:: print_rec_parameter_number
+    :type: logical
+    :value: .FALSE.
+
+    Print GRIB identifier of parameter.
+
+.. py:attribute:: print_rec_name
+    :type: logical
+    :value: .TRUE.
+
+    Print record alternate name
+
+.. py:attribute:: print_rec_altname
+    :type: logical
+    :value: .FALSE.
+
+    Print field short name.
+
+.. py:attribute:: print_rec_level
+    :type: logical
+    :value: .TRUE.
+
+    Print GRIB level values.
+
+.. py:attribute:: print_rec_level_type
+    :type: logical
+    :value: .FALSE.
+
+    Print GRIB level type.
+
+.. py:attribute:: print_rec_hgrid_type
+    :type: logical
+    :value: .FALSE.
+
+    Print type of horizontal coordinates 
+
+.. py:attribute:: print_rec_hgrid_size
+    :type: logical
+    :value: .FALSE.
+
+    Print size of horizontal grid (ni, nj)
+
+.. py:attribute:: print_rec_hgrid_delta
+    :type: logical
+    :value: .FALSE.
+
+    Print increment of horizontal grid (di, dj)
+
+.. py:attribute:: print_rec_hgrid_start
+    :type: logical
+    :value: .FALSE.
+
+    Print start coordinates of horizontal grid (swi, swj) (South-West)
+
+.. py:attribute:: print_rec_hgrid_end
+    :type: logical
+    :value: .FALSE.
+
+    Print end coordinates of horizontal grid (nei, nej) (North-East)
+
+.. py:attribute:: print_rec_initial_date
+    :type: logical
+    :value: .TRUE.
+
+    Print initial (reference) date of field.
+
+.. py:attribute:: print_rec_time_range_short
+    :type: logical
+    :value: .TRUE.
+
+    Print time range, short version (withozt time range type).
+
+.. py:attribute:: print_rec_time_range_long
+    :type: logical
+    :value: .TRUE.
+
+    Print time range, long version.
+
+.. py:attribute:: print_rec_validation_date
+    :type: logical
+    :value: .FALSE.
+
+    Print record validation date, as YYYYMMDDHHMM
+
+.. py:attribute:: print_rec_ntuple
+    :type: logical
+    :value: .FALSE.
+
+    Print n-tuple identificator for current record
+
+    (GRIB1: table version number, parameter number; 
+
+    GRIB2: discipline, category, parameter)
+
+.. py:attribute:: print_rec_pds
+    :type: logical
+    :value: .FALSE.
+
+    Print product definition section.
+
+.. py:attribute:: print_rec_gds
+    :type: logical
+    :value: .FALSE.
+
+    Print grid description section.
+
+.. py:attribute:: print_rec_vcoord
+    :type: logical
+    :value: .FALSE.
+
+    Print vertical coordinates parameters.
+
+.. py:attribute:: print_rec_data
+    :type: logical
+    :value: .FALSE.
+
+    Print all values of data section.
+
+.. py:attribute:: print_rec_minmax
+    :type: logical
+    :value: .FALSE.
+
+    Print minimum and maximum of data section.
+
+.. py:attribute:: print_rec_mean
+    :type: logical
+    :value: .FALSE.
+
+
+    Print mean value of data section.
+
+.. py:attribute:: print_rec_std
+    :type: logical
+    :value: .FALSE.
+
+    Print standard deviation of data section.
+
+.. py:attribute:: print_rec_median
+    :type: logical
+    :value: .FALSE.
+
+    Print median value of data section.
+
+.. py:attribute:: print_rec_minmax_location
+    :type: logical
+    :value: .FALSE.
+
+    Print location of minimum and maximum in data grid.
+
+.. py:attribute:: print_rec_undef
+    :type: logical
+    :value: .FALSE.
+
+    Print value of undef as used in data section, and number of undefined values.
+
+.. py:attribute:: print_rec_moment
+    :type: comma separated list of integers
+
+    For each value p in the list, print the p-th cental moment of the data section.
+
+.. py:attribute:: print_rec_percentile 
+    :type: comma separated list of reals
+
+    For each value p in the list, print the p-th percentile of the data section.
+
+More information on INSPECT pseudo-output is available in section 7.2.

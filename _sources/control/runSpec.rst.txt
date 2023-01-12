@@ -1,0 +1,390 @@
+:py:mod:`&RunSpecification`
+===========================
+
+.. py:module:: &RunSpecification
+    
+    This namelist block must be present and unique.
+
+.. py:attribute:: strict_nl_parsing
+    :type: logical
+    
+    Some non-recommended usage of the namelist can be useful in some
+    situations. In this case this switch should be set to .FALSE.
+    (the following tests are then skipped: orthogonality of xtr_field
+    specifications, existence of at least one xtr_field, all xtr_field 
+    defined before tmp\_ and out\_ iterations).
+
+.. py:attribute:: strict_usage
+    :type: logical
+
+    To guarantee as much as possible the consistency of the results,
+    many internal tests are made and the program raises an exception
+    as soon as a potential problem is detected. However, some tests
+    are detrimental to the flexibility of the program, and may be
+    switched off.
+    The following conditions are only enforced when strict_usage is
+    true:
+
+    * critical :py:mod:`&ModelSpecifications` parameters are set;
+    * a default model name is specified by the user, and its value is registered;
+    * except for fields collected in INCORE storage, all fields are compatible with the user specified name;
+    * core meta-information of each used record is complete and consistent; 
+    * master table version of active GRIB 2 record is compatible with the current fieldextra release; 
+    * all fields explicitly specified through in_field are present in input files;
+    * field identity is explicitly reset when using an operator modifying the field identity.
+  
+    The following actions are only performed when strict_usage is
+    true: 
+    
+    * interrupt output production, as soon as an exception is detected during the production of this output; 
+    * do not allow some potentially dangerous options.
+
+.. py:attribute:: enable_exit_status
+    :type: Logical
+    :value: .false.
+
+    enable process exit status
+
+    When enable_exit_status is .true., any exception will cause the program
+    to generate a 'STOP 1' before quitting; the Fortran 2008 standard
+    recommends that the value associated with STOP is used as process
+    exit status (but this is only a recommendation!).
+    
+    So, when enable_exit_status is true, if your system follows the 
+    standard recommendation, an exception will cause a program
+    exit status of 1.
+
+.. py:attribute:: enable_repeat_mode
+    :type: {'none','regular','all'}
+    :value: 'none'
+
+    When enable_repeat_mode is distinct from 'none', the file 'fieldextra.rmode'
+    will be created in the working directory; this file contains the full list
+    of products and their production status. This file is generated at the
+    end of the fieldextra task, the first time enable_repeat_mode is activated.
+    When fieldextra is again called, and the file 'fieldextra.rmode' is still
+    present in the working directory, all files marked as successful will be skipped.
+
+    Special output 'INCORE' and 'INSPECT' are never skipped. When 
+    enable_repeat_mode is 'regular', temporary files (files declared
+    both as input and output) are never skipped.
+    
+    Normally, when calling fieldextra with the same namelist multiple times,
+    all products will be re-computed. This can be a hurdle in a production
+    environment when exceptions occured for a couple of products only: in
+    such a case one would like to restart fieldextra with the same namelist
+    but to only re-compute the products which were unsuccessful. This can
+    be achieved with the enable_repeat_mode variable.
+    
+    The file 'fieldextra.rmode' is a self explaining ASCII file and can be 
+    edited. This can be useful to test a single product out of a complex 
+    namelist.
+
+.. py:attribute:: ready_flag_dir 
+    
+    directory path
+
+.. py:attribute:: ready_flag_prefix_pure 
+    
+    file name prefix
+
+.. py:attribute:: ready_flag_prefix_other 
+    
+    file name prefix, CURRENTLY NOT USED
+
+    Fieldextra will produce an empty file at the specified location, a
+    so called ready file, as soon as a specific group of input files has
+    been processed. This is used to synchronize fieldextra with downstream
+    processing modules.
+    
+    The processing order of input files is described at the beginning of
+    section 4.3.1; as soon as all pure input files associated with a specific
+    time stamp have been processed, and the associated output produced, including
+    those output depending on temporary buffer, an empty file with a time stamp
+    dependent name will be created. These files are created in the directory
+    ready_flag_dir and are named <ready_flag_prefix_pure><time stamp> .
+    
+    The association of input files with a certain time stamp is only done
+    for files explicitely declared within a time loop. The time stamp
+    format depends on the time loop keyword specified in the namelist
+    (see 4.3.1 --> time loop). If several time loop keywords are used
+    within the same namelist, a ready flag will be created for each 
+    (time stamp, time loop keyword) pair.
+    
+    An exception is raised if the ready flag already exists.
+
+.. py:attribute:: out_noready_postfix 
+    
+    file name postfix, incomplete files
+
+    It is possible to use a temporary file name for all 'intermediate' output
+    files, i.e. for files which are not yet completed or for which an 
+    exception has been raised. This temporary name is built by appending 
+    'out_noready_postfix' to the definitive name. This mechanism is active
+    if a non blank value is specified for out_noready_postfix.
+
+.. py:attribute:: out_snapshot_postfix 
+    
+    file name postfix, snapshot files
+
+    It is possible to produce snapshots of currently processed output at
+    specified times (see out_type_snapshot in &Process specification). The
+    name of the snapshot is constructed by appending the string <out_snapshot_postfix><time stamp>
+    to the normal output file name, where <time stamp> is the time stamp
+    of the input file triggering the snapshot production.
+
+.. py:attribute:: clone_missing_input 
+    :type: logical
+    :value: false
+
+.. py:attribute:: wait_time 
+    
+    wait time increment [s]
+
+.. py:attribute:: mx_wait_time
+
+    maximum cumulated wait time [s]
+
+.. py:attribute:: stop_wait_flag 
+    
+    file name with full path
+		
+    When some input file is missing, another try is made after wait_time
+    seconds, up to a maximum of mx_wait_time cumulated seconds. If the
+    file is still not present, it may be cloned using a previous file as
+    template, with all field values associated with the missing file set
+    to undef.
+    
+    By default these mechanisms are inactive and  missing input files
+    are skipped (and the program will return an unsuccessful exit status).
+    Each of these two mechanisms can be enabled independently.
+    
+    If the flag stop_wait_flag is found while waiting for an input file,
+    the wait loop is interrupted and the program stops.
+    
+    Cloning is enabled when "clone_missing_input" is set to true. The
+    input files which are candidate for cloning are the files part of 
+    a group of files defined by a time or an EPS keyword (<...>); all 
+    candidates sharing the same base name are grouped together (the base name is the name before the sustitution of the time or EPS keyword). 
+    Cloning is done separately for each group, and is only possible
+    when enough files have been successfully processed (at least 2 files, at least 3 time levels when a time keyword is used).
+    
+    Files contributing to INCORE storage can not be cloned.
+    Files created on the fly ('temporary' files) can not be cloned.
+    
+    When a file candidate for cloning is missing, the file is cloned
+    using as template the last processed file of the same group; the
+    records meta information is modified to match the information
+    associated with the EPS or time keyword of the missing file
+    (see below for more details), and the record values are set
+    to undefined.
+    The following rules are considered when updating the
+    meta-information of the cloned file:
+
+    group of files using <mm>, <mmm> 
+        the keyword value is interpreted as an EPS member identity; the EPS member identity is replaced in all records
+    group of files using <hh>, <hhh>, <ddhh>, <ddhhmmss>
+        the keyword value is interpreted as a lead time;
+        the lead time is replaced in all records;
+        for records with a non trivial time interval:
+        
+        * when the time period start differs from the reference date,
+          the time period is kept the same with respect to the lead time
+        * otherwise the start of the time period is not changed, and only
+          the end of the time period is modified to be kept the same with
+          respect to the lead time
+
+    group of files using <nnnnnnnn>
+        operation currently not supported!
+    group of files using <reference_yyyy:start_year>,
+        the keyword value is interpreted as a reference year;
+        the reference year is replaced in all records;
+        lead time and time interval are untouched
+    group of files using <reference_yyyymmddhh:start_date>, <reference_yyyymmddhhmm:start_date>
+        the keyword value is interpreted as a reference date;
+        the reference date is replaced in all records;
+        lead time and time interval are untouched
+    group of files using <yyyy:start_year>
+        the keyword value is interpreted as a validation year;
+        the reference year is modified in all records to match
+        the new validation year;
+        lead time and time interval are untouched
+    group of files using <yyyymmddhh:start_date>, <yyyymmddhhmm:start_date>
+        the keyword value is interpreted as a validation date;
+        
+        * when lead time is zero, the reference date is modified
+          in all records to match the new validation date
+        * otherwise the reference date is kept and the lead time
+          is modified to match the new validation date, the time
+          interval with respect to lead time is unchanged
+    
+    Note that the robustness of the cloning algorithm, in particular
+    the setting of the meta-information, depends on the hypothesis
+    that all files sharing the same base name have the same structure.
+    This may be a problem when a group of files contains fields defined 
+    for variable length time range (e.g. accumulated fields from 
+    intermittent assimilation cycle): the time range interval may
+    be coded in a way not matching the expected coding (but the
+    validation date is always correctly coded).
+       
+    Order of input files processing is described later on in
+    'Definition of input files' section.
+
+.. py:attribute:: stop_flag 
+    
+    file name with full path
+    
+    If this file is present, the program stops before reading the next 
+    input (this also interrupts any active input wait loop).
+
+.. py:attribute:: n_ompthread_total
+    
+    number of OpenMP threads used by program
+
+.. py:attribute:: n_ompthread_collect  
+
+    number of concurrent output processed in collect
+
+.. py:attribute:: n_ompthread_generate 
+    
+    number of concurrent output processed in generate
+    
+    Define the number of threads used for shared memory multitasking.
+
+    * The total number of concurrent OpenMP threads at any moment is at
+      most n_ompthread_total.
+    * The number of output processed concurrently in the collect step,
+      where decoded records are dispatched in output specific storage,
+      is n_ompthread_collect. Regrid operators applied in this step
+      may use up to INT(n_ompthread_total/n_ompthread_collect) threads
+      (this is the case for any interpolation from ICON grid).
+    * The number of output processed concurrently in the generate step,
+      where each product is created, is n_ompthread_generate. In the
+      production of each output, the applied operators are parallelized
+      with INT(n_ompthread_total/n_ompthread_generate) threads.
+
+    Two values may be specified for n_ompthread_generate, to use
+    a distinct partition of threads for expensive products
+    (see out_cost_expensive below, see 2.6 for more details).
+    
+    The default value for these parameters is 1 and a different value
+    is only allowed when the program runs in OpenMP mode. 
+
+.. py:attribute:: out_cost_expensive 
+    
+    threshold for expensive products
+    
+    When set, two different partitions of OpenMP threads are used:
+
+    * all 'expensive' products, with out_cost >= out_cost_expensive, are
+      computed first, using n_ompthread_generate(2);
+    * all other products are computed next using n_ompthread_generate(1).
+
+.. py:attribute:: out_production_granularity 
+    :type: integer, larger or equal to 1
+
+    Control the output production granularity; the larger the value the
+    higher the potential OpenMP speedup, but also the higher the memory
+    footprint. Default value is 1. See section 2.6 for more details.
+
+.. py:attribute:: soft_memory_limit 
+    :type: positive real
+
+    Soft limit on memory allocation (in gigabyte), default: 20.0 .
+    This defines a soft limit for the memory usage at run time. Memory
+    allocation is tracked within the program and the program stops when
+    reaching this limit. Note that the total memory usage at that point
+    is larger than soft_memory_limit by an unknown amount (for large 
+    problems the additional untracked memory is relatively small). 
+    
+    Setting soft_memory_limit to 0 prevents stopping the program
+    (but diagnostic on memory usage is still performed).
+    
+    Memory usage is logged in the profiling part of the file
+    'fieldextra.diagnostic', under the name 'High water mark'.
+
+.. py:attribute:: grib1_bufferin_release 
+    :type: logical
+
+    When set to true, attempt to free cached memory pages after data
+    has been used (call to posix_fadvise(...POSIX_FADV_DONTNEED...)).
+    Default is false.
+
+.. py:attribute:: grib1_bufferin_size 
+    :type: integer, in [1024(=2**10),134217728(=2**27)]
+
+    Suggested buffer size for reading GRIB 1 files, in bytes. Default
+    value is set to 4194304 (=2**22) bytes. If set to 0, the GRIB 1
+    library uses a system dependent default value.
+    
+    Large impact on performance can be expected if the value is too
+    small compared to the size of the processed records.
+
+.. py:attribute:: verbosity
+
+    Control the type of information written to the standard output:
+
+    * 'silent'  : only errors
+    * 'low'     : key status,  errors
+    * 'moderate': usage, key status, warning and errors
+    * 'high'    : usage, all status, warning and errors
+    * 'debug    : as 'high', with additional information required
+      to understand code behaviour (can be very verbose!)
+
+    The high verbosity level should be used when encountering problems
+    with the program.
+    When verbosity is set to 'debug', additional_diagnostic and 
+    additional_profiling are also automatically set to true.
+
+.. py:attribute:: diagnostic_length
+
+    Specifies the maximum length of diagnostic lines; when necessary, the
+    diagnostic is wrapped to respect this value. A value of 0 means that no
+    word wrapping takes place. A minimum length is enforced.
+
+.. py:attribute:: additional_diagnostic
+    :type: logical
+
+    Control the production of additional diagnostic, default is false.
+    When true,
+    
+    1. the following additional information is written in file fieldextra.diagnostic:
+
+       * list and processing order of input files
+       * list of output files
+       * for each output file:
+  
+         * information on processing iterations
+         * characteristics of horizontal regridding operation
+         * characteristics of each output field
+         * diagnostic produced by imported COSMO modules
+  
+    2. the following additional diagnostic files are produced:
+        
+       * fieldextra.location : locations and their associated grid points
+       * fieldextra.region : summary of region set characteristics
+       * fieldextra.region.stencil_i : region stencil for set i
+       * fieldextra.slice : information on user specified slices
+    
+    .. note:: value of additional_diagnostic is automatically set to true when verbosity is set to 'debug'
+    
+    .. attention:: significant degredation of code performance may result from the activation of this mode.
+
+.. py:attribute:: additional_profiling
+    :type: logical
+
+    Control the production of detailed code profiling, default is false.
+    When true, the following additional information is written in file fieldextra.diagnostic:
+    
+    * global cost of each type of operations
+    * detailed timing and memory usage for each produced output
+    * detailed timing of parallel regions
+    
+    .. note:: value of additional_profiling is automatically set to true when verbosity is set to 'debug'
+
+.. py:attribute:: ictools_debug_level
+    :type: integer
+    
+    Control the level of debugging information produced by the ICON tools
+    libraries. The default value is 0, meaning no debugging information is
+    produced; the larger the value, the more information will be produced.

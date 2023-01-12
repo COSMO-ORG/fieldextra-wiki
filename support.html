@@ -1,0 +1,1219 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Description of output format" href="output.html" /><link rel="prev" title="Operators to compute new fields" href="operators.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Description of support files - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="control/intro.html">Control file</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="control/runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="description-of-support-files">
+<h1>Description of support files<a class="headerlink" href="#description-of-support-files" title="Permalink to this heading">#</a></h1>
+<section id="dictionary">
+<h2>dictionary<a class="headerlink" href="#dictionary" title="Permalink to this heading">#</a></h2>
+<p>All blank lines and all lines beginning with an exclamation mark are ignored.
+The first interpreted lines define the name of the dictionary and the type of model.
+All following interpreted lines define the set of key/values.</p>
+<ol class="loweralpha">
+<li><dl>
+<dt>Global information</dt><dd><p>The first interpreted lines define global information valid for all keys of
+the current dictionary.</p>
+<blockquote>
+<div><p>DICTIONARY_NAME ‘name’          (any string)
+MODEL_TYPE ‘type’               (e.g. cosmo, ifs, gme; blank is allowed)
+PRODUCT_CATEGORY ‘cat1,…’     (optional; e.g. ‘determinist’; blank is allowed)
+GRIB2_MASTER_TABLE_VERSION nn   (optional; e.g. 11; blank is allowed)
+GRIB2_LOCAL_TABLE_VERSION vv    (optional; e.g. 1; blank is allowed only when</p>
+<blockquote>
+<div><p>no local code is used)</p>
+</div></blockquote>
+</div></blockquote>
+<p>The dictionary name is used to refer to a specific dictionary in the namelist of
+fieldextra. The model type is used to interpret local values in the dictionary and
+in input records. Furthermore, in combination with PRODUCT_CATEGORY, this information
+is used to define the products compatible with the current dictionary.</p>
+<p>Both DICTIONARY_NAME and MODEL_TYPE entries are compulsory. Empty value of MODEL_TYPE
+is supported and means any possible value (e.g. for dictionary refering to observations,
+for default dictionary valid for any model).</p>
+<p>The PRODUCT_CATEGORY entry is optional; it refers to a comma separated list of
+compatible product categories (see description of default_product_category in
+README.user for a list of supported values). Empty value is supported and means
+any possible value.</p>
+<p>The values of GRIB2_MASTER_TABLE_VERSION and GRIB2_LOCAL_TABLE_VERSION refer to the
+minimal version of the GRIB 2 tables which are required to interpret the GRIB 2
+information used in the current dictionary.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Key / values (repeated as many times as necessary)</dt><dd><p>The values associated whith each key are grouped into 5 lines:</p>
+<dl>
+<dt>Line 1 (Key)</dt><dd><ul class="simple">
+<li><p>Key is the field short name (no embedded blanks)</p></li>
+</ul>
+</dd>
+<dt>Line 2 (Units, description)</dt><dd><ul class="simple">
+<li><p>Units are the physical units of the field</p></li>
+<li><p>Description is the field (long) name</p></li>
+</ul>
+</dd>
+<dt>Line 3 (set of GRIB 1 attributes as key=value)</dt><dd><ul class="simple">
+<li><p>The first surface is the top surface, the second surface (if any) is the bottom surface,</p></li>
+</ul>
+<p>in a geographic meaning</p>
+</dd>
+<dt>Line 4 (set of GRIB 2 attributes as key=value)</dt><dd><ul class="simple">
+<li><p>Some GRIB 2 attributes, such as the surface value or the central wave number, are coded</p></li>
+</ul>
+<p>with the two integers scaleFactorOf… and scaledValueOf…, the attribute value being
+10**(-scaleFactorOf…) * scaledValueOf… ; in the dictionary below, scaleFactorOf…
+is named ‘factor…’ and scaledValueOf… is named ‘value…’
++ The first surface is the top surface, the second surface (if any) is the bottom surface,
+in a geographic meaning</p>
+</dd>
+<dt>Line 5 (other field characteristics, expressed as a set of key=value)</dt><dd><ul>
+<li><p>constant: true if the field is constant in time (associated validation date is ignored)</p></li>
+<li><p>singleLevel: true if the field is a single level field</p></li>
+<li><dl>
+<dt>passiveSfc2: second surface of associated field is passive when:</dt><dd><blockquote>
+<div><ol class="arabic simple">
+<li><p>singleLevel=false</p></li>
+<li><p>passiveSfc2=true</p></li>
+<li><p>first surface is indexed model level</p></li>
+<li><p>second surface is either undefined or not associated with any value</p></li>
+</ol>
+</div></blockquote>
+<p>Passive second surface means that the second surface information is only
+used for documenting the level characteristics (incl. vertical coefficients)
+and is not considered when matching levels. More precisely, for passive
+second surface:
+&gt; the surface type is removed by import and reset by export;
+&gt; when processing GRIB 2 records, it is expected that the vertical</p>
+<blockquote>
+<div><p>coordinate coefficients are coded as value of the second fix surface;
+this is considered both by import and export.
+If found in input record, the coefficients are transfered in the
+output record; otherwise, if suitable vertical coefficients are
+available from another source (e.g. namelist), they will be used.</p>
+</div></blockquote>
+<p>This non standard use of the GRIB 2 second surface is expected by the
+COSMO model for the height of the half levels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>soilModel: true if the field belongs to the soil model</dt><dd><p>(soil, vegetation… but also snow and lake)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>vCompIndex: order of vector component, or -1 if not a 2d vector field</dt><dd><p>(vector basis as defined by bit 5 of GRIB code table 7)</p>
+</dd>
+</dl>
+</li>
+<li><p>associatedVComp: short name of of associated vector component, for 2d vector fields</p></li>
+<li><p>associatedMLev: short name of multi-level field which can be associated to build a full vertical profile.</p></li>
+<li><dl>
+<dt>parent: short name of main parent field (if any).</dt><dd><p>When the operator to compute the field requires a lateral halo around the target area,
+the size of this halo has to be specified; in this case the string format is:</p>
+<blockquote>
+<div><p>main_parent_key:halo_size</p>
+</div></blockquote>
+<p>A halo size of 999 means the full field has to be provided.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>rttovId: string characterizing the RTTOV coefficient file used to compute the associated field;</dt><dd><p>the full name of the coefficients file is rtcoef_&lt;rttovID&gt;.dat, and the file should
+be accessible at the location rttov_coefs_path specified in &amp;GlobalResource.</p>
+</dd>
+</dl>
+</li>
+<li><p>rttovChan: channel number in RTTOV coefficient file; required to compute the associated field.</p></li>
+<li><p>multiTLevParent: true if multiple time levels of (some of) the parent fields are required.</p></li>
+<li><dl>
+<dt>localInfoNumberUse: meaning of GRIB 2 localInformationNumber, if any; if localInformationNumber</dt><dd><p>is used for something different than just differentiating different fields representing
+the same physical quantity, this should be documented here. The value of localInfoNumberUse
+can be any meaningful string; however, if the corresponding characteristics is computed in
+fieldextra, a pre-defined value has to be used. Currently this is the case for:</p>
+<blockquote>
+<div><p>poper=azimut_class &lt;–&gt; localInfoNumberUse=numberOfClasses</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>keyUsedInProgram: when set, the short name which has to be used in any namelist and any resource</dt><dd><p>files is the one defined by ‘keyUsedInProgram’, and not the original key.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Algorithm used to derive the field short name associated with a GRIB record:</dt><dd><ul class="simple">
+<li><p>list of matching dictionary entries is derived according to the rules below</p></li>
+<li><p>GRIB 1 attributes are used when working with GRIB 1 records, GRIB 2 attributes</p></li>
+</ul>
+<p>are used when working with GRIB 2 records
++ dictionary attributes explicitely defined only match when the same value is
+available in the decoded record
++ missing dictionary attributes, or dictionary attributes with values set to -1,
+always match (wildcard)
++ entry with highest explicit matches is selected (i.e. wildcards have lower
+priority)
++ a short name is associated with a record if, and only if, a unique dictionary
+entry can be associated with the decoded record</p>
+</dd>
+</dl>
+<p>Line2: Description (fixed format according to template: A20,2X,A140)
+Units                Name
+AAAAAAAAAAAAAAAAAAA  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA…
+———————————————————————————————————————–
+Line3: GRIB 1 information, blank separated key=value groups</p>
+<blockquote>
+<div><blockquote>
+<div><p>key :   table parameter alternateTable alternateParameter
+type : integer   integer        integer            integer</p>
+</div></blockquote>
+<p>required:     yes       yes             no                 no
+default:      -1        -1             -1                 -1</p>
+<blockquote>
+<div><p>key : typeLevel valueSfc1 valueSfc2 timeRangeType localElemNumber
+type :   integer   integer   integer       integer         integer</p>
+</div></blockquote>
+<p>required:        no       no         no            no              no
+default:        -1       -1         -1            -1              -1</p>
+</div></blockquote>
+<dl>
+<dt>Line4: GRIB 2 information, blank separated key=value groups</dt><dd><blockquote>
+<div><p>key : discipline category parameter statProcType typeSfc1 factorSfc1 valueSfc1 typeSfc2 factorSfc2 valueSfc2
+type :    integer  integer   integer      integer  integer    integer   integer  integer    integer   integer</p>
+</div></blockquote>
+<p>required:       yes       yes       yes           no      no          no        no       no         no        no
+default:        -1        -1        -1           -1      -1           0        -1       -1          0        -1</p>
+<blockquote>
+<div><p>key : typeGenProc satelliteSeries satelliteNumber instrumentType factorWaveNumber valueWaveNumber
+type :     integer         integer         integer        integer          integer         integer</p>
+</div></blockquote>
+<p>required:          no              no              no             no               no              no
+default:          -1              -1              -1             -1                0              -1</p>
+<blockquote>
+<div><p>key : constituentType aerosolType modeNumber distFuncType localInfoNumber
+type :         integer     integer    integer      integer         integer</p>
+</div></blockquote>
+<p>required:              no          no         no           no              no
+default:              -1          -1         -1           -1              -1</p>
+</dd>
+</dl>
+<dl>
+<dt>Line5: additional information on field characteristics, blank separated key=value groups</dt><dd><blockquote>
+<div><p>key : constant singleLevel passiveSfc2 soilModel vCompIndex associatedVComp associatedMLev
+type :  logical     logical     logical   logical    integer          string         string</p>
+</div></blockquote>
+<p>required:      yes         yes          no       yes        no              no             no
+default:        F           F           F         F        -1              ‘’             ‘’</p>
+<blockquote>
+<div><p>key :   parent rttovId rttovChan multiTLevParent localInfoNumberUse keyUsedInProgram
+type :   string  string   integer         logical             string           string</p>
+</div></blockquote>
+<p>required:       no      no        no              no                 no               no
+default:       ‘’      ‘’        -1               F                 ‘’               ‘’</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="location-list">
+<h2>location_list<a class="headerlink" href="#location-list" title="Permalink to this heading">#</a></h2>
+<p>All blank lines and all lines beginning with an exclamation mark are ignored.
+All other lines are interpreted.</p>
+<p>A location is defined by two lines:</p>
+<p>The first line follows a fixed format and contains the fields described below; any text
+added after these fields is ignored:</p>
+<blockquote>
+<div><p>Id:            unique string defining location (must not contain any column character)
+Description:   description of the location (station name,…)
+Region:        region description (e.g. used in LM_GPPA output for stations clustering)
+Flags:         string consisting of 10 characters which can be individually set to the</p>
+<blockquote>
+<div><blockquote>
+<div><p>values ‘Y’ (yes), ‘N’ (no), and ‘_’ (undefined),respectively, and which
+have the following meanings</p>
+</div></blockquote>
+<p>Flags(1):    dd not representative
+Flags(2):    ff not representative
+Flags(3):    Kalman filter available
+Flags(4):    MOS based on multilinear regression available
+Flags(5):    MOS based on logistic regression available
+Flags(6):    MOS based on extended logistic regression available
+Flags(7-10): unused</p>
+</div></blockquote>
+<p>Lon:           longitude of location, in (-180.0,180.0) [deg]
+Lat:           latitude of location, in (-90.0,90.0) [deg]
+Alt:           location altitude [m]
+gpi/gpj:       index of associated LM grid point (automatic association if set to 0)
+gph:           height of associated LM grid point (only if gpi/gpj explicitely specified)</p>
+</div></blockquote>
+<p>The second line is a comma-separated list of location aliases. These are unique strings of
+the form ‘&lt;group&gt;:&lt;name&gt;’, which may be used in the namelist alternatively to the station id.
+With these aliases it is possible to assign one location to several groups. In order to select
+data at all locations belonging to one particular group, it is sufficient to specify the name
+of the group in the namelist. Each group specifier must only be used once within the list of
+aliases associated with a certain location. Skipping this line is allowed.</p>
+<dl class="simple">
+<dt>ATTENTION: Fieldextra recognizes the group specifier ‘WMO’ and tries to interpret the</dt><dd><p>related location names as 5-digit WMO numbers. Thus one should use this
+group specification consistently. The recognition of the string ‘WMO’ is
+case-independent.</p>
+</dd>
+</dl>
+<p>ATTENTION: The location id, group, and name must not start with the character ‘_’.</p>
+</section>
+<section id="location-list-additional">
+<h2>location_list_additional<a class="headerlink" href="#location-list-additional" title="Permalink to this heading">#</a></h2>
+<p>All blank lines and all lines beginning with an exclamation mark are ignored.
+The first interpreted lines define the kind of content, and are pairs
+of keyword and value. These header lines are subdivided into two categories:</p>
+<ol class="loweralpha">
+<li><p>Obligatory header lines, common to all files defining additional location information
+These are currently the two lines</p>
+<blockquote>
+<div><p>Kind_of_specification &lt;string&gt;
+Nbr_lines_per_block &lt;integer&gt;</p>
+</div></blockquote>
+<p>The first header line must always contain the ‘Kind_of_specification’ definition.</p>
+</li>
+<li><p>Additional header lines, depending on the ‘Kind_of_specification’
+These must follow all obligatory header lines and may be in arbitrary order.</p></li>
+</ol>
+<p>The rest of the file is composed of a series of blocks, one per location. Each
+block starts with a line describing the location and continues with a set of
+lines describing the associated parameters.
+The format of both lines depends on the ‘Kind_of_specification’. Each location is recognized by
+a tag (either its id or alias), which must be defined in the location_list file.</p>
+<p>Possible kind of specifications:</p>
+<ol class="arabic">
+<li><dl>
+<dt>skyview_horizon:</dt><dd><p>skyview factor in directions south, west, north, east and total, followed by
+horizon in directions south, west, north, east</p>
+<dl class="simple">
+<dt>Keywords values:</dt><dd><p>Kind_of_specification: skyview_horizon
+Nbr_lines_per_block: 2</p>
+</dd>
+<dt>Line format:</dt><dd><p>block header: 1 string (location tag)
+second block line: 9 real numbers, blank separated</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>KF_coefficients:</dt><dd><p>Kalman filter coefficients
+Additional header lines:</p>
+<blockquote>
+<div><p>Nbr_stations &lt;integer&gt;
+Date &lt;integer, kind=kind_idate&gt;
+Model &lt;string&gt;
+Parameter &lt;string&gt;
+Error_model &lt;string&gt;</p>
+</div></blockquote>
+<dl>
+<dt>Keywords values:</dt><dd><p>Kind_of_specification: KF_coefficients
+Nbr_lines_per_block: &lt;n_lines_per_block&gt;
+Nbr_stations: &lt;n_kf_stations&gt;
+Date: &lt;kf_rdate&gt;, format YYMMDDHHmm
+Model: &lt;kf_model_name&gt;
+Parameter: &lt;kf_target_field&gt;
+Error_model: ‘1,&lt;kf_predictor_field&gt;’  (the error model is a comma-separated list of</p>
+<blockquote>
+<div><p>predictors, which must be enclosed in inverted
+commas in order to be correctly interpreted by
+the program;
+currently only a linear error model is supported,
+which uses the constant 1 and the field that will
+be corrected as predictors)</p>
+</div></blockquote>
+</dd>
+<dt>Parameter and kf_predictor_field naming convention:</dt><dd><p>See below.</p>
+</dd>
+<dt>Line format:</dt><dd><dl class="simple">
+<dt>block header: 1 string (location tag), 3 real numbers (grid point coordinates latitude,</dt><dd><p>longitude, height), blank separated</p>
+</dd>
+<dt>block lines &gt; 1: 1 integer of kind=kind_idate (validation date in format &lt;YYMMDDHHmm&gt;),</dt><dd><p>2 real numbers (Kalman coefficients c0 and c1), blank separated</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The Kalman filter correction is given by c0*1 + c1*kf_predictor_field.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>MOS_coefficients_mlr:</dt><dd><p>MOS coefficients based on multiple linear regression
+Additional header lines:</p>
+<blockquote>
+<div><p>Nbr_stations &lt;integer&gt;
+Date &lt;integer, kind=kind_idate&gt;
+Model &lt;string&gt;
+Parameter &lt;string&gt;
+Forecast_model &lt;string&gt;
+Transformation &lt;string&gt; ( for mos_predictor_field_1 in Forecast_model )
+Transformation &lt;string&gt; ( for mos_predictor_field_2 in Forecast_model )
+…
+Transformation &lt;string&gt; ( for mos_predictor_field_n in Forecast_model )
+Backtransformation &lt;string&gt;
+Missing_value_code &lt;real&gt;
+Threshold &lt;empty&gt;</p>
+</div></blockquote>
+<dl>
+<dt>Keywords values:</dt><dd><p>Kind_of_specification: MOS_coefficients
+Nbr_lines_per_block: &lt;n_lines_per_block&gt;
+Nbr_stations: &lt;n_mos_stations&gt;
+Date: &lt;mos_rdate&gt;, format YYMMDDHHmm
+Model: &lt;mos_model_name&gt;
+Parameter: &lt;mos_target_field&gt;
+Forecast_model: ‘1,&lt;mos_predictor_field_1&gt;,…,&lt;mos_predictor_field_n&gt;’</p>
+<blockquote>
+<div><p>(the forecast model is a comma-separated list of n predictors
+which must be enclosed in inverted commas in order to be correctly
+interpreted by the program; the currently implemented predictors are
+the constant 1 and a list of n predictor fields)</p>
+</div></blockquote>
+<dl>
+<dt>Transformation:</dt><dd><p>‘prototype=&lt;prototype_spec_1&gt;, prototype=&lt;prototype_spec_2&gt;, threshold=&lt;threshold&gt;’
+The values of the transformed predictor field x is computed according to
+prototype_spec[12]:
+1. “pow_pol;p0,p1,c”</p>
+<blockquote>
+<div><dl class="simple">
+<dt>pow_pol: x <a href="#id1"><span class="problematic" id="id2">|</span></a>-&gt; (p0 + p1 * x)**c</dt><dd><p><a href="#id3"><span class="problematic" id="id4">|</span></a>-&gt; undefined          if condition (*) applies</p>
+</dd>
+</dl>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><dl class="simple">
+<dt>“ln_pow_pol;p0,p1,c”</dt><dd><dl class="simple">
+<dt>ln_pow_pol: x <a href="#id5"><span class="problematic" id="id6">|</span></a>-&gt; ln[(p0 + p1 * x)**c]</dt><dd><p><a href="#id7"><span class="problematic" id="id8">|</span></a>-&gt; undefined       if condition (*) or (**) applies</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ol>
+<p>p0, p1, c, and threshold are real numbers, and
+the transformation is evaluated as
+x <a href="#id9"><span class="problematic" id="id10">|</span></a>-&gt; name_1(x) if x &lt; threshold, and name_2(x) otherwise</p>
+</dd>
+<dt>Backtransformation: analogous to Transformation</dt><dd><p>prototype_spec[12]: may be one of
+1. “inv_of_pow_pol;p0,p1,c”</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x <a href="#id11"><span class="problematic" id="id12">|</span></a>-&gt; (x**(1/c) - p0) / p1</dt><dd><p><a href="#id13"><span class="problematic" id="id14">|</span></a>-&gt; undefined                  if condition (*) or (<a href="#id15"><span class="problematic" id="id16">**</span></a><a href="#id17"><span class="problematic" id="id18">*</span></a>) applies</p>
+</dd>
+</dl>
+<p>inverse of pow_pol</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><dl class="simple">
+<dt>“inv_of_ln_pow_pol;p0,p1,exp”</dt><dd><dl class="simple">
+<dt>x <a href="#id19"><span class="problematic" id="id20">|</span></a>-&gt; (exp(x/c) - p0) / p1</dt><dd><p><a href="#id21"><span class="problematic" id="id22">|</span></a>-&gt; undefined                  if condition (*) or (<a href="#id23"><span class="problematic" id="id24">**</span></a><a href="#id25"><span class="problematic" id="id26">*</span></a>) applies</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ol>
+<p>(*)   one of {x, p0, p1, c} is undefined
+(**)  p0 + p1 * x &lt; 0
+(<a href="#id27"><span class="problematic" id="id28">**</span></a><a href="#id29"><span class="problematic" id="id30">*</span></a>) p1 != 0 and c != 0</p>
+</dd>
+</dl>
+<p>Missing_value_code: &lt;mos_undefcode&gt;
+Threshold: the keyword is defined for mos_mlr without value specification to preserve</p>
+<blockquote>
+<div><p>consistency of the format of the coefficient files of MOS methods</p>
+</div></blockquote>
+</dd>
+<dt>Parameter and predictor naming convention:</dt><dd><p>See below.</p>
+</dd>
+<dt>Line format:</dt><dd><dl class="simple">
+<dt>block header: 1 string (location tag), 3 real numbers (grid point coordinates</dt><dd><p>latitude, longitude, height), blank separated</p>
+</dd>
+<dt>block lines &gt; 1: 1 integer of kind=kind_idate (validation date in format</dt><dd><p>&lt;YYMMDDHHmm&gt;), n+1 real numbers (MOS coefficients c_0, …, c_n
+related to each predictor in Forecast_model), blank separated</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The MOS estimation is given by
+Backtransformation[c_0 +</p>
+<blockquote>
+<div><p>c_1 * Transformation_1(mos_predictor_field_1) + … +
+c_n * Transformation_n(mos_predictor_field_n)        ]</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><p>MOS_coefficients_global:
+MOS coefficients based on global multiple linear regression, valid for virtual station ‘__GRID__’
+with coordinates (0.0, 0.0, 0), representing the entire grid</p>
+<dl>
+<dt>Additional header lines:</dt><dd><p>Nbr_stations 1
+Date &lt;integer, kind=kind_idate&gt;
+Model &lt;string&gt;
+Parameter &lt;string&gt;
+Forecast_model &lt;string&gt;
+Transformation &lt;string&gt; ( for mos_predictor_field_1 in Forecast_model )
+Transformation &lt;string&gt; ( for mos_predictor_field_2 in Forecast_model )
+…
+Transformation &lt;string&gt; ( for mos_predictor_field_n in Forecast_model )
+Backtransformation &lt;string&gt;
+Missing_value_code &lt;real&gt;
+Threshold &lt;empty&gt;</p>
+</dd>
+<dt>Keywords values:</dt><dd><p>Kind_of_specification: MOS_coefficients_global
+Nbr_lines_per_block: &lt;n_lines_per_block&gt;
+Nbr_stations: &lt;n_mos_stations&gt;
+Date: &lt;mos_rdate&gt;, format YYMMDDHHmm
+Model: &lt;mos_model_name&gt;
+Parameter: &lt;mos_target_field&gt;
+Forecast_model: ‘1,&lt;mos_predictor_field_1&gt;,…,&lt;mos_predictor_field_n&gt;’</p>
+<blockquote>
+<div><p>(the forecast model is a comma-separated list of n+1 predictors
+which must be enclosed in inverted commas in order to be correctly
+interpreted by the program; the currently implemented predictors are
+the constant 1 and a list of n predictor fields)</p>
+</div></blockquote>
+<dl>
+<dt>Transformation:</dt><dd><dl>
+<dt>‘prototype=&lt;prototype_spec_1&gt;, </dt><dd><p>prototype=&lt;prototype_spec_2&gt;, threshold=&lt;threshold&gt;’
+The values of the transformed predictor field x is computed according to
+prototype_spec[12]:
+1. “pow_pol;p0,p1,c”
+pow_pol: x <a href="#id31"><span class="problematic" id="id32">|</span></a>-&gt; (p0 + p1 * x)**c</p>
+<blockquote>
+<div><p><a href="#id33"><span class="problematic" id="id34">|</span></a>-&gt; undefined          if condition (*) applies</p>
+</div></blockquote>
+<p>2. “ln_pow_pol;p0,p1,c”
+ln_pow_pol: x <a href="#id35"><span class="problematic" id="id36">|</span></a>-&gt; ln[(p0 + p1 * x)**c]</p>
+<blockquote>
+<div><p><a href="#id37"><span class="problematic" id="id38">|</span></a>-&gt; undefined       if condition (*) or (**) applies</p>
+</div></blockquote>
+<p>p0, p1, c, and threshold are real numbers, and
+the transformation is evaluated as
+x <a href="#id39"><span class="problematic" id="id40">|</span></a>-&gt; name_1(x) if x &lt; threshold, and name_2(x) otherwise</p>
+</dd>
+</dl>
+</dd>
+<dt>Backtransformation: analogous to Transformation</dt><dd><blockquote>
+<div><p>prototype_spec[12]: may be one of
+1. “inv_of_pow_pol;p0,p1,c”
+x <a href="#id41"><span class="problematic" id="id42">|</span></a>-&gt; (x**(1/c) - p0) / p1</p>
+<blockquote>
+<div><p><a href="#id43"><span class="problematic" id="id44">|</span></a>-&gt; undefined                  if condition (*) or (<a href="#id45"><span class="problematic" id="id46">**</span></a><a href="#id47"><span class="problematic" id="id48">*</span></a>) applies</p>
+</div></blockquote>
+<p>inverse of pow_pol
+2. “inv_of_ln_pow_pol;p0,p1,exp”
+x <a href="#id49"><span class="problematic" id="id50">|</span></a>-&gt; (exp(x/c) - p0) / p1</p>
+<blockquote>
+<div><p><a href="#id51"><span class="problematic" id="id52">|</span></a>-&gt; undefined                  if condition (*) or (<a href="#id53"><span class="problematic" id="id54">**</span></a><a href="#id55"><span class="problematic" id="id56">*</span></a>) applies</p>
+</div></blockquote>
+</div></blockquote>
+<p>(*)   one of {x, p0, p1, c} is undefined
+(**)  p0 + p1 * x &lt; 0
+(<a href="#id57"><span class="problematic" id="id58">**</span></a><a href="#id59"><span class="problematic" id="id60">*</span></a>) p1 != 0 and c != 0</p>
+</dd>
+</dl>
+<p>Missing_value_code: &lt;mos_undefcode&gt;
+Threshold: the keyword is defined for mos_global without value specification to preserve</p>
+<blockquote>
+<div><p>consistency of the format of the coefficient files of MOS methods</p>
+</div></blockquote>
+</dd>
+<dt>Parameter and predictor naming convention:</dt><dd><p>See below.</p>
+</dd>
+<dt>Line format:</dt><dd><dl class="simple">
+<dt>block header: __GRID__ 0.0 0.0 0.0 (id and grid point coordinates of virtual station representing</dt><dd><p>the entire grid)</p>
+</dd>
+<dt>block lines &gt; 1: 1 integer of kind=kind_idate (validation date in format &lt;YYMMDDHHmm&gt;),</dt><dd><p>n+1 real numbers (MOS coefficients c_0, …, c_n related to each predictor
+in Forecast_model), blank separated</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The MOS estimation is given by
+Backtransformation[c_0 +</p>
+<blockquote>
+<div><p>c_1 * Transformation_1(mos_predictor_field_1) + … +
+c_n * Transformation_n(mos_predictor_field_n)        ]</p>
+</div></blockquote>
+</li>
+<li><p>MOS_coefficients_logreg:
+MOS coefficients based on logistic regression
+Additional header lines:</p>
+<blockquote>
+<div><p>Nbr_stations &lt;integer&gt;
+Date &lt;integer, kind=kind_idate&gt;
+Model &lt;string&gt;
+Parameter &lt;string&gt;
+Forecast_model &lt;string&gt;
+Transformation &lt;string&gt; ( for mos_predictor_field_1 in Forecast_model )
+Transformation &lt;string&gt; ( for mos_predictor_field_2 in Forecast_model )
+…
+Transformation &lt;string&gt; ( for mos_predictor_field_n in Forecast_model )
+Backtransformation &lt;string&gt;
+Missing_value_code &lt;real&gt;
+Threshold &lt;real&gt;</p>
+</div></blockquote>
+<dl>
+<dt>Keywords values:</dt><dd><p>Kind_of_specification: MOS_coefficients_logreg
+Nbr_lines_per_block: &lt;n_lines_per_block&gt;
+Nbr_stations: &lt;n_mos_stations&gt;
+Date: &lt;mos_rdate&gt;, format YYMMDDHHmm
+Model: &lt;mos_model_name&gt;
+Parameter: &lt;mos_target_field&gt;
+Forecast_model: ‘1,&lt;mos_predictor_field_1&gt;,…,&lt;mos_predictor_field_n&gt;’</p>
+<blockquote>
+<div><p>(the forecast model is a comma-separated list of n+1 predictors
+which must be enclosed in inverted commas in order to be correctly
+interpreted by the program; the currently implemented predictors are
+the constant 1 and a list of n predictor fields)</p>
+</div></blockquote>
+<dl>
+<dt>Transformation:</dt><dd><dl>
+<dt>‘prototype=&lt;prototype_spec_1&gt;, </dt><dd><p>prototype=&lt;prototype_spec_2&gt;, threshold=&lt;threshold&gt;’
+The values of the transformed predictor field x is computed according to
+prototype_spec[12]:
+1. “pow_pol;p0,p1,c”
+pow_pol: x <a href="#id61"><span class="problematic" id="id62">|</span></a>-&gt; (p0 + p1 * x)**c</p>
+<blockquote>
+<div><p><a href="#id63"><span class="problematic" id="id64">|</span></a>-&gt; undefined          if condition (*) applies</p>
+</div></blockquote>
+<p>2. “ln_pow_pol;p0,p1,c”
+ln_pow_pol: x <a href="#id65"><span class="problematic" id="id66">|</span></a>-&gt; ln[(p0 + p1 * x)**c]</p>
+<blockquote>
+<div><p><a href="#id67"><span class="problematic" id="id68">|</span></a>-&gt; undefined       if condition (*) or (**) applies</p>
+</div></blockquote>
+<p>p0, p1, c, and threshold are real numbers, and
+the transformation is evaluated as
+x <a href="#id69"><span class="problematic" id="id70">|</span></a>-&gt; name_1(x) if x &lt; threshold, and name_2(x) otherwise</p>
+</dd>
+</dl>
+<p>(*)   one of {x, p0, p1, c} is undefined
+(**)  p0 + p1 * x &lt; 0</p>
+</dd>
+<dt>Backtransformation: “inv_of_logit”</dt><dd><p>inv_of_logit: x <a href="#id71"><span class="problematic" id="id72">|</span></a>-&gt; 1.0 / ( 1.0 + EXP(-x) )</p>
+</dd>
+</dl>
+<p>Missing_value_code: &lt;mos_undefcode&gt;
+Threshold: &lt;mos_threshold&gt;</p>
+</dd>
+<dt>Parameter and predictor naming convention:</dt><dd><p>See below.</p>
+</dd>
+<dt>Line format:</dt><dd><dl class="simple">
+<dt>block header: 1 string (location tag), 3 real numbers (grid point coordinates latitude,</dt><dd><p>longitude, height), blank separated</p>
+</dd>
+<dt>block lines &gt; 1: 1 integer of kind=kind_idate (validation date in format &lt;YYMMDDHHmm&gt;),</dt><dd><p>n+1 real numbers (MOS coefficients c_0, …, c_n related to each predictor
+in Forecast_model), blank separated</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The MOS estimation of the probability of threshold exceedance is given by
+Backtransformation[c_0                                                 +</p>
+<blockquote>
+<div><p>c_1 * Transformation_1(mos_predictor_field_1) + … +
+c_n * Transformation_n(mos_predictor_field_n)        ]</p>
+</div></blockquote>
+</li>
+<li><p>MOS_coefficients_extlogreg:
+MOS coefficients based on extended logistic regression
+Additional header lines:</p>
+<blockquote>
+<div><p>Nbr_stations &lt;integer&gt;
+Date &lt;integer, kind=kind_idate&gt;
+Model &lt;string&gt;
+Parameter &lt;string&gt;
+Forecast_model &lt;string&gt;
+Transformation &lt;string&gt; ( for mos_predictor_field_1 in Forecast_model )
+Transformation &lt;string&gt; ( for mos_predictor_field_2 in Forecast_model )
+…
+Transformation &lt;string&gt; ( for mos_predictor_field_n in Forecast_model )
+Transformation &lt;string&gt; ( for the threshold predictor ‘__THRESHOLD__’ in Forecast_model )
+Backtransformation &lt;string&gt;
+Missing_value_code &lt;real&gt;
+Threshold &lt;empty&gt;</p>
+</div></blockquote>
+<dl>
+<dt>Keywords values:</dt><dd><p>Kind_of_specification: MOS_coefficients_extlogreg
+Nbr_lines_per_block: &lt;n_lines_per_block&gt;
+Nbr_stations: &lt;n_mos_stations&gt;
+Date: &lt;mos_rdate&gt;, format YYMMDDHHmm
+Model: &lt;mos_model_name&gt;
+Parameter: &lt;mos_target_field&gt;
+Forecast_model: ‘1,&lt;mos_predictor_field_1&gt;,…,&lt;mos_predictor_field_n&gt;,__THRESHOLD__’</p>
+<blockquote>
+<div><p>(the forecast model is a comma-separated list of n+2 predictors
+which must be enclosed in inverted commas in order to be correctly
+interpreted by the program; the currently implemented predictors are
+the constant 1, a list of n field predictors, and one threshold predictor,
+which is represented by the field name ‘__THRESHOLD__’)</p>
+</div></blockquote>
+<dl>
+<dt>Transformation:</dt><dd><dl>
+<dt>‘prototype=&lt;prototype_spec_1&gt;, </dt><dd><p>prototype=&lt;prototype_spec_2&gt;, threshold=&lt;threshold&gt;’
+The values of the transformed predictor field x is computed according to
+prototype_spec[12]:
+1. “pow_pol;p0,p1,c”
+pow_pol: x <a href="#id73"><span class="problematic" id="id74">|</span></a>-&gt; (p0 + p1 * x)**c</p>
+<blockquote>
+<div><p><a href="#id75"><span class="problematic" id="id76">|</span></a>-&gt; undefined          if condition (*) applies</p>
+</div></blockquote>
+<p>2. “ln_pow_pol;p0,p1,c”
+ln_pow_pol: x <a href="#id77"><span class="problematic" id="id78">|</span></a>-&gt; ln[(p0 + p1 * x)**c]</p>
+<blockquote>
+<div><p><a href="#id79"><span class="problematic" id="id80">|</span></a>-&gt; undefined       if condition (*) or (**) applies</p>
+</div></blockquote>
+<p>p0, p1, c, and threshold are real numbers, and
+the transformation is evaluated as
+x <a href="#id81"><span class="problematic" id="id82">|</span></a>-&gt; name_1(x) if x &lt; threshold, and name_2(x) otherwise</p>
+</dd>
+</dl>
+<p>(*)   one of {x, p0, p1, c} is undefined
+(**)  p0 + p1 * x &lt; 0</p>
+</dd>
+<dt>Backtransformation: “inv_of_logit”</dt><dd><p>inv_of_logit: x <a href="#id83"><span class="problematic" id="id84">|</span></a>-&gt; 1.0 / ( 1.0 + EXP(-x) )</p>
+</dd>
+</dl>
+<p>Missing_value_code: &lt;mos_undefcode&gt;
+Threshold: &lt;empty&gt;</p>
+</dd>
+<dt>Parameter and predictor naming convention:</dt><dd><p>See below.</p>
+</dd>
+<dt>Line format:</dt><dd><dl class="simple">
+<dt>block header: 1 string (location tag), 3 real numbers (grid point coordinates latitude,</dt><dd><p>longitude, height), blank separated</p>
+</dd>
+<dt>block lines &gt; 1: 1 integer of kind=kind_idate (validation date in format &lt;YYMMDDHHmm&gt;),</dt><dd><p>n+2 real numbers (MOS coefficients c_0, …, c_n, c_(n+1) related to each
+predictor in Forecast_model), blank separated</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The MOS estimation of the probability of threshold exceedance is given by
+Backtransformation[c_0                                                     +</p>
+<blockquote>
+<div><p>c_1     * Transformation_1(mos_predictor_field_1) + … +
+c_n     * Transformation_n(mos_predictor_field_n)       +
+c_(n+1) * Transformation(__THRESHOLD__)                  ]</p>
+</div></blockquote>
+<p>Note:
+In files for ‘KF_coefficients’, ‘MOS_coefficients_mlr’, ‘MOS_coefficients_global’,
+‘MOS_coefficients_logreg’ and ‘MOS_coefficients_extlogreg’ the naming convention
+for parameter and predictor fields is as follows:</p>
+<blockquote>
+<div><p>In the most simple case, just the field name can be given to define the target field
+and the predictor fields: all levels of a multi-level field and each member of an
+ensemble prediction system can then be corrected with the same set of coefficients.
+If individual corrections or estimations have to be applied to each level of a
+multi-level field or to a specific eps member field, a unique field tag of the form</p>
+<blockquote>
+<div><p>&lt;field_name&gt;[&#64;&lt;level_value&gt;&lt;unit&gt;][&#64;member&lt;eps_member&gt;]</p>
+</div></blockquote>
+<p>can be set for the target field and the predictor fields to define the appropriate
+coefficients. Fieldextra will always check the availability of level- or
+eps-member-specific coefficients before applying level- or eps-member-independent
+corrections.</p>
+<p>Tags are currently only supported for multi-level fields of the level classes listed
+below.</p>
+<blockquote>
+<div><p>z_agl          magl
+z_amsl         masl
+p              hPa
+k              k       (hybrid)
+gk             gk      (generalized height)</p>
+</div></blockquote>
+<p>The algorithm that computes the correction or estimation explicitely looks for the
+availability of the predictor fields in the current iteration.
+If no predictor field tag has been given in the fieldextra namelist as argument to the
+transformation operator, only the field names are used to select the predictor fields;
+otherwise, the predictor tag given in the namelist are additionally used.</p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="region-list">
+<span id="section-6-4"></span><h2>region_list<a class="headerlink" href="#region-list" title="Permalink to this heading">#</a></h2>
+<p>This file is used to specify geographical regions.</p>
+<p>Multiple sets of regions may be defined in the same file.
+Within each set, the regions must not overlap.</p>
+<p>Each region is defined by one or more non overlapping polygons. Each polygon
+is defined by its summits, expressed in geographical latitude and longitude.
+Multiple sets of non overlapping regions may be defined; a tag is associated with
+each region set, and another tag is associated with each region.</p>
+<p>Each polygon is defined in this file by a block of 3 lines :
+- the first line specifies the tag of the region set, the number of summits</p>
+<blockquote>
+<div><p>defining the polygon, the tag of the region, and (optionnaly) the description
+of the region (within quotation marks when composed of multiple words).</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>the second line lists the geog. latitude of the polygon’s summits, in fixed</dt><dd><p>format, expressed in (-90.,90.) [deg]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>the third line lists the geog. longitude of the polygon’s summits, in fixed</dt><dd><p>format, expressed in (0.360.) [deg]</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>In particuler, polygons sharing the same region set tag and region tag belong
+to the same region.</p>
+<p>Following limitations exist on the choice of the region tag and region set tag:
+- the use of the character ‘:’ is prohibited
+- the string length of the region tag must not exceed ln_reg_name</p>
+<blockquote>
+<div><p>(as defined in fxtr_definition)</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>the string length of the region set tag must not exceed ln_loc_group</dt><dd><p>(as defined in fxtr_definition)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>region set tag must differ from all location groups defined in the</dt><dd><p>active location list</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>All blank lines and all lines beginning with an exclamation mark are ignored.</p>
+<p>See the description of ‘region_list’ in section 4.1 for more details.</p>
+</section>
+<section id="slice-list">
+<span id="section-6-5"></span><h2>slice_list<a class="headerlink" href="#slice-list" title="Permalink to this heading">#</a></h2>
+<p>This file is used to specify slices to produced vertical cross-sections.</p>
+<p>Each slice is defined by a broken line, with control points expressed either
+as geographical latitude/longitude, or as locations (refering to the active
+location_list file), or as grid coordinates. Segments between control points
+are either along earth (sphere) geodesic, or along straight line in grid
+coordinate space. A slice is discretized according to the values of the keys
+“slice_to_gridpoint” and “slice_resolution_factor”; it is also possible to
+upscale (smooth) the fields along the slice by setting “slice_upscaling_factor”.
+Each slice is recognized by a unique tag. Currently, only NETCDF output is
+compatible with slices (with a specific slice dimension and associated
+attributes, see 7.13 in README.user).</p>
+<p>Each slice is defined in this file by a block of 3 or 4 lines, depending on
+the way the control points are specified:
+- the first line is a user specified description of the slice
+- the second line specifies the tag associated with the slice, the number of</p>
+<blockquote>
+<div><p>control points defining the slice, and the algorithm used to build the slice.
+The following algorithms are supported:</p>
+<blockquote>
+<div><p>geodesic_latlon_slice, geodesic_loc_slice,
+geodesic_ij_slice, straight_ij_slice
+where:
+the first part of the string specifies the type of segments
+between the control points (‘geodesic’: geodesic along earth
+great circles, ‘straight’: straight line in model coordinates),
+the second part of the string specifies how control points are
+expressed (‘latlon_slice’: as geographical lat/lon, ‘ij_slice’:
+as model coordinates, ‘loc_slice’: as location).</p>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>for ‘latlon_slice’<span class="classifier">the third line lists the geog. latitude of the control points,</span></dt><dd><p>in fixed format, expressed in (-90.,90.) [deg]; the fourth line lists the geog.
+longitude of the control points, in fixed format, expressed in (0.360.) [deg]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>for ‘ij_slice’<span class="classifier">the third line lists the i-coordinates of the control points,</span></dt><dd><p>in fixed format; the fourth line lists the j-coordinates of the control points,
+in fixed format.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>for ‘loc_slice’<span class="classifier">the third line lists the locations, using the aliases</span></dt><dd><p>defined in the active location_list file.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>All blank lines and all lines beginning with an exclamation mark are ignored.</p>
+</section>
+<section id="adaboost-coefs">
+<h2>adaboost_coefs<a class="headerlink" href="#adaboost-coefs" title="Permalink to this heading">#</a></h2>
+<p>Coefficents for AdaBoost classifier algorithm.
+The first line after the comment block is the generic name of the classifier algorithm.
+The second line after the comment block list the names of the classified fields;
+multiple names are comma separated.
+The following two lines are the number of base classifiers and the number of features.
+The next line is the kind of the base classifier; supported values are
+DThresholdClassifier and DecisionTreeClassifier.
+The next line is a comma separated list describing all feature names; information about
+the level is coded as ‘field#level’, where level refers to the index of a model surface.
+All the following lines but the last two describe the parameters of each base classifier.
+The last two lines are used to specify the probability mapping function.</p>
+<dl>
+<dt>Each base classifier characteristics are coded according to the following rules:</dt><dd><dl class="simple">
+<dt>The first value on each line determines the kind of classifier:</dt><dd><p>THR = Threshold Classifier
+DTR = Decision Tree Classifier</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Line describing THR classifier:</dt><dd><p>THR val_1 val_2 val_3 voting_weight
+val_1        : index of the feature (first feature has index zero)
+val_2        : threshold value
+val_3        : indicate which region is assigned to the event class
+voting_weight: voting weight of the associated classifier</p>
+</dd>
+</dl>
+<dl>
+<dt>Line describing DTR classifier:</dt><dd><p>DTR class_1 class_2 class_3 voting_weight
+class_i      : values describing individual node classifiers, e.g.</p>
+<blockquote>
+<div><p>THR val_1 val_2 val_3</p>
+</div></blockquote>
+<p>voting_weight: voting weight of the associated classifier</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Probability mapping function f(x) is used to normalize the raw value of the
+classifier x. This function is defined by the last two lines according to:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>MFC a0 a1 a2  –&gt; coefficients for the function</dt><dd><p>f(x)=a0+a1*x+a2*x^2</p>
+</dd>
+<dt>MFT t1 t2     –&gt; if x &lt; t1 then f(x)=0</dt><dd><p>if t1 &lt; x &lt; t2 then f(x)=a0+a1*x+a2*x^2
+if x &gt; t2 then f(x)=a0+a1*t2+a2*t2^2</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Kind of classifier:
+1. Threshold Classifier</p>
+<blockquote>
+<div><p>The data is classified according to only one single threshold. Samples above
+the threshold are in one class, samples below the threshold in the other class.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><dl class="simple">
+<dt>Decision Tree Classifier</dt><dd><p>This classifier consists of three individual threshold classifiers. The first
+one is called ‘root classifier’ the second one is the ‘left child classifier’,
+the third one is called ‘right child classifier’. A sample first gets classified
+by the root. If it is classified as an ‘event’ it is handed over to the left child,
+in the other case to the right child. The corresponding child classifier calculates
+the resulting classification.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="simple">
+<dt>Example with Threshold Classifier as Base Classifier:</dt><dd><p>! Comment 1
+! Comment 2
+AdaBoostClassifier
+C_TSTORM
+2
+7
+DThresholdClassifier
+LAT,LONG,HEIGHT,DAYOFYEAR,TIME,PMSL,T#16
+THR 7 264.645 -0.542653 0.171028
+THR 5 101695 -0.6134 0.461628
+MFC 0.6688 -4.2163 6.4126
+MFT 0.4 0.6</p>
+</dd>
+<dt>Example of a line describing a Decision Tree Classifier:</dt><dd><p>DTR THR 4 12.5 0.73389 THR 3 258.5 -0.68592 THR 41 -6.0766 -0.59423 1.26233</p>
+</dd>
+</dl>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="output.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Description of output format</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="operators.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Operators to compute new fields</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Description of support files</a><ul>
+<li><a class="reference internal" href="#dictionary">dictionary</a></li>
+<li><a class="reference internal" href="#location-list">location_list</a></li>
+<li><a class="reference internal" href="#location-list-additional">location_list_additional</a></li>
+<li><a class="reference internal" href="#region-list">region_list</a></li>
+<li><a class="reference internal" href="#slice-list">slice_list</a></li>
+<li><a class="reference internal" href="#adaboost-coefs">adaboost_coefs</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

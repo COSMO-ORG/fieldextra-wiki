@@ -1,0 +1,144 @@
+*******************************************
+Supported products and data representations
+*******************************************
+
+.. _section 3.1:
+
+Model names
+===========
+
+The following table list all registred model names, and the associated values
+of the n-tuple used to derive the model name.
+
+For COSMO model (incl. GME, ICON and INCA), the model name is univoquely
+specified by the values of the 4-tuple:
+(center, subcenter, generating process identifier, product category).
+
+For IFS model, the model name is univoquely specified by the values of
+the 3-tuple:
+(center, local section number, product category).
+
+=============== ============ =========== ================ ======== ========
+registered name originating  subcenter   generating       local    product
+                center                   process          section  category
+                                         id               number
+=============== ============ =========== ================ ======== ========
+**cosmo model**
+---------------------------------------------------------------------------
+cosmo-1         zurich       any         101              any      not EPS
+cosmo-2         zurich       any         102              any      not EPS
+cosmo-7         zurich       any         107              any      not EPS
+cosmo-e         zurich       any         103,130          any      EPS
+cosmo-i2        arpa_simc    any         36,139,144,148   any      not EPS
+cosmo-i7        arpa_simc    any         31,32,34,38,     any      not EPS
+                                         42,46,131    
+cosmo_ru        moscow       any         135              any      not EPS
+cosmo_ru-eps    moscow       any         235              any      EPS
+cosmo_eu        offenbach    any         131,132,134,135  any      not EPS
+cosmo_de        offenbach    any         137,138          any      not EPS
+cosmo_de-eps    offenbach    any         137,138          any      EPS
+cosmo_d2        offenbach    any         139              any      not EPS
+cosmo_d2-eps    offenbach    any         139              any      EPS
+cosmo_it-eps    roma         not 98      15               any      EPS   
+cosmo-leps      roma         98          any              any      EPS
+cosmo-leps      cosmo        98          any              any      EPS
+**gme model**
+---------------------------------------------------------------------------
+gme             offenbach    any         159,160,185,186, any      not EPS
+                                         187,188,208,209  
+**icon model**
+---------------------------------------------------------------------------
+icon            offenbach    any         1,2,3            any      not EPS
+**inca model**
+---------------------------------------------------------------------------
+inca-1          zurich       any         201              any      not EPS
+**ifs model**
+---------------------------------------------------------------------------
+ifs-hres        ecmwf        any         any              any      not EPS
+ifs-ens         ecmwf        any         any              30       EPS
+ifs-seas        ecmwf        any         any              15,16    EPS
+=============== ============ =========== ================ ======== ========
+
+Type of product
+===============
+
+A product is defined by a model type (e.g. cosmo), a model name (e.g. cosmo-leps),
+and a product category (e.g. eps member). Product characteristics are derived from
+the meta-information available in the input records; interpretation of this
+information is dependent on local conventions defined by each originating center.
+Products from the following center are correctly and exhaustively interpreted:
+
+* Zurich, Offenbach (all local coding)
+* Roma (some local coding, COSMO-LEPS)
+* ARPA-SIMC, Moscow (generic)
+* COSMO (generic, COSMO-LEPS)
+* ECMWF (generic, some local coding)
+
+
+When the product characteristics are not recognized, the product characteristics
+can be explicitly set by the user. In particular, a generic model name 'cosmo' is
+provided to support any center using the cosmo model.
+When working with GRIB 1 input, some local coding may still not be accessible, in
+particular EPS related information. To overcome this limitation, it is supposed
+that the coding of EPS information in GRIB 1, associated with the generic model
+name 'cosmo', follows the COSMO-LEPS standard.
+
+
+A product is fully supported when the product is recognized, the coding of vertical
+coordinates is recognized, the procedures to reconstruct the vertical coordinates
+are implemented (when relevant), and the EPS informations are recognized (when 
+relevant). 
+
+The following table lists fully supported products.
+
+============================ ======= ======== ==========
+product                      gme     ifs [1]_ cosmo/icon
+============================ ======= ======== ==========
+**NWP data**
+--------------------------------------------------------
+determinist                  YES      YES      YES 
+eps control                   NA       NO      YES [2]_
+eps member                    NA      YES      YES 
+eps perturbation              NA       NO      YES 
+eps mean                      NA      YES      YES 
+eps spread                    NA       NA      YES 
+eps std. deviation            NA      YES      YES 
+eps quantile                  NA       NO      YES 
+eps quantile difference       NA       NO      YES 
+eps probability               NA      YES      YES 
+neighb. probability           NO       NO      YES 
+**Observations**
+--------------------------------------------------------
+radar                                   YES
+============================ ======= ======== ==========
+
+.. [1] IFS-HRES, IFS-ENS, IFS-SEAS
+.. [2] only COSMO LEPS 
+
+In this document, one refers to EPS derived products as PDF related
+fields (PDF stands for Probability Distribution Function).
+
+It is possible to work with unsupported or unrecognized products by setting
+'strict_usage' to false in &RunSpecification. Most fieldextra operations will
+still be allowed; however, some information may not be decoded (local usage), 
+which may lead to program exceptions, and some operations may lead to incorrect
+results, so double check your output!
+
+
+Type of data representation
+===========================
+
+====================================== ========
+====================================== ========
+geographical lat/lon                   YES
+rotated geographical lat/lon           YES [5]_
+Swiss coordinates                      YES [6]_
+Gauss-Boaga coordinates (west & east)  YES [6]_
+Native ICON grid                       YES [7]_
+====================================== ========
+
+All scanning modes are supported
+
+.. [5] only with zero angle of rotation 
+.. [6] change of reference system for vector fields not available, no GRIB 2 support
+.. [7] only in input records, interpolation on regular grid required for processing

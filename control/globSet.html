@@ -1,0 +1,571 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&amp;NetCDFImport" href="netcdf.html" /><link rel="prev" title="&amp;GlobalResource" href="globRes.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>&amp;GlobalSettings - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-GlobalSettings">
+<span id="globalsettings"></span><h1><a class="reference internal" href="#module-GlobalSettings" title="&amp;GlobalSettings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a><a class="headerlink" href="#module-GlobalSettings" title="Permalink to this heading">#</a></h1>
+<p>namelist block must be present and unique.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.default_dictionary">
+<span class="sig-name descname"><span class="pre">default_dictionary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.default_dictionary" title="Permalink to this definition">#</a></dt>
+<dd><p><strong>compulsory</strong></p>
+<p>The value of default dictionary refers to the DICTIONARY_NAME values
+in the dictionary files specified in <a class="reference internal" href="globRes.html#module-GlobalResource" title="&amp;GlobalResource"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a> it specifies
+the default active dictionary.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.default_model_name">
+<span class="sig-name descname"><span class="pre">default_model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.default_model_name" title="Permalink to this definition">#</a></dt>
+<dd><p><strong>compulsory</strong></p>
+<p>The default model name is used to</p>
+<ul class="simple">
+<li><p>select the active <a class="reference internal" href="modelSpec.html#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> block;</p></li>
+<li><p>select data containers in TMPL_BASE template;</p></li>
+<li><p>check compatibility with some data defined in <a class="reference internal" href="globRes.html#GlobalResource.location_list_additional" title="&amp;GlobalResource.location_list_additional"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalResource.location_list_additional</span></code></a> (e.g. kalman coefficients);</p></li>
+<li><p>supplement unrecognized or missing information in input records (model
+name, model type, originating center; only when it is a registred name;
+see also <a class="reference internal" href="../products.html#section-3-1"><span class="std std-ref">Model names</span></a>).</p></li>
+</ul>
+<dl class="simple">
+<dt>Supported values:</dt><dd><p>{‘unknown’, ‘cosmo’ <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, ‘cosmo-1’, ‘cosmo-2’, ‘cosmo-7’, ‘cosmo-e’,
+‘cosmo-i2’, ‘cosmo-i7’, ‘cosmo-eu’, ‘cosmo_de’, ‘cosmo_de-eps’,
+‘cosmo_d2’, ‘cosmo_d2-eps’, ‘cosmo_ru-eps’, ‘cosmo-leps’,
+‘gme’, ‘ifs’ <a class="footnote-reference brackets" href="#id3" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, ‘ifs-hres’, ‘ifs-ens’, ‘ifs-seas’, ‘inca-1’}</p>
+</dd>
+</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
+<p>Generic names, to support multiple models in same output</p>
+</aside>
+</aside>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a> must be a registred name (except when <a class="reference internal" href="runSpec.html#RunSpecification.strict_usage" title="&amp;RunSpecification.strict_usage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;RunSpecification.strict_usage</span></code></a> is false).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a> is not used to overwrite correctly decoded values but must be compatible with these decoded values (except when decoding records collected in incore storage or when <a class="reference internal" href="runSpec.html#RunSpecification.strict_usage" title="&amp;RunSpecification.strict_usage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;RunSpecification.strict_usage</span></code></a> is false).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>when a generic model name is used, only the decoded model type must be compatible with <a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a>; otherwise, the model name, the model type and the originating center must be compatible. The former mechanism supports working with multiple models at the same type, the latter allows a stricter control of the production stream.</p>
+</div>
+<p>For usage of fieldextra with an unsupported configuration of cosmo
+(i.e. the center specific coding is not implemented), setting the
+<a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a> to ‘cosmo’ open all functionalities of the
+program. Note that local coding, such as EPS information, is
+interpreted according to a default COSMO implementation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.default_product_category">
+<span class="sig-name descname"><span class="pre">default_product_category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.default_product_category" title="Permalink to this definition">#</a></dt>
+<dd><p>The default product category is used to supplement missing or unrecognized
+information and to interpret local coding in input records. This value can
+be overwritten on an input file basis by setting default_product_category
+in the <a class="reference internal" href="process.html#module-Process" title="&amp;Process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block used to define the corresponding input file (see <a class="reference internal" href="process.html#section-4-3-1"><span class="std std-ref">Input files</span></a>).</p>
+<dl class="simple">
+<dt>Supported values:</dt><dd><p>‘determinist’,
+‘eps_control’, ‘eps_member’, ‘eps_mean’, ‘eps_perturbation’,
+‘eps_spread’
+‘eps_standard_deviation’, ‘eps_standard_deviation_normed’,
+‘eps_quantile’, ‘eps_quantile_difference’,
+‘eps_probability’, ‘nbh_probability’, ‘stat_probability’,
+‘eps_probability_refdist’,
+‘eps_extreme_forecast_index’, ‘eps_shift_of_tail_index’,
+‘satellite’, ‘radar’,
+‘all’</p>
+</dd>
+</dl>
+<p>When available, the value decoded from the input record has precedence over
+the user specified value (no consistency is enforced, to supports mixing
+records with differing product categories in the same output).</p>
+<p>It may be necessary to set this value, because some meta-information is
+sometimes missing in input records and prohibits the use of some or all
+of fieldextra features (depending on the value of strict_usage).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.default_out_type_">
+<span class="sig-name descname"><span class="pre">default_out_type_</span></span><a class="headerlink" href="#GlobalSettings.default_out_type_" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.default_out_mode_">
+<span class="sig-name descname"><span class="pre">default_out_mode_</span></span><a class="headerlink" href="#GlobalSettings.default_out_mode_" title="Permalink to this definition">#</a></dt>
+<dd><p>All default values of namelist variables <code class="docutils literal notranslate"><span class="pre">out_type_*</span></code> and <code class="docutils literal notranslate"><span class="pre">out_mode_*</span></code>, as
+defined in <a class="reference internal" href="process.html#section-4-3-2"><span class="std std-ref">Output files</span></a>, can be reset.</p>
+<p>In some case, the default value is out_type dependent, this is recognized
+by <code class="docutils literal notranslate"><span class="pre">default_out_type_n_&lt;name&gt;</span></code> (default for NETCDF output) and
+<code class="docutils literal notranslate"><span class="pre">default_out_type_g_&lt;name&gt;</span></code> (default got GRIB1 and GRIB2).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.location_to_gridpoint">
+<span class="sig-name descname"><span class="pre">location_to_gridpoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;algorithm&gt;</span></em><a class="headerlink" href="#GlobalSettings.location_to_gridpoint" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the algorithm used to associate a grid point to a geographic
+location:</p>
+<dl class="simple">
+<dt>‘nn’</dt><dd><p>nearest neighbour</p>
+</dd>
+<dt>‘n4’</dt><dd><p>nearest neighbour or smallest delta(h) among 4 GP</p>
+</dd>
+<dt>‘n9’</dt><dd><p>nearest neighbour or smallest delta(h) among 9 GP</p>
+</dd>
+<dt>‘sn’</dt><dd><p>nearest gridpoints within given radius (over land: 1.415,
+over water: 2) for the optimal distance, where distance is
+the sum of the horizontal distance in meter plus the vertical
+height difference in meter multiplied by the vertical emphasis
+factor (500). This is the COSMO standard.</p>
+</dd>
+</dl>
+<p>n4, n9 nd sn skip water points when possible.</p>
+<p>Compulsory when <a class="reference internal" href="globRes.html#GlobalResource.location_list" title="&amp;GlobalResource.location_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalResource.location_list</span></code></a> is used.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.slice_resolution_factor">
+<span class="sig-name descname"><span class="pre">slice_resolution_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">strictly</span> <span class="pre">positive</span> <span class="pre">real</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3</span></em><a class="headerlink" href="#GlobalSettings.slice_resolution_factor" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the resolution used to discretized the user specified slices.</p>
+<p>Slice resolution is given by <a class="reference internal" href="#GlobalSettings.slice_resolution_factor" title="&amp;GlobalSettings.slice_resolution_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_resolution_factor</span></code></a> times a
+‘representative’ grid resolution, the ‘representative’ grid resolution
+being expressed in lat/lon space when the slice follows geodesic or in
+(i,j) space when the slice follows straight lines in grid space.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.slice_to_gridpoint">
+<span class="sig-name descname"><span class="pre">slice_to_gridpoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;algorithm&gt;</span></em><a class="headerlink" href="#GlobalSettings.slice_to_gridpoint" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the algorithm used to compute a field along a specified slice:</p>
+<dl class="simple">
+<dt>‘nn’</dt><dd><p>the slice follows the specified path, with a resolution
+which is programatically derived but can also be user
+specified (see <a class="reference internal" href="#GlobalSettings.slice_resolution_factor" title="&amp;GlobalSettings.slice_resolution_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_resolution_factor</span></code></a>),
+and, for each slice point, the field value at the nearest
+grid point is used.</p>
+</dd>
+<dt>‘nn_on_grid’</dt><dd><p>the slice is approximated by a path following
+the mass points on the horizontal grid, by taking
+the grid nearest grid points to the original slice.</p>
+</dd>
+</dl>
+<p>Compulsory when <a class="reference internal" href="globRes.html#GlobalResource.slice_list" title="&amp;GlobalResource.slice_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalResource.slice_list</span></code></a> is used.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.slice_upscaling_factor">
+<span class="sig-name descname"><span class="pre">slice_upscaling_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">strictly</span> <span class="pre">positive</span> <span class="pre">integer</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#GlobalSettings.slice_upscaling_factor" title="Permalink to this definition">#</a></dt>
+<dd><p>Define a possible upscaling of the fields along the slice.
+A value of 1 means no upscaling is applied.
+Not compatible with <a class="reference internal" href="#GlobalSettings.slice_to_gridpoint" title="&amp;GlobalSettings.slice_to_gridpoint"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_to_gridpoint</span></code></a> set to “nn_on_grid”.</p>
+<p>The upcsaling is obtained by convoluting each field along the slice with
+a boxcar function (“rectangular” function) of size (“footprint”) equal to <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">*</span> <span class="pre">slice_upscaling_factor</span> <span class="pre">/</span> <span class="pre">slice_resolution_factor</span></code>
+(expressed in terms of discretized slice resolution)
+This roughly corresponds to keeping wave lengths <a class="reference internal" href="#GlobalSettings.slice_upscaling_factor" title="&amp;GlobalSettings.slice_upscaling_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_upscaling_factor</span></code></a>
+times the grid spacing upwards.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.originating_center">
+<span class="sig-name descname"><span class="pre">originating_center</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.originating_center" title="Permalink to this definition">#</a></dt>
+<dd><p>according to GRIB table 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.production_status">
+<span class="sig-name descname"><span class="pre">production_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.production_status" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.genproc_type">
+<span class="sig-name descname"><span class="pre">genproc_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.genproc_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="GlobalSettings.auxiliary_metainfo">
+<span class="sig-name descname"><span class="pre">auxiliary_metainfo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;sring&gt;[,&lt;string&gt;</span> <span class="pre">...]</span> <span class="pre">(each</span> <span class="pre">string</span> <span class="pre">expressed</span> <span class="pre">as</span> <span class="pre">key=value)</span></em><a class="headerlink" href="#GlobalSettings.auxiliary_metainfo" title="Permalink to this definition">#</a></dt>
+<dd><p>Set after the last processing iteration, before producing the output.
+Override any value extracted from input records.</p>
+<dl>
+<dt>originating_center :</dt><dd><p>reset value of originating center (see code table 0
+of GRIB standard).</p>
+<dl class="simple">
+<dt>Possible values:</dt><dd><p>‘Moscow’, ‘Offenbach’, ‘Roma’, ‘Zurich’, ‘ARPA-SIMC’,
+‘COSMO’, ‘ECMWF’</p>
+</dd>
+</dl>
+</dd>
+<dt>production_status :</dt><dd><p>reset value of production status (see code table 1.3
+of GRIB 2 standard).</p>
+<dl class="simple">
+<dt>Possible values:</dt><dd><p>‘operational’, ‘test_operational’, ‘research’,
+‘reanalysis’, ‘TIGGE_operational’, ‘TIGGE_test’</p>
+</dd>
+</dl>
+</dd>
+<dt>genproc_type :</dt><dd><p>reset value of type of generating process (see code table 4.3
+of GRIB 2 standard).</p>
+<dl class="simple">
+<dt>Possible values:</dt><dd><p>‘observation’, ‘climatology’, ‘initialization’,
+‘analysis’, ‘analysis_error’,
+‘forecast’, ‘bias_corrected_forecast’, ‘forecast_error’,
+‘smoothed_forecast’, ‘smoothed_calibrated_forecast’,
+‘eps_forecast’, ‘eps_probability’, ‘neighbourhood_probability’</p>
+</dd>
+</dl>
+</dd>
+<dt>auxiliary_metainfo :</dt><dd><p>reset specified field meta-information; expressed as
+a list of ‘key=value’, where value is an integer
+and key is one of the following keyword:</p>
+<dl class="simple">
+<dt>keys defined in GRIB standard (value is universal)</dt><dd><p>‘masterTablesVersion’,
+‘hoursAfterDataCutoff’, ‘minutesAfterDataCutoff’,
+‘forecastProbabilityNumber’, ‘totalNumberOfForecastProbabilities’, (aerosol characteristics)
+‘scaleFactorOfFirstSize’, ‘scaledValueOfFirstSize’
+‘scaleFactorOfSecondSize’, ‘scaledValueOfSecondSize’
+‘scaleFactorOfFirstWavelength’, ‘scaledValueOfFirstWavelength’
+‘scaleFactorOfSecondWavelength’, ‘scaledValueOfSecondWavelength’ (chemical distribution characteristics)
+‘numberOfModeOfDistribution’
+‘numberOfDistributionFunctionParameters’</p>
+</dd>
+<dt>keys defined in GRIB standard (value is either a standard or a local code)</dt><dd><p>‘typeOfProcessedData’                             [GRIB 2 table 1.4]
+‘typeOfEnsembleForecast’                          [GRIB 2 table 4.6]
+‘typeOfSizeInterval’, ‘typeOfWavelengthInterval’  [GRIB 2 table 4.91]</p>
+</dd>
+<dt>keys defined in GRIB standard (value is a local code)</dt><dd><p>‘subCentre’, ‘localTablesVersion’
+‘generatingProcessIdentifier’,
+‘backgroundGeneratingProcessIdentifier’</p>
+</dd>
+<dt>local keys (value is a local code)</dt><dd><p>‘localNumberOfExperiment’, ‘localInformationNumber’,
+‘localHostIdentifier’, ‘localVersionNumber’,
+‘localCreationDateYear’, ‘localCreationDateMonth’,
+‘localCreationDateDay’, ‘localCreationDateHour’,
+‘localCreationDateMinute’, ‘localCreationDateSecond’,
+‘localValidityDateYear’, ‘localValidityDateMonth’,
+‘localValidityDateDay’, ‘localValidityDateHour’,
+‘localValidityDateMinute’, ‘localValidityDateSecond’,
+‘localTypeOfEnsembleForecast’,
+‘localTypeOfEnsembleProductGeneration’,
+‘localTypeOfEnsemblePostprocessing’,
+‘localElementNumber’,
+‘experimentVersionNumber’,
+‘baseDateEPS’, ‘baseTimeEPS’,
+‘totalInitialConditions’,
+‘numberOfMembersInCluster’,
+‘numberOfRepresentativeMember’
+‘marsClass’, ‘marsType’, ‘marsStream’, ‘suiteName’</p>
+</dd>
+</dl>
+<p>This information can also be set independently for each
+output (see <a class="reference internal" href="process.html#Process.out_auxiliary_metainfo" title="&amp;Process.out_auxiliary_metainfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.out_auxiliary_metainfo</span></code></a>), or, even,
+independently for each field (see <a class="reference internal" href="process.html#Process.set_auxiliary_metainfo" title="&amp;Process.set_auxiliary_metainfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.set_auxiliary_metainfo</span></code></a>
+later on).</p>
+<p>This feature supports, in particular, the setting of any
+supported GRIB 2 local use section.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="netcdf.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="globRes.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a><ul>
+<li><a class="reference internal" href="#GlobalSettings.default_dictionary"><code class="docutils literal notranslate"><span class="pre">default_dictionary</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.default_model_name"><code class="docutils literal notranslate"><span class="pre">default_model_name</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.default_product_category"><code class="docutils literal notranslate"><span class="pre">default_product_category</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.default_out_type_"><code class="docutils literal notranslate"><span class="pre">default_out_type_</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.default_out_mode_"><code class="docutils literal notranslate"><span class="pre">default_out_mode_</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.location_to_gridpoint"><code class="docutils literal notranslate"><span class="pre">location_to_gridpoint</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.slice_resolution_factor"><code class="docutils literal notranslate"><span class="pre">slice_resolution_factor</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.slice_to_gridpoint"><code class="docutils literal notranslate"><span class="pre">slice_to_gridpoint</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.slice_upscaling_factor"><code class="docutils literal notranslate"><span class="pre">slice_upscaling_factor</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.originating_center"><code class="docutils literal notranslate"><span class="pre">originating_center</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.production_status"><code class="docutils literal notranslate"><span class="pre">production_status</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.genproc_type"><code class="docutils literal notranslate"><span class="pre">genproc_type</span></code></a></li>
+<li><a class="reference internal" href="#GlobalSettings.auxiliary_metainfo"><code class="docutils literal notranslate"><span class="pre">auxiliary_metainfo</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

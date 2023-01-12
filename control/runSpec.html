@@ -1,0 +1,736 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&amp;GlobalResource" href="globRes.html" /><link rel="prev" title="Control file" href="intro.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>&amp;RunSpecification - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-RunSpecification">
+<span id="runspecification"></span><h1><a class="reference internal" href="#module-RunSpecification" title="&amp;RunSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a><a class="headerlink" href="#module-RunSpecification" title="Permalink to this heading">#</a></h1>
+<p>This namelist block must be present and unique.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.strict_nl_parsing">
+<span class="sig-name descname"><span class="pre">strict_nl_parsing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.strict_nl_parsing" title="Permalink to this definition">#</a></dt>
+<dd><p>Some non-recommended usage of the namelist can be useful in some
+situations. In this case this switch should be set to .FALSE.
+(the following tests are then skipped: orthogonality of xtr_field
+specifications, existence of at least one xtr_field, all xtr_field
+defined before tmp_ and out_ iterations).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.strict_usage">
+<span class="sig-name descname"><span class="pre">strict_usage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.strict_usage" title="Permalink to this definition">#</a></dt>
+<dd><p>To guarantee as much as possible the consistency of the results,
+many internal tests are made and the program raises an exception
+as soon as a potential problem is detected. However, some tests
+are detrimental to the flexibility of the program, and may be
+switched off.
+The following conditions are only enforced when strict_usage is
+true:</p>
+<ul class="simple">
+<li><p>critical <code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecifications</span></code> parameters are set;</p></li>
+<li><p>a default model name is specified by the user, and its value is registered;</p></li>
+<li><p>except for fields collected in INCORE storage, all fields are compatible with the user specified name;</p></li>
+<li><p>core meta-information of each used record is complete and consistent;</p></li>
+<li><p>master table version of active GRIB 2 record is compatible with the current fieldextra release;</p></li>
+<li><p>all fields explicitly specified through in_field are present in input files;</p></li>
+<li><p>field identity is explicitly reset when using an operator modifying the field identity.</p></li>
+</ul>
+<p>The following actions are only performed when strict_usage is
+true:</p>
+<ul class="simple">
+<li><p>interrupt output production, as soon as an exception is detected during the production of this output;</p></li>
+<li><p>do not allow some potentially dangerous options.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.enable_exit_status">
+<span class="sig-name descname"><span class="pre">enable_exit_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.false.</span></em><a class="headerlink" href="#RunSpecification.enable_exit_status" title="Permalink to this definition">#</a></dt>
+<dd><p>enable process exit status</p>
+<p>When enable_exit_status is .true., any exception will cause the program
+to generate a ‘STOP 1’ before quitting; the Fortran 2008 standard
+recommends that the value associated with STOP is used as process
+exit status (but this is only a recommendation!).</p>
+<p>So, when enable_exit_status is true, if your system follows the
+standard recommendation, an exception will cause a program
+exit status of 1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.enable_repeat_mode">
+<span class="sig-name descname"><span class="pre">enable_repeat_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">{'none','regular','all'}</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'none'</span></em><a class="headerlink" href="#RunSpecification.enable_repeat_mode" title="Permalink to this definition">#</a></dt>
+<dd><p>When enable_repeat_mode is distinct from ‘none’, the file ‘fieldextra.rmode’
+will be created in the working directory; this file contains the full list
+of products and their production status. This file is generated at the
+end of the fieldextra task, the first time enable_repeat_mode is activated.
+When fieldextra is again called, and the file ‘fieldextra.rmode’ is still
+present in the working directory, all files marked as successful will be skipped.</p>
+<p>Special output ‘INCORE’ and ‘INSPECT’ are never skipped. When
+enable_repeat_mode is ‘regular’, temporary files (files declared
+both as input and output) are never skipped.</p>
+<p>Normally, when calling fieldextra with the same namelist multiple times,
+all products will be re-computed. This can be a hurdle in a production
+environment when exceptions occured for a couple of products only: in
+such a case one would like to restart fieldextra with the same namelist
+but to only re-compute the products which were unsuccessful. This can
+be achieved with the enable_repeat_mode variable.</p>
+<p>The file ‘fieldextra.rmode’ is a self explaining ASCII file and can be
+edited. This can be useful to test a single product out of a complex
+namelist.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.ready_flag_dir">
+<span class="sig-name descname"><span class="pre">ready_flag_dir</span></span><a class="headerlink" href="#RunSpecification.ready_flag_dir" title="Permalink to this definition">#</a></dt>
+<dd><p>directory path</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.ready_flag_prefix_pure">
+<span class="sig-name descname"><span class="pre">ready_flag_prefix_pure</span></span><a class="headerlink" href="#RunSpecification.ready_flag_prefix_pure" title="Permalink to this definition">#</a></dt>
+<dd><p>file name prefix</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.ready_flag_prefix_other">
+<span class="sig-name descname"><span class="pre">ready_flag_prefix_other</span></span><a class="headerlink" href="#RunSpecification.ready_flag_prefix_other" title="Permalink to this definition">#</a></dt>
+<dd><p>file name prefix, CURRENTLY NOT USED</p>
+<p>Fieldextra will produce an empty file at the specified location, a
+so called ready file, as soon as a specific group of input files has
+been processed. This is used to synchronize fieldextra with downstream
+processing modules.</p>
+<p>The processing order of input files is described at the beginning of
+section 4.3.1; as soon as all pure input files associated with a specific
+time stamp have been processed, and the associated output produced, including
+those output depending on temporary buffer, an empty file with a time stamp
+dependent name will be created. These files are created in the directory
+ready_flag_dir and are named &lt;ready_flag_prefix_pure&gt;&lt;time stamp&gt; .</p>
+<p>The association of input files with a certain time stamp is only done
+for files explicitely declared within a time loop. The time stamp
+format depends on the time loop keyword specified in the namelist
+(see 4.3.1 –&gt; time loop). If several time loop keywords are used
+within the same namelist, a ready flag will be created for each
+(time stamp, time loop keyword) pair.</p>
+<p>An exception is raised if the ready flag already exists.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.out_noready_postfix">
+<span class="sig-name descname"><span class="pre">out_noready_postfix</span></span><a class="headerlink" href="#RunSpecification.out_noready_postfix" title="Permalink to this definition">#</a></dt>
+<dd><p>file name postfix, incomplete files</p>
+<p>It is possible to use a temporary file name for all ‘intermediate’ output
+files, i.e. for files which are not yet completed or for which an
+exception has been raised. This temporary name is built by appending
+‘out_noready_postfix’ to the definitive name. This mechanism is active
+if a non blank value is specified for out_noready_postfix.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.out_snapshot_postfix">
+<span class="sig-name descname"><span class="pre">out_snapshot_postfix</span></span><a class="headerlink" href="#RunSpecification.out_snapshot_postfix" title="Permalink to this definition">#</a></dt>
+<dd><p>file name postfix, snapshot files</p>
+<p>It is possible to produce snapshots of currently processed output at
+specified times (see out_type_snapshot in &amp;Process specification). The
+name of the snapshot is constructed by appending the string &lt;out_snapshot_postfix&gt;&lt;time stamp&gt;
+to the normal output file name, where &lt;time stamp&gt; is the time stamp
+of the input file triggering the snapshot production.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.clone_missing_input">
+<span class="sig-name descname"><span class="pre">clone_missing_input</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">false</span></em><a class="headerlink" href="#RunSpecification.clone_missing_input" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.wait_time">
+<span class="sig-name descname"><span class="pre">wait_time</span></span><a class="headerlink" href="#RunSpecification.wait_time" title="Permalink to this definition">#</a></dt>
+<dd><p>wait time increment [s]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.mx_wait_time">
+<span class="sig-name descname"><span class="pre">mx_wait_time</span></span><a class="headerlink" href="#RunSpecification.mx_wait_time" title="Permalink to this definition">#</a></dt>
+<dd><p>maximum cumulated wait time [s]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.stop_wait_flag">
+<span class="sig-name descname"><span class="pre">stop_wait_flag</span></span><a class="headerlink" href="#RunSpecification.stop_wait_flag" title="Permalink to this definition">#</a></dt>
+<dd><p>file name with full path</p>
+<p>When some input file is missing, another try is made after wait_time
+seconds, up to a maximum of mx_wait_time cumulated seconds. If the
+file is still not present, it may be cloned using a previous file as
+template, with all field values associated with the missing file set
+to undef.</p>
+<p>By default these mechanisms are inactive and  missing input files
+are skipped (and the program will return an unsuccessful exit status).
+Each of these two mechanisms can be enabled independently.</p>
+<p>If the flag stop_wait_flag is found while waiting for an input file,
+the wait loop is interrupted and the program stops.</p>
+<p>Cloning is enabled when “clone_missing_input” is set to true. The
+input files which are candidate for cloning are the files part of
+a group of files defined by a time or an EPS keyword (&lt;…&gt;); all
+candidates sharing the same base name are grouped together (the base name is the name before the sustitution of the time or EPS keyword).
+Cloning is done separately for each group, and is only possible
+when enough files have been successfully processed (at least 2 files, at least 3 time levels when a time keyword is used).</p>
+<p>Files contributing to INCORE storage can not be cloned.
+Files created on the fly (‘temporary’ files) can not be cloned.</p>
+<p>When a file candidate for cloning is missing, the file is cloned
+using as template the last processed file of the same group; the
+records meta information is modified to match the information
+associated with the EPS or time keyword of the missing file
+(see below for more details), and the record values are set
+to undefined.
+The following rules are considered when updating the
+meta-information of the cloned file:</p>
+<dl class="simple">
+<dt>group of files using &lt;mm&gt;, &lt;mmm&gt;</dt><dd><p>the keyword value is interpreted as an EPS member identity; the EPS member identity is replaced in all records</p>
+</dd>
+<dt>group of files using &lt;hh&gt;, &lt;hhh&gt;, &lt;ddhh&gt;, &lt;ddhhmmss&gt;</dt><dd><p>the keyword value is interpreted as a lead time;
+the lead time is replaced in all records;
+for records with a non trivial time interval:</p>
+<ul class="simple">
+<li><p>when the time period start differs from the reference date,
+the time period is kept the same with respect to the lead time</p></li>
+<li><p>otherwise the start of the time period is not changed, and only
+the end of the time period is modified to be kept the same with
+respect to the lead time</p></li>
+</ul>
+</dd>
+<dt>group of files using &lt;nnnnnnnn&gt;</dt><dd><p>operation currently not supported!</p>
+</dd>
+<dt>group of files using &lt;reference_yyyy:start_year&gt;,</dt><dd><p>the keyword value is interpreted as a reference year;
+the reference year is replaced in all records;
+lead time and time interval are untouched</p>
+</dd>
+<dt>group of files using &lt;reference_yyyymmddhh:start_date&gt;, &lt;reference_yyyymmddhhmm:start_date&gt;</dt><dd><p>the keyword value is interpreted as a reference date;
+the reference date is replaced in all records;
+lead time and time interval are untouched</p>
+</dd>
+<dt>group of files using &lt;yyyy:start_year&gt;</dt><dd><p>the keyword value is interpreted as a validation year;
+the reference year is modified in all records to match
+the new validation year;
+lead time and time interval are untouched</p>
+</dd>
+<dt>group of files using &lt;yyyymmddhh:start_date&gt;, &lt;yyyymmddhhmm:start_date&gt;</dt><dd><p>the keyword value is interpreted as a validation date;</p>
+<ul class="simple">
+<li><p>when lead time is zero, the reference date is modified
+in all records to match the new validation date</p></li>
+<li><p>otherwise the reference date is kept and the lead time
+is modified to match the new validation date, the time
+interval with respect to lead time is unchanged</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that the robustness of the cloning algorithm, in particular
+the setting of the meta-information, depends on the hypothesis
+that all files sharing the same base name have the same structure.
+This may be a problem when a group of files contains fields defined
+for variable length time range (e.g. accumulated fields from
+intermittent assimilation cycle): the time range interval may
+be coded in a way not matching the expected coding (but the
+validation date is always correctly coded).</p>
+<p>Order of input files processing is described later on in
+‘Definition of input files’ section.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.stop_flag">
+<span class="sig-name descname"><span class="pre">stop_flag</span></span><a class="headerlink" href="#RunSpecification.stop_flag" title="Permalink to this definition">#</a></dt>
+<dd><p>file name with full path</p>
+<p>If this file is present, the program stops before reading the next
+input (this also interrupts any active input wait loop).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.n_ompthread_total">
+<span class="sig-name descname"><span class="pre">n_ompthread_total</span></span><a class="headerlink" href="#RunSpecification.n_ompthread_total" title="Permalink to this definition">#</a></dt>
+<dd><p>number of OpenMP threads used by program</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.n_ompthread_collect">
+<span class="sig-name descname"><span class="pre">n_ompthread_collect</span></span><a class="headerlink" href="#RunSpecification.n_ompthread_collect" title="Permalink to this definition">#</a></dt>
+<dd><p>number of concurrent output processed in collect</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.n_ompthread_generate">
+<span class="sig-name descname"><span class="pre">n_ompthread_generate</span></span><a class="headerlink" href="#RunSpecification.n_ompthread_generate" title="Permalink to this definition">#</a></dt>
+<dd><p>number of concurrent output processed in generate</p>
+<p>Define the number of threads used for shared memory multitasking.</p>
+<ul class="simple">
+<li><p>The total number of concurrent OpenMP threads at any moment is at
+most n_ompthread_total.</p></li>
+<li><p>The number of output processed concurrently in the collect step,
+where decoded records are dispatched in output specific storage,
+is n_ompthread_collect. Regrid operators applied in this step
+may use up to INT(n_ompthread_total/n_ompthread_collect) threads
+(this is the case for any interpolation from ICON grid).</p></li>
+<li><p>The number of output processed concurrently in the generate step,
+where each product is created, is n_ompthread_generate. In the
+production of each output, the applied operators are parallelized
+with INT(n_ompthread_total/n_ompthread_generate) threads.</p></li>
+</ul>
+<p>Two values may be specified for n_ompthread_generate, to use
+a distinct partition of threads for expensive products
+(see out_cost_expensive below, see 2.6 for more details).</p>
+<p>The default value for these parameters is 1 and a different value
+is only allowed when the program runs in OpenMP mode.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.out_cost_expensive">
+<span class="sig-name descname"><span class="pre">out_cost_expensive</span></span><a class="headerlink" href="#RunSpecification.out_cost_expensive" title="Permalink to this definition">#</a></dt>
+<dd><p>threshold for expensive products</p>
+<p>When set, two different partitions of OpenMP threads are used:</p>
+<ul class="simple">
+<li><p>all ‘expensive’ products, with out_cost &gt;= out_cost_expensive, are
+computed first, using n_ompthread_generate(2);</p></li>
+<li><p>all other products are computed next using n_ompthread_generate(1).</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.out_production_granularity">
+<span class="sig-name descname"><span class="pre">out_production_granularity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer,</span> <span class="pre">larger</span> <span class="pre">or</span> <span class="pre">equal</span> <span class="pre">to</span> <span class="pre">1</span></em><a class="headerlink" href="#RunSpecification.out_production_granularity" title="Permalink to this definition">#</a></dt>
+<dd><p>Control the output production granularity; the larger the value the
+higher the potential OpenMP speedup, but also the higher the memory
+footprint. Default value is 1. See section 2.6 for more details.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.soft_memory_limit">
+<span class="sig-name descname"><span class="pre">soft_memory_limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">positive</span> <span class="pre">real</span></em><a class="headerlink" href="#RunSpecification.soft_memory_limit" title="Permalink to this definition">#</a></dt>
+<dd><p>Soft limit on memory allocation (in gigabyte), default: 20.0 .
+This defines a soft limit for the memory usage at run time. Memory
+allocation is tracked within the program and the program stops when
+reaching this limit. Note that the total memory usage at that point
+is larger than soft_memory_limit by an unknown amount (for large
+problems the additional untracked memory is relatively small).</p>
+<p>Setting soft_memory_limit to 0 prevents stopping the program
+(but diagnostic on memory usage is still performed).</p>
+<p>Memory usage is logged in the profiling part of the file
+‘fieldextra.diagnostic’, under the name ‘High water mark’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.grib1_bufferin_release">
+<span class="sig-name descname"><span class="pre">grib1_bufferin_release</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.grib1_bufferin_release" title="Permalink to this definition">#</a></dt>
+<dd><p>When set to true, attempt to free cached memory pages after data
+has been used (call to posix_fadvise(…POSIX_FADV_DONTNEED…)).
+Default is false.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.grib1_bufferin_size">
+<span class="sig-name descname"><span class="pre">grib1_bufferin_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer,</span> <span class="pre">in</span> <span class="pre">[1024(=2**10),134217728(=2**27)]</span></em><a class="headerlink" href="#RunSpecification.grib1_bufferin_size" title="Permalink to this definition">#</a></dt>
+<dd><p>Suggested buffer size for reading GRIB 1 files, in bytes. Default
+value is set to 4194304 (=2**22) bytes. If set to 0, the GRIB 1
+library uses a system dependent default value.</p>
+<p>Large impact on performance can be expected if the value is too
+small compared to the size of the processed records.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.verbosity">
+<span class="sig-name descname"><span class="pre">verbosity</span></span><a class="headerlink" href="#RunSpecification.verbosity" title="Permalink to this definition">#</a></dt>
+<dd><p>Control the type of information written to the standard output:</p>
+<ul class="simple">
+<li><p>‘silent’  : only errors</p></li>
+<li><p>‘low’     : key status,  errors</p></li>
+<li><p>‘moderate’: usage, key status, warning and errors</p></li>
+<li><p>‘high’    : usage, all status, warning and errors</p></li>
+<li><p>‘debug    : as ‘high’, with additional information required
+to understand code behaviour (can be very verbose!)</p></li>
+</ul>
+<p>The high verbosity level should be used when encountering problems
+with the program.
+When verbosity is set to ‘debug’, additional_diagnostic and
+additional_profiling are also automatically set to true.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.diagnostic_length">
+<span class="sig-name descname"><span class="pre">diagnostic_length</span></span><a class="headerlink" href="#RunSpecification.diagnostic_length" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the maximum length of diagnostic lines; when necessary, the
+diagnostic is wrapped to respect this value. A value of 0 means that no
+word wrapping takes place. A minimum length is enforced.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.additional_diagnostic">
+<span class="sig-name descname"><span class="pre">additional_diagnostic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.additional_diagnostic" title="Permalink to this definition">#</a></dt>
+<dd><p>Control the production of additional diagnostic, default is false.
+When true,</p>
+<ol class="arabic simple">
+<li><p>the following additional information is written in file fieldextra.diagnostic:</p>
+<ul class="simple">
+<li><p>list and processing order of input files</p></li>
+<li><p>list of output files</p></li>
+<li><p>for each output file:</p>
+<ul>
+<li><p>information on processing iterations</p></li>
+<li><p>characteristics of horizontal regridding operation</p></li>
+<li><p>characteristics of each output field</p></li>
+<li><p>diagnostic produced by imported COSMO modules</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>the following additional diagnostic files are produced:</p>
+<ul class="simple">
+<li><p>fieldextra.location : locations and their associated grid points</p></li>
+<li><p>fieldextra.region : summary of region set characteristics</p></li>
+<li><p>fieldextra.region.stencil_i : region stencil for set i</p></li>
+<li><p>fieldextra.slice : information on user specified slices</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>value of additional_diagnostic is automatically set to true when verbosity is set to ‘debug’</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>significant degredation of code performance may result from the activation of this mode.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.additional_profiling">
+<span class="sig-name descname"><span class="pre">additional_profiling</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.additional_profiling" title="Permalink to this definition">#</a></dt>
+<dd><p>Control the production of detailed code profiling, default is false.
+When true, the following additional information is written in file fieldextra.diagnostic:</p>
+<ul class="simple">
+<li><p>global cost of each type of operations</p></li>
+<li><p>detailed timing and memory usage for each produced output</p></li>
+<li><p>detailed timing of parallel regions</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>value of additional_profiling is automatically set to true when verbosity is set to ‘debug’</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="RunSpecification.ictools_debug_level">
+<span class="sig-name descname"><span class="pre">ictools_debug_level</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer</span></em><a class="headerlink" href="#RunSpecification.ictools_debug_level" title="Permalink to this definition">#</a></dt>
+<dd><p>Control the level of debugging information produced by the ICON tools
+libraries. The default value is 0, meaning no debugging information is
+produced; the larger the value, the more information will be produced.</p>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="globRes.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="intro.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Control file</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a><ul>
+<li><a class="reference internal" href="#RunSpecification.strict_nl_parsing"><code class="docutils literal notranslate"><span class="pre">strict_nl_parsing</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.strict_usage"><code class="docutils literal notranslate"><span class="pre">strict_usage</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.enable_exit_status"><code class="docutils literal notranslate"><span class="pre">enable_exit_status</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.enable_repeat_mode"><code class="docutils literal notranslate"><span class="pre">enable_repeat_mode</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.ready_flag_dir"><code class="docutils literal notranslate"><span class="pre">ready_flag_dir</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.ready_flag_prefix_pure"><code class="docutils literal notranslate"><span class="pre">ready_flag_prefix_pure</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.ready_flag_prefix_other"><code class="docutils literal notranslate"><span class="pre">ready_flag_prefix_other</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.out_noready_postfix"><code class="docutils literal notranslate"><span class="pre">out_noready_postfix</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.out_snapshot_postfix"><code class="docutils literal notranslate"><span class="pre">out_snapshot_postfix</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.clone_missing_input"><code class="docutils literal notranslate"><span class="pre">clone_missing_input</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.wait_time"><code class="docutils literal notranslate"><span class="pre">wait_time</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.mx_wait_time"><code class="docutils literal notranslate"><span class="pre">mx_wait_time</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.stop_wait_flag"><code class="docutils literal notranslate"><span class="pre">stop_wait_flag</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.stop_flag"><code class="docutils literal notranslate"><span class="pre">stop_flag</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.n_ompthread_total"><code class="docutils literal notranslate"><span class="pre">n_ompthread_total</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.n_ompthread_collect"><code class="docutils literal notranslate"><span class="pre">n_ompthread_collect</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.n_ompthread_generate"><code class="docutils literal notranslate"><span class="pre">n_ompthread_generate</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.out_cost_expensive"><code class="docutils literal notranslate"><span class="pre">out_cost_expensive</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.out_production_granularity"><code class="docutils literal notranslate"><span class="pre">out_production_granularity</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.soft_memory_limit"><code class="docutils literal notranslate"><span class="pre">soft_memory_limit</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.grib1_bufferin_release"><code class="docutils literal notranslate"><span class="pre">grib1_bufferin_release</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.grib1_bufferin_size"><code class="docutils literal notranslate"><span class="pre">grib1_bufferin_size</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.verbosity"><code class="docutils literal notranslate"><span class="pre">verbosity</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.diagnostic_length"><code class="docutils literal notranslate"><span class="pre">diagnostic_length</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.additional_diagnostic"><code class="docutils literal notranslate"><span class="pre">additional_diagnostic</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.additional_profiling"><code class="docutils literal notranslate"><span class="pre">additional_profiling</span></code></a></li>
+<li><a class="reference internal" href="#RunSpecification.ictools_debug_level"><code class="docutils literal notranslate"><span class="pre">ictools_debug_level</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

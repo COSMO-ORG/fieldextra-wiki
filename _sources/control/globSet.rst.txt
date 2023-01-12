@@ -1,0 +1,254 @@
+:py:mod:`&GlobalSettings`
+=========================
+
+.. py:module:: &GlobalSettings
+    
+    namelist block must be present and unique.
+
+.. py:attribute:: default_dictionary
+    :type: string
+
+    **compulsory**
+
+    The value of default dictionary refers to the DICTIONARY_NAME values
+    in the dictionary files specified in :py:mod:`&GlobalResource` it specifies 
+    the default active dictionary.
+
+.. py:attribute:: default_model_name
+    :type: string
+
+    **compulsory**
+
+    The default model name is used to
+
+    * select the active :py:mod:`&ModelSpecification` block;
+    * select data containers in TMPL_BASE template;
+    * check compatibility with some data defined in :py:attr:`&GlobalResource.location_list_additional` (e.g. kalman coefficients);
+    * supplement unrecognized or missing information in input records (model
+      name, model type, originating center; only when it is a registred name;
+      see also :ref:`section 3.1`).
+    
+    Supported values:
+        {'unknown', 'cosmo' [1]_, 'cosmo-1', 'cosmo-2', 'cosmo-7', 'cosmo-e',
+        'cosmo-i2', 'cosmo-i7', 'cosmo-eu', 'cosmo_de', 'cosmo_de-eps',
+        'cosmo_d2', 'cosmo_d2-eps', 'cosmo_ru-eps', 'cosmo-leps',
+        'gme', 'ifs' [1]_, 'ifs-hres', 'ifs-ens', 'ifs-seas', 'inca-1'}
+    
+    .. [1] Generic names, to support multiple models in same output
+    
+    .. note:: :py:attr:`&GlobalSettings.default_model_name` must be a registred name (except when :py:attr:`&RunSpecification.strict_usage` is false).
+    
+    .. note:: :py:attr:`&GlobalSettings.default_model_name` is not used to overwrite correctly decoded values but must be compatible with these decoded values (except when decoding records collected in incore storage or when :py:attr:`&RunSpecification.strict_usage` is false). 
+    
+    .. note:: when a generic model name is used, only the decoded model type must be compatible with :py:attr:`&GlobalSettings.default_model_name`; otherwise, the model name, the model type and the originating center must be compatible. The former mechanism supports working with multiple models at the same type, the latter allows a stricter control of the production stream.
+     
+    For usage of fieldextra with an unsupported configuration of cosmo
+    (i.e. the center specific coding is not implemented), setting the
+    :py:attr:`&GlobalSettings.default_model_name` to 'cosmo' open all functionalities of the
+    program. Note that local coding, such as EPS information, is
+    interpreted according to a default COSMO implementation.
+
+.. py:attribute:: default_product_category
+    :type: string
+
+    The default product category is used to supplement missing or unrecognized
+    information and to interpret local coding in input records. This value can
+    be overwritten on an input file basis by setting default_product_category
+    in the :py:mod:`&Process` block used to define the corresponding input file (see :ref:`section 4.3.1`).
+    
+    Supported values:
+      'determinist',
+      'eps_control', 'eps_member', 'eps_mean', 'eps_perturbation',
+      'eps_spread'
+      'eps_standard_deviation', 'eps_standard_deviation_normed',
+      'eps_quantile', 'eps_quantile_difference', 
+      'eps_probability', 'nbh_probability', 'stat_probability', 
+      'eps_probability_refdist',
+      'eps_extreme_forecast_index', 'eps_shift_of_tail_index',
+      'satellite', 'radar', 
+      'all'
+    
+    When available, the value decoded from the input record has precedence over
+    the user specified value (no consistency is enforced, to supports mixing
+    records with differing product categories in the same output). 
+    
+    It may be necessary to set this value, because some meta-information is
+    sometimes missing in input records and prohibits the use of some or all 
+    of fieldextra features (depending on the value of strict_usage). 
+
+.. py:attribute:: default_out_type_
+
+.. py:attribute:: default_out_mode_
+
+    All default values of namelist variables ``out_type_*`` and ``out_mode_*``, as
+    defined in :ref:`section 4.3.2`, can be reset.
+    
+    In some case, the default value is out_type dependent, this is recognized
+    by ``default_out_type_n_<name>`` (default for NETCDF output) and 
+    ``default_out_type_g_<name>`` (default got GRIB1 and GRIB2).
+
+
+
+.. py:attribute:: location_to_gridpoint
+    :type: <algorithm>
+
+    Define the algorithm used to associate a grid point to a geographic
+    location:
+      
+    'nn'
+        nearest neighbour 
+    'n4'  
+        nearest neighbour or smallest delta(h) among 4 GP
+    'n9'
+        nearest neighbour or smallest delta(h) among 9 GP 
+    'sn'
+        nearest gridpoints within given radius (over land: 1.415, 
+        over water: 2) for the optimal distance, where distance is
+        the sum of the horizontal distance in meter plus the vertical
+        height difference in meter multiplied by the vertical emphasis
+        factor (500). This is the COSMO standard.
+
+    n4, n9 nd sn skip water points when possible.
+
+    Compulsory when :py:attr:`&GlobalResource.location_list` is used.
+
+.. py:attribute:: slice_resolution_factor 
+    :type: strictly positive real
+    :value: 0.3
+
+    Define the resolution used to discretized the user specified slices.
+    
+    Slice resolution is given by :py:attr:`&GlobalSettings.slice_resolution_factor` times a
+    'representative' grid resolution, the 'representative' grid resolution
+    being expressed in lat/lon space when the slice follows geodesic or in 
+    (i,j) space when the slice follows straight lines in grid space.  
+
+.. py:attribute:: slice_to_gridpoint
+    :type: <algorithm>
+
+    Define the algorithm used to compute a field along a specified slice:
+
+    'nn'          
+        the slice follows the specified path, with a resolution
+        which is programatically derived but can also be user
+        specified (see :py:attr:`&GlobalSettings.slice_resolution_factor`),
+        and, for each slice point, the field value at the nearest
+        grid point is used.
+    'nn_on_grid'  
+        the slice is approximated by a path following 
+        the mass points on the horizontal grid, by taking
+        the grid nearest grid points to the original slice.
+    
+    Compulsory when :py:attr:`&GlobalResource.slice_list` is used.
+
+.. py:attribute:: slice_upscaling_factor 
+    :type: strictly positive integer
+    :value: 1
+
+    Define a possible upscaling of the fields along the slice.
+    A value of 1 means no upscaling is applied.
+    Not compatible with :py:attr:`&GlobalSettings.slice_to_gridpoint` set to "nn_on_grid".
+    
+    The upcsaling is obtained by convoluting each field along the slice with
+    a boxcar function ("rectangular" function) of size ("footprint") equal to ``0.5 * slice_upscaling_factor / slice_resolution_factor``
+    (expressed in terms of discretized slice resolution)
+    This roughly corresponds to keeping wave lengths :py:attr:`&GlobalSettings.slice_upscaling_factor`
+    times the grid spacing upwards.
+
+.. py:attribute:: originating_center
+    :type: string
+    
+    according to GRIB table 0
+
+.. py:attribute:: production_status
+    :type: string
+
+.. py:attribute:: genproc_type
+    :type: string
+
+.. py:attribute:: auxiliary_metainfo
+    :type: <sring>[,<string> ...] (each string expressed as key=value)
+
+    Set after the last processing iteration, before producing the output.
+    Override any value extracted from input records.
+    
+    originating_center :   
+        reset value of originating center (see code table 0 
+        of GRIB standard).
+
+        Possible values:
+            'Moscow', 'Offenbach', 'Roma', 'Zurich', 'ARPA-SIMC',
+            'COSMO', 'ECMWF'
+
+    production_status :     
+        reset value of production status (see code table 1.3 
+        of GRIB 2 standard). 
+
+        Possible values:
+            'operational', 'test_operational', 'research',
+            'reanalysis', 'TIGGE_operational', 'TIGGE_test'
+
+    genproc_type :          
+        reset value of type of generating process (see code table 4.3 
+        of GRIB 2 standard). 
+        
+        Possible values:
+            'observation', 'climatology', 'initialization',
+            'analysis', 'analysis_error',
+            'forecast', 'bias_corrected_forecast', 'forecast_error',
+            'smoothed_forecast', 'smoothed_calibrated_forecast',
+            'eps_forecast', 'eps_probability', 'neighbourhood_probability'
+
+    auxiliary_metainfo :    
+        reset specified field meta-information; expressed as
+        a list of 'key=value', where value is an integer
+        and key is one of the following keyword:
+        
+        keys defined in GRIB standard (value is universal)
+            'masterTablesVersion', 
+            'hoursAfterDataCutoff', 'minutesAfterDataCutoff',
+            'forecastProbabilityNumber', 'totalNumberOfForecastProbabilities', (aerosol characteristics)
+            'scaleFactorOfFirstSize', 'scaledValueOfFirstSize'
+            'scaleFactorOfSecondSize', 'scaledValueOfSecondSize'
+            'scaleFactorOfFirstWavelength', 'scaledValueOfFirstWavelength'
+            'scaleFactorOfSecondWavelength', 'scaledValueOfSecondWavelength' (chemical distribution characteristics)
+            'numberOfModeOfDistribution'
+            'numberOfDistributionFunctionParameters'
+
+        keys defined in GRIB standard (value is either a standard or a local code)
+            'typeOfProcessedData'                             [GRIB 2 table 1.4]
+            'typeOfEnsembleForecast'                          [GRIB 2 table 4.6]
+            'typeOfSizeInterval', 'typeOfWavelengthInterval'  [GRIB 2 table 4.91]
+
+        keys defined in GRIB standard (value is a local code)
+            'subCentre', 'localTablesVersion'
+            'generatingProcessIdentifier',
+            'backgroundGeneratingProcessIdentifier'
+
+        local keys (value is a local code)
+            'localNumberOfExperiment', 'localInformationNumber',
+            'localHostIdentifier', 'localVersionNumber',
+            'localCreationDateYear', 'localCreationDateMonth',
+            'localCreationDateDay', 'localCreationDateHour',
+            'localCreationDateMinute', 'localCreationDateSecond', 
+            'localValidityDateYear', 'localValidityDateMonth',
+            'localValidityDateDay', 'localValidityDateHour',
+            'localValidityDateMinute', 'localValidityDateSecond',
+            'localTypeOfEnsembleForecast',
+            'localTypeOfEnsembleProductGeneration',
+            'localTypeOfEnsemblePostprocessing',
+            'localElementNumber',
+            'experimentVersionNumber',
+            'baseDateEPS', 'baseTimeEPS',
+            'totalInitialConditions',
+            'numberOfMembersInCluster',
+            'numberOfRepresentativeMember'
+            'marsClass', 'marsType', 'marsStream', 'suiteName'
+
+        This information can also be set independently for each
+        output (see :py:attr:`&Process.out_auxiliary_metainfo`), or, even,
+        independently for each field (see :py:attr:`&Process.set_auxiliary_metainfo`
+        later on).
+
+        This feature supports, in particular, the setting of any
+        supported GRIB 2 local use section.

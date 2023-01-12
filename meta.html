@@ -1,0 +1,538 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="About operators and tags" href="aboutOpsTags.html" /><link rel="prev" title="Description of GRIB2 local use" href="grib2.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Handling of meta-information - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="control/intro.html">Control file</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="control/runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="handling-of-meta-information">
+<h1>Handling of meta-information<a class="headerlink" href="#handling-of-meta-information" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>Each 2-dimensional field is associated with a set of meta-information describing the
+characteristics of the field. For each input record, the set of meta-information
+depends on the input format and on the way the record has been created. Some
+information is required for a correct processing of the field (e.g. horizontal grid),
+other is optional.</p>
+<p>When processing an input record, fieldextra decodes most of the meta-information
+and keeps it in internal storage, after a possible translation to an internal
+representation (to be input format neutral). Missing or incomplete information
+may be supplemented with user specified information and dictionary information.
+Furthermore, meta-information may be programatically updated when computing a
+new field or applying some operators, relying in particular on the information
+defined in the active dictionary.</p>
+<p>The set of meta-information created in the output depends on the type of output.
+If necessary, the information is translated from the internal representation to
+the output specific representation. For some meta-information, missing values may
+be supplemented by values defined in the active dictionary.</p>
+<p>Local meta-information, in the sense of information which is defined in the
+GRIB local use section, is simply transfered from the input to the output.
+When a new field is computed, the local meta-information of the derived field
+is taken from the local meta-information of the main parent.
+Two exceptions to this rule:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>local meta-information internally flaged as ‘volatile’ is erased after
+the field has been identified, and re-created on the basis of the active
+dictionary at the very end of the last processing iteration.
+Currently declared as volatile:</p>
+<blockquote>
+<div><p>COSMO model: localElementNumber, localInformationNumber, marsType</p>
+</div></blockquote>
+</li>
+<li><p>on a field basis, the value of localInformationNumber may be declared as
+significant, instead of volatile, by setting localInfoNumberUse in the
+active dictionary. In this case, the decoded value is kept, and transfered
+across any processing iterations. Furthermore, the value is programatically
+set by some operators (e.g. when localInfoNumberUse=numberOfClasses for
+some field, applying poper=’azimut_class’ results in localInformationNumber
+being set to the number of classes for this field).</p></li>
+</ol>
+</div></blockquote>
+<p>As explained below, the user has always the possibility to reset any
+local meta-information by using auxiliary_metainfo in &amp;GlobalSettings,
+out_auxiliary_metainfo in &amp;Process, or set_auxiliary_metainfo in &amp;Process.</p>
+<p>The user has the possibility to define some default meta-information, to supplement
+_missing_ information in the input records:</p>
+<blockquote>
+<div><p>in &amp;GlobalSettings :          default_model_name, default_product_category
+in &amp;ModelSpecification :      vertical_coordinate_*
+in &amp;Process (io definition) : default_product_category</p>
+</div></blockquote>
+<p>Furthermore, the user has the possibility to explicitely set some meta-information,
+re-setting any previous value. In this latter case, depending on the operator, the
+information may be reset just after decoding a record, before any processing, or
+before generating the output data, after all other processing (in this latter case,
+the user value has precedence over any programatically set values and over any
+values defined in the active dictionary):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>&gt; to re-set values of decoded records, before any processing :</dt><dd><dl class="simple">
+<dt>in &amp;ModelSpecification<span class="classifier">earth_axis_large, earth_axis_small (GRIB 1 input)</span></dt><dd><p>vertical_coordinate_* (reset if set_vcoord=.T. or
+vertical_coordinate_reset=.T.)</p>
+</dd>
+<dt>in &amp;Process (field iteration)<span class="classifier">set_units, set_vcoord, set_level_property,</span></dt><dd><p>set_reference_date, set_leadtime,
+set_trange_type, set_time_range,
+set_genproc_type, set_product_category,
+set_epsmember_identity, set_auxiliary_metainfo</p>
+</dd>
+</dl>
+</dd>
+<dt>&gt; to re-set values just before generating the output data :</dt><dd><dl class="simple">
+<dt>in &amp;GlobalSettings<span class="classifier">originating_center, production_status,</span></dt><dd><p>genproc_type, auxiliary_metainfo</p>
+</dd>
+<dt>in &amp;Process (io definition)<span class="classifier">out_model_name,</span></dt><dd><p>out_genproc_type, out_product_category,
+out_vertical_coordinate, out_auxiliary_metainfo</p>
+</dd>
+<dt>in &amp;Process (field iteration)<span class="classifier">set_units, set_level_property,</span></dt><dd><p>set_reference_date, set_leadtime,
+set_trange_type,
+set_genproc_type, set_product_category,
+set_epsmember_identity, set_auxiliary_metainfo</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p>The meta-information processing flow is summarized in the following picture:</p>
+<blockquote>
+<div><dl>
+<dt>** input data **</dt><dd><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</dd>
+</dl>
+<p>++ decode record ++
+translate information to internal representation
+(auxiliary meta-information is not interpreted)</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>GRIB 1 record ?
+yes: use specified defaults         [earth_axis_*]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>missing or partial information ?
+yes: use specified defaults         [default_model_name -&gt; model name, model type, center;</p>
+<blockquote>
+<div><blockquote>
+<div><p>default_product_category; vertical_coordinate_*     ]</p>
+</div></blockquote>
+<dl>
+<dt>use dictionary information     [type of generating process;</dt><dd><blockquote>
+<div><p>type of statistical processing;</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line">field level                                         ]</div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<p>regrid operator ?
+yes: programatically set            [horizontal grid]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>++ collect record ++
+re-init volatile information        [localInformationNumber; localElementNumber; marsType;</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">forecastProbabilityNumber; totalNumberOfForecastProbabilities]</div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>in_field: set_* ?
+yes: reset information              [set_units; set_vcoord; set_level_property;</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">set_reference_date; set_trange_type; set_time_range;</div>
+<div class="line">set_leadtime; set_product_category; set_epsmember_identity;</div>
+<div class="line">set_genproc_type; set_auxiliary_metainfo                  ]</div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>++ processing iterations ++
+compute new field ?
+no: transfer information
+yes: use main parent,</p>
+<blockquote>
+<div><p>use dictionary,                [level]
+programatically set</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>column operator ?
+yes: programatically set            [level]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>temporal operator ?
+yes: programatically set            [time range information]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>reset field identity ?
+yes: programatically set            [short name, units]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>++ prepare output ++
+postprocessing operator ?
+yes: programatically set            [as coded in chosen postprocessing operator]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>regrid operator ?
+yes: programatically set            [horizontal grid]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>volatile ?
+programatically set                 [marsType]
+from dictionary                     [localInformationNumber; localElementNumber]</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>Settings in &amp;GlobalSettings ?
+yes: reset information              [originating_center; production_status;</p>
+<blockquote>
+<div><p>genproc_type, auxiliary_metainfo      ]</p>
+</div></blockquote>
+<p>Settings in &amp;Process (io def)?
+yes: reset information              [out_model_name;</p>
+<blockquote>
+<div><p>out_genproc_type; out_product_category;
+out_vertical_coordinate; out_auxiliary_metainfo]</p>
+</div></blockquote>
+<p>Settings in &amp;Process (fld def)?
+yes: reset information              [set_units; set_level_property;</p>
+<blockquote>
+<div><blockquote>
+<div><p>set_reference_date; set_leadtime;</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line">set_trange_type; set_product_category;</div>
+<div class="line">set_epsmember_identity;</div>
+<div class="line">set_genproc_type; set_auxiliary_metainfo      ]</div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>++ generate output ++
+silently discard information not supported by output type</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>translate information to type compatible representation
+(GRIB 1 : use dictionary to translate level)</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>** output data **</p>
+</div></blockquote>
+</div></blockquote>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="aboutOpsTags.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">About operators and tags</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="grib2.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Description of GRIB2 local use</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

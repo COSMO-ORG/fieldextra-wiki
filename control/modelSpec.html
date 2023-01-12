@@ -1,0 +1,498 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&amp;Process" href="process.html" /><link rel="prev" title="&amp;InspectSpecification" href="inspectSpec.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>&amp;ModelSpecification - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lexicon.html">Lexicon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summary.html">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-ModelSpecification">
+<span id="modelspecification"></span><h1><a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a><a class="headerlink" href="#module-ModelSpecification" title="Permalink to this heading">#</a></h1>
+<p>This namelist block must be present and can be repeated as many times
+as necessary.</p>
+<p>Each set of <a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> defines common characteristics of input
+fields associated with a certain model configuration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;string&gt;</span></em><a class="headerlink" href="#ModelSpecification.model_name" title="Permalink to this definition">#</a></dt>
+<dd><p>must be unique among all <a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> blocks</p>
+<p>Name of model related to current specifications. The active set is defined
+by setting <a class="reference internal" href="globSet.html#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a>. Only one set can be active
+at the same time.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.earth_axis_large">
+<span class="sig-name descname"><span class="pre">earth_axis_large</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;real</span> <span class="pre">in</span> <span class="pre">[m]&gt;</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ModelSpecification.earth_axis_large" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.earth_axis_small">
+<span class="sig-name descname"><span class="pre">earth_axis_small</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;real</span> <span class="pre">in</span> <span class="pre">[m]&gt;</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ModelSpecification.earth_axis_small" title="Permalink to this definition">#</a></dt>
+<dd><p>Coding of earth model in GRIB 1 is limited; in particular the earth axis can
+only take one of the value prescribed in the GRIB 1 table 7. Consequently,
+the coded values may differ from the effective values used in the associated
+model, leading to incorrect computation of some differential operators. To
+overcome this difficulty, the earth axis may be explicitely set; in case of
+a spherical earth model both values must be set to the earth radius.
+When set and processing a GRIB 1 record, the specified values overwrite the
+information coded in the record meta-information.
+When <a class="reference internal" href="runSpec.html#RunSpecification.strict_usage" title="&amp;RunSpecification.strict_usage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;RunSpecification.strict_usage</span></code></a> is true and GRIB 1 records are decoded, it is compulsory
+to set these values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.hydrometeor">
+<span class="sig-name descname"><span class="pre">hydrometeor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.hydrometeor" title="Permalink to this definition">#</a></dt>
+<dd><p>Specifies the list of hydrometeors in the concerned model; this is used in
+some operators to take into account the effect of water loading. Each field
+name refers to the active dictionary. The list must be defined when the
+variable <a class="reference internal" href="process.html#Process.out_mode_ignore_wloading" title="&amp;Process.out_mode_ignore_wloading"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.out_mode_ignore_wloading</span></code></a> is false.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.precip_all">
+<span class="sig-name descname"><span class="pre">precip_all</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_all" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.precip_snow">
+<span class="sig-name descname"><span class="pre">precip_snow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_snow" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.precip_rain">
+<span class="sig-name descname"><span class="pre">precip_rain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_rain" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.precip_convective">
+<span class="sig-name descname"><span class="pre">precip_convective</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_convective" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.precip_gridscale">
+<span class="sig-name descname"><span class="pre">precip_gridscale</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_gridscale" title="Permalink to this definition">#</a></dt>
+<dd><p>The set of hydrometeors is model dependent. Furthermore, only a subset of hydrometerors
+may be available in the model output. Each one of these variables defines the linear
+combination of fields to compute the corresponding type of precipitation.
+Each field name refers to the active dictionary. The default value of coefficient,
+when missing, is 1.
+By default these lists are empty, meaning that the corresponding type of precipitation
+can not be generated by fieldextra.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.radiation_topo_corrected">
+<span class="sig-name descname"><span class="pre">radiation_topo_corrected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;string,</span> <span class="pre">'yes',</span> <span class="pre">'no'</span> <span class="pre">or</span> <span class="pre">blank&gt;</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">blank</span></em><a class="headerlink" href="#ModelSpecification.radiation_topo_corrected" title="Permalink to this definition">#</a></dt>
+<dd><p>Radiation at surface can be derived on horizontal plane, or may take
+into account the slope associated with the topography. This information
+is however not available in the field meta-information and must be
+externally specified when using some radiation operators.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.passive_sfc2">
+<span class="sig-name descname"><span class="pre">passive_sfc2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.passive_sfc2" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.not_passive_sfc2">
+<span class="sig-name descname"><span class="pre">not_passive_sfc2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.not_passive_sfc2" title="Permalink to this definition">#</a></dt>
+<dd><p>Set ‘passive second surface’ attribute for all fields listed; the value derived
+from the active dictionary will be ignored.</p>
+<p>The ‘passive second surface’ attribute defines the role of the second surface
+information of all mentioned fields. If the second surface is passive, the
+coded information is only used for documenting the field, but is internally
+ignored; furthermore, the vertical coordinate coefficients may be coded as
+value of the second surface. See passiveSfc2 for additional information.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.constant_in_time">
+<span class="sig-name descname"><span class="pre">constant_in_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.constant_in_time" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.not_constant_in_time">
+<span class="sig-name descname"><span class="pre">not_constant_in_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.not_constant_in_time" title="Permalink to this definition">#</a></dt>
+<dd><p>Set ‘constant in time’ attribute for all fields listed; the value derived
+from the active dictionary will be ignored.</p>
+<p>The ‘constant in time’ status drives the behaviour of fieldextra by missing
+time information, and also the time slots considered when mixing constant
+and non constant fields in the same product.</p>
+<p>It may occur that some fields should be considered as constant in some context
+(e.g. Z0 as external parameter), and as time varying in some other context
+(e.g. Z0 as model output).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_id">
+<span class="sig-name descname"><span class="pre">vertical_coordinate_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;integer,</span> <span class="pre">value</span> <span class="pre">refers</span> <span class="pre">to</span> <span class="pre">external</span> <span class="pre">look-up</span> <span class="pre">table&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_uuid">
+<span class="sig-name descname"><span class="pre">vertical_coordinate_uuid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">[0-9A-Fa-f]&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_uuid" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_nlev">
+<span class="sig-name descname"><span class="pre">vertical_coordinate_nlev</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;integer,</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">surfaces</span> <span class="pre">(half-levels)&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_nlev" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_positive">
+<span class="sig-name descname"><span class="pre">vertical_coordinate_positive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;'up'</span> <span class="pre">or</span> <span class="pre">'down'&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_positive" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_coef">
+<span class="sig-name descname"><span class="pre">vertical_coordinate_coef</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">real</span> <span class="pre">numbers&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_coef" title="Permalink to this definition">#</a></dt>
+<dd><p>The vertical coordinate attributes can be specified either as ID, UUID,
+dimension, and positive direction, for generalized height based vertical
+coordinates, or as a list of real numbers. In the latter case, the numbers
+are interpreted according to the value of model_name.
+This is used to supplement the information about the vertical coordinates
+obtained from the decoded records, when missing or unrecognized, or to
+reset the coded information when <a class="reference internal" href="process.html#Process.set_vcoord" title="&amp;Process.set_vcoord"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.set_vcoord</span></code></a> or <a class="reference internal" href="#ModelSpecification.vertical_coordinate_reset" title="&amp;ModelSpecification.vertical_coordinate_reset"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;ModelSpecification.vertical_coordinate_reset</span></code></a>
+is true.</p>
+<p>A typical application of this feature is related to the use of generalized
+height based vertical coordinates, when these coordinates also support an
+analytic representation: by supplying values for vertical_coordinate_coef,
+both the production of standard GRIB 1 output and the derivation of the
+COSMO fields P0, HHL and HFL are possible.</p>
+<p>Another typical application of this feature is to convert a GRIB 1 file
+into a GRIB 2 file, converting at the same time the sigma or hybrid
+vertical coordinates in generalized height based vertical coordinates.
+For that, vertical_coordinate_reset must be set to true; besides the new
+definition of the vertical coordinates, the surface type of all fields
+defined on model levels will be re-set to the correct type.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_reset">
+<span class="sig-name descname"><span class="pre">vertical_coordinate_reset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.false.</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_reset" title="Permalink to this definition">#</a></dt>
+<dd><p>As previously explained, the values of vertical_coordinate_* are default
+values used to supplement missing values. Hovever, it is also possible
+to unconditionaly replace the decoded values by the user specified values
+by setting <code class="docutils literal notranslate"><span class="pre">vertical_coordinate_reset=.true.</span></code> (field based reset is also
+possible by using set_vcoord); in this case, the information is replaced
+while collecting input fields.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ModelSpecification.regrid_method">
+<span class="sig-name descname"><span class="pre">regrid_method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;default</span> <span class="pre">re-gridding</span> <span class="pre">algorithm(s)&gt;</span></em><a class="headerlink" href="#ModelSpecification.regrid_method" title="Permalink to this definition">#</a></dt>
+<dd><p>Instead of replicating the definition of the re-gridding algorithm for each
+concerned input/output, it is possible to define a default value by setting
+regrid_method in <a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> and to refer to this default value by
+setting <code class="docutils literal notranslate"><span class="pre">in_regrid_method='default'</span></code> in each concerned <a class="reference internal" href="process.html#module-Process" title="&amp;Process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block (see
+<a class="reference internal" href="process.html#Process.in_regrid_method" title="&amp;Process.in_regrid_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.in_regrid_method</span></code></a>).
+The values supported by <a class="reference internal" href="#ModelSpecification.regrid_method" title="&amp;ModelSpecification.regrid_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;ModelSpecification.regrid_method</span></code></a> are similar to those supported by <a class="reference internal" href="process.html#Process.in_regrid_method" title="&amp;Process.in_regrid_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.in_regrid_method</span></code></a>.</p>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="process.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="inspectSpec.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a><ul>
+<li><a class="reference internal" href="#ModelSpecification.model_name"><code class="docutils literal notranslate"><span class="pre">model_name</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.earth_axis_large"><code class="docutils literal notranslate"><span class="pre">earth_axis_large</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.earth_axis_small"><code class="docutils literal notranslate"><span class="pre">earth_axis_small</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.hydrometeor"><code class="docutils literal notranslate"><span class="pre">hydrometeor</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.precip_all"><code class="docutils literal notranslate"><span class="pre">precip_all</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.precip_snow"><code class="docutils literal notranslate"><span class="pre">precip_snow</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.precip_rain"><code class="docutils literal notranslate"><span class="pre">precip_rain</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.precip_convective"><code class="docutils literal notranslate"><span class="pre">precip_convective</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.precip_gridscale"><code class="docutils literal notranslate"><span class="pre">precip_gridscale</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.radiation_topo_corrected"><code class="docutils literal notranslate"><span class="pre">radiation_topo_corrected</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.passive_sfc2"><code class="docutils literal notranslate"><span class="pre">passive_sfc2</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.not_passive_sfc2"><code class="docutils literal notranslate"><span class="pre">not_passive_sfc2</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.constant_in_time"><code class="docutils literal notranslate"><span class="pre">constant_in_time</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.not_constant_in_time"><code class="docutils literal notranslate"><span class="pre">not_constant_in_time</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_id"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_id</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_uuid"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_uuid</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_nlev"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_nlev</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_positive"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_positive</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_coef"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_coef</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_reset"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_reset</span></code></a></li>
+<li><a class="reference internal" href="#ModelSpecification.regrid_method"><code class="docutils literal notranslate"><span class="pre">regrid_method</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

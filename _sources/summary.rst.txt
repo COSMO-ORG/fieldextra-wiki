@@ -1,0 +1,505 @@
+*******************************************
+Summary of namelist objects and their usage
+*******************************************
+
+The next tables list all variables defined in some of the header blocks, 
+and specify the variables default values. All compulsory variables are also
+marked.
+   
+.....................................................................................................
+                                               user defined value
+                                                 is compulsory
+.....................................................................................................
+&RunSpecification
+ strict_nl_parsing                 = .TRUE.               
+ strict_usage                      = .TRUE.               
+ enable_exit_status                = .FALSE.
+ enable_repeat_mode                = 'none'
+ clone_missing_input               = .FALSE.
+ wait_time                         = 1                    
+ mx_wait_time                      = 0                  
+ stop_wait_flag                    = ''
+ stop_flag                         = ''
+ ready_flag_dir                    = ''
+ ready_flag_prefix_pure            = ''
+ ready_flag_prefix_other           = ''
+ out_noready_postfix               = ''
+ out_snapshot_postfix              = ''
+ n_ompthread_total                 = 1
+ n_ompthread_collect               = 1
+ n_ompthread_generate              = 1
+ out_cost_expensive                = undefined
+ out_production_granularity        = 1
+ soft_memory_limit                 = 20.0
+ grib1_bufferin_size               = 4194304  (2**22)
+ grib1_bufferin_release            = .FALSE.
+ ictools_debug_level               = 0
+ verbosity                         = 'high'
+ diagnostic_length                 = 100
+ additional_diagnostic             = .FALSE.
+ additional_profiling              = .FALSE.
+
+.....................................................................................................
+&GlobalResource
+ dictionary                        = ''                X                             
+ grib_definition_path              = ''                X
+ grib_bitmap_path                  = ''                                                
+ grib2_sample                      = ''                   
+ icon_grid_description             = ''                                                
+ rttov_coefs_path                  = ''                                                
+ location_list                     = ''                                                
+ location_list_additional          = ''                                                
+ region_list                       = ''                                                
+ slice_list                        = ''                                                
+ adaboost_coefs                    = ''                                                
+
+.....................................................................................................
+&GlobalSettings
+ default_dictionary                = ''                X                             
+ default_model_name                = ''                X                             
+ default_product_category          = 'any'                                            
+
+ default_out_type                  = 'GRIB1'            
+ default_out_type_replace          = .true.
+ default_out_type_justontime       = 'auto'
+ default_out_type_snapshot         = undefined
+ default_out_type_toc              = .false.            
+ default_out_type_dupcst           = .false.            
+ default_out_type_noundef          = .false.            
+ default_out_type_undefcode        = -99999.            
+ default_out_type_scanmode         = 'native'           
+ default_out_type_packing          = 'standard'         
+ default_out_type_ncformat         = 'nc3_64boffset'
+ default_out_type_ncdeflate        = undefined
+ default_out_type_ncshuffle        = .false.
+ default_out_type_ncunlimitedtime  = .true.
+ default_out_type_simplenc         = .false.            
+ default_out_type_nodegeneratedim  = .false             
+ default_out_type_nousetag         = .false.            
+ default_out_type_alternate_name   = .false.            
+ default_out_type_autoncname       = .false.            
+ default_out_type_alternate_code   = .false.             
+ default_out_type_transcode        = .true.             
+ default_out_type_timebnds         = .false.             
+ default_out_type_prefered_tunits  = ''
+ default_out_type_nogridincr       = .true.             
+ default_out_type_n_novcoord       = .true. 
+ default_out_type_g_novcoord       = .false.
+ default_out_type_stdlongitude     = .false.            
+ default_out_type_mapcst           = .true.            
+ default_out_type_fmt              = ''
+ default_out_type_template         = ''                 
+ default_out_type_nomatch_action   = 'raise_exception'  
+ default_out_type_file_header      = ''                 
+ default_out_type_text1            = ''                 
+ default_out_type_text2            = ''                 
+ default_out_type_depreciated      =  .false.           
+ default_out_type_verbosity        =  1                 
+ default_out_type_mminfo           = 'auto'             
+ default_out_type_pdfinfo          = 'auto'             
+ default_out_type_epsminfo         = 'auto'             
+ default_out_type_prodinfo         = 'auto'             
+ default_out_type_separator        = 'ascii_null'
+ default_out_type_cheader          = ''                
+ default_out_type_legend           = ''                
+ default_out_type_line_label       = ''                
+ default_out_type_fusedt           = .false.            
+ default_out_type_locinfo          = .false.            
+ default_out_type_lagranto         = .false.            
+ default_out_type_dwhhack          = .false.            
+
+ default_out_mode_mismemb_limit    = 100                
+ default_out_mode_mismemb_abort    = .true.             
+ default_out_mode_weighted_member  = .false.            
+ default_out_mode_sun_topo         = .false.
+ default_out_mode_rttov_cloud      = 'none'             
+ default_out_mode_dvt_scale        = 1.0                
+ default_out_mode_hcor_dhmin       = 50.0                
+ default_out_mode_ignore_wloading  = .true.             
+ default_out_mode_rh_clipped       = .true.             
+ default_out_mode_hi_adjusted      = .false.            
+ default_out_mode_h0cl_extrapolate = .false.
+ default_out_mode_tw_iterative     = .false.            
+ default_out_mode_nbhprob_shape    =  0                 
+ default_out_mode_nbhprob_rxy      = undefined          
+ default_out_mode_nbhprob_rt       = undefined          
+ default_out_mode_nbhprob_rfade    = undefined          
+ default_out_mode_kfcor_na         = 'undef'            
+ default_out_mode_moscor_na        = 'undef'            
+ location_to_gridpoint             = ''                                                
+ slice_to_gridpoint                = ''                                                
+ slice_resolution_factor           = 0.3
+ slice_upscaling_factor            = 1
+ originating_center                = undefined
+ production_status                 = ''
+ genproc_type                      = ''
+ auxiliary_metainfo                = ''
+
+.....................................................................................................
+&NetCDFImport
+ varname_translation               = ''
+ var_default_attribute             = ''
+ dim_default_attribute             = ''
+
+.....................................................................................................
+&InspectSpecification
+ digits_per_data                   = 0
+ select_record                     = 0
+ select_data_column                = 0
+ select_data_row                   = 0
+ print_file_creation_date          = .FALSE.
+ print_experiment_version          = .FALSE.
+ print_rec_number                  = .TRUE.
+ print_rec_format                  = .FALSE.
+ print_rec_parameter_table         = .FALSE.
+ print_rec_parameter_number        = .FALSE.
+ print_rec_name                    = .TRUE.
+ print_rec_altname                 = .FALSE.
+ print_rec_level                   = .TRUE.
+ print_rec_level_type              = .FALSE.
+ print_rec_hgrid_type              = .FALSE.
+ print_rec_hgrid_size              = .FALSE.
+ print_rec_hgrid_delta             = .FALSE.
+ print_rec_hgrid_start             = .FALSE.
+ print_rec_hgrid_end               = .FALSE.
+ print_rec_initial_date            = .TRUE.
+ print_rec_time_range_short        = .TRUE.
+ print_rec_time_range_long         = .FALSE.
+ print_rec_validation_date         = .FALSE.
+ print_rec_ntuple                  = .FALSE.
+ print_rec_pds                     = .FALSE.
+ print_rec_gds                     = .FALSE.
+ print_rec_vcoord                  = .FALSE.
+ print_rec_data                    = .FALSE.
+ print_rec_minmax                  = .FALSE.
+ print_rec_mean                    = .FALSE.
+ print_rec_std                     = .FALSE.
+ print_rec_median                  = .FALSE.
+ print_rec_minmax_location         = .FALSE.
+ print_rec_undef                   = .FALSE.
+ print_rec_moment                  = undefined
+ print_rec_percentile              = undefined
+
+.....................................................................................................
+&ModelSpecification
+ model_name                        = ''                X
+ earth_axis_large                  = 0.                X(a
+ earth_axis_small                  = 0.                X(a
+ hydrometeor                       = ''                   
+ precip_all                        = ''                   
+ precip_snow                       = ''                   
+ precip_rain                       = ''                   
+ precip_convective                 = ''                   
+ precip_gridscale                  = ''                   
+ radiation_topo_corrected          = ''
+ passive_sfc2                      = ''
+ not_passive_sfc2                  = ''
+ constant_in_time                  = ''
+ not_constant_in_time              = ''
+ vertical_coordinate_coef          = undefined
+ vertical_coordinate_id            = undefined
+ vertical_coordinate_uuid          = ''
+ vertical_coordinate_nlev          = undefined
+ vertical_coordinate_positive      = ''
+ vertical_coordinate_reset         = .false.
+ regrid_method                     = ''
+
+.....................................................................................................
+
+      Legend:
+      -------
+      a) compulsory only when working with input in GRIB 1 format
+
+
+The next tables list all variables defined in the &Process blocks, and
+specify the variables default values. For each variable, the supported
+output types are displayed. The situations where the variable is ignored
+are described.
+A similar table is available in README.user.locale for output types of
+local interest.
+
+.............................................................................................................
+                                                   INCORE/INSPECT    FLD_TABLE       TMPL_BASE
+                                                           METEOG        DAT_TABLE         GRIB1
+                                                             ASCII_TABLE     XLS_TABLE         GRIB2
+                                                                 BLK_TABLE        N_TUPLE         NETCDF
+.............................................................................................................
+&Process (definition of input data)
+
+ in_file                    = ''                         X   X   X   X   X   X   X   X   X   X   X   X
+ in_type                    = 'PLAIN'              (1)   X   X   X   X   X   X   X   X   X   X   X   X
+
+ tlist                      =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ tstart                     =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ tstop                      =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ tincr                      =  1                   (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ epslist                    =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ epsstart                   =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ epsstop                    =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+ epsincr                    =  1                   (1)   X   X   X   X   X   X   X   X   X   X   X   X
+
+ in_read_first              = .false.              (1)       X   X   X   X   X   X   X   X   X   X   X
+ in_read_order              = undefined            (1)       X   X   X   X   X   X   X   X   X   X   X
+ in_dictionary              = see &GlobalSettings  (1)   X   X   X   X   X   X   X   X   X   X   X   X
+
+ in_regrid_target           = ''                   (2)   X   X   X   X   X   X   X   X   X   X   X   X
+ in_regrid_method           = ''                   (2)   X   X   X   X   X   X   X   X   X   X   X   X
+ in_regrid_all              = .false.              (2)   X   X   X   X   X   X   X   X   X   X   X   X
+
+ epsgroup                   = undefined            (2)       X   X   X   X   X   X   X   X   X   X   X
+ epsgroup_size              = undefined            (2)       X   X   X   X   X   X   X   X   X   X   X
+ epscomposed_size           = undefined            (2)       X   X   X   X   X   X   X   X   X   X   X
+
+ default_product_category   = see &GlobalSettings  (1)   X   X   X   X   X   X   X   X   X   X   X   X
+
+
+.............................................................................................................
+                                                   INCORE/INSPECT    FLD_TABLE       TMPL_BASE
+                                                           METEOG        DAT_TABLE         GRIB1
+                                                             ASCII_TABLE     XLS_TABLE         GRIB2
+                                                                 BLK_TABLE        N_TUPLE         NETCDF
+.............................................................................................................
+&Process (definition of output data and of related global operations)
+                                                                   
+ out_file                   = ''                         X   X   X   X   X   X   X   X   X   X   X   X
+
+ out_tstart                 = -HUGE                (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_tstop                  =  HUGE                (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_tincr                  =  1                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ tlag                       =  (0,0,1)             (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_group_eps              = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_shuffle_eps            = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_shuffle_time           = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+
+ out_autotag                = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_cost                   = 1                    (2)       X   X   X   X   X   X   X   X   X   X   X
+
+ out_postproc_module        = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_regrid_target          = ''                   (2)               X   X   X   X   X       X   X   X
+ out_regrid_method          = ''                   (2)               X   X   X   X   X       X   X   X
+ out_regrid_method_filter   = ''                   (2)               X   X   X   X   X       X   X   X
+ out_regrid_method_distance = ''                   (2)               X   X   X   X   X       X   X   X
+ out_regrid_topography      = ''                   (2)               X   X   X   X   X       X   X   X
+ out_filter_cst             = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_filter_time            = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_model_name             = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_product_category       = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_genproc_type           = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_vertical_coordinate    = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_auxiliary_metainfo     = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+
+ out_type                   = see &GlobalSettings  (2)   X   X   X   X   X   X   X   X   X   X   X   X
+ out_type_replace           = see &GlobalSettings  (2)               X               X       X   X    
+ out_type_justontime        = see &GlobalSettings  (2)               X                       X   X   X
+ out_type_snapshot          = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_type_toc               = see &GlobalSettings  (2)                                       X   X   X
+ out_type_dupcst            = see &GlobalSettings  (2)               X           X(a         X   X   X
+ out_type_noundef           = see &GlobalSettings  (2)               X           X(a         X   X   X
+ out_type_undefcode         = see &GlobalSettings  (2)           X   X   X   X   X   X   X    
+ out_type_scanmode          = see &GlobalSettings  (2)               X                       X   X
+ out_type_packing           = see &GlobalSettings  (2)                                       X   X
+ out_type_ncformat          = see &GlobalSettings  (2)                                               X
+ out_type_ncdeflate         = see &GlobalSettings  (2)                                               X
+ out_type_ncshuffle         = see &GlobalSettings  (2)                                               X
+ out_type_ncunlimitedtime   = see &GlobalSettings  (2)                                               X
+ out_type_simplenc          = see &GlobalSettings  (2)                                               X
+ out_type_nodegeneratedim   = see &GlobalSettings  (2)                                               X
+ out_type_nousetag          = see &GlobalSettings  (2)           X   X   X   X   X   X               X
+ out_type_alternate_name    = see &GlobalSettings  (2)           X   X   X   X   X   X       X   X   X
+ out_type_alternate_code    = see &GlobalSettings  (2)                                       X    
+ out_type_autoncname        = see &GlobalSettings  (2)                                               X
+ out_type_transcode         = see &GlobalSettings  (2)                                       X    
+ out_type_timebnds          = see &GlobalSettings  (2)                                               X
+ out_type_prefered_tunits   = see &GlobalSettings  (2)                                       X   X    
+ out_type_nogridincr        = see &GlobalSettings  (2)                                       X    
+ out_type_novcoord          = (e                   (2)                                       X   X   X
+ out_type_stdlongitude      = see &GlobalSettings  (2)           X   X   X   X   X   X   X   X   X   X
+ out_type_mapcst            = see &GlobalSettings  (2)   X   X   X   X   X   X   X   X   X   X   X   X
+ out_type_fmt               = (d                   (2)       X   X   X   X   X   X   X   X
+ out_type_template          = see &GlobalSettings  (2)                                   X       X
+ out_type_nomatch_action    = see &GlobalSettings  (2)                                   X    
+ out_type_file_header       = see &GlobalSettings  (2)               X   X   X   X                    
+ out_type_text1             = see &GlobalSettings  (2)       X   X   X   X   X   X       X           X
+ out_type_text2             = see &GlobalSettings  (2)       X   X                       X           X
+ out_type_depreciated       = see &GlobalSettings  (2)               X           X
+ out_type_verbosity         = see &GlobalSettings  (2)               X   X   X   X
+ out_type_mminfo            = see &GlobalSettings  (2)               X   X   X   X
+ out_type_pdfinfo           = see &GlobalSettings  (2)           X   X   X   X   X
+ out_type_epsminfo          = see &GlobalSettings  (2)           X   X   X   X   X
+ out_type_prodinfo          = see &GlobalSettings  (2)               X           X   X
+ out_type_separator         = (f                   (2)           X               X
+ out_type_cheader           = see &GlobalSettings  (2)                           X(b
+ out_type_legend            = see &GlobalSettings  (2)           X
+ out_type_line_label        = see &GlobalSettings  (2)           X
+ out_type_fusedt            = see &GlobalSettings  (2)           X               X(b          
+ out_type_locinfo           = see &GlobalSettings  (2)           X               X            
+ out_type_lagranto          = see &GlobalSettings  (2)                                               X
+ out_type_dwhhack           = see &GlobalSettings  (2)                       X
+
+ out_mode_mismemb_limit     = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_mismemb_abort     = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_weighted_member   = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_sun_topo          = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_rttov_cloud       = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_dvt_scale         = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_hcor_dhmin        = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_ignore_wloading   = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_rh_clipped        = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_hi_adjusted       = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_h0cl_extrapolate  = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_tw_iterative      = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_nbhprob_shape     = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_nbhprob_rxy       = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_nbhprob_rt        = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_nbhprob_rfade     = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_kfcor_na          = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_mode_moscor_na         = see &GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+
+ frame_ngp                  = -1                   (2)               X           X   X       X   X   X
+ imin                       = -1                   (2)               X           X   X       X   X   X
+ imax                       = -1                   (2)               X           X   X       X   X   X
+ iinc                       =  1                   (2)               X           X   X          
+ jmin                       = -1                   (2)               X           X   X       X   X   X
+ jmax                       = -1                   (2)               X           X   X       X   X   X
+ jinc                       =  1                   (2)               X           X   X         
+ region_bbox                =  ''                  (2)               X           X   X       X   X   X
+ ilist                      = -1                   (2)           X   X   X   X   X   X       X   X   X
+ jlist                      = -1                   (2)           X   X   X   X   X   X       X   X   X
+ loclist                    = '???'                (2)       X   X   X   X   X   X   X   X   X   X   X
+ locgroup                   = '???'                (2)       X   X   X   X   X   X   X   X   X   X   X
+ slice                      = '???'                (2)                                               X
+
+ in_filter                  = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ tmp1_filter                = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ tmp2_filter                = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ tmp3_filter                = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ tmp4_filter                = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ tmp5_filter                = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+ out_filter                 = ''                   (2)       X   X   X   X   X   X   X   X   X   X   X
+
+.............................................................................................................
+                                                   INCORE/INSPECT    FLD_TABLE       TMPL_BASE
+                                                           METEOG        DAT_TABLE         GRIB1
+                                                             ASCII_TABLE     XLS_TABLE         GRIB2
+                                                                 BLK_TABLE        N_TUPLE         NETCDF
+.............................................................................................................
+&Process (definition of fields to extract and to generate)
+
+ selection_mode             = 'INCLUDE_ONLY'       (2)   X   X   X   X   X   X   X   X   X   X   X   X
+
+ in_size_field              = 0                    (2)       X   X   X   X   X   X   X   X   X   X   X
+ in_size_vdate              = 0                    (2)       X   X   X   X   X   X   X   X   X   X   X
+ in_duplicate_infield       = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+
+ in_field                   = ''                         X   X   X   X   X   X   X   X   X   X   X   X
+ tmp1_field                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ tmp2_field                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ tmp3_field                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ tmp4_field                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ tmp5_field                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ out_field                  = ''                             X   X   X   X   X   X   X   X   X   X   X
+
+ reference_field            = .true.               (3)       X   X   X   X   X   X   X   X   X   X   X
+
+ skip_time                  = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+ keep_time                  = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+ expect_missing_field       = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+ ignore_model_identity      = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+ ignore_vcoord              = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+ shared_eps_member          = .false.              (3)   X   X   X   X   X   X   X   X   X   X   X   X
+ tag                        = ''                         X   X   X   X   X   X   X   X   X   X   X   X
+ use_tag                    = ''                             X   X   X   X   X   X   X   X   X   X   X
+ use_operator               = ''                   (4)       X   X   X   X   X   X   X   X   X   X   X
+
+ product_category           = 'all'                      X   X   X   X   X   X   X   X   X   X   X   X
+ level_class                = 'all'                      X   X   X   X   X   X   X   X   X   X   X   X
+ level_units                = ''                         X   X   X   X   X   X   X   X   X   X   X   X
+ levlist                    = -1                         X   X   X   X   X   X   X   X   X   X   X   X
+ levmin                     = -1                         X   X   X   X   X   X   X   X   X   X   X   X
+ levmax                     = -1                         X   X   X   X   X   X   X   X   X   X   X   X
+ levinc                     =  1                         X   X   X   X   X   X   X   X   X   X   X   X
+ epslist                    = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ epsstart                   = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ epsstop                    = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ epsincr                    =  1                         X   X   X   X   X   X   X   X   X   X   X   X
+ prob_interval              = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ prob_tlow                  = -HUGE                      X   X   X   X   X   X   X   X   X   X   X   X
+ prob_thigh                 =  HUGE                      X   X   X   X   X   X   X   X   X   X   X   X
+ quantile                   = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ ref_quantile               = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ efi_order                  = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+
+ set_vcoord                 = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+ set_level_property         = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+ set_time_range             = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+
+ regrid                     = .false.              (3)   X   X   X   X   X   X   X   X   X   X   X   X
+ compare_with               = ''                   (3)       X   X   X   X   X   X   X   X   X   X   X
+ compare_fct                = ''                   (3)       X   X   X   X   X   X   X   X   X   X   X
+ compare_mask               = ''                   (3)       X   X   X   X   X   X   X   X   X   X   X
+ merge_with                 = ''                   (3)       X   X   X   X   X   X   X   X   X   X   X
+ merge_mask                 = ''                   (3)       X   X   X   X   X   X   X   X   X   X   X
+ hoper                      = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ hoper_mask                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ scale                      =  1.                            X   X   X   X   X   X   X   X   X   X   X
+ offset                     =  0.                            X   X   X   X   X   X   X   X   X   X   X
+ voper                      = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ voper_lev                  = -1                             X   X   X   X   X   X   X   X   X   X   X
+ voper_lev_units            = ''                             X   X   X   X   X   X   X   X   X   X   X
+ voper_use_tag              = ''                             X   X   X   X   X   X   X   X   X   X   X
+ toper                      = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ toper_mask                 = ''                             X   X   X   X   X   X   X   X   X   X   X
+ poper                      = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ poper2                     = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ poper3                     = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ poper4                     = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ poper5                     = 'id'                           X   X   X   X   X   X   X   X   X   X   X
+ new_field_id               = ''                             X   X   X   X   X   X   X   X   X   X   X
+
+ set_units                  = ''                   (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_reference_date         = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_trange_type            = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_leadtime               = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_genproc_type           = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_product_category       = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_epsmember_identity     = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+ set_auxiliary_metainfo     = ''                   (6)       X   X   X   X   X   X   X   X   X   X   X
+
+ set_undefcode              = undefined            (5)               X   
+ set_packing                = ''                   (5)                                       X   X
+ set_description            = ''                   (5)           X                           X   X   X
+ set_comment                = ''                   (5)                                               X
+ use_alternate_code         = .false.              (5)                                       X    
+
+.............................................................................................................
+
+      Legend:
+      -------
+      > Default values expressed as <...> refer to value set for corresponding parameter.
+      > Some limitations:
+        (1) value ignored unless an input file name is specified;
+        (2) value ignored unless an output file name is specified;
+        (3) can only be used in relation with in_field
+        (4) can only be used in relation with tmp1_field/.../tmp5_field/out_field
+        (5) can only be used in relation with the last processing iteration 
+        (6) can only be used in relation with in_field or with the last processing iteration
+      > Further remarks:
+        (a) only supported when out_type_cheader belongs to {'','gp'}
+        (b) only supported when out_type_separator is non blank
+        (c) only supported when in_field is present
+        (d) default out_type_fmt depends on out_type value
+            (can be changed by setting default_out_type_fmt):
+              6G13.5   for FLD_TABLE, DAT_TABLE, BLK_TABLE
+              G13.5    for TMPL_BASE, XLS_TABLE, N_TUPLE
+              setting out_type_format is mandatory for METEOG
+        (e) default out_type_novcoord depends on out_type value
+            (can be changed by setting default_out_type_novcoord):
+              value of default_out_type_n_*    for NETCDF
+              value of default_out_type_g_*    for GRIB1, GRIB2
+        (f) default out_type_separator depends on out_type value
+            (can be changed by setting default_out_type_separator):
+              ';'    for ASCII_TABLE
+              ' '    for XLS_TABLE
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,0 +1,214 @@
+:py:mod:`&GlobalResource`
+=========================
+
+.. py:module:: &GlobalResource
+    
+    This namelist block must be present and unique.
+
+.. py:attribute:: dictionary
+    :type: <file_path>[,<file path>...]
+
+    **compulsory**
+
+    Within fieldextra, fields are identified by a unique string, the
+    so-called field short name (this is the same short name which is
+    used e.g. in the ecCodes localConcepts, or in the COSMO model).
+    The characteristics associated with each short names are defined in
+    one or more dictionaries (a collection of key/values for each short
+    name).
+    The information stored in the active dictionary is used at different 
+    steps of the processing (decoding of input file, computation of
+    new field, creation of GRIB and NetCDF output). The default active
+    dictionary is defined by the variable :py:attr:`&GlobalSettings.default_dictionary`; an alternate dictionary can be used to decode
+    a specific input file by setting the variable :py:attr:`&Process.in_dictionary` in
+    the associated :py:mod:`&Process` block.
+    
+    Some field names have a special meaning to fieldextra, and should
+    always be defined in the default dictionary:
+    
+    * horizontal coord. ``RLAT``, ``RLON``
+    * vertical coord. ``HEIGHT``, ``P``, ``THETA``, ``POT_VORTIC``
+    * surface fields ``HSURF``, ``FIS``, ``FR_LAND``
+    * all names used for parent and derived fields in :ref:`chapter 5`.
+
+    In addition, for the COSMO model, when working with hybrid vertical
+    coordinates: 
+    
+    * HFL, HHL, P0FL
+    
+    .. note:: HFL is HEIGHT @ model full level, for hybrid coordinates, and HHL is HEIGHT @ model half level, for hybrid coordinates; these fields are kept for backward compatibility reasons.
+    
+    A detailed description of dictionaries is found in section 6.1 below.
+
+.. py:attribute:: grib_definition_path
+    :type: <path1>[,<path2>,<path3>]
+
+    **compulsory**
+
+    Path of directory containing the definitions files for the
+    ECMWF ecCodes.
+    The decoding rules used by ecCodes are stored in a set of
+    human readable definition files; when using fieldextra, the path
+    to this set must be explicitely specified, and any default value
+    is overwritten.
+    When multiple paths are specified, ecCodes decoding engine will
+    look for each definition file in the directories from path1
+    to path3, and it will stop as soon as a file is found. Therefore, 
+    if you want to overwrite some decoding rules, put your definitions
+    in path1, and the official definitions in path2, being careful to
+    use the same directory structure as in the main isntallation. As
+    the path search is done for each definition file, a partial
+    overwriting of the rules, at the file level, is possible.
+    
+    All COSMO software, including fieldextra, are compatible with
+    a unified COSMO ecCodes package, managed at DWD, which requires
+    the following setting: ::
+
+        grib_definition_path = "../resources/eccodes_definitions_cosmo",
+                               "../resources/eccodes_definitions_vendor"
+
+.. py:attribute:: grib2_sample
+    :type: <file path>
+
+    Path of file used as GRIB sample by ECMWF ecCodes when encoding
+    GRIB 2 records. It is possible to supersede this value on an
+    output basis by setting out_type_template in the corresponding
+    :py:mod:`&Process` block (GRIB2 output only).
+    Important: see remark in 7.12 about the choice of the GRIB 2 sample.
+
+.. py:attribute:: grib_bitmap_path 
+    :type: <directory path> 
+
+    Path of directory containing external binary bitmap files used by
+    DWD GRIB library when decoding/encoding GRIB 1 data.
+
+.. py:attribute:: icon_grid_description 
+    :type: <file path>[,<file path>...]
+
+    Path of NetCDF file(s) containing the description of ICON unstructured
+    grids. All grid descriptions must be loaded before processing ICON fields. 
+    All ICON fields must be re-gridded on a regular grid before further
+    processing (see in_regrid_method='from_unstructured_grid' later on).
+
+.. py:attribute:: rttov_coefs_path 
+    :type: <directory path>
+
+    Path of directory containing RTTOV coefficient files, as required
+    by RTTOV library when computing synthetic satellites fields. See
+    also the description of rttovID and rttovChan in chapter 6.1.
+
+.. py:attribute:: location_list 
+    :type: <file path> 
+
+    Path of the file containing the definition of geographic locations.
+    
+    Each location is defined by a unique id and its geographical coordinates.
+    Each location is recognized by its id. The user may additionally specify
+    a list of unique location aliases of the form <group>:<name> which may
+    be alternatively used to address certain locations.
+    The association between locations and grid points is based on the
+    algorithm defined by ocation_to_gridpoint; however, the user has the
+    possibility to enforce some specific association by specifying gpi/gpj
+    in the location list (see 6.2).        
+    When 'additional_diagnostic' is set to true, the list of locations
+    and their associated grid points is written on disk in file
+    fieldextra.location, in a format compatible with location_list.
+    Location id's or aliases can be used to limit the output to some
+    specified geographical locations, to perform field transformations at
+    certain geographical locations. Details on these issues are given in
+    sections 4.3.2 (usage of namelist variables 'loclist' and 'locgroup')
+    and 4.3.4 (usage of point operators 'poper').
+    The location_list file and the possible additional information
+    found in location_list_additional (see below) are also used to
+    associate additional parameters to each location, required to
+    derive new quantities (e.g. height corrected fields, Kalman
+    filtered fields).
+
+.. py:attribute:: location_list_additional 
+    :type: <file path>[,<file path>...]
+
+    Additional information can be associated with the locations defined
+    in location_list. Each set of additional information must be coded
+    in a separate file. Each location is recognized either by its id, or
+    by one of its aliases in location_list. The possible kind of additional
+    information is (see 6.3 below):
+
+    1. skyview and horizon factor
+    2. Kalman filter coefficients
+    3. MOS coefficients
+
+.. py:attribute:: region_list 
+    :type: <file path>
+
+    Path of the file used to define geographical regions.
+    Multiple sets of regions may be defined in the same file.
+    Within each set, the regions must not overlap.
+    
+    Each region is build from one or more non overlapping polygons,
+    with each polygon expressed in geographical lat/lon coordinates;
+    each region is recognized by a unique tag.
+    
+    Each region set is recognized by a unique tag.
+    
+    The list of grid points belonging to each region is obtained by mapping
+    the regions onto the reference grid specified by HSURF in INCORE (or, if
+    not available, by FIS, or by the first INCORE field).
+    The following applies:
+
+    - regions without grid points are ignored. 
+    - regions not fully contained in the reference grid are clipped.
+    - to solve the ambiguity of defining a polygon on a sphere,
+      north and south poles are never included in the region,
+      and the antipodal line of the reference grid never intersects
+      the regions.
+    
+    A new location is automatically associated with each region, the
+    location name being the region tag and the location group being the
+    region set tag (some arbitrary grid point of the concerned region
+    is assigned to this location).
+    
+    Regions are used e.g. by some horizontal operators to calculate region
+    specific quantities (mean, max,...). It is possible to set the value of
+    "locgroup" (see 4.3.2) to the region set tag to automatically generate
+    some result for each region of the related region set.
+    
+    When 'additional_diagnostic' is set to true, a summary of each
+    region set is produced in 'fieldextra.region', and the stencil
+    of region set i is written in 'fieldextra.region.stencil_i'. The
+    stencil is a map displaying the association between grid points and 
+    regions (useful to check region definition).
+    
+    Fieldextra compatible region_list files can be generated from GIS
+    shape files, after a generic dump from the GIS system, by using
+    the srcipt shape2fxtr.pl available in ./tools directory.
+    A more sophisticated support is offered by the Fortran converter
+    shp_fxtr available at https://github.com/dcesari/fortrangis
+    (thanks to Davide Cesari <dcesari@arpa.emr.it>).
+
+.. py:attribute:: slice_list 
+    :type: <file path>
+
+    Path of the file used to define slices, for the computation of
+    vertical cross-sections.
+    !
+    Each slice is defined by a broken line, with control points expressed either
+    as geographical latitude/longitude, or as locations (refering to the active
+    location_list file), or as grid coordinates. Segments between control points
+    are either along earth (sphere) geodesic, or along straight line in grid
+    coordinate space. A slice is discretized according to the values of the keys
+    "slice_to_gridpoint" and "slice_resolution_factor"; it is also possible to 
+    upscale (smooth) the fields along the slice by setting "slice_upscaling_factor".
+    Each slice is recognized by a unique tag. Currently, only NETCDF output is
+    compatible with slices.
+    !
+    When 'additional_diagnostic' is set to true, a summary of slices
+    characteristics is produced in the filed fieldextra.slice.
+    !
+    Details on the file format is found in section 6.5.
+
+.. py:attribute:: adaboost_coefs 
+    :type: <file path>[,<file path>...]
+    
+    Path of file(s) containing AdaBoost coefficients. A file contains
+    all necessary parameters to compute a single classification field
+    (C_TSTORM,...). 

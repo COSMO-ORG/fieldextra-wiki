@@ -1,0 +1,98 @@
+******************************
+Description of GRIB2 local use
+******************************
+
+A short description of the GRIB 2 local use sections supported by fieldextra is
+available here. More details about the content of the different local use
+sections is available in the associated definition files of ecCodes
+(e.g. grib2/local.215.250 for default local section of MeteoSwiss). 
+
+The section 11 of this document describes the algorithm used by fieldextra
+to set the values for the different local keys.
+
+1. Originating center = Moscow (76)
+
+grib2LocalSectionNumber = 250 (default):
+    *** Same as DWD ***
+
+2. Originating center = DWD (78)
+
+grib2LocalSectionNumber = 250 (default):
+    localInformationNumber, localNumberOfExperiment
+
+grib2LocalSectionNumber = 252 (Ensemble system incl. postprocessing):
+    localHostIdentifier, localCreationDateYear, localCreationDateMonth,
+    localCreationDateDay, localCreationDateHour, localCreationDateMinute,
+    localCreationDateSecond, localValidityDateYear, localValidityDateMonth,
+    localValidityDateDay, localValidityDateHour, localValidityDateMinute,
+    localValidityDateSecond, localNumberOfExperiment, localTypeOfEnsembleForecast,
+    localTypeOfEnsembleProductGeneration, localTypeOfEnsemblePostprocessing,
+    localInformationNumber
+
+grib2LocalSectionNumber = 253 (Ensemble system):
+    localHostIdentifier, localCreationDateYear, localCreationDateMonth,
+    localCreationDateDay, localCreationDateHour, localCreationDateMinute,
+    localCreationDateSecond, localValidityDateYear, localValidityDateMonth,
+    localValidityDateDay, localValidityDateHour, localValidityDateMinute,
+    localValidityDateSecond, localNumberOfExperiment, localTypeOfEnsembleForecast,
+    localInformationNumber
+
+grib2LocalSectionNumber = 254 (Deterministic system):
+    localHostIdentifier, localCreationDateYear, localCreationDateMonth,
+    localCreationDateDay, localCreationDateHour, localCreationDateMinute,
+    localCreationDateSecond, localValidityDateYear, localValidityDateMonth,
+    localValidityDateDay, localValidityDateHour, localValidityDateMinute,
+    localValidityDateSecond, localInformationNumber, localVersionNumber,
+    localNumberOfExperiment
+
+3. Originating center = Roma (80)
+
+grib2LocalSectionNumber = 28 (COSMO-LEPS member):
+    tiggeLocalVersion (=1), suiteName (=4),
+    marsClass (=12, read-only), marsType, marsStream, 
+    experimentVersionNumber,
+    baseDateEPS, baseTimeEPS,
+    numberOfRepresentativeMember, numberOfMembersInCluster, totalInitialConditions,
+
+grib2LocalSectionNumber = 250 (default):
+    *** Same as DWD ***
+
+grib2LocalSectionNumber = 252 (Ensemble system incl. postprocessing):
+    *** Same as DWD ***
+
+grib2LocalSectionNumber = 253 (Ensemble system):
+    *** Same as DWD ***
+
+grib2LocalSectionNumber = 254 (Deterministic system):
+    *** Same as DWD ***
+
+4. Originating center = ARPA-SIMC (200)
+
+grib2LocalSectionNumber = 250 (default):
+    *** Same as DWD ***
+
+5. Originating center = Zurich (215)
+
+grib2LocalSectionNumber = 250 (default):
+    *** Same as DWD ***
+
+grib2LocalSectionNumber = 252 (Ensemble system incl. postprocessing):
+    *** Same as DWD ***
+
+grib2LocalSectionNumber = 253 (Ensemble system):
+    *** Same as DWD ***
+
+grib2LocalSectionNumber = 254 (Deterministic system):
+    *** Same as DWD ***
+
+6. Originating center = COSMO (250)
+
+grib2LocalSectionNumber = 28 (COSMO-LEPS member):
+    tiggeLocalVersion (=1), suiteName (=4),
+    marsClass (=12, read-only), marsType, marsStream, 
+    experimentVersionNumber,
+    baseDateEPS, baseTimeEPS,
+    numberOfRepresentativeMember, numberOfMembersInCluster, totalInitialConditions,
+
+grib2LocalSectionNumber = 250 (default):
+    *** Same as DWD ***

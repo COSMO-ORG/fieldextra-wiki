@@ -1,0 +1,68 @@
+************************
+About operators and tags
+************************
+
+When using multiple operators and working with tags, the following rules have to be kept
+in mind:
+  * The fields you define for tmp1_field, ... out_field, are either taken from the previous
+    iteration, or computed using parents fields found in the previous iteration;
+  * All operators you define within an iteration, like poper, poper2 ... modify the 
+    values of the field you have at the start of the iteration;
+  * Operators are applied in turns, as in a pipeline, the output of the previous operator
+    being used as input for the next operator, in the order hoper, scale/offset, voper, 
+    toper, poper, poper2, poper3, poper4, poper5, spatial filter, new_field_id;
+  * When you have multiple fields in the same iteration, each class of operator is applied
+    to all the concerned fields before stepping to the next class of operators;
+  * The tags you specify are attached to the field at the start of the iteration;
+  * The tags or the short names you refer to in some operator refer to fields in the same
+    iteration, in the state the field has just before applying the concerned operator (!);
+  * Finally, the order of appeareance in the namelist of the fields or of the operators 
+    do not influence the results.
+
+
+To illustrate these rules, consider the following namelist snippet :
+  &Process tmp2_field='TOT_PREC', tag='CBHEXT1', 
+           poper='polynomial,0.16,0.4545',
+           poper2='replace_cond,TOT_PREC<0.2 || TOT_PREC>0.75,0.0' /
+
+The field TOT_PREC is taken from the previous iteration, associated with the tag CBHEXT1,
+modified by poper, then by poper2.
+The first operator _replaces_ TOT_PREC with (0.16 + 0.4545*TOT_PREC).
+The second operator _replaces_ the just computed value, (0.16 + 0.4545*TOT_PREC), 
+with 0.0 where the condition is true.
+The condition is based on TOT_PREC, and  fieldextra recognizes that TOT_PREC is the
+field being currently processed; according to the rules just explained, the values of
+the field _at this stage_ of the computation are taken to evaluate the condition, i.e.
+after applying the polynomial transformation!
+In other words, in this first example, TOT_PREC is replaced by:
+  1.                         if (0.16 + 0.4545*TOT_PREC) < 0.2,  i.e. TOT_PREC < 0.088
+  2.                         if (0.16 + 0.4545*TOT_PREC) > 0.75, i.e. TOT_PREC > 1.298
+  (0.16 + 0.4545*TOT_PREC)   otherwise.
+
+
+Compare this with the following namelist snippet :
+  &Process tmp2_field='TOT_PREC', tag='tot_prec', 
+  &Process tmp2_field='TOT_PREC', tag='cbhext1', 
+           poper='polynomial,0.16,0.4545',
+           poper2='replace_cond,tot_prec<0.2 || tot_prec>0.75,0.0' /
+
+In this second example, TOT_PREC is replaced by:
+  1.                         if TOT_PREC < 0.2
+  2.                         if TOT_PREC > 0.75
+  (0.16 + 0.4545*TOT_PREC)   otherwise.
+
+Some remarks about the previous namelist snippet:
+*	a second field is introduced in the tmp2_field iteration to hold the unmodified
+  TOT_PREC;
+*	a tag is associated with the unmodified TOT_PREC, for usage in the conditions
+  of poper2;
+*	the operator || is used in the logical condition to make the namelist more
+  compact (and more efficient);
+*	It is recommended to use short names for user defined field tags, to clearly
+  distinguish between field tags and field short names.
+
+
+These examples illustrate the fact that the syntax of the namelist is very close
+to the internal working of the code; consequently, it is important to have a 
+good understanding of the internal working of fieldextra when crafting new 
+namelists.

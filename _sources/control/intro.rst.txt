@@ -1,0 +1,51 @@
+************
+Control file
+************
+
+The program control data file is an ASCII file containing Fortran 90
+namelist input. The template for this file is:
+
+:py:mod:`&RunSpecification`
+    Run time specifications, compulsory
+:py:mod:`&GlobalResource`
+    Program resources & configuration, compulsory
+
+:py:mod:`&GlobalSettings`
+
+:py:mod:`&NetCDFImport`
+    Attributes of NetCDF imported file, 0 or 1 occurence
+:py:mod:`&InspectSpecification`
+    Attributes of INSPECT ouput, 0 or 1 occurence
+:py:mod:`&ModelSpecification`
+    Model specifications, at least 1 occurence
+:py:mod:`&Process`
+    Operations to perform, 0 or more occurences
+
+
+All Fortran 90 standard rules for namelist input apply, e.g.
+
+- Character strings do not need quotes if they do not contain blanks
+- Everything except character strings is case insensitive.
+- Ordering within a namelist block is free.
+- One line can contain several items, separated by blanks or commas.
+- Each block must be terminated by a slash.
+
+Double check your namelist! Although a lot of effort has been invested
+to control the consistency of the user defined parameters, mistakes in
+the formatting of the namelist may have unexpected consequences.
+
+
+In the following chapters, all namelist objects are described in
+details. A table listing in a compact form all the namelist objects
+together with their default values is available in chapter 14.
+
+.. toctree:: 
+    :hidden:
+    
+    runSpec
+    globRes
+    globSet
+    netcdf
+    inspectSpec
+    modelSpec
+    process

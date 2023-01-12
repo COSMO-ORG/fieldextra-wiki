@@ -1,0 +1,745 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title=":nl:nl:`Test`" href="test.html" /><link rel="prev" title="Lexicon" href="lexicon.html" />
+
+    <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Summary of namelist objects and their usage - fieldextra v13_0_0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">fieldextra v13_0_0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">fieldextra v13_0_0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Program usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="products.html">Supported products and data representations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="control/intro.html">Control file</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="control/runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control/process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators to compute new fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Description of support files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Description of output format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib1.html">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grib2.html">Description of GRIB2 local use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html">Handling of meta-information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aboutOpsTags.html">About operators and tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Description of tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicon.html">Lexicon</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Summary of namelist objects and their usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">:nl:nl:`Test`</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="summary-of-namelist-objects-and-their-usage">
+<h1>Summary of namelist objects and their usage<a class="headerlink" href="#summary-of-namelist-objects-and-their-usage" title="Permalink to this heading">#</a></h1>
+<p>The next tables list all variables defined in some of the header blocks,
+and specify the variables default values. All compulsory variables are also
+marked.</p>
+<blockquote>
+<div><p>strict_usage                      = .TRUE.
+enable_exit_status                = .FALSE.
+enable_repeat_mode                = ‘none’
+clone_missing_input               = .FALSE.
+wait_time                         = 1
+mx_wait_time                      = 0
+stop_wait_flag                    = ‘’
+stop_flag                         = ‘’
+ready_flag_dir                    = ‘’
+ready_flag_prefix_pure            = ‘’
+ready_flag_prefix_other           = ‘’
+out_noready_postfix               = ‘’
+out_snapshot_postfix              = ‘’
+n_ompthread_total                 = 1
+n_ompthread_collect               = 1
+n_ompthread_generate              = 1
+out_cost_expensive                = undefined
+out_production_granularity        = 1
+soft_memory_limit                 = 20.0
+grib1_bufferin_size               = 4194304  (2**22)
+grib1_bufferin_release            = .FALSE.
+ictools_debug_level               = 0
+verbosity                         = ‘high’
+diagnostic_length                 = 100
+additional_diagnostic             = .FALSE.
+additional_profiling              = .FALSE.</p>
+</div></blockquote>
+<blockquote>
+<div><p>grib_definition_path              = ‘’                X
+grib_bitmap_path                  = ‘’
+grib2_sample                      = ‘’
+icon_grid_description             = ‘’
+rttov_coefs_path                  = ‘’
+location_list                     = ‘’
+location_list_additional          = ‘’
+region_list                       = ‘’
+slice_list                        = ‘’
+adaboost_coefs                    = ‘’</p>
+</div></blockquote>
+<blockquote>
+<div><p>default_model_name                = ‘’                X
+default_product_category          = ‘any’</p>
+<p>default_out_type                  = ‘GRIB1’
+default_out_type_replace          = .true.
+default_out_type_justontime       = ‘auto’
+default_out_type_snapshot         = undefined
+default_out_type_toc              = .false.
+default_out_type_dupcst           = .false.
+default_out_type_noundef          = .false.
+default_out_type_undefcode        = -99999.
+default_out_type_scanmode         = ‘native’
+default_out_type_packing          = ‘standard’
+default_out_type_ncformat         = ‘nc3_64boffset’
+default_out_type_ncdeflate        = undefined
+default_out_type_ncshuffle        = .false.
+default_out_type_ncunlimitedtime  = .true.
+default_out_type_simplenc         = .false.
+default_out_type_nodegeneratedim  = .false
+default_out_type_nousetag         = .false.
+default_out_type_alternate_name   = .false.
+default_out_type_autoncname       = .false.
+default_out_type_alternate_code   = .false.
+default_out_type_transcode        = .true.
+default_out_type_timebnds         = .false.
+default_out_type_prefered_tunits  = ‘’
+default_out_type_nogridincr       = .true.
+default_out_type_n_novcoord       = .true.
+default_out_type_g_novcoord       = .false.
+default_out_type_stdlongitude     = .false.
+default_out_type_mapcst           = .true.
+default_out_type_fmt              = ‘’
+default_out_type_template         = ‘’
+default_out_type_nomatch_action   = ‘raise_exception’
+default_out_type_file_header      = ‘’
+default_out_type_text1            = ‘’
+default_out_type_text2            = ‘’
+default_out_type_depreciated      =  .false.
+default_out_type_verbosity        =  1
+default_out_type_mminfo           = ‘auto’
+default_out_type_pdfinfo          = ‘auto’
+default_out_type_epsminfo         = ‘auto’
+default_out_type_prodinfo         = ‘auto’
+default_out_type_separator        = ‘ascii_null’
+default_out_type_cheader          = ‘’
+default_out_type_legend           = ‘’
+default_out_type_line_label       = ‘’
+default_out_type_fusedt           = .false.
+default_out_type_locinfo          = .false.
+default_out_type_lagranto         = .false.
+default_out_type_dwhhack          = .false.</p>
+<p>default_out_mode_mismemb_limit    = 100
+default_out_mode_mismemb_abort    = .true.
+default_out_mode_weighted_member  = .false.
+default_out_mode_sun_topo         = .false.
+default_out_mode_rttov_cloud      = ‘none’
+default_out_mode_dvt_scale        = 1.0
+default_out_mode_hcor_dhmin       = 50.0
+default_out_mode_ignore_wloading  = .true.
+default_out_mode_rh_clipped       = .true.
+default_out_mode_hi_adjusted      = .false.
+default_out_mode_h0cl_extrapolate = .false.
+default_out_mode_tw_iterative     = .false.
+default_out_mode_nbhprob_shape    =  0
+default_out_mode_nbhprob_rxy      = undefined
+default_out_mode_nbhprob_rt       = undefined
+default_out_mode_nbhprob_rfade    = undefined
+default_out_mode_kfcor_na         = ‘undef’
+default_out_mode_moscor_na        = ‘undef’
+location_to_gridpoint             = ‘’
+slice_to_gridpoint                = ‘’
+slice_resolution_factor           = 0.3
+slice_upscaling_factor            = 1
+originating_center                = undefined
+production_status                 = ‘’
+genproc_type                      = ‘’
+auxiliary_metainfo                = ‘’</p>
+</div></blockquote>
+<blockquote>
+<div><p>var_default_attribute             = ‘’
+dim_default_attribute             = ‘’</p>
+</div></blockquote>
+<blockquote>
+<div><p>select_record                     = 0
+select_data_column                = 0
+select_data_row                   = 0
+print_file_creation_date          = .FALSE.
+print_experiment_version          = .FALSE.
+print_rec_number                  = .TRUE.
+print_rec_format                  = .FALSE.
+print_rec_parameter_table         = .FALSE.
+print_rec_parameter_number        = .FALSE.
+print_rec_name                    = .TRUE.
+print_rec_altname                 = .FALSE.
+print_rec_level                   = .TRUE.
+print_rec_level_type              = .FALSE.
+print_rec_hgrid_type              = .FALSE.
+print_rec_hgrid_size              = .FALSE.
+print_rec_hgrid_delta             = .FALSE.
+print_rec_hgrid_start             = .FALSE.
+print_rec_hgrid_end               = .FALSE.
+print_rec_initial_date            = .TRUE.
+print_rec_time_range_short        = .TRUE.
+print_rec_time_range_long         = .FALSE.
+print_rec_validation_date         = .FALSE.
+print_rec_ntuple                  = .FALSE.
+print_rec_pds                     = .FALSE.
+print_rec_gds                     = .FALSE.
+print_rec_vcoord                  = .FALSE.
+print_rec_data                    = .FALSE.
+print_rec_minmax                  = .FALSE.
+print_rec_mean                    = .FALSE.
+print_rec_std                     = .FALSE.
+print_rec_median                  = .FALSE.
+print_rec_minmax_location         = .FALSE.
+print_rec_undef                   = .FALSE.
+print_rec_moment                  = undefined
+print_rec_percentile              = undefined</p>
+</div></blockquote>
+<blockquote>
+<div><p>earth_axis_large                  = 0.                X(a
+earth_axis_small                  = 0.                X(a
+hydrometeor                       = ‘’
+precip_all                        = ‘’
+precip_snow                       = ‘’
+precip_rain                       = ‘’
+precip_convective                 = ‘’
+precip_gridscale                  = ‘’
+radiation_topo_corrected          = ‘’
+passive_sfc2                      = ‘’
+not_passive_sfc2                  = ‘’
+constant_in_time                  = ‘’
+not_constant_in_time              = ‘’
+vertical_coordinate_coef          = undefined
+vertical_coordinate_id            = undefined
+vertical_coordinate_uuid          = ‘’
+vertical_coordinate_nlev          = undefined
+vertical_coordinate_positive      = ‘’
+vertical_coordinate_reset         = .false.
+regrid_method                     = ‘’</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>compulsory only when working with input in GRIB 1 format</p></li>
+</ol>
+</div></blockquote>
+<p>The next tables list all variables defined in the &amp;Process blocks, and
+specify the variables default values. For each variable, the supported
+output types are displayed. The situations where the variable is ignored
+are described.
+A similar table is available in README.user.locale for output types of
+local interest.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>ASCII_TABLE     XLS_TABLE         GRIB2</dt><dd><p>BLK_TABLE        N_TUPLE         NETCDF</p>
+</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><p>in_file                    = ‘’                         X   X   X   X   X   X   X   X   X   X   X   X
+in_type                    = ‘PLAIN’              (1)   X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>tlist                      =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+tstart                     =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+tstop                      =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+tincr                      =  1                   (1)   X   X   X   X   X   X   X   X   X   X   X   X
+epslist                    =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+epsstart                   =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+epsstop                    =  undefined           (1)   X   X   X   X   X   X   X   X   X   X   X   X
+epsincr                    =  1                   (1)   X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>in_read_first              = .false.              (1)       X   X   X   X   X   X   X   X   X   X   X
+in_read_order              = undefined            (1)       X   X   X   X   X   X   X   X   X   X   X
+in_dictionary              = see &amp;GlobalSettings  (1)   X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>in_regrid_target           = ‘’                   (2)   X   X   X   X   X   X   X   X   X   X   X   X
+in_regrid_method           = ‘’                   (2)   X   X   X   X   X   X   X   X   X   X   X   X
+in_regrid_all              = .false.              (2)   X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>epsgroup                   = undefined            (2)       X   X   X   X   X   X   X   X   X   X   X
+epsgroup_size              = undefined            (2)       X   X   X   X   X   X   X   X   X   X   X
+epscomposed_size           = undefined            (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>default_product_category   = see &amp;GlobalSettings  (1)   X   X   X   X   X   X   X   X   X   X   X   X</p>
+</div></blockquote>
+<blockquote>
+<div><dl class="simple">
+<dt>ASCII_TABLE     XLS_TABLE         GRIB2</dt><dd><p>BLK_TABLE        N_TUPLE         NETCDF</p>
+</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><p>out_file                   = ‘’                         X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>out_tstart                 = -HUGE                (2)       X   X   X   X   X   X   X   X   X   X   X
+out_tstop                  =  HUGE                (2)       X   X   X   X   X   X   X   X   X   X   X
+out_tincr                  =  1                   (2)       X   X   X   X   X   X   X   X   X   X   X
+tlag                       =  (0,0,1)             (2)       X   X   X   X   X   X   X   X   X   X   X
+out_group_eps              = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+out_shuffle_eps            = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+out_shuffle_time           = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>out_autotag                = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X
+out_cost                   = 1                    (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>out_postproc_module        = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_regrid_target          = ‘’                   (2)               X   X   X   X   X       X   X   X
+out_regrid_method          = ‘’                   (2)               X   X   X   X   X       X   X   X
+out_regrid_method_filter   = ‘’                   (2)               X   X   X   X   X       X   X   X
+out_regrid_method_distance = ‘’                   (2)               X   X   X   X   X       X   X   X
+out_regrid_topography      = ‘’                   (2)               X   X   X   X   X       X   X   X
+out_filter_cst             = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_filter_time            = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_model_name             = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_product_category       = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_genproc_type           = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_vertical_coordinate    = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_auxiliary_metainfo     = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>out_type                   = see &amp;GlobalSettings  (2)   X   X   X   X   X   X   X   X   X   X   X   X
+out_type_replace           = see &amp;GlobalSettings  (2)               X               X       X   X
+out_type_justontime        = see &amp;GlobalSettings  (2)               X                       X   X   X
+out_type_snapshot          = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_type_toc               = see &amp;GlobalSettings  (2)                                       X   X   X
+out_type_dupcst            = see &amp;GlobalSettings  (2)               X           X(a         X   X   X
+out_type_noundef           = see &amp;GlobalSettings  (2)               X           X(a         X   X   X
+out_type_undefcode         = see &amp;GlobalSettings  (2)           X   X   X   X   X   X   X
+out_type_scanmode          = see &amp;GlobalSettings  (2)               X                       X   X
+out_type_packing           = see &amp;GlobalSettings  (2)                                       X   X
+out_type_ncformat          = see &amp;GlobalSettings  (2)                                               X
+out_type_ncdeflate         = see &amp;GlobalSettings  (2)                                               X
+out_type_ncshuffle         = see &amp;GlobalSettings  (2)                                               X
+out_type_ncunlimitedtime   = see &amp;GlobalSettings  (2)                                               X
+out_type_simplenc          = see &amp;GlobalSettings  (2)                                               X
+out_type_nodegeneratedim   = see &amp;GlobalSettings  (2)                                               X
+out_type_nousetag          = see &amp;GlobalSettings  (2)           X   X   X   X   X   X               X
+out_type_alternate_name    = see &amp;GlobalSettings  (2)           X   X   X   X   X   X       X   X   X
+out_type_alternate_code    = see &amp;GlobalSettings  (2)                                       X
+out_type_autoncname        = see &amp;GlobalSettings  (2)                                               X
+out_type_transcode         = see &amp;GlobalSettings  (2)                                       X
+out_type_timebnds          = see &amp;GlobalSettings  (2)                                               X
+out_type_prefered_tunits   = see &amp;GlobalSettings  (2)                                       X   X
+out_type_nogridincr        = see &amp;GlobalSettings  (2)                                       X
+out_type_novcoord          = (e                   (2)                                       X   X   X
+out_type_stdlongitude      = see &amp;GlobalSettings  (2)           X   X   X   X   X   X   X   X   X   X
+out_type_mapcst            = see &amp;GlobalSettings  (2)   X   X   X   X   X   X   X   X   X   X   X   X
+out_type_fmt               = (d                   (2)       X   X   X   X   X   X   X   X
+out_type_template          = see &amp;GlobalSettings  (2)                                   X       X
+out_type_nomatch_action    = see &amp;GlobalSettings  (2)                                   X
+out_type_file_header       = see &amp;GlobalSettings  (2)               X   X   X   X
+out_type_text1             = see &amp;GlobalSettings  (2)       X   X   X   X   X   X       X           X
+out_type_text2             = see &amp;GlobalSettings  (2)       X   X                       X           X
+out_type_depreciated       = see &amp;GlobalSettings  (2)               X           X
+out_type_verbosity         = see &amp;GlobalSettings  (2)               X   X   X   X
+out_type_mminfo            = see &amp;GlobalSettings  (2)               X   X   X   X
+out_type_pdfinfo           = see &amp;GlobalSettings  (2)           X   X   X   X   X
+out_type_epsminfo          = see &amp;GlobalSettings  (2)           X   X   X   X   X
+out_type_prodinfo          = see &amp;GlobalSettings  (2)               X           X   X
+out_type_separator         = (f                   (2)           X               X
+out_type_cheader           = see &amp;GlobalSettings  (2)                           X(b
+out_type_legend            = see &amp;GlobalSettings  (2)           X
+out_type_line_label        = see &amp;GlobalSettings  (2)           X
+out_type_fusedt            = see &amp;GlobalSettings  (2)           X               X(b
+out_type_locinfo           = see &amp;GlobalSettings  (2)           X               X
+out_type_lagranto          = see &amp;GlobalSettings  (2)                                               X
+out_type_dwhhack           = see &amp;GlobalSettings  (2)                       X</p>
+<p>out_mode_mismemb_limit     = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_mismemb_abort     = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_weighted_member   = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_sun_topo          = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_rttov_cloud       = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_dvt_scale         = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_hcor_dhmin        = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_ignore_wloading   = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_rh_clipped        = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_hi_adjusted       = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_h0cl_extrapolate  = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_tw_iterative      = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_nbhprob_shape     = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_nbhprob_rxy       = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_nbhprob_rt        = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_nbhprob_rfade     = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_kfcor_na          = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X
+out_mode_moscor_na         = see &amp;GlobalSettings  (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>frame_ngp                  = -1                   (2)               X           X   X       X   X   X
+imin                       = -1                   (2)               X           X   X       X   X   X
+imax                       = -1                   (2)               X           X   X       X   X   X
+iinc                       =  1                   (2)               X           X   X
+jmin                       = -1                   (2)               X           X   X       X   X   X
+jmax                       = -1                   (2)               X           X   X       X   X   X
+jinc                       =  1                   (2)               X           X   X
+region_bbox                =  ‘’                  (2)               X           X   X       X   X   X
+ilist                      = -1                   (2)           X   X   X   X   X   X       X   X   X
+jlist                      = -1                   (2)           X   X   X   X   X   X       X   X   X
+loclist                    = ‘???’                (2)       X   X   X   X   X   X   X   X   X   X   X
+locgroup                   = ‘???’                (2)       X   X   X   X   X   X   X   X   X   X   X
+slice                      = ‘???’                (2)                                               X</p>
+<p>in_filter                  = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+tmp1_filter                = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+tmp2_filter                = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+tmp3_filter                = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+tmp4_filter                = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+tmp5_filter                = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X
+out_filter                 = ‘’                   (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+</div></blockquote>
+<blockquote>
+<div><dl class="simple">
+<dt>ASCII_TABLE     XLS_TABLE         GRIB2</dt><dd><p>BLK_TABLE        N_TUPLE         NETCDF</p>
+</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><p>selection_mode             = ‘INCLUDE_ONLY’       (2)   X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>in_size_field              = 0                    (2)       X   X   X   X   X   X   X   X   X   X   X
+in_size_vdate              = 0                    (2)       X   X   X   X   X   X   X   X   X   X   X
+in_duplicate_infield       = .false.              (2)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>in_field                   = ‘’                         X   X   X   X   X   X   X   X   X   X   X   X
+tmp1_field                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+tmp2_field                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+tmp3_field                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+tmp4_field                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+tmp5_field                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+out_field                  = ‘’                             X   X   X   X   X   X   X   X   X   X   X</p>
+<p>reference_field            = .true.               (3)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>skip_time                  = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+keep_time                  = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+expect_missing_field       = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+ignore_model_identity      = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+ignore_vcoord              = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+shared_eps_member          = .false.              (3)   X   X   X   X   X   X   X   X   X   X   X   X
+tag                        = ‘’                         X   X   X   X   X   X   X   X   X   X   X   X
+use_tag                    = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+use_operator               = ‘’                   (4)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>product_category           = ‘all’                      X   X   X   X   X   X   X   X   X   X   X   X
+level_class                = ‘all’                      X   X   X   X   X   X   X   X   X   X   X   X
+level_units                = ‘’                         X   X   X   X   X   X   X   X   X   X   X   X
+levlist                    = -1                         X   X   X   X   X   X   X   X   X   X   X   X
+levmin                     = -1                         X   X   X   X   X   X   X   X   X   X   X   X
+levmax                     = -1                         X   X   X   X   X   X   X   X   X   X   X   X
+levinc                     =  1                         X   X   X   X   X   X   X   X   X   X   X   X
+epslist                    = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+epsstart                   = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+epsstop                    = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+epsincr                    =  1                         X   X   X   X   X   X   X   X   X   X   X   X
+prob_interval              = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+prob_tlow                  = -HUGE                      X   X   X   X   X   X   X   X   X   X   X   X
+prob_thigh                 =  HUGE                      X   X   X   X   X   X   X   X   X   X   X   X
+quantile                   = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+ref_quantile               = undefined                  X   X   X   X   X   X   X   X   X   X   X   X
+efi_order                  = undefined                  X   X   X   X   X   X   X   X   X   X   X   X</p>
+<p>set_vcoord                 = .false.              (3)       X   X   X   X   X   X   X   X   X   X   X
+set_level_property         = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X
+set_time_range             = undefined            (3)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>regrid                     = .false.              (3)   X   X   X   X   X   X   X   X   X   X   X   X
+compare_with               = ‘’                   (3)       X   X   X   X   X   X   X   X   X   X   X
+compare_fct                = ‘’                   (3)       X   X   X   X   X   X   X   X   X   X   X
+compare_mask               = ‘’                   (3)       X   X   X   X   X   X   X   X   X   X   X
+merge_with                 = ‘’                   (3)       X   X   X   X   X   X   X   X   X   X   X
+merge_mask                 = ‘’                   (3)       X   X   X   X   X   X   X   X   X   X   X
+hoper                      = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+hoper_mask                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+scale                      =  1.                            X   X   X   X   X   X   X   X   X   X   X
+offset                     =  0.                            X   X   X   X   X   X   X   X   X   X   X
+voper                      = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+voper_lev                  = -1                             X   X   X   X   X   X   X   X   X   X   X
+voper_lev_units            = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+voper_use_tag              = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+toper                      = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+toper_mask                 = ‘’                             X   X   X   X   X   X   X   X   X   X   X
+poper                      = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+poper2                     = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+poper3                     = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+poper4                     = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+poper5                     = ‘id’                           X   X   X   X   X   X   X   X   X   X   X
+new_field_id               = ‘’                             X   X   X   X   X   X   X   X   X   X   X</p>
+<p>set_units                  = ‘’                   (6)       X   X   X   X   X   X   X   X   X   X   X
+set_reference_date         = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+set_trange_type            = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+set_leadtime               = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+set_genproc_type           = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+set_product_category       = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+set_epsmember_identity     = undefined            (6)       X   X   X   X   X   X   X   X   X   X   X
+set_auxiliary_metainfo     = ‘’                   (6)       X   X   X   X   X   X   X   X   X   X   X</p>
+<p>set_undefcode              = undefined            (5)               X
+set_packing                = ‘’                   (5)                                       X   X
+set_description            = ‘’                   (5)           X                           X   X   X
+set_comment                = ‘’                   (5)                                               X
+use_alternate_code         = .false.              (5)                                       X</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p>&gt; Default values expressed as &lt;…&gt; refer to value set for corresponding parameter.
+&gt; Some limitations:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>value ignored unless an input file name is specified;</p></li>
+<li><p>value ignored unless an output file name is specified;</p></li>
+<li><p>can only be used in relation with in_field</p></li>
+<li><p>can only be used in relation with tmp1_field/…/tmp5_field/out_field</p></li>
+<li><p>can only be used in relation with the last processing iteration</p></li>
+<li><p>can only be used in relation with in_field or with the last processing iteration</p></li>
+</ol>
+</div></blockquote>
+<dl>
+<dt>&gt; Further remarks:</dt><dd><ol class="loweralpha">
+<li><p>only supported when out_type_cheader belongs to {‘’,’gp’}</p></li>
+<li><p>only supported when out_type_separator is non blank</p></li>
+<li><p>only supported when in_field is present</p></li>
+<li><p>default out_type_fmt depends on out_type value
+(can be changed by setting default_out_type_fmt):</p>
+<blockquote>
+<div><p>6G13.5   for FLD_TABLE, DAT_TABLE, BLK_TABLE
+G13.5    for TMPL_BASE, XLS_TABLE, N_TUPLE
+setting out_type_format is mandatory for METEOG</p>
+</div></blockquote>
+</li>
+<li><p>default out_type_novcoord depends on out_type value
+(can be changed by setting default_out_type_novcoord):</p>
+<blockquote>
+<div><p>value of default_out_type_n_*    for NETCDF
+value of default_out_type_g_*    for GRIB1, GRIB2</p>
+</div></blockquote>
+</li>
+<li><p>default out_type_separator depends on out_type value
+(can be changed by setting default_out_type_separator):</p>
+<blockquote>
+<div><p>‘;’    for ASCII_TABLE
+‘ ‘    for XLS_TABLE</p>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="test.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">:nl:nl:`Test`</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="lexicon.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Lexicon</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Jean-Marie Bettems, Tierry Hörmann
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>
