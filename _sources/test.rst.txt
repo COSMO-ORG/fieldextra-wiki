@@ -1,5 +1,5 @@
-:nl:nl:`Test`
-=============
+:nl:nl:`&Test`
+==============
 
 .. nl:namelist:: Test
 
@@ -7,5 +7,91 @@ bla bli
 
 blubb
 
-:nl:nl:`Test`
+:nl:nl:`&Test`
+
+Here is an attribute
+
+.. nl:argument:: foo
+    :type: logical
+    :default: "bar"
+    :required:
+
+    Some description
+
+    :format: ``<abc>``
+    :value Some: value
+    :value Another: value
+
+        Let's reference a different namelist: :nl:nl:`&Test2`
+    :value "string": This is a string
+
+Here we reference the attribute. :nl:arg:`&Test foo`.
+
+.. nl:value:: 42
+
+    This is a nice value for the previous argument
+
+.. nl:namelist:: Test2
+
+We can also reference an externally defined value: :nl:val:`&Test foo=42`
+
+Or an internally defined value: :nl:val:`&Test foo="string"`
+
+.. nl:argument:: arg
+
+    This is an argument in a different namelist
+
+Let's activate a previous namelist
+
+.. nl:active_nl:: Test
+
+.. nl:argument:: hello
+    :default: "world"
+
+    This is an argument in the old namelist
+
+We can also activate a previous argument
+
+.. nl:active_arg:: foo
+
+.. nl:value:: .false.
+    
+    Which allows us to add value descriptions
+
+We can also activate an argument from a different namelist
+
+.. nl:active_arg:: Test2 arg
+
+.. nl:value:: xyz
+
+    And add an argument there
+
+    .. list-table::
+
+        * - markup
+          - is
+          - possible
+
+        * - here
+          -
+          -
+This activated the respective namelist
+
+.. nl:argument:: cont
+
+    And we can create new arguments
+
+    :value .true.: This is a nice value
+
+        With some markup:
+
+        .. list-table:: 
+
+            * - markup
+              - is
+              - also
+    
+            * - possible
+              - here
+              -
 

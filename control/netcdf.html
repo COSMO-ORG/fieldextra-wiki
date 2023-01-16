@@ -160,13 +160,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
@@ -214,15 +214,20 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-NetCDFImport">
-<span id="netcdfimport"></span><h1><a class="reference internal" href="#module-NetCDFImport" title="&amp;NetCDFImport"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a><a class="headerlink" href="#module-NetCDFImport" title="Permalink to this heading">#</a></h1>
+          <section id="nl-nl-NetCDFImport">
+<span id="netcdfimport"></span><h1><a class="reference internal" href="#nl-nl-NetCDFImport" title="&amp;NetCDFImport"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a><a class="headerlink" href="#nl-nl-NetCDFImport" title="Permalink to this heading">#</a></h1>
 <p>This namelist block is optional, but must be unique.</p>
 <p>It is used to specify missing attributes associated with imported
 NetCDF file. It is ignored when no NetCDF file is imported.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="NetCDFImport.varname_translation">
-<span class="sig-name descname"><span class="pre">varname_translation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&quot;nc_var_1:short_name_1&quot;,</span> <span class="pre">&quot;nc_var_2:short_name_2&quot;</span> <span class="pre">...</span></em><a class="headerlink" href="#NetCDFImport.varname_translation" title="Permalink to this definition">#</a></dt>
-<dd><p>Translation table for NetCDF variables.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-NetCDFImport-varname_translation">
+<span class="sig-prename descclassname"><span class="pre">&amp;NetCDFImport</span> </span><span class="sig-name descname"><span class="pre">varname_translation</span></span><a class="headerlink" href="#nl-attr-NetCDFImport-varname_translation" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“nc_var_1:short_name_1”, “nc_var_2:short_name_2” …</p>
+</dd>
+</dl>
+<p>Translation table for NetCDF variables.</p>
 <p>A list of NetCDF variable names (nc_var) and of associated field short
 names (short_name) is provided, following the pattern described above.
 This information supersedes any other method to associate NetCDF variable
@@ -245,10 +250,15 @@ z dimension):</p>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="NetCDFImport.var_default_attribute">
-<span class="sig-name descname"><span class="pre">var_default_attribute</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&quot;nc_var_1:attribute_list_1&quot;,</span> <span class="pre">&quot;nc_var_2:attribute_list_2&quot;</span> <span class="pre">...</span></em><a class="headerlink" href="#NetCDFImport.var_default_attribute" title="Permalink to this definition">#</a></dt>
-<dd><p>Default attributes for NetCDF variables.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-NetCDFImport-var_default_attribute">
+<span class="sig-prename descclassname"><span class="pre">&amp;NetCDFImport</span> </span><span class="sig-name descname"><span class="pre">var_default_attribute</span></span><a class="headerlink" href="#nl-attr-NetCDFImport-var_default_attribute" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“nc_var_1:attribute_list_1”, “nc_var_2:attribute_list_2” …</p>
+</dd>
+</dl>
+<p>Default attributes for NetCDF variables.</p>
 <p>A list of NetCDF variable names (nc_var) and of associated attributes
 (attribute_list) is provided, following the pattern described above.
 The attribute_list is a blank separated list of key/values
@@ -275,10 +285,15 @@ associated with all NetCDF variables; <code class="docutils literal notranslate"
 than any specific variable name.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="NetCDFImport.dim_default_attribute">
-<span class="sig-name descname"><span class="pre">dim_default_attribute</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&quot;nc_dim_1:attribute_list_1&quot;,</span> <span class="pre">&quot;nc_dim_2:attribute_list_2&quot;</span> <span class="pre">...</span></em><a class="headerlink" href="#NetCDFImport.dim_default_attribute" title="Permalink to this definition">#</a></dt>
-<dd><p>Default attributes for NetCDF dimensions.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-NetCDFImport-dim_default_attribute">
+<span class="sig-prename descclassname"><span class="pre">&amp;NetCDFImport</span> </span><span class="sig-name descname"><span class="pre">dim_default_attribute</span></span><a class="headerlink" href="#nl-attr-NetCDFImport-dim_default_attribute" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“nc_dim_1:attribute_list_1”, “nc_dim_2:attribute_list_2” …</p>
+</dd>
+</dl>
+<p>Default attributes for NetCDF dimensions.</p>
 <p>A list of NetCDF dimension names (nc_dim) and of associated attributes
 (attribute_list) is provided, following the pattern described above.
 The attribute_list is a blank separated list of key/values
@@ -391,7 +406,7 @@ which use ‘absolute_time_as_yyyymmdd’ for time values.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -402,7 +417,7 @@ which use ‘absolute_time_as_yyyymmdd’ for time values.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></div>
                 
               </div>
             </a>
@@ -436,10 +451,10 @@ which use ‘absolute_time_as_yyyymmdd’ for time values.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a><ul>
-<li><a class="reference internal" href="#NetCDFImport.varname_translation"><code class="docutils literal notranslate"><span class="pre">varname_translation</span></code></a></li>
-<li><a class="reference internal" href="#NetCDFImport.var_default_attribute"><code class="docutils literal notranslate"><span class="pre">var_default_attribute</span></code></a></li>
-<li><a class="reference internal" href="#NetCDFImport.dim_default_attribute"><code class="docutils literal notranslate"><span class="pre">dim_default_attribute</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a><ul>
+<li><a class="reference internal" href="#nl-attr-NetCDFImport-varname_translation"><code class="docutils literal notranslate"><span class="pre">varname_translation</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-NetCDFImport-var_default_attribute"><code class="docutils literal notranslate"><span class="pre">var_default_attribute</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-NetCDFImport-dim_default_attribute"><code class="docutils literal notranslate"><span class="pre">dim_default_attribute</span></code></a></li>
 </ul>
 </li>
 </ul>

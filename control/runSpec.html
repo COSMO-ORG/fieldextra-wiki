@@ -160,13 +160,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
@@ -214,12 +214,12 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-RunSpecification">
-<span id="runspecification"></span><h1><a class="reference internal" href="#module-RunSpecification" title="&amp;RunSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a><a class="headerlink" href="#module-RunSpecification" title="Permalink to this heading">#</a></h1>
+          <section id="nl-nl-RunSpecification">
+<span id="runspecification"></span><h1><a class="reference internal" href="#nl-nl-RunSpecification" title="&amp;RunSpecification"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a><a class="headerlink" href="#nl-nl-RunSpecification" title="Permalink to this heading">#</a></h1>
 <p>This namelist block must be present and unique.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.strict_nl_parsing">
-<span class="sig-name descname"><span class="pre">strict_nl_parsing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.strict_nl_parsing" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-strict_nl_parsing">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">strict_nl_parsing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-strict_nl_parsing" title="Permalink to this definition">#</a></dt>
 <dd><p>Some non-recommended usage of the namelist can be useful in some
 situations. In this case this switch should be set to .FALSE.
 (the following tests are then skipped: orthogonality of xtr_field
@@ -227,9 +227,9 @@ specifications, existence of at least one xtr_field, all xtr_field
 defined before tmp_ and out_ iterations).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.strict_usage">
-<span class="sig-name descname"><span class="pre">strict_usage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.strict_usage" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-strict_usage">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">strict_usage</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-strict_usage" title="Permalink to this definition">#</a></dt>
 <dd><p>To guarantee as much as possible the consistency of the results,
 many internal tests are made and the program raises an exception
 as soon as a potential problem is detected. However, some tests
@@ -238,7 +238,7 @@ switched off.
 The following conditions are only enforced when strict_usage is
 true:</p>
 <ul class="simple">
-<li><p>critical <code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecifications</span></code> parameters are set;</p></li>
+<li><p>critical <code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecifications</span></code> parameters are set;</p></li>
 <li><p>a default model name is specified by the user, and its value is registered;</p></li>
 <li><p>except for fields collected in INCORE storage, all fields are compatible with the user specified name;</p></li>
 <li><p>core meta-information of each used record is complete and consistent;</p></li>
@@ -254,9 +254,9 @@ true:</p>
 </ul>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.enable_exit_status">
-<span class="sig-name descname"><span class="pre">enable_exit_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.false.</span></em><a class="headerlink" href="#RunSpecification.enable_exit_status" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-enable_exit_status">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">enable_exit_status</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.false.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">Logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-enable_exit_status" title="Permalink to this definition">#</a></dt>
 <dd><p>enable process exit status</p>
 <p>When enable_exit_status is .true., any exception will cause the program
 to generate a ‘STOP 1’ before quitting; the Fortran 2008 standard
@@ -267,9 +267,9 @@ standard recommendation, an exception will cause a program
 exit status of 1.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.enable_repeat_mode">
-<span class="sig-name descname"><span class="pre">enable_repeat_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">{'none','regular','all'}</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'none'</span></em><a class="headerlink" href="#RunSpecification.enable_repeat_mode" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-enable_repeat_mode">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">enable_repeat_mode</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="pre">'none'</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">{'none','regular','all'}</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-enable_repeat_mode" title="Permalink to this definition">#</a></dt>
 <dd><p>When enable_repeat_mode is distinct from ‘none’, the file ‘fieldextra.rmode’
 will be created in the working directory; this file contains the full list
 of products and their production status. This file is generated at the
@@ -290,21 +290,21 @@ edited. This can be useful to test a single product out of a complex
 namelist.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.ready_flag_dir">
-<span class="sig-name descname"><span class="pre">ready_flag_dir</span></span><a class="headerlink" href="#RunSpecification.ready_flag_dir" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-ready_flag_dir">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">ready_flag_dir</span></span><a class="headerlink" href="#nl-attr-RunSpecification-ready_flag_dir" title="Permalink to this definition">#</a></dt>
 <dd><p>directory path</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.ready_flag_prefix_pure">
-<span class="sig-name descname"><span class="pre">ready_flag_prefix_pure</span></span><a class="headerlink" href="#RunSpecification.ready_flag_prefix_pure" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-ready_flag_prefix_pure">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">ready_flag_prefix_pure</span></span><a class="headerlink" href="#nl-attr-RunSpecification-ready_flag_prefix_pure" title="Permalink to this definition">#</a></dt>
 <dd><p>file name prefix</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.ready_flag_prefix_other">
-<span class="sig-name descname"><span class="pre">ready_flag_prefix_other</span></span><a class="headerlink" href="#RunSpecification.ready_flag_prefix_other" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-ready_flag_prefix_other">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">ready_flag_prefix_other</span></span><a class="headerlink" href="#nl-attr-RunSpecification-ready_flag_prefix_other" title="Permalink to this definition">#</a></dt>
 <dd><p>file name prefix, CURRENTLY NOT USED</p>
 <p>Fieldextra will produce an empty file at the specified location, a
 so called ready file, as soon as a specific group of input files has
@@ -325,9 +325,9 @@ within the same namelist, a ready flag will be created for each
 <p>An exception is raised if the ready flag already exists.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.out_noready_postfix">
-<span class="sig-name descname"><span class="pre">out_noready_postfix</span></span><a class="headerlink" href="#RunSpecification.out_noready_postfix" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-out_noready_postfix">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">out_noready_postfix</span></span><a class="headerlink" href="#nl-attr-RunSpecification-out_noready_postfix" title="Permalink to this definition">#</a></dt>
 <dd><p>file name postfix, incomplete files</p>
 <p>It is possible to use a temporary file name for all ‘intermediate’ output
 files, i.e. for files which are not yet completed or for which an
@@ -336,9 +336,9 @@ exception has been raised. This temporary name is built by appending
 if a non blank value is specified for out_noready_postfix.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.out_snapshot_postfix">
-<span class="sig-name descname"><span class="pre">out_snapshot_postfix</span></span><a class="headerlink" href="#RunSpecification.out_snapshot_postfix" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-out_snapshot_postfix">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">out_snapshot_postfix</span></span><a class="headerlink" href="#nl-attr-RunSpecification-out_snapshot_postfix" title="Permalink to this definition">#</a></dt>
 <dd><p>file name postfix, snapshot files</p>
 <p>It is possible to produce snapshots of currently processed output at
 specified times (see out_type_snapshot in &amp;Process specification). The
@@ -347,26 +347,26 @@ to the normal output file name, where &lt;time stamp&gt; is the time stamp
 of the input file triggering the snapshot production.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.clone_missing_input">
-<span class="sig-name descname"><span class="pre">clone_missing_input</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">false</span></em><a class="headerlink" href="#RunSpecification.clone_missing_input" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-clone_missing_input">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">clone_missing_input</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.false.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-clone_missing_input" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.wait_time">
-<span class="sig-name descname"><span class="pre">wait_time</span></span><a class="headerlink" href="#RunSpecification.wait_time" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-wait_time">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">wait_time</span></span><a class="headerlink" href="#nl-attr-RunSpecification-wait_time" title="Permalink to this definition">#</a></dt>
 <dd><p>wait time increment [s]</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.mx_wait_time">
-<span class="sig-name descname"><span class="pre">mx_wait_time</span></span><a class="headerlink" href="#RunSpecification.mx_wait_time" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-mx_wait_time">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">mx_wait_time</span></span><a class="headerlink" href="#nl-attr-RunSpecification-mx_wait_time" title="Permalink to this definition">#</a></dt>
 <dd><p>maximum cumulated wait time [s]</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.stop_wait_flag">
-<span class="sig-name descname"><span class="pre">stop_wait_flag</span></span><a class="headerlink" href="#RunSpecification.stop_wait_flag" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-stop_wait_flag">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">stop_wait_flag</span></span><a class="headerlink" href="#nl-attr-RunSpecification-stop_wait_flag" title="Permalink to this definition">#</a></dt>
 <dd><p>file name with full path</p>
 <p>When some input file is missing, another try is made after wait_time
 seconds, up to a maximum of mx_wait_time cumulated seconds. If the
@@ -445,29 +445,29 @@ validation date is always correctly coded).</p>
 ‘Definition of input files’ section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.stop_flag">
-<span class="sig-name descname"><span class="pre">stop_flag</span></span><a class="headerlink" href="#RunSpecification.stop_flag" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-stop_flag">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">stop_flag</span></span><a class="headerlink" href="#nl-attr-RunSpecification-stop_flag" title="Permalink to this definition">#</a></dt>
 <dd><p>file name with full path</p>
 <p>If this file is present, the program stops before reading the next
 input (this also interrupts any active input wait loop).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.n_ompthread_total">
-<span class="sig-name descname"><span class="pre">n_ompthread_total</span></span><a class="headerlink" href="#RunSpecification.n_ompthread_total" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-n_ompthread_total">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">n_ompthread_total</span></span><a class="headerlink" href="#nl-attr-RunSpecification-n_ompthread_total" title="Permalink to this definition">#</a></dt>
 <dd><p>number of OpenMP threads used by program</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.n_ompthread_collect">
-<span class="sig-name descname"><span class="pre">n_ompthread_collect</span></span><a class="headerlink" href="#RunSpecification.n_ompthread_collect" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-n_ompthread_collect">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">n_ompthread_collect</span></span><a class="headerlink" href="#nl-attr-RunSpecification-n_ompthread_collect" title="Permalink to this definition">#</a></dt>
 <dd><p>number of concurrent output processed in collect</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.n_ompthread_generate">
-<span class="sig-name descname"><span class="pre">n_ompthread_generate</span></span><a class="headerlink" href="#RunSpecification.n_ompthread_generate" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-n_ompthread_generate">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">n_ompthread_generate</span></span><a class="headerlink" href="#nl-attr-RunSpecification-n_ompthread_generate" title="Permalink to this definition">#</a></dt>
 <dd><p>number of concurrent output processed in generate</p>
 <p>Define the number of threads used for shared memory multitasking.</p>
 <ul class="simple">
@@ -490,9 +490,9 @@ a distinct partition of threads for expensive products
 is only allowed when the program runs in OpenMP mode.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.out_cost_expensive">
-<span class="sig-name descname"><span class="pre">out_cost_expensive</span></span><a class="headerlink" href="#RunSpecification.out_cost_expensive" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-out_cost_expensive">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">out_cost_expensive</span></span><a class="headerlink" href="#nl-attr-RunSpecification-out_cost_expensive" title="Permalink to this definition">#</a></dt>
 <dd><p>threshold for expensive products</p>
 <p>When set, two different partitions of OpenMP threads are used:</p>
 <ul class="simple">
@@ -502,17 +502,17 @@ computed first, using n_ompthread_generate(2);</p></li>
 </ul>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.out_production_granularity">
-<span class="sig-name descname"><span class="pre">out_production_granularity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer,</span> <span class="pre">larger</span> <span class="pre">or</span> <span class="pre">equal</span> <span class="pre">to</span> <span class="pre">1</span></em><a class="headerlink" href="#RunSpecification.out_production_granularity" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-out_production_granularity">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">out_production_granularity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer,</span> <span class="pre">larger</span> <span class="pre">or</span> <span class="pre">equal</span> <span class="pre">to</span> <span class="pre">1</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-out_production_granularity" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the output production granularity; the larger the value the
 higher the potential OpenMP speedup, but also the higher the memory
 footprint. Default value is 1. See section 2.6 for more details.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.soft_memory_limit">
-<span class="sig-name descname"><span class="pre">soft_memory_limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">positive</span> <span class="pre">real</span></em><a class="headerlink" href="#RunSpecification.soft_memory_limit" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-soft_memory_limit">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">soft_memory_limit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">positive</span> <span class="pre">real</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-soft_memory_limit" title="Permalink to this definition">#</a></dt>
 <dd><p>Soft limit on memory allocation (in gigabyte), default: 20.0 .
 This defines a soft limit for the memory usage at run time. Memory
 allocation is tracked within the program and the program stops when
@@ -525,17 +525,17 @@ problems the additional untracked memory is relatively small).</p>
 ‘fieldextra.diagnostic’, under the name ‘High water mark’.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.grib1_bufferin_release">
-<span class="sig-name descname"><span class="pre">grib1_bufferin_release</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.grib1_bufferin_release" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-grib1_bufferin_release">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">grib1_bufferin_release</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-grib1_bufferin_release" title="Permalink to this definition">#</a></dt>
 <dd><p>When set to true, attempt to free cached memory pages after data
 has been used (call to posix_fadvise(…POSIX_FADV_DONTNEED…)).
 Default is false.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.grib1_bufferin_size">
-<span class="sig-name descname"><span class="pre">grib1_bufferin_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer,</span> <span class="pre">in</span> <span class="pre">[1024(=2**10),134217728(=2**27)]</span></em><a class="headerlink" href="#RunSpecification.grib1_bufferin_size" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-grib1_bufferin_size">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">grib1_bufferin_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer,</span> <span class="pre">in</span> <span class="pre">[1024(=2**10),134217728(=2**27)]</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-grib1_bufferin_size" title="Permalink to this definition">#</a></dt>
 <dd><p>Suggested buffer size for reading GRIB 1 files, in bytes. Default
 value is set to 4194304 (=2**22) bytes. If set to 0, the GRIB 1
 library uses a system dependent default value.</p>
@@ -543,9 +543,9 @@ library uses a system dependent default value.</p>
 small compared to the size of the processed records.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.verbosity">
-<span class="sig-name descname"><span class="pre">verbosity</span></span><a class="headerlink" href="#RunSpecification.verbosity" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-verbosity">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">verbosity</span></span><a class="headerlink" href="#nl-attr-RunSpecification-verbosity" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the type of information written to the standard output:</p>
 <ul class="simple">
 <li><p>‘silent’  : only errors</p></li>
@@ -561,17 +561,17 @@ When verbosity is set to ‘debug’, additional_diagnostic and
 additional_profiling are also automatically set to true.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.diagnostic_length">
-<span class="sig-name descname"><span class="pre">diagnostic_length</span></span><a class="headerlink" href="#RunSpecification.diagnostic_length" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-diagnostic_length">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">diagnostic_length</span></span><a class="headerlink" href="#nl-attr-RunSpecification-diagnostic_length" title="Permalink to this definition">#</a></dt>
 <dd><p>Specifies the maximum length of diagnostic lines; when necessary, the
 diagnostic is wrapped to respect this value. A value of 0 means that no
 word wrapping takes place. A minimum length is enforced.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.additional_diagnostic">
-<span class="sig-name descname"><span class="pre">additional_diagnostic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.additional_diagnostic" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-additional_diagnostic">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">additional_diagnostic</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-additional_diagnostic" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the production of additional diagnostic, default is false.
 When true,</p>
 <ol class="arabic simple">
@@ -608,9 +608,9 @@ When true,</p>
 </div>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.additional_profiling">
-<span class="sig-name descname"><span class="pre">additional_profiling</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><a class="headerlink" href="#RunSpecification.additional_profiling" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-additional_profiling">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">additional_profiling</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-additional_profiling" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the production of detailed code profiling, default is false.
 When true, the following additional information is written in file fieldextra.diagnostic:</p>
 <ul class="simple">
@@ -624,9 +624,9 @@ When true, the following additional information is written in file fieldextra.di
 </div>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="RunSpecification.ictools_debug_level">
-<span class="sig-name descname"><span class="pre">ictools_debug_level</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer</span></em><a class="headerlink" href="#RunSpecification.ictools_debug_level" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-RunSpecification-ictools_debug_level">
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">ictools_debug_level</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-ictools_debug_level" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the level of debugging information produced by the ICON tools
 libraries. The default value is 0, meaning no debugging information is
 produced; the larger the value, the more information will be produced.</p>
@@ -644,7 +644,7 @@ produced; the larger the value, the more information will be produced.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -689,34 +689,34 @@ produced; the larger the value, the more information will be produced.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a><ul>
-<li><a class="reference internal" href="#RunSpecification.strict_nl_parsing"><code class="docutils literal notranslate"><span class="pre">strict_nl_parsing</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.strict_usage"><code class="docutils literal notranslate"><span class="pre">strict_usage</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.enable_exit_status"><code class="docutils literal notranslate"><span class="pre">enable_exit_status</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.enable_repeat_mode"><code class="docutils literal notranslate"><span class="pre">enable_repeat_mode</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.ready_flag_dir"><code class="docutils literal notranslate"><span class="pre">ready_flag_dir</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.ready_flag_prefix_pure"><code class="docutils literal notranslate"><span class="pre">ready_flag_prefix_pure</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.ready_flag_prefix_other"><code class="docutils literal notranslate"><span class="pre">ready_flag_prefix_other</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.out_noready_postfix"><code class="docutils literal notranslate"><span class="pre">out_noready_postfix</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.out_snapshot_postfix"><code class="docutils literal notranslate"><span class="pre">out_snapshot_postfix</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.clone_missing_input"><code class="docutils literal notranslate"><span class="pre">clone_missing_input</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.wait_time"><code class="docutils literal notranslate"><span class="pre">wait_time</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.mx_wait_time"><code class="docutils literal notranslate"><span class="pre">mx_wait_time</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.stop_wait_flag"><code class="docutils literal notranslate"><span class="pre">stop_wait_flag</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.stop_flag"><code class="docutils literal notranslate"><span class="pre">stop_flag</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.n_ompthread_total"><code class="docutils literal notranslate"><span class="pre">n_ompthread_total</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.n_ompthread_collect"><code class="docutils literal notranslate"><span class="pre">n_ompthread_collect</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.n_ompthread_generate"><code class="docutils literal notranslate"><span class="pre">n_ompthread_generate</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.out_cost_expensive"><code class="docutils literal notranslate"><span class="pre">out_cost_expensive</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.out_production_granularity"><code class="docutils literal notranslate"><span class="pre">out_production_granularity</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.soft_memory_limit"><code class="docutils literal notranslate"><span class="pre">soft_memory_limit</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.grib1_bufferin_release"><code class="docutils literal notranslate"><span class="pre">grib1_bufferin_release</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.grib1_bufferin_size"><code class="docutils literal notranslate"><span class="pre">grib1_bufferin_size</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.verbosity"><code class="docutils literal notranslate"><span class="pre">verbosity</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.diagnostic_length"><code class="docutils literal notranslate"><span class="pre">diagnostic_length</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.additional_diagnostic"><code class="docutils literal notranslate"><span class="pre">additional_diagnostic</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.additional_profiling"><code class="docutils literal notranslate"><span class="pre">additional_profiling</span></code></a></li>
-<li><a class="reference internal" href="#RunSpecification.ictools_debug_level"><code class="docutils literal notranslate"><span class="pre">ictools_debug_level</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a><ul>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-strict_nl_parsing"><code class="docutils literal notranslate"><span class="pre">strict_nl_parsing</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-strict_usage"><code class="docutils literal notranslate"><span class="pre">strict_usage</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-enable_exit_status"><code class="docutils literal notranslate"><span class="pre">enable_exit_status</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-enable_repeat_mode"><code class="docutils literal notranslate"><span class="pre">enable_repeat_mode</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-ready_flag_dir"><code class="docutils literal notranslate"><span class="pre">ready_flag_dir</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-ready_flag_prefix_pure"><code class="docutils literal notranslate"><span class="pre">ready_flag_prefix_pure</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-ready_flag_prefix_other"><code class="docutils literal notranslate"><span class="pre">ready_flag_prefix_other</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-out_noready_postfix"><code class="docutils literal notranslate"><span class="pre">out_noready_postfix</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-out_snapshot_postfix"><code class="docutils literal notranslate"><span class="pre">out_snapshot_postfix</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-clone_missing_input"><code class="docutils literal notranslate"><span class="pre">clone_missing_input</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-wait_time"><code class="docutils literal notranslate"><span class="pre">wait_time</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-mx_wait_time"><code class="docutils literal notranslate"><span class="pre">mx_wait_time</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-stop_wait_flag"><code class="docutils literal notranslate"><span class="pre">stop_wait_flag</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-stop_flag"><code class="docutils literal notranslate"><span class="pre">stop_flag</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-n_ompthread_total"><code class="docutils literal notranslate"><span class="pre">n_ompthread_total</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-n_ompthread_collect"><code class="docutils literal notranslate"><span class="pre">n_ompthread_collect</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-n_ompthread_generate"><code class="docutils literal notranslate"><span class="pre">n_ompthread_generate</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-out_cost_expensive"><code class="docutils literal notranslate"><span class="pre">out_cost_expensive</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-out_production_granularity"><code class="docutils literal notranslate"><span class="pre">out_production_granularity</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-soft_memory_limit"><code class="docutils literal notranslate"><span class="pre">soft_memory_limit</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-grib1_bufferin_release"><code class="docutils literal notranslate"><span class="pre">grib1_bufferin_release</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-grib1_bufferin_size"><code class="docutils literal notranslate"><span class="pre">grib1_bufferin_size</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-verbosity"><code class="docutils literal notranslate"><span class="pre">verbosity</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-diagnostic_length"><code class="docutils literal notranslate"><span class="pre">diagnostic_length</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-additional_diagnostic"><code class="docutils literal notranslate"><span class="pre">additional_diagnostic</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-additional_profiling"><code class="docutils literal notranslate"><span class="pre">additional_profiling</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-RunSpecification-ictools_debug_level"><code class="docutils literal notranslate"><span class="pre">ictools_debug_level</span></code></a></li>
 </ul>
 </li>
 </ul>

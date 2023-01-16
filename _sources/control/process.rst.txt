@@ -1,21 +1,21 @@
-:py:mod:`&Process`
+:nl:nl:`&Process`
 ==================
 
 Introduction
 ------------
 
-.. py:module:: &Process
+.. nl:namelist:: Process
 
 Fieldextra supports the simultaneous generation of multiple products.
 The operations required to generate each product are defined by a set
-of :py:mod:`&Process` blocks in the namelist file. Multiple :py:mod:`&Process` blocks are
+of :nl:nl:`&Process` blocks in the namelist file. Multiple :nl:nl:`&Process` blocks are
 associated with a specified product using the name of the output file
-(:py:attr:`&Process.out_file`); until a new output file name is defined, all :py:mod:`&Process`
+(:nl:arg:`&Process out_file`); until a new output file name is defined, all :nl:nl:`&Process`
 blocks belong to the same product definition (following the order
-of :py:mod:`&Process` blocks in the control file).
+of :nl:nl:`&Process` blocks in the control file).
     
 
-The :py:mod:`&Process` block can be repeated as many times as necessary. Each
+The :nl:nl:`&Process` block can be repeated as many times as necessary. Each
 output file must be declared with one or more associated input files
 (see :ref:`section 4.3.1` and :ref:`section 4.3.2`). The
 data collected in a specific output file is extracted from the set of
@@ -24,7 +24,7 @@ on extracted fields and computation of derived fields are applied before
 writing the output on disk (see :ref:`section 4.3.4`
 and :ref:`section 4.3.5`).
 
-The typical sequence of :py:mod:`&Process` blocks for a specific :py:attr:`&Process.out_file` is: ::
+The typical sequence of :nl:nl:`&Process` blocks for a specific :nl:arg:`&Process out_file` is: ::
 
     &Process  in_file= ...                                    | This can be repeated when
               out_file= ...    /                              | multiple input contribute
@@ -39,7 +39,7 @@ The typical sequence of :py:mod:`&Process` blocks for a specific :py:attr:`&Proc
 This sequence can be repeated as many times as necessary. The same input
 and output files will be used until new file names are explicitely
 specified; all other variables are reset to their default value before
-reading the next :py:mod:`&Process` block.
+reading the next :nl:nl:`&Process` block.
 
     
 A case with two input files contributing to a single output is presented
@@ -68,8 +68,8 @@ below: ::
     &Process out_field = field_7  /     All fields specified here are written in output.
     
     
-When :py:attr:`&RunSpecification.strict_nl_parsing` is true (which is the default), fieldextra requires that
-all :py:mod:`&Process` definitions associated to each single output follow the order given
+When :nl:arg:`&RunSpecification strict_nl_parsing` is true (which is the default), fieldextra requires that
+all :nl:nl:`&Process` definitions associated to each single output follow the order given
 in the previous example: first the input/output characteristics are specified
 together with the fields to extract, for each contributing input/output pairs,
 and only then are the processing iterations specified, in the order of the
@@ -78,8 +78,8 @@ iterations that are made.
 
 As explained in detail further on, it is possible to use some shortcuts to
 write more compact namelists. In particular it is possible to use an implicit
-time loop in the definition of :py:attr:`&Process.in_file`, and to suppress the out_field group
-when all extracted fields have to be available in :py:attr:`&Process.out_file`.
+time loop in the definition of :nl:arg:`&Process in_file`, and to suppress the out_field group
+when all extracted fields have to be available in :nl:arg:`&Process out_file`.
 
 .. _section 4.3.1:
     
@@ -120,10 +120,10 @@ the following formats:
 
     Required field attributes which are missing in the imported
     NetCDF file can be set in the namelist header, in particular
-    by using :py:attr:`&NetCDFImport.dim_default_attribute` and :py:attr:`&NetCDFImport.var_default_attribute`.
+    by using :nl:arg:`&NetCDFImport dim_default_attribute` and :nl:arg:`&NetCDFImport var_default_attribute`.
 
     The rules to define the short name associated with a NetCDF
-    variable are: use the :py:mod:`&NetCDFImport` translation table when
+    variable are: use the :nl:nl:`&NetCDFImport` translation table when
     available (varname_translation), otherwise use the short name
     attribute, otherwise use the variable name itself.
     Once a field short has been defined, the NetCDF variable name
@@ -167,7 +167,7 @@ Input files are processed twice: first to collect data for pseudo-output
 
 Processing order of input files is defined by the following rules:
 
-Case A : :py:attr:`&Process.in_read_order` is not set
+Case A : :nl:arg:`&Process in_read_order` is not set
     1.  files with the same time stamp are grouped together
         (a file defined both with and without a time stamp is 
         recognized as a unique input file and sorting is based
@@ -182,7 +182,7 @@ Case A : :py:attr:`&Process.in_read_order` is not set
         follows increasing alphanumeric order of associated
         time stamp;
     4.  re-order some special files
-        (pure input: :py:attr:`&Process.in_file` not declared as :py:attr:`&Process.out_file`)
+        (pure input: :nl:arg:`&Process in_file` not declared as :nl:arg:`&Process out_file`)
         
         1.  move non pure input at the end of the group containing
             the last contributing pure input, respecting otherwise
@@ -193,14 +193,14 @@ Case A : :py:attr:`&Process.in_read_order` is not set
     5.  INCORE pseudo-file is accessed on-demand, and, for each
         output, before the first contributing standard input file.
 
-Case B : :py:attr:`&Process.in_read_order` is set
-    in this case, :py:attr:`&Process.in_read_order` must be set for all 
+Case B : :nl:arg:`&Process in_read_order` is set
+    in this case, :nl:arg:`&Process in_read_order` must be set for all 
     input files, and in_sort_first is not allowed
 
     1.  files are processed following increasing values of
-        :py:attr:`&Process.in_read_order`;
+        :nl:arg:`&Process in_read_order`;
     2.  within a group of files having the same value of
-        :py:attr:`&Process.in_read_order`, rules 1-3 of case A applies; 
+        :nl:arg:`&Process in_read_order`, rules 1-3 of case A applies; 
     3.  INCORE pseudo-file is accessed on-demand, and, for each
         output, before the first contributing standard input file.
 
@@ -233,15 +233,15 @@ Policy on missing input file is controlled by the values of
 wait_time, mx_wait_time, and clone_missing_input (one of
 skip [default], clone, wait and exit, wait and clone).
 
-.. py:attribute:: in_file
-    :type: <input file name> 
+.. nl:argument:: in_file
+    :format: <input file name> 
 
     The name __INCORE\__ is reserved
 
 It is often necessary to apply the same operations to a set of
 files, each file of the set being characterized by a unique
 validation date or representing a different EPS member.
-Instead of repeating the :py:mod:`&Process` group, a mechanism supports
+Instead of repeating the :nl:nl:`&Process` group, a mechanism supports
 the definition of an implicit loop on the input file name.
 This mechanism relies on the file name conventions defined for
 the COSMO model.
@@ -285,22 +285,26 @@ any additional keyword remains untransformed.
 The list of input files is defined by specifying a list of
 times, either explicitly ...
 
-.. py:attribute:: tlist
-    :type: <time>,<time>,...
+.. nl:argument:: tlist
+    
+    :format: <time>,<time>,...
 
     -1 means no time list
 
 or implicitly ...
 
-.. py:attribute:: tstart
-    :type: <start time>
+.. nl:argument:: tstart
+    
+    :format: <start time>
 
-.. py:attribute:: tstop
-    :type: <stop time>
+.. nl:argument:: tstop
+    
+    :format: <stop time>
 
-.. py:attribute:: tincr
-    :type: <increment>
-    :value: 1
+.. nl:argument:: tincr
+    :default: 1
+
+    :format: <increment>
 
 The list of input files is created by replacing the time keyword
 by each value of the list in turn, according to the following 
@@ -350,22 +354,27 @@ any additional keyword remains untransformed.
 The list of input files is defined by specifying a list of
 members, either explicitely ...
 
-.. py:attribute:: epslist
-    :type: <eps member>,<eps member>,...
+.. nl:argument:: epslist
+    
+    :format: <eps member>,<eps member>,...
 
     -1 means no eps list
 
 or implicitly ...
 
-.. py:attribute:: epsstart
-    :type: <start eps member>
+.. nl:argument:: epsstart
+    
+    :format: <start eps member>
 
-.. py:attribute:: epsstop
-    :type: <stop eps member>
+.. nl:argument:: epsstop
+    
+    :format: <stop eps member>
 
-.. py:attribute:: epsincr
-    :type: <increment eps member>
-    :value: 1
+.. nl:argument:: epsincr
+    :default: 1
+
+
+    :format: <increment eps member>
 
 
 The list of input files is created by replacing the keyword by a
@@ -375,9 +384,11 @@ epslist in turn.
 other characteristics
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. py:attribute:: in_type
-    :type: <input file type>   
-    :value: 'PLAIN'    
+.. nl:argument:: in_type
+    :default: 'PLAIN'    
+
+
+    :format: <input file type>   
 
 
     In addition to plain input files, this program may also access pseudo
@@ -388,7 +399,7 @@ other characteristics
     INCORE  : 
             pseudo input type to support direct access to fields
             stored in INCORE storage (see 4.3.2 below). The
-            parameter :py:attr:`&Process.in_file` must not be set in this case.
+            parameter :nl:arg:`&Process in_file` must not be set in this case.
     PLAIN   : 
             plain input file; the format currently supported are
             WMO GRIB, edition 1 and 2, NetCDF (CF convention), and
@@ -400,16 +411,19 @@ other characteristics
     memory footprint of some applications (see 2.5). This is possible by
     using one of the following mutually exclusive variables:
 
-.. py:attribute:: in_read_first
+.. nl:argument:: in_read_first
+    :default: .false.
+
     :type: logical
-    :value: .false.
 
     forces the associated input file to be processed just
     after INCORE pseudo-input. Not compatible with input also declared as
     output in another procesing block.
 
-.. py:attribute:: in_read_order
-    :type: <strictly positive integer>
+.. nl:argument:: in_read_order
+
+
+    :format: <strictly positive integer>
 
     default undefined
     
@@ -421,7 +435,7 @@ other characteristics
     ensure that any input also declared as output in another procesing
     block is processed after all 'pure' input files.
 
-.. py:attribute:: in_dictionary
+.. nl:argument:: in_dictionary
     :type: string
 
     supersede value of default_dictionary
@@ -436,7 +450,7 @@ other characteristics
     The special value __AUTO\__ is used to defer the choice of the dictionary
     till a record is decoded, independently for each record. The dictionary
     is selected on the basis of the decoded model type and product category,
-    in the list of dictionaries specified in :py:mod:`&GlobalResource`
+    in the list of dictionaries specified in :nl:nl:`&GlobalResource`
     is associated with a model type (keyword MODEL_TYPE) and, optionaly, with
     a list of product category (keyword PRODUCT_CATEGORY), and these 
     information are used to select the active dictionary:
@@ -451,7 +465,7 @@ other characteristics
     It is not allowed to collect fields associated with different dictionaries 
     in the same output (see also 'ignore_model_identity').
 
-.. py:attribute:: default_product_category
+.. nl:argument:: default_product_category
     :type: string
 
     default product category for associated input
@@ -459,7 +473,7 @@ other characteristics
     The default product category is used to supplement missing or unrecognized
     information in the input records of the associated file.
     
-    See the definition of :py:attr:`&GlobalSettings.default_product_category` for the list of
+    See the definition of :nl:arg:`&GlobalSettings default_product_category` for the list of
     supported values and a discussion on the use of this parameter.
 
 .. _section 4.3.2:
@@ -468,13 +482,13 @@ Output files
 ------------
 
 For each output file, the set of contributing input is built using
-the definitions found in the :py:mod:`&Process` block(s) where this output is
+the definitions found in the :nl:nl:`&Process` block(s) where this output is
 mentioned; the set of input fields available for the production of
 this ouput is limited to the contributing input files.
 
 The set of contributing input depends on the usage of time and eps
 keywords in the definition of the input and the output, on the
-usage of :py:attr:`&Process.tlag` and on the usage of :py:attr:`&Process.out_group_eps`, as explained below.
+usage of :nl:arg:`&Process tlag` and on the usage of :nl:arg:`&Process out_group_eps`, as explained below.
 
 Normally, the production of any specified output is done only once all
 contributing input files have been processed, or, at the latest, at the
@@ -485,7 +499,7 @@ has been processed. This is the so-called 'just on time' mode.
 
 **'just on time mode'**
     *   by default, automatically set, independently for each output
-        (but :py:attr:`&Process.out_type_justontime` allows explicit control)
+        (but :nl:arg:`&Process out_type_justontime` allows explicit control)
     *   this mode controls the way multiple validation times are
         processed: either in one pass at the end of the program,
         or each time the data for a specific validation time have
@@ -495,12 +509,12 @@ has been processed. This is the so-called 'just on time' mode.
         to be active:
 
         *   output supports just on time mode (supports the use 
-            of :py:attr:`&Process.out_type_justontime`, see output characteristics in
+            of :nl:arg:`&Process out_type_justontime`, see output characteristics in
             :ref:`chapter 7`)
         *   all time operators are set to identity
         *   no computed fields requiring parents on multiple time levels
         *   no use of out_postproc_module (could contain time operator)
-        *   no use of time stamp in :py:attr:`&Process.out_file` definition
+        *   no use of time stamp in :nl:arg:`&Process out_file` definition
         *   all contributing input files, with the exception of INCORE,
             are declared with the same non trivial time keyword and are
             associated with the same time list.
@@ -512,8 +526,8 @@ input files. This can be achieved by using the so called
 
 **'snapshot mode'**
     the program runs concurrently to the production of input files 
-    and wait for input files as necessary (controlled by :py:attr:`&RunSpecification.wait_time` and 
-    :py:attr:`&RunSpecification.mx_wait_time`). The production of intermediate (incomplete) output may
+    and wait for input files as necessary (controlled by :nl:arg:`&RunSpecification wait_time` and 
+    :nl:arg:`&RunSpecification mx_wait_time`). The production of intermediate (incomplete) output may
     be triggered by the use of out_type_snapshot.
 
 To guarantee the integrity of output files during production, the
@@ -522,27 +536,28 @@ operations.
 
 When output files are iteratively produced, it is possible to flag
 all output files which are not yet complete. This is achieved by
-setting :py:attr:`&RunSpecification.out_noready_postfix`.
+setting :nl:arg:`&RunSpecification out_noready_postfix`.
 
  
-.. py:attribute:: out_file
-    :type: <output file name> 
+.. nl:argument:: out_file
+
+    :format: <output file name> 
 
     The names __INCORE\__ and __INSPECT\__ are reserved
 
 time and eps loop
 ^^^^^^^^^^^^^^^^^
 
-As for the definition of :py:attr:`&Process.in_file`, it is possible to use a generic
-name for :py:attr:`&Process.out_file`, using one of the following keyword:
+As for the definition of :nl:arg:`&Process in_file`, it is possible to use a generic
+name for :nl:arg:`&Process out_file`, using one of the following keyword:
 
-time related, refer to :py:attr:`&Process.tstart` or :py:attr:`&Process.tlist` :
+time related, refer to :nl:arg:`&Process tstart` or :nl:arg:`&Process tlist` :
     ``<hh>`` [1]_, ``<hhh>`` [1]_, ``<ddhh>`` [1]_, ``<ddhhmmss>`` [1]_,
     ``<yyyy:start_year>``, ``<reference_yyyy:start_year>``
     ``<yyyymmddhh:start_date>``, ``<reference_yyyymmddhh:start_date>``
     ``<yyyymmddhhmm:start_date>``, ``<reference_yyyymmddhhmm:start_date>``
     ``<nnnnnnnn>`` [1]_
-eps related, refer to :py:attr:`&Process.epsstart` or :py:attr:`&Process.epslist` :
+eps related, refer to :nl:arg:`&Process epsstart` or :nl:arg:`&Process epslist` :
     ``<mm>``, ``<mmm>``
 
 .. [1] 
@@ -552,33 +567,36 @@ eps related, refer to :py:attr:`&Process.epsstart` or :py:attr:`&Process.epslist
     This functionality supports in particular the construction of lagged
     ensemble.
 
-As for :py:attr:`&Process.in_file`, the list of output files is constructed by replacing 
+As for :nl:arg:`&Process in_file`, the list of output files is constructed by replacing 
 the eps or time keyword with each element of the specified eps or time
-list in turn (as specified by :py:attr:`&Process.epslist`, :py:attr:`&Process.epsstart`... or :py:attr:`&Process.tlist`, :py:attr:`&Process.tstart`...).
+list in turn (as specified by :nl:arg:`&Process epslist`, :nl:arg:`&Process epsstart`... or :nl:arg:`&Process tlist`, :nl:arg:`&Process tstart`...).
 In case of time keyword, the units for the values of the time list
-are defined according to the :py:attr:`&Process.in_file` time keyword, if present; 
-otherwise the :py:attr:`&Process.out_file` time keyword defines these units.
+are defined according to the :nl:arg:`&Process in_file` time keyword, if present; 
+otherwise the :nl:arg:`&Process out_file` time keyword defines these units.
 
 These keywords are primary used to group similar output files created
 with the same operations, which supports more compact namelist and
 help optimize some internal operations. However, this feature also
 supports some additional functionalities, such as distributing the
-input file records in multiple output (see :py:attr:`&Process.out_shuffle_time` and :py:attr:`&Process.out_shuffle_eps`).
+input file records in multiple output (see :nl:arg:`&Process out_shuffle_time` and :nl:arg:`&Process out_shuffle_eps`).
     
 When the set of contributing input files has been defined by an
 implicit time loop (generic name), it is possible to restrict the
-set of output files, when :py:attr:`&Process.out_file` is defined by a generic name,
+set of output files, when :nl:arg:`&Process out_file` is defined by a generic name,
 and the set of active dates collected in each output, by defining
 a new time list :
 
-.. py:attribute:: out_tstart
-    :type: <start time for filtering output>  
+.. nl:argument:: out_tstart
 
-.. py:attribute:: out_tstop
-    :type: <stop time for filtering output>  
+    :format: <start time for filtering output>  
 
-.. py:attribute:: out_tincr
-    :type: <increment for filtering output> 
+.. nl:argument:: out_tstop
+
+    :format: <stop time for filtering output>  
+
+.. nl:argument:: out_tincr
+
+    :format: <increment for filtering output> 
 
 The effects of this time list are:
 
@@ -588,7 +606,7 @@ The effects of this time list are:
 2.  For each output, restrict the set of collected dates to the ones
     present in the contributing input files with a matching time stamp
     (files without time stamp are not filtered out). Note that any
-    operator defined for the production of the output (e.g. :py:attr:`&Process.toper` )
+    operator defined for the production of the output (e.g. :nl:arg:`&Process toper` )
     has access to all time levels, the filter acting only after the
     generation of the output fields.
 
@@ -599,21 +617,22 @@ definition, the default rule is to associate the files with the same
 time or eps keyword.
 This default behaviour does not support the case where multiple time
 levels or multiple EPS members are required to compute the output
-fields (e.g. use of :py:attr:`&Process.toper`, computation of EPS derived fields). For 
-this reason the default rule can be changed by the usage of :py:attr:`&Process.tlag`
-or :py:attr:`&Process.out_group_eps`, as explained below.
+fields (e.g. use of :nl:arg:`&Process toper`, computation of EPS derived fields). For 
+this reason the default rule can be changed by the usage of :nl:arg:`&Process tlag`
+or :nl:arg:`&Process out_group_eps`, as explained below.
 
-.. py:attribute:: tlag
-    :type: <start time>[,<stop time>[,<increment>]]
+.. nl:argument:: tlag
+
+    :format: <start time>[,<stop time>[,<increment>]]
 
 
-    The variable :py:attr:`&Process.tlag` defines a set of times through an implicit time loop;
+    The variable :nl:arg:`&Process tlag` defines a set of times through an implicit time loop;
     the following conditions must be respected:
 
     *  start time <= 0, start time <= stop time, increment > 0
     *  0 must be part of the set of time
    
-    The set of times defined through :py:attr:`&Process.tlag` specifies the set of input files
+    The set of times defined through :nl:arg:`&Process tlag` specifies the set of input files
     contributing to each output, expressed as time differences relatively
     to the time stamp defined for each concerned output:
 
@@ -628,7 +647,7 @@ or :py:attr:`&Process.out_group_eps`, as explained below.
    
     Two optional syntax are also supported:
 
-    * When :py:attr:`&Process.tlag` is only defined through <start time>, the other components
+    * When :nl:arg:`&Process tlag` is only defined through <start time>, the other components
       take the values ::     
 
         <stop time> = 0
@@ -645,23 +664,24 @@ or :py:attr:`&Process.out_group_eps`, as explained below.
       with irregular list of times.
    
     The variable tlag is mostly used in relation with a temporal operator
-    (:py:attr:`&Process.toper`), when the fields in each output file are the result of some
+    (:nl:arg:`&Process toper`), when the fields in each output file are the result of some
     temporal transformation, but a unique output file is desired for each
     time level; in this situation, it is important to make sure that the
-    set of contributing times specified by :py:attr:`&Process.tlag` is compatible with the
-    set of times levels required by :py:attr:`&Process.toper`, as specified in :py:attr:`&Process.toper` argument.
+    set of contributing times specified by :nl:arg:`&Process tlag` is compatible with the
+    set of times levels required by :nl:arg:`&Process toper`, as specified in :nl:arg:`&Process toper` argument.
    
-    Note that :py:attr:`&Process.tlag` can only be set when both :py:attr:`&Process.in_file` and :py:attr:`&Process.out_file` are
+    Note that :nl:arg:`&Process tlag` can only be set when both :nl:arg:`&Process in_file` and :nl:arg:`&Process out_file` are
     defined as generic name, with a time keyword. 
 
-.. py:attribute:: out_group_eps
-    :type: <.TRUE. or .FALSE.>
-    :value: .FALSE.
+.. nl:argument:: out_group_eps
+    :default: .FALSE.
+
+    :format: <.TRUE. or .FALSE.>
 
 
-    Controls the interpretation of :py:mod:`&Process` blocks using eps keywords
+    Controls the interpretation of :nl:nl:`&Process` blocks using eps keywords
     in the definition of outfile. By default, each output defined in 
-    such a :py:mod:`&Process` block is only associated with the input having 
+    such a :nl:nl:`&Process` block is only associated with the input having 
     the same EPS identity (or with any input without eps keyword); this
     prohibits the usage of operators requiring access to all EPS
     members.
@@ -673,7 +693,7 @@ or :py:attr:`&Process.out_group_eps`, as explained below.
     of a set of EPS members, with each member in a unique file, where the
     transformation uses EPS reduction operators (e.g. mean, deviation).
    
-    When setting :py:attr:`&Process.in_size_field`, consider all fields contributing to the
+    When setting :nl:arg:`&Process in_size_field`, consider all fields contributing to the
     common internal storage (this means in particular multiplying the
     number of extracted fields by the number of distinct EPS members in
     the contributing input).
@@ -684,14 +704,15 @@ or :py:attr:`&Process.out_group_eps`, as explained below.
 The following operators are used to split an input file into multiple output,
 grouping fields with the same characteristics in the same output.
 
-.. py:attribute:: out_shuffle_time
-    :type: <.TRUE. or .FALSE.>
-    :value: .FALSE.
+.. nl:argument:: out_shuffle_time
+    :default: .FALSE.
 
-    By setting :py:attr:`&Process.out_shuffle_time` to true, the fields are dispatched in
+    :format: <.TRUE. or .FALSE.>
+
+    By setting :nl:arg:`&Process out_shuffle_time` to true, the fields are dispatched in
     different output on the basis of their reference date, validation
     date or lead time. A time keyword must be used in the definition
-    of :py:attr:`&Process.out_file`, and a list of times must be specified. The way the
+    of :nl:arg:`&Process out_file`, and a list of times must be specified. The way the
     fields are grouped depends on the time keyword:
 
     *   when using <yyyy:start_year>, fields with the same year
@@ -709,13 +730,14 @@ grouping fields with the same characteristics in the same output.
 
     Constant fields are dispatched in all output.
 
-.. py:attribute:: out_shuffle_eps
-    :type: <.TRUE. or .FALSE.>
-    :value: .FALSE.
+.. nl:argument:: out_shuffle_eps
+    :default: .FALSE.
 
-    By setting :py:attr:`&Process.out_shuffle_eps` to true, the fields are distributed 
+    :format: <.TRUE. or .FALSE.>
+
+    By setting :nl:arg:`&Process out_shuffle_eps` to true, the fields are distributed 
     in different output on the basis of their EPS member values. An
-    EPS member keyword must be used in the definition of :py:attr:`&Process.out_file`,
+    EPS member keyword must be used in the definition of :nl:arg:`&Process out_file`,
     and a list of EPS members must be specified. EPS fields not
     associated with a specific EPS member value (e.g. mean), and 
     non EPS fields are dispatched in all output.
@@ -724,25 +746,27 @@ grouping fields with the same characteristics in the same output.
 in field manipulation
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. py:attribute:: in_duplicate_field
-    :type: <.TRUE. or .FALSE.>
-    :value: .FALSE.
+.. nl:argument:: in_duplicate_field
+    :default: .FALSE.
+
+    :format: <.TRUE. or .FALSE.>
 
     By default a single instance of each 2d field is allowed in the
-    :py:attr:`&Process.in_field` iteration (a 2d field is characterized by its short name,
+    :nl:arg:`&Process in_field` iteration (a 2d field is characterized by its short name,
     level, eps identity...). This can be changed by setting
-    :py:attr:`&Process.in_duplicate_field` to true.
+    :nl:arg:`&Process in_duplicate_field` to true.
 
-    When :py:attr:`&Process.in_duplicate_field` is true, tags in the :py:attr:`&Process.in_field` iteration
+    When :nl:arg:`&Process in_duplicate_field` is true, tags in the :nl:arg:`&Process in_field` iteration
     may be inherited from the input file or may be programatically set,
-    as explained in :py:attr:`&Process.tag`.
+    as explained in :nl:arg:`&Process tag`.
     This is required to discriminate between multiple instances of the same field.
 
-.. py:attribute:: out_autotag
-    :type: <.TRUE. or .FALSE.>
-    :value: .FALSE.
+.. nl:argument:: out_autotag
+    :default: .FALSE.
 
-    Tags are programatically set when :py:attr:`&Process.out_autotag` is true. Each input
+    :format: <.TRUE. or .FALSE.>
+
+    Tags are programatically set when :nl:arg:`&Process out_autotag` is true. Each input
     field not associated with a user defined tag or an inherited tag is
     tagged with '__autotag_fn\_#__', # being the order of occurence
     of the corresponding field in the input stream and fn the field
@@ -750,24 +774,26 @@ in field manipulation
 
 The association between contributing input records and inherited 
 or automatic tags is documented in 'fieldextra.diagnostic' when
-:py:attr:`&RunSpecification.additional_diagnostic` is set to true.
+:nl:arg:`&RunSpecification additional_diagnostic` is set to true.
 
 
-A specific instance of a field can be selected in the :py:attr:`&Process.in_field`
-iteration by setting :py:attr:`&Process.use_tag` to the value of the inherited or 
+A specific instance of a field can be selected in the :nl:arg:`&Process in_field`
+iteration by setting :nl:arg:`&Process use_tag` to the value of the inherited or 
 automatic tag.
 
 Note that it is necessary to explicitely set the number of
-contributing fields when setting :py:attr:`&Process.in_duplicate_field`, by
-using :py:attr:`&Process.in_size_field`.
+contributing fields when setting :nl:arg:`&Process in_duplicate_field`, by
+using :nl:arg:`&Process in_size_field`.
 
-.. py:attribute:: in_size_field
-    :type: [<size1>,] <size2>
-    :value: 0,0
+.. nl:argument:: in_size_field
+    :default: 0,0
 
-.. py:attribute:: in_size_vdate
-    :type: <size>
-    :value: 0
+    :format: [<size1>,] <size2>
+
+.. nl:argument:: in_size_vdate
+    :default: 0
+
+    :format: <size>
 
 
 The size of the internal storage is automatically evaluated on the
@@ -777,15 +803,15 @@ be used to minimize the memory footprint when the program is unable
 to precisely estimate the required storage (``selection_mode=EXCLUDE``,
 ``selection_mode=INCLUDE_ALL``, ``in_field=__ALL__``). 
 
-The value of :py:attr:`&Process.in_size_field` specifies the field dimension of the 
+The value of :nl:arg:`&Process in_size_field` specifies the field dimension of the 
 storage size (each 2d field takes one slot), and the value of
-:py:attr:`&Process.in_size_vdate`  specifies the validation date dimension of the
+:nl:arg:`&Process in_size_vdate`  specifies the validation date dimension of the
 storage size.
 
-When two :py:attr:`&Process.in_size_field` values are specified, the first value refers
+When two :nl:arg:`&Process in_size_field` values are specified, the first value refers
 to the size of the storage required for the first contributing input
 file, and the second value refers to the total required size; this is
-used to support memory optimization :py:attr:`&Process.in_read_first`.
+used to support memory optimization :nl:arg:`&Process in_read_first`.
 
 These values must not be exact, but should define an upper bound
 of the required storage size.
@@ -793,9 +819,10 @@ of the required storage size.
 controling load balance
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:attribute:: out_cost
-    :type: <positive integer>
-    :value: 1
+.. nl:argument:: out_cost
+    :default: 1
+
+    :format: <positive integer>
 
 
     To improve the load balance of the code running in parallel mode, a
@@ -815,7 +842,7 @@ when the target grid is a subset of the grid associated with the input field.
 
 It is possible to re-grid any input fields from its native grid to a common
 base grid; one has to specify a re-gridding algorithm, and each input field
-flagged with ``regrid=.true.`` (or all fields when  :py:attr:`&Process.in_regrid_all` is true) will
+flagged with ``regrid=.true.`` (or all fields when  :nl:arg:`&Process in_regrid_all` is true) will
 be interpolated on the common base grid just after being extracted from the
 input file (see detailed description below).
 
@@ -823,12 +850,12 @@ The following possibilities are available when working with fields defined
 on staggered grid:
 
 1.  The user re-grid the fields defined on the staggered grid by using the
-    :py:attr:`&Process.in_regrid_method` operator described below. This method is global,
+    :nl:arg:`&Process in_regrid_method` operator described below. This method is global,
     meaning that de-staggering is computed once when collecting the 
     concerned fields, the de-staggered field being dispatch in all
     output using this field.
 2.  The user re-grid the fields defined on the staggered grid by using the
-    horizontal operator ``hoper='destagger'`` (see :py:attr:`&Process.hoper`). This
+    horizontal operator ``hoper='destagger'`` (see :nl:arg:`&Process hoper`). This
     operator can be used in any processing iteration; with the use of tags,
     this operator support having both staggered and un-staggered version
     of the same field (or of derived fields) in the same output.
@@ -852,10 +879,10 @@ The following possibilities are available when the target grid is a subset
 of the grid associated with the input field:
 
 1.  The user re-grid the fields defined on the original grid by using the
-    :py:attr:`&Process.in_regrid_method` operator described below. 
+    :nl:arg:`&Process in_regrid_method` operator described below. 
 2.  The user specifies the common target grid with ``in_regrid_target='tag'``,
     without defining a re-gridding algorithm (tag refers to some INCORE
-    field); all input fields will be cropped to match :py:attr:`&Process.in_regrid_target`.
+    field); all input fields will be cropped to match :nl:arg:`&Process in_regrid_target`.
 
 This latter mechanism (point 2 above) can also be used when working with
 fields which are both staggered and defined on a larger domain than the
@@ -863,13 +890,14 @@ target domain. However, in this case, the de-staggering is not always
 unambiguously defined; the convention is then to use a positive staggering.
 
 Further opportunity to re-grid all collected fields associated with a specific
-output is provided by the operator  :py:attr:`&Process.out_regrid_target`  (see description later on).
+output is provided by the operator  :nl:arg:`&Process out_regrid_target`  (see description later on).
 
-When both  :py:attr:`&Process.in_regrid_target`  and  :py:attr:`&Process.in_regrid_method`  are defined, field interpolation 
+When both  :nl:arg:`&Process in_regrid_target`  and  :nl:arg:`&Process in_regrid_method`  are defined, field interpolation 
 will take place:
 
-.. py:attribute:: in_regrid_target
-    :type: <target grid for re-gridding, or common base grid>
+.. nl:argument:: in_regrid_target
+
+    :format: <target grid for re-gridding, or common base grid>
 
     This can be one of
 
@@ -931,15 +959,16 @@ will take place:
         - ]2000000,3000000[
         - ]4000000,5500000[
 
-.. py:attribute:: in_regrid_method
-    :type: <re-gridding algorithm(s)>
+.. nl:argument:: in_regrid_method
+
+    :format: <re-gridding algorithm(s)>
     
     applied just after data extraction
 
     This can be one of
 
     * | ``"default"``
-      | refer to the definition of the regridding method in the active :py:mod:`&ModelSpecification` (see :py:attr:`&ModelSpecification.regrid_method`)
+      | refer to the definition of the regridding method in the active :nl:nl:`&ModelSpecification` (see :nl:arg:`&ModelSpecification regrid_method`)
     * ``<regrid_method>``  
     * ``<f1>,...:<regrid_method>[,<f2>...:<regrid_method> ...]``  (only for regrid_method in &ModelSpecification)
 
@@ -1015,31 +1044,31 @@ will take place:
     ``<exp_scale>`` 
       factor defining exponential weight
 
-    For :py:attr:`&ModelSpecification.regrid_method`, re-gridding method applicability can be restricted to a set of fields,
+    For :nl:arg:`&ModelSpecification regrid_method`, re-gridding method applicability can be restricted to a set of fields,
     as specified by an optional list of one or more comma separated field
     short names (``<f1>``, ``<f2>``...); the default re-gridding method is specified 
     by omitting this list or by using the special short name ``"__ALL__"``.
                     
 
-.. py:attribute:: in_regrid_all
+.. nl:argument:: in_regrid_all
+    :default: false
     :type: logical
-    :value: false
 
     switch to re-grid all input fields
 
-    When :py:attr:`&Process.in_regrid_all` is true, all input fields are re-gridded; otherwise, only the
+    When :nl:arg:`&Process in_regrid_all` is true, all input fields are re-gridded; otherwise, only the
     fields marked with ``regrid=.true.`` are re-gridded (see the description of regrid
     later on).
             
    
 Both re-gridding from regular grids and from unstructured grids are supported.
-The definition of the target grid is done with :py:attr:`&Process.in_regrid_target`.
-The choice of the re-gridding method is set with :py:attr:`&Process.in_regrid_method`; multiple
+The definition of the target grid is done with :nl:arg:`&Process in_regrid_target`.
+The choice of the re-gridding method is set with :nl:arg:`&Process in_regrid_method`; multiple
 methods may be defined, including a default method and a set of field specific
 methods (using the ``"default"`` mechanism).
 When re-gridding from unstructured grid, the description of the source grid
-must be made available through :py:mod:`&GlobalResource`; this case is currently only
-implemented for the ICON grid (use :py:attr:`&GlobalResource.icon_grid_description`
+must be made available through :nl:nl:`&GlobalResource`; this case is currently only
+implemented for the ICON grid (use :nl:arg:`&GlobalResource icon_grid_description`
 to load the description of the source grid).
 
 Re-gridding on a regular grid is required before further processing of any field
@@ -1090,7 +1119,7 @@ A different re-gridding algorithm may be defined for each input / output pair.
 
 .. note::
       it is possible to work on a subdomain of the grid specified by
-      :py:attr:`&Process.in_regrid_target`, by setting the values of imin, imax, jmin, jmax
+      :nl:arg:`&Process in_regrid_target`, by setting the values of imin, imax, jmin, jmax
       (see later on for the definition of these parameters)
 
 .. note::
@@ -1098,7 +1127,7 @@ A different re-gridding algorithm may be defined for each input / output pair.
       "rbf" method, it is possible (but not recommended) to specify the
       scale factor. When not specified, the scale factor is internally
       computed, and the (range of) computed value can be printed out by
-      setting ictools_debug_level=1 in :py:mod:`&RunSpecification` (look for 
+      setting ictools_debug_level=1 in :nl:nl:`&RunSpecification` (look for 
       "min/max shape parameter:" in fieldextra standard diagnostic,
       the shape parameter being the inverse of the scale factor).
 
@@ -1113,21 +1142,24 @@ two or more standard EPS runs.
 Each model run contributing to such a composed EPS is tagged by a unique
 'group' value. 
 
-.. py:attribute:: epsgroup
-    :type: <group id; strictly positive integer>
+.. nl:argument:: epsgroup
+
+    :format: <group id; strictly positive integer>
 
 
-.. py:attribute:: epsgroup_size
-    :type: <nbr. of EPS members associated with epsgroup; integer>
+.. nl:argument:: epsgroup_size
 
-.. py:attribute:: epscomposed_size
-    :type: <total nbr. of EPS members in composed system; integer>
+    :format: <nbr. of EPS members associated with epsgroup; integer>
+
+.. nl:argument:: epscomposed_size
+
+    :format: <total nbr. of EPS members in composed system; integer>
 
 
     When set, the product category of all fields contributing to the specified
     output is set to eps_member, and the member identity is built from the
     specified epsgroup value and from the existing member identity (if any).
-    The value of :py:attr:`&Process.epsgroup_size` and :py:attr:`&Process.epscomposed_size` must always be set.
+    The value of :nl:arg:`&Process epsgroup_size` and :nl:arg:`&Process epscomposed_size` must always be set.
 
 
 Global operations
@@ -1143,42 +1175,48 @@ based on a combination of standard operators.  These n to m operators can be
 implemented within fxtr_operator_generic or fxtr_operator_specific, and are
 triggered by setting the value of out_postproc_module.
 
-.. py:attribute:: out_postproc_module
-    :type: <name of procedure to apply>
+.. nl:argument:: out_postproc_module
+
+    :format: <name of procedure to apply>
 
 
 **re-gridding operator, to re-grid all fields available in the last processing iteration.** 
 
-.. py:attribute:: out_regrid_target
-    :type: <target grid for re-gridding>
+.. nl:argument:: out_regrid_target
 
-.. py:attribute:: out_regrid_method
-    :type: <re-gridding algorithm>
+    :format: <target grid for re-gridding>
+
+.. nl:argument:: out_regrid_method
+
+    :format: <re-gridding algorithm>
 
 with the following optional attributes:
 
-.. py:attribute:: out_regrid_method_distance
-    :type: <weight_ij=positive_integer,weight_z=positive_integer>
+.. nl:argument:: out_regrid_method_distance
+
+    :format: <weight_ij=positive_integer,weight_z=positive_integer>
 
     generalized distance
 
-.. py:attribute:: out_regrid_topography
-    :type: <source:incore_tag_s,target=incore_tag_t>
+.. nl:argument:: out_regrid_topography
+
+    :format: <source:incore_tag_s,target=incore_tag_t>
 
         
-.. py:attribute:: out_regrid_method_filter
-    :type: <source:incore_tag_s,target=incore_tag_t>
+.. nl:argument:: out_regrid_method_filter
+
+    :format: <source:incore_tag_s,target=incore_tag_t>
 
     filter to select contributing source points
 
-The same usage as for :py:attr:`&Process.in_regrid_target` / :py:attr:`&Process.in_regrid_method` is supported 
+The same usage as for :nl:arg:`&Process in_regrid_target` / :nl:arg:`&Process in_regrid_method` is supported 
 (including ``out_regrid_method='default'``). In addition, a different 
 distance than the the lateral distance in ij-space can be specifid
-(:py:attr:`&Process.out_regrid_method_distance`) and the set of source points contributing
-to each target point can be further restricted (:py:attr:`&Process.out_regrid_method_filter`).
+(:nl:arg:`&Process out_regrid_method_distance`) and the set of source points contributing
+to each target point can be further restricted (:nl:arg:`&Process out_regrid_method_filter`).
 
 
-When :py:attr:`&Process.out_regrid_method_distance` is specified, the distance "distance_ij" in
+When :nl:arg:`&Process out_regrid_method_distance` is specified, the distance "distance_ij" in
 (i,j) space used by the regridding operator is replaced by a generalized distance.
 The generalized distance is defined by:
 
@@ -1231,11 +1269,12 @@ Meta-information
 Some meta-information can be reset for all fields contributing to
 the curent output
 
-.. py:attribute:: out_model_name
-    :type: <registred model name; string>
+.. nl:argument:: out_model_name
+
+    :format: <registred model name; string>
 
     Reset value of model name and model type; value must be a registred model
-    name (see the list in the description of :py:attr:`&GlobalSettings.default_model_name`).
+    name (see the list in the description of :nl:arg:`&GlobalSettings default_model_name`).
     
     A side effect of re-setting the model name is to change the value of
     any other meta-information associated with the chosen model name; this
@@ -1248,49 +1287,53 @@ the curent output
     to also adapt these local codes.
    
     The effect of :py:attr:`out_model_name` has precedence over all resetting operators
-    defined in :py:mod:`&GlobalSettings`, but not over operators defined in the same 
+    defined in :nl:nl:`&GlobalSettings`, but not over operators defined in the same 
     block (e.g. :py:attr:`out_auxiliary_metainfo`) or over field specific resetting
     operators (e.g. set_auxiliary_metainfo).
 
-.. py:attribute:: out_genproc_type
-    :type: <registred generating process type; string>
+.. nl:argument:: out_genproc_type
+
+    :format: <registred generating process type; string>
 
 
     Reset value of generating process type; value must be a registred
-    generating process type (see the list in :py:attr:`&Process.set_genproc_type`)
+    generating process type (see the list in :nl:arg:`&Process set_genproc_type`)
    
     The effect of :py:attr:`out_genproc_type` has precedence over all resetting
-    operators defined in :py:mod:`&GlobalSettings`, but not over the field specific
-    operator :py:attr:`&Process.set_genproc_type`.
+    operators defined in :nl:nl:`&GlobalSettings`, but not over the field specific
+    operator :nl:arg:`&Process set_genproc_type`.
    
-    See also the definition of :py:attr:`&Process.set_genproc_type` for more information.
+    See also the definition of :nl:arg:`&Process set_genproc_type` for more information.
 
-.. py:attribute:: out_product_category
-    :type: <registred product category; string>
+.. nl:argument:: out_product_category
+
+    :format: <registred product category; string>
 
 
     Reset value of product category; value must be a registred product category
     (see the list in the description of "default_product_category")
    
     The effect of :py:attr:`out_product_category` has precedence over all resetting
-    operators defined in :py:mod:`&GlobalSettings`, but not over the field specific
+    operators defined in :nl:nl:`&GlobalSettings`, but not over the field specific
     operator "set_product_category".
    
     See also the definition of set_product_category for more information.
 
-.. py:attribute:: out_vertical_coordinate
-    :type: <tag of INCORE field>
+.. nl:argument:: out_vertical_coordinate
+
+    :format: <tag of INCORE field>
 
 
     Reset vertical coordinates information, using the information associated with
     the specified INCORE field.
 
-.. py:attribute:: out_auxiliary_metainfo
-    :type: <sring>[,<string> ...] (each string expressed as key=value)
+.. nl:argument:: out_auxiliary_metainfo
+
+    :format: <sring>[,<string> ...] (each string expressed as key=value)
 
 
     Reset specified field meta-information; override any key=value specified
-    in :py:attr:`&GlobalSettings.auxiliary_metainfo`.
+    in :nl:arg:`&GlobalSettings auxiliary_metainfo`.
 
 
 Fields filtering
@@ -1299,9 +1342,10 @@ Fields filtering
 The set of fields effectively used for the current output file
 can be filtred
 
-.. py:attribute:: out_filter_cst
-    :type: <filtering condition; string>
-    :value: blank
+.. nl:argument:: out_filter_cst
+    :default: blank
+
+    :format: <filtering condition; string>
 
 
     Filter the data written in the output file; acts on fields declared
@@ -1313,17 +1357,18 @@ can be filtred
       always dismiss constant fields
     ``"keep_in_first_output"``
       dismiss constant fields, except in the first output of a temporal serie 
-      (i.e. when :py:attr:`&Process.out_file` is a generic name using a time stamp in its definition).
+      (i.e. when :nl:arg:`&Process out_file` is a generic name using a time stamp in its definition).
 
-.. py:attribute:: out_filter_time
-    :type: <filtering condition; string>
-    :value: blank
+.. nl:argument:: out_filter_time
+    :default: blank
+
+    :format: <filtering condition; string>
 
 
     Filter the data written in the output file in the time dimension. 
     Unlike out_tstart... this operator does not depend on the presence
-    and on the values of time stamps in the definition of :py:attr:`&Process.in_file` and
-    of :py:attr:`&Process.out_file`. It is typically used when input files contain  multiple
+    and on the values of time stamps in the definition of :nl:arg:`&Process in_file` and
+    of :nl:arg:`&Process out_file`. It is typically used when input files contain  multiple
     validation dates and the mechanism provided by out_tstart... can
     not be used.
    
@@ -1352,13 +1397,15 @@ following parameters ...
 
 **computation of EPS derived products**
 
-.. py:attribute:: out_mode_mismemb_limit
-    :type: <threshold for missing member related exception>
-    :value: 100[%]
+.. nl:argument:: out_mode_mismemb_limit
+    :default: 100[%]
 
-.. py:attribute:: out_mode_mismemb_abort
-    :type: <action by missing member exception>
-    :value: .T.
+    :format: <threshold for missing member related exception>
+
+.. nl:argument:: out_mode_mismemb_abort
+    :default: .T.
+
+    :format: <action by missing member exception>
 
     When computing eps derived products, an exception is detected when the number
     of available members is smaller than any one of the following values
@@ -1366,30 +1413,33 @@ following parameters ...
     * ``(out_mode_mismemb_limit/100) * ensemble_size``
     * ``2``
 
-    The action taken when an exception is detected depends on the value of :py:attr:`&Process.out_mode_mismemb_abort`
+    The action taken when an exception is detected depends on the value of :nl:arg:`&Process out_mode_mismemb_abort`
     : either abort production of corresponding product,
     when this variable is true, or silently set the resulting values to undefined.
     Note that the evaluation of the missing members exception is done independently
     for each validation date (in particular to support lagged EPS).
 
-.. py:attribute:: out_mode_weighted_member
-    :type: <use weighted EPS members>
-    :value: .F.
+.. nl:argument:: out_mode_weighted_member
+    :default: .F.
+
+    :format: <use weighted EPS members>
 
     Use cluster population as member weight when set to true
 
-.. py:attribute:: out_mode_normalized_stdev
-    :type: <normalize standard deviation>
-    :value: .F.
+.. nl:argument:: out_mode_normalized_stdev
+    :default: .F.
+
+    :format: <normalize standard deviation>
 
     When set to true, the EPS standard deviation is normalized by the value of the
     EPS mean (the value is set to undefined when the mean is too close to zero).
                       
 **computation of synthetic satellite products**
 
-.. py:attribute:: out_mode_rttov_cloud
-    :type: <type of clouds in rttov computation>
-    :value: 'none'
+.. nl:argument:: out_mode_rttov_cloud
+    :default: 'none'
+
+    :format: <type of clouds in rttov computation>
 
     One of {'none','simple','complex'}. Should only be set to 'none' when no
     cloudy products are computed. See description of synthetic satellite products
@@ -1397,9 +1447,10 @@ following parameters ...
    
 **computation of air density** 
 
-.. py:attribute:: out_mode_ignore_wloading
-    :type: <ignore water loading>
-    :value: .T.
+.. nl:argument:: out_mode_ignore_wloading
+    :default: .T.
+
+    :format: <ignore water loading>
 
     When set to false, the list of hydrometeors available in the active model
     must be explicitely specified by setting the variable "hydrometeor" in 
@@ -1407,62 +1458,66 @@ following parameters ...
    
 **computation of algorithm for lapse rate base height correction** (``voper=translate_simple``)
 
-.. py:attribute:: out_mode_hcor_dhmin
-    :type: <min. topo difference>
-    :value: 50.
+.. nl:argument:: out_mode_hcor_dhmin
+    :default: 50.
+
+    :format: <min. topo difference>
 
    
 **computation of divergence trend term CAT_DVT**
 
-.. py:attribute:: out_mode_dvt_scale
-    :type: <scaling factor>
-    :value: 1.
+.. nl:argument:: out_mode_dvt_scale
+    :default: 1.
+
+    :format: <scaling factor>
 
    
 **computation of relative humidity**
 
-.. py:attribute:: out_mode_rh_clipped
-    :type: <relative humidity clipped at 100%>
-    :value: .T.
+.. nl:argument:: out_mode_rh_clipped
+    :default: .T.
+
+    :format: <relative humidity clipped at 100%>
 
    
 **computation of heat index**
 
-.. py:attribute:: out_mode_hi_adjusted
-    :value: .F.
+.. nl:argument:: out_mode_hi_adjusted
+    :default: .F.
 
     apply NOAA adjustments to heat index
 
    
 **computation of maximal sunshine duration**
 
-.. py:attribute:: out_mode_sun_topo
-    :value: .F.
+.. nl:argument:: out_mode_sun_topo
+    :default: .F.
 
     consider topo derived horizon
 
    
 **computation of height of zero degree centigrade isotherm**
 
-.. py:attribute:: out_mode_h0cl_extrapolate
-    :value: .F.
+.. nl:argument:: out_mode_h0cl_extrapolate
+    :default: .F.
 
     extrapolate below lowest model level
 
    
 **computation of wet bulb temperature**
 
-.. py:attribute:: out_mode_tw_iterative
-    :value: .F.
+.. nl:argument:: out_mode_tw_iterative
+    :default: .F.
 
     compute wet bulb temperature with a secant method
 
    
 **neighbourhood probability algorithm**
 
-.. py:attribute:: out_mode_nbhprob_shape
-    :type: <shape of neighbourhood>
-    :value: 0
+.. nl:argument:: out_mode_nbhprob_shape
+    :default: 0
+
+    :format: <shape of neighbourhood>
 
     ===== ============================
     value shape
@@ -1472,32 +1527,35 @@ following parameters ...
     2     maximum in time shape
     ===== ============================
         
-.. py:attribute:: out_mode_nbhprob_rxy
-    :type: <spatial radius; no default>
+.. nl:argument:: out_mode_nbhprob_rxy
+
+    :format: <spatial radius; no default>
 
     in mesh size units
 
-.. py:attribute:: out_mode_nbhprob_rt
-    :type: <temporal radius; no default>
+.. nl:argument:: out_mode_nbhprob_rt
+
+    :format: <temporal radius; no default>
 
     in units of collected validation times
 
-.. py:attribute:: out_mode_nbhprob_rfade
-    :type: <radius of fading zone; no default>
+.. nl:argument:: out_mode_nbhprob_rfade
+
+    :format: <radius of fading zone; no default>
 
     in mesh size units
    
 **computation of Kalman filter and MOS correction**
 
-.. py:attribute:: out_mode_kfcor_na
-    :value: 'undef'
+.. nl:argument:: out_mode_kfcor_na
+    :default: 'undef'
 
     handling of missing Kalman correction
 
-    supported values are listed at :py:attr:`&Process.out_mode_moscor_na`
+    supported values are listed at :nl:arg:`&Process out_mode_moscor_na`
 
-.. py:attribute:: out_mode_moscor_na
-    :value: 'undef'
+.. nl:argument:: out_mode_moscor_na
+    :default: 'undef'
 
     handling of missing MOS correction
 
@@ -1525,8 +1583,9 @@ The base format of the output file is defined by out_type; additional characteri
 and variants of the base format are controled by out_type_* variables, as explained
 below.
 
-.. py:attribute:: out_type
-    :type: <output file type; e.g. GRIB2, ASCII_TABLE>
+.. nl:argument:: out_type
+
+    :format: <output file type; e.g. GRIB2, ASCII_TABLE>
 
     Supported values of out_type:
 
@@ -1542,15 +1601,15 @@ below.
           * produce grid point height information for some output
             (require field HSURF);
           * specify model base grid when working with staggered fields
-            (see :py:attr:`&Process.in_regrid_target`);
+            (see :nl:arg:`&Process in_regrid_target`);
           * specify model base grid when working with fields defined on a large domain
-            (see :py:attr:`&Process.in_regrid_target`);
+            (see :nl:arg:`&Process in_regrid_target`);
           * specify grid and auxiliary fields for re-gridding
-            (see :py:attr:`&Process.in_regrid_target`, <out_regrid_target>);
+            (see :nl:arg:`&Process in_regrid_target`, <out_regrid_target>);
           * merge different fields and define associated mask
-            (see :py:attr:`&Process.merge_with`);
+            (see :nl:arg:`&Process merge_with`);
           * compare different fields and define associated mask
-            (see :py:attr:`&Process.compare_with`);
+            (see :nl:arg:`&Process compare_with`);
           * provide access to additional constant fields 
             (see below).
      
@@ -1597,14 +1656,14 @@ below.
                it is possible to have multiple instances of these special fields in INCORE,
                but the fields associated with the reference grid must be marked by setting
                "reference_field" to false for all other instances.
-          .. note:: the parameter :py:attr:`&Process.out_file` may be omitted when out_type='INCORE'
-          .. note:: mixing INCORE fields with other fields defined on a sub-mesh is supported (see the documentation of :py:attr:`&Process.in_regrid_target`).
+          .. note:: the parameter :nl:arg:`&Process out_file` may be omitted when out_type='INCORE'
+          .. note:: mixing INCORE fields with other fields defined on a sub-mesh is supported (see the documentation of :nl:arg:`&Process in_regrid_target`).
    
     2.  Pseudo output type used to extract the characteristics of the records contained
         in the associated input files
       
         ``INSPECT`` : 
-                  the information produced is defined by the settings in :py:mod:`&InspectSpecification`
+                  the information produced is defined by the settings in :nl:nl:`&InspectSpecification`
                   and is stored in ASCII file fieldextra.inspect, in current working directory.
       
         When the only output in a namelist is the INSPECT pseudo-output, fewer consistency
@@ -1658,9 +1717,10 @@ Out type attributes acting on file production
 """""""""""""""""""""""""""""""""""""""""""""
    
 
-.. py:attribute:: out_type_replace
-    :type: <overwrite pre-existing output> 
-    :value: .TRUE.
+.. nl:argument:: out_type_replace
+    :default: .TRUE.
+
+    :format: <overwrite pre-existing output> 
 
     Compatible with ``GRIB1``, ``GRIB2``, ``BLK_TABLE``, ``N_TUPLE`` 
 
@@ -1670,9 +1730,10 @@ Out type attributes acting on file production
     under the conditions: (1) out_type_snapshot is not used, (2) output support
     append mode.
 
-.. py:attribute:: out_type_justontime
-    :type: <'auto', 'no', or 'yes'>
-    :value: 'auto'
+.. nl:argument:: out_type_justontime
+    :default: 'auto'
+
+    :format: <'auto', 'no', or 'yes'>
 
     Compatible with ``GRIB1``, ``GRIB2``, ``BLK_TABLE``, ``NETCDF``
 
@@ -1681,7 +1742,7 @@ Out type attributes acting on file production
     mode incorrectly enable just on time mode. For example:
 
     1. all conditions for just on time are fulfilled (:ref:`section 4.3.2`), but
-       some of the :py:attr:`&Process.in_field` are not available for all processed time 
+       some of the :nl:arg:`&Process in_field` are not available for all processed time 
        planes, which will generate some sort of 'missing parent'
        exception when just on time is active.
        
@@ -1692,9 +1753,10 @@ Out type attributes acting on file production
     2. input files belong to the same forecast serie, but are
        dispatched in distinct subdirectories.
 
-.. py:attribute:: out_type_snapshot
-    :type: <time>,<time>,...
-    :value: -1
+.. nl:argument:: out_type_snapshot
+    :default: -1
+
+    :format: <time>,<time>,...
 
     -1 means no time list
 
@@ -1709,12 +1771,13 @@ Out type attributes acting on file production
     just after the processing of each corresponding input files. The
     name of each snapshot is build by appending out_snapshot_postfix and
     the value of the associated time stamp to the name of the output file.
-    The value of :py:attr:`&RunSpecification.out_snapshot_postfix` must be defined in :py:mod:`&RunSpecification`.
-    The value of :py:attr:`&RunSpecification.out_noready_postfix` is ignored for snapshots.
+    The value of :nl:arg:`&RunSpecification out_snapshot_postfix` must be defined in :nl:nl:`&RunSpecification`.
+    The value of :nl:arg:`&RunSpecification out_noready_postfix` is ignored for snapshots.
 
-.. py:attribute:: out_type_toc
-    :type: <generate table of content> 
-    :value: .FALSE.
+.. nl:argument:: out_type_toc
+    :default: .FALSE.
+
+    :format: <generate table of content> 
 
     Compatible with ``GRIB1``, ``GRIB2``, ``NETCDF`` 
 
@@ -1732,9 +1795,10 @@ Out type attributes acting on file production
 Out type attributes acting on data
 """"""""""""""""""""""""""""""""""
 
-.. py:attribute:: out_type_dupcst
-    :type: <duplicate constant fields>
-    :value: .FALSE.
+.. nl:argument:: out_type_dupcst
+    :default: .FALSE.
+
+    :format: <duplicate constant fields>
 
     Compatible with ``BLK_TABLE``, ``XLS_TABLE``, ``GRIB1``, ``GRIB2``, ``NETCDF``
 
@@ -1743,9 +1807,10 @@ Out type attributes acting on data
     in terms of validation date). When out_type_dupcst is true, each
     constant field occurence is produced.
 
-.. py:attribute:: out_type_noundef
-    :type: <skip data when all values are undefined>
-    :value: .FALSE.
+.. nl:argument:: out_type_noundef
+    :default: .FALSE.
+
+    :format: <skip data when all values are undefined>
 
     Compatible with ``BLK_TABLE``, ``XLS_TABLE``, ``GRIB1``, ``GRIB2``, ``NETCDF``
 
@@ -1759,9 +1824,10 @@ Out type attributes acting on data
       skip validation date when all values of all processed fields are
       undefined for this validation date;
 
-.. py:attribute:: out_type_undefcode
-    :type: <missing value code>
-    :value: -99999.
+.. nl:argument:: out_type_undefcode
+    :default: -99999.
+
+    :format: <missing value code>
 
     Compatible with ``FLD_TABLE``, ``DAT_TABLE``, ``BLK_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``TMPL_BASE``, ``N_TUPLE``
 
@@ -1771,14 +1837,15 @@ Out type attributes acting on data
           the value of out_type_undefcode can be overriden on a field basis
           by setting set_undefcode (``BLK_TABLE`` only).
 
-.. py:attribute:: out_type_scanmode
-    :type: <scanning mode>
-    :value: 'native'
+.. nl:argument:: out_type_scanmode
+    :default: 'native'
+
+    :format: <scanning mode>
 
     Compatible with ``BLK_TABLE``, ``GRIB1``, ``GRIB2``
 
     The mapping of a rectangular domain in some output may be explicitely
-    specified by :py:attr:`&Process.out_type_scanmode`:
+    specified by :nl:arg:`&Process out_type_scanmode`:
 
     *  the data order follows the original scanning mode 'native'
     *  the data order follows a user specified scanning mode
@@ -1789,9 +1856,10 @@ Out type attributes acting on data
 
        where i represents west-east axis, and j represents south-north axis
     
-.. py:attribute:: out_type_packing
-    :type: <packing algorithm>
-    :value: 'standard'
+.. nl:argument:: out_type_packing
+    :default: 'standard'
+
+    :format: <packing algorithm>
 
     Compatible with ``GRIB1``, ``GRIB2``
 
@@ -1823,12 +1891,13 @@ Out type attributes acting on data
           | ``'aec,16'``   generates a file x2.5 smaller, in x1.5 the time 
           | ``'jpeg,16'``  generates a file x3 smaller, in x3 the time 
     .. note::
-          the value of :py:attr:`&Process.out_type_packing` can be overriden on a field basis
-          by setting :py:attr:`&Process.set_packing`
+          the value of :nl:arg:`&Process out_type_packing` can be overriden on a field basis
+          by setting :nl:arg:`&Process set_packing`
 
-.. py:attribute:: out_type_ncformat
-    :type: <NetCDF file format>
-    :value: 'nc3_64boffset'
+.. nl:argument:: out_type_ncformat
+    :default: 'nc3_64boffset'
+
+    :format: <NetCDF file format>
 
     Compatible with ``NETCDF``
 
@@ -1849,9 +1918,10 @@ Out type attributes acting on data
           in order to get good performances when choosing ``'nc4_classic'``, it 
           is strongly recommended to set ``out_type_ncunlimitedtime=.false.``
 
-.. py:attribute:: out_type_ncunlimitedtime
-    :type: <logical>
-    :value: true
+.. nl:argument:: out_type_ncunlimitedtime
+    :default: true
+
+    :format: <logical>
 
     Compatible with ``NETCDF``
     
@@ -1865,18 +1935,20 @@ Out type attributes acting on data
     to much larger memory footprint at run time (in the case multiple time
     levels are stored in the same output).
 
-.. py:attribute:: out_type_ncdeflate
-    :type: <compression factor in [1,9]>
+.. nl:argument:: out_type_ncdeflate
+
+    :format: <compression factor in [1,9]>
 
     default undefined
 
-.. py:attribute:: out_type_ncshuffle
-    :type: <logical>
-    :value: false
+.. nl:argument:: out_type_ncshuffle
+    :default: false
+
+    :format: <logical>
 
     Compatible with ``NETCDF``, but requires ``out_type_ncformat="nc4_classic"``
 
-    When :py:attr:`&Process.out_type_ncdeflate` is defined, the NetCDF will be compressed.
+    When :nl:arg:`&Process out_type_ncdeflate` is defined, the NetCDF will be compressed.
     Variable data is compressed, not metadata such as attributes.
     Deflation level 1 is intended to compress faster than level 9.
     Deflation level 9 is intended to compress smaller than level 1.
@@ -1895,9 +1967,10 @@ Out type attributes acting on data
           ``out_type_ncshuffle=.true.`` (from 5.084GB to 1.330GB, the same file in
           GRIB 2 has a size of 2.310GB), for a 3.5 increase in computation time.
 
-.. py:attribute:: out_type_simplenc
-    :type: <produce simple NetCDF>
-    :value: .FALSE.
+.. nl:argument:: out_type_simplenc
+    :default: .FALSE.
+
+    :format: <produce simple NetCDF>
 
     Compatible with ``NETCDF``
 
@@ -1914,16 +1987,17 @@ Out type attributes acting on data
     Fieldextra will generate such a simplified NetCDF, when the value of
     out_type_simplenc is set to true. 
 
-.. py:attribute:: out_type_nodegeneratedim
-    :type: <ignore degenerate dimensions>
-    :value: .FALSE.
+.. nl:argument:: out_type_nodegeneratedim
+    :default: .FALSE.
+
+    :format: <ignore degenerate dimensions>
 
     Compatible with ``NETCDF``
 
     A NetCDF data is stored in a n-dimensional array, with the set of n-dimensions
     being dependent on the type of field. Normally all relevant dimensions are
     considered, even when the dimension is degenerate; this behaviour is changed
-    by setting :py:attr:`&Process.out_type_nodegeneratedim` to true. 
+    by setting :nl:arg:`&Process out_type_nodegeneratedim` to true. 
     Example: a single level EPS field is stored in an array of dimensions
     (t,m,y,x), m being the perturbation number dimension; if a different output
     is used for each member and ``out_type_nodegeneratedim=.TRUE.``, the dimensions
@@ -1934,20 +2008,22 @@ Out type attributes acting on meta-data
 """""""""""""""""""""""""""""""""""""""
    
 
-.. py:attribute:: out_type_nousetag
-    :type: <always use short name, ignore tag>
-    :value: .FALSE.
+.. nl:argument:: out_type_nousetag
+    :default: .FALSE.
+
+    :format: <always use short name, ignore tag>
 
     Compatible with ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``BLK_TABLE``, ``N_TUPLE``, ``NETCDF``
-.. py:attribute:: out_type_alternate_name
-    :type: <use alternate short name>
-    :value: .FALSE.
+.. nl:argument:: out_type_alternate_name
+    :default: .FALSE.
+
+    :format: <use alternate short name>
 
     Compatible with ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``BLK_TABLE``, ``N_TUPLE``, ``GRIB1``, ``GRIB2``, ``NETCDF``
 
     When the name of the field is coded in the output file, the value of the
     short name is used, or, if set, of the field tag. When out_type_nousetag
-    is true, the value of the tag is always ignored. When :py:attr:`&Process.out_type_alternate_name`
+    is true, the value of the tag is always ignored. When :nl:arg:`&Process out_type_alternate_name`
     is true, and an alternate short name is defined in the active dictionary, the
     alternate short name is used instead of the short name.
     An alternate short name is defined when the attribute ``keyUsedInProgram`` is
@@ -1962,9 +2038,10 @@ Out type attributes acting on meta-data
              setting out_type_alternate_name to true, the default value of the
              field will be 'SP'. 
 
-.. py:attribute:: out_type_autoncname
-    :type: <generate object name>
-    :value: .FALSE.
+.. nl:argument:: out_type_autoncname
+    :default: .FALSE.
+
+    :format: <generate object name>
 
     Compatible with ``NETCDF``
 
@@ -1973,9 +2050,10 @@ Out type attributes acting on meta-data
     the string ``_n`` to the field name, where n takes one of the value 1, 2 ...
     This output type is not compatible with just on time mode.
 
-.. py:attribute:: out_type_alternate_code
-    :type: <use alternate pds code>
-    :value: .FALSE.
+.. nl:argument:: out_type_alternate_code
+    :default: .FALSE.
+
+    :format: <use alternate pds code>
 
     Compatible with ``GRIB1``
 
@@ -1984,15 +2062,16 @@ Out type attributes acting on meta-data
     ``alternateTable`` and ``alternateParameter``. When no alternate code is defined,
     the usual code is applied.
    
-    A similar feature is offered by :py:attr:`&Process.use_alternate_code`, but on a field basis.
+    A similar feature is offered by :nl:arg:`&Process use_alternate_code`, but on a field basis.
     The alternate code will be used as soon as one of the two switches is set.
    
     This may be used, e.g., to code probabilities differently than determinist
     products, without having to introduce an additional dictionary.
 
-.. py:attribute:: out_type_transcode
-    :type: <transcode GRIB 1 pds>
-    :value: .TRUE.
+.. nl:argument:: out_type_transcode
+    :default: .TRUE.
+
+    :format: <transcode GRIB 1 pds>
 
     Compatible with ``GRIB1``
 
@@ -2004,9 +2083,10 @@ Out type attributes acting on meta-data
    
     Used e.g. for the processing of COSMO soil moisture level information.
 
-.. py:attribute:: out_type_timebnds
-    :type: <produce time bounds>
-    :value: .FALSE.
+.. nl:argument:: out_type_timebnds
+    :default: .FALSE.
+
+    :format: <produce time bounds>
 
     Compatible with ``NETCDF``
 
@@ -2019,9 +2099,10 @@ Out type attributes acting on meta-data
     processing is the same for each lead time, (2) for each lead 
     time, all non trivial time range intervals are the same.
 
-.. py:attribute:: out_type_prefered_tunits
-    :type: <string1,string2>
-    :value: ''
+.. nl:argument:: out_type_prefered_tunits
+    :default: ''
+
+    :format: <string1,string2>
 
     Compatible with ``GRIB1``, ``GRIB2``
     
@@ -2037,9 +2118,10 @@ Out type attributes acting on meta-data
    
     Default value is '' (i.e. no prefered time units specified)
 
-.. py:attribute:: out_type_nogridincr
-    :type: <ignore grid increment>
-    :value: .TRUE.
+.. nl:argument:: out_type_nogridincr
+    :default: .TRUE.
+
+    :format: <ignore grid increment>
 
     Compatible with ``GRIB1``
 
@@ -2049,15 +2131,16 @@ Out type attributes acting on meta-data
     Defining out_type_nogridincr=.F. forces fieldextra to write the grid increments
     values in the GRIB 1 gds.
 
-.. py:attribute:: out_type_novcoord
-    :type: <control coding of vcoord description, one of {'yes','no','auto'}>
+.. nl:argument:: out_type_novcoord
+
+    :format: <control coding of vcoord description, one of {'yes','no','auto'}>
 
     Compatible with ``GRIB1``, ``GRIB2``, ``NETCDF``
    
     For sigma and hybrid coordinates, the description of the vertical coordinates is
     coded as a set of coefficients (in each GRIB record, or in a NetCDF variable). When
-    :py:attr:`&Process.out_type_novcoord` is 'no', fieldextra will produce this information in each GRIB
-    record, or in a special 'vcoord' NetCDF variable; when :py:attr:`&Process.out_type_novcoord` is 'yes',
+    :nl:arg:`&Process out_type_novcoord` is 'no', fieldextra will produce this information in each GRIB
+    record, or in a special 'vcoord' NetCDF variable; when :nl:arg:`&Process out_type_novcoord` is 'yes',
     this information is skipped (GRIB 1, NETCDF) or restricted to records associated
     with a sigma or hybrid surface (GRIB 2).
    
@@ -2071,26 +2154,28 @@ Out type attributes acting on meta-data
    
     For NETCDF output, support for coding vertical coordinate coefficients is only
     available for the COSMO model (release 3.18 or better), independently from the
-    value of :py:attr:`&Process.out_type_novcoord`.
+    value of :nl:arg:`&Process out_type_novcoord`.
 
-.. py:attribute:: out_type_stdlongitude
-    :type: <use standard coding of longitude>
-    :value: .FALSE.
+.. nl:argument:: out_type_stdlongitude
+    :default: .FALSE.
+
+    :format: <use standard coding of longitude>
 
     Compatible with ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``BLK_TABLE``, ``TMPL_BASE``, ``GRIB1``, ``GRIB2``, ``NETCDF``
 
     By default, coding of longitude meta-information in output is in [-180.,180.[;
-    by setting :py:attr:`&Process.out_type_stdlongitude` to true, longitude will be coded in [0.,360.[.
+    by setting :nl:arg:`&Process out_type_stdlongitude` to true, longitude will be coded in [0.,360.[.
     Note that this switch does not affect the coding of any longitude field (such as
     RLON).
 
-.. py:attribute:: out_type_mapcst
-    :type: <reset constant fields meta-info>
-    :value: .TRUE.
+.. nl:argument:: out_type_mapcst
+    :default: .TRUE.
 
-    Compatible with any :py:attr:`&Process.out_type`
+    :format: <reset constant fields meta-info>
 
-    When :py:attr:`&Process.out_type_mapcst` is true, and when mixing constant and non constant
+    Compatible with any :nl:arg:`&Process out_type`
+
+    When :nl:arg:`&Process out_type_mapcst` is true, and when mixing constant and non constant
     fields in the same output, the following meta-information associated with
     the constant fields are set to the common value of the non constant fields:
     the lead time, the type of generating process.
@@ -2102,17 +2187,18 @@ Out type attributes acting on meta-data
 Out type attributes acting on data format
 """""""""""""""""""""""""""""""""""""""""
    
-.. py:attribute:: out_type_fmt
-    :type: <format of values in output file>
+.. nl:argument:: out_type_fmt
 
-    :py:attr:`&Process.out_type_fmt` is either a Fortran edit descriptor (``FLD_TABLE``, ``DAT_TABLE``,
+    :format: <format of values in output file>
+
+    :nl:arg:`&Process out_type_fmt` is either a Fortran edit descriptor (``FLD_TABLE``, ``DAT_TABLE``,
     ``BLK_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``TMPL_BASE``, ``N_TUPLE``) or a key defining
     a specific table format (``METEOG``, see table below). 
    
-    Default values are :py:attr:`&Process.out_type` dependent:
+    Default values are :nl:arg:`&Process out_type` dependent:
       | ``FLD_TABLE``, ``DAT_TABLE``, ``BLK_TABLE`` (default 6G13.5)
       | ``TMPL_BASE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``N_TUPLE`` (default G13.5)
-      | ``METEOG`` (no default, :py:attr:`&Process.out_type_fmt` mut be set)
+      | ``METEOG`` (no default, :nl:arg:`&Process out_type_fmt` mut be set)
    
     **Table format keys for METEOG**
 
@@ -2160,14 +2246,16 @@ Out type attributes acting on data format
         | delta_h: location name / height diff. between loc. and orography
         | h: location height / location name
 
-.. py:attribute:: out_type_template
-    :type: <path of template file>
-    :value: ''
+.. nl:argument:: out_type_template
+    :default: ''
+
+    :format: <path of template file>
 
     Compatible with ``TMPL_BASE``, ``GRIB2``
-.. py:attribute:: out_type_nomatch_action
-    :type: <action by unresolved data container>
-    :value: 'raise_exception'
+.. nl:argument:: out_type_nomatch_action
+    :default: 'raise_exception'
+
+    :format: <action by unresolved data container>
 
     Compatible with ``TMPL_BASE``
 
@@ -2179,7 +2267,7 @@ Out type attributes acting on data format
             fieldextra are replaced by special keywords ('data container').
             The default action when finding unresolved data container is
             to raise an exception; it is however possible to control this
-            behaviour by setting :py:attr:`&Process.out_type_nomatch_action` to one of
+            behaviour by setting :nl:arg:`&Process out_type_nomatch_action` to one of
 
             ``'raise_exception'`` 
               default
@@ -2193,26 +2281,29 @@ Out type attributes acting on data format
     ``GRIB2`` : 
             the template is a GRIB 2 file containing a generic record used
             by ecCodes to construct the final GRIB 2 record. When
-            out_type_template is not set, the value of :py:attr:`&GlobalResource.grib2_sample` is used instead.
+            out_type_template is not set, the value of :nl:arg:`&GlobalResource grib2_sample` is used instead.
 
             Important: see remark in :ref:`section 7.12` about the choice of the GRIB 2 sample.
 
-.. py:attribute:: out_type_file_header
-    :type: <user specified file header>
-    :value: '' 
+.. nl:argument:: out_type_file_header
+    :default: '' 
+
+    :format: <user specified file header>
 
     Compatible with ``BLK_TABLE``, ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``
 
     Replace the standard and automatically defined output type and output version 
     string, which is also the file header.
 
-.. py:attribute:: out_type_text1
-    :type: <user defined text for some output>
-    :value: ''
+.. nl:argument:: out_type_text1
+    :default: ''
 
-.. py:attribute:: out_type_text2
-    :type: <user defined text for some output>
-    :value: ''
+    :format: <user defined text for some output>
+
+.. nl:argument:: out_type_text2
+    :default: ''
+
+    :format: <user defined text for some output>
 
     Compatible with ``FLD_TABLE``, ``DAT_TABLE``, ``BLK_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``TMPL_BASE``, ``METEOG``, ``NETCDF``
 
@@ -2223,45 +2314,52 @@ Out type attributes acting on data format
     * ``TMPL_BASE`` : attributes 'user_text1' and 'user_text2'
     * ``NETCDF`` : global attributes 'title' and 'comment'
 
-.. py:attribute:: out_type_depreciated
-    :type: <use depreciated version of format>
-    :value: .FALSE. 
+.. nl:argument:: out_type_depreciated
+    :default: .FALSE. 
+
+    :format: <use depreciated version of format>
 
     Compatible with ``BLK_TABLE``, ``XLS_TABLE``
 
-.. py:attribute:: out_type_verbosity
-    :type: <verbosity of output; one of 0,1,2,3,4>
-    :value: 1 
+.. nl:argument:: out_type_verbosity
+    :default: 1 
+
+    :format: <verbosity of output; one of 0,1,2,3,4>
 
     Compatible with ``BLK_TABLE``, ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``
 
-.. py:attribute:: out_type_mminfo
-    :type: <express date in minutes; 'yes', 'no' or 'auto'>
-    :value: 'auto'
+.. nl:argument:: out_type_mminfo
+    :default: 'auto'
+
+    :format: <express date in minutes; 'yes', 'no' or 'auto'>
 
     Compatible with ``BLK_TABLE``, ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``
 
-.. py:attribute:: out_type_pdfinfo
-    :type: <display PDF related information; 'yes', 'no' or 'auto'>
-    :value: 'auto'
+.. nl:argument:: out_type_pdfinfo
+    :default: 'auto'
+
+    :format: <display PDF related information; 'yes', 'no' or 'auto'>
 
     Compatible with ``BLK_TABLE``, ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``
 
-.. py:attribute:: out_type_epsminfo
-    :type: <display EPS member information; 'yes', 'no' or 'auto'>
-    :value: 'auto'
+.. nl:argument:: out_type_epsminfo
+    :default: 'auto'
+
+    :format: <display EPS member information; 'yes', 'no' or 'auto'>
 
     Compatible with ``BLK_TABLE``, ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``
 
-.. py:attribute:: out_type_prodinfo
-    :type: <display product information; 'yes', 'no' or 'auto'>
-    :value: 'auto'
+.. nl:argument:: out_type_prodinfo
+    :default: 'auto'
+
+    :format: <display product information; 'yes', 'no' or 'auto'>
 
     Compatible with ``BLK_TABLE``, ``XLS_TABLE``, ``N_TUPLE``
 
-.. py:attribute:: out_type_locinfo
-    :type: <additional information on locations>
-    :value: .FALSE.
+.. nl:argument:: out_type_locinfo
+    :default: .FALSE.
+
+    :format: <additional information on locations>
 
     Compatible with ``XLS_TABLE``, ``ASCII_TABLE``
 
@@ -2271,28 +2369,33 @@ Out type attributes acting on data format
 
 Some of these parameters support an automatic mode (``'auto'``); in this case the
 format is derived from the content of the internal storage, or from the definition
-of the time loop in the namelist (:py:attr:`&Process.out_type_mminfo`).
+of the time loop in the namelist (:nl:arg:`&Process out_type_mminfo`).
       
-.. py:attribute:: out_type_separator
-    :type: <field separator>  
+.. nl:argument:: out_type_separator
+
+    :format: <field separator>  
 
     Compatible with ``XLS_TABLE``, ``ASCII_TABLE``
 
-.. py:attribute:: out_type_cheader
-    :type: <column headers>
-    :value: '' 
+.. nl:argument:: out_type_cheader
+    :default: '' 
 
-.. py:attribute:: out_type_fusedt
-    :type: <fuse date & time info>
-    :value: .FALSE.
+    :format: <column headers>
+
+.. nl:argument:: out_type_fusedt
+    :default: .FALSE.
+
+    :format: <fuse date & time info>
 
     Compatible with ``XLS_TABLE``, ``ASCII_TABLE``
 
-.. py:attribute:: out_type_line_label
-    :type: <define way data is tabulated - string>
+.. nl:argument:: out_type_line_label
 
-.. py:attribute:: out_type_legend
-    :type: <define type of header - string>
+    :format: <define way data is tabulated - string>
+
+.. nl:argument:: out_type_legend
+
+    :format: <define type of header - string>
 
     Compatible with ``ASCII_TABLE``
 
@@ -2302,16 +2405,16 @@ The above parameters define the characteristics of CSV oriented output.
 
     ``XLS_TABLE`` output can either be expressed as a MS Excel compatible csv
     data, or as a column oriented fixed format data. The active option is
-    defined by the value of :py:attr:`&Process.out_type_separator`.
+    defined by the value of :nl:arg:`&Process out_type_separator`.
     
-    :py:attr:`&Process.out_type_separator` is a single character used to separate fields in
+    :nl:arg:`&Process out_type_separator` is a single character used to separate fields in
     output; date information and time information are also represented
-    in a form compatible with MS Excel. When :py:attr:`&Process.out_type_separator` is missing
+    in a form compatible with MS Excel. When :nl:arg:`&Process out_type_separator` is missing
     or blank, output is column oriented and fields are separated by one or
     more blanks.
     
     The csv variant supports additional customizing:
-    :py:attr:`&Process.out_type_cheader` is a string specifiying the way data is arranged in lines and columns:
+    :nl:arg:`&Process out_type_cheader` is a string specifiying the way data is arranged in lines and columns:
          
     ``'gp'``    : 
       each column is uniquely specified by a location (grid point)
@@ -2320,15 +2423,15 @@ The above parameters define the characteristics of CSV oriented output.
     ``''``      : 
       default, same as ``'gp'``
 
-    :py:attr:`&Process.out_type_fusedt` is a logical switch controlling the fusion of date and time information into a single string. 
+    :nl:arg:`&Process out_type_fusedt` is a logical switch controlling the fusion of date and time information into a single string. 
 
 2.  ``ASCII_TABLE``
 
-    :py:attr:`&Process.out_type_separator` is a single character used to separate fields in
+    :nl:arg:`&Process out_type_separator` is a single character used to separate fields in
     output; default value is ';', blank value is supported.
   
     Five options for the arrangement of output values are possible; the option
-    is choosen by the namelist :py:attr:`&Process.out_type_line_label`:
+    is choosen by the namelist :nl:arg:`&Process out_type_line_label`:
 
     ``location_time``      
                           one new line for each location and each validation
@@ -2370,7 +2473,7 @@ The above parameters define the characteristics of CSV oriented output.
     ``extra``    
       minimal header in data file, full header as extra file
 
-    Default value is ``"none"`` (if :py:attr:`&Process.out_type_line_label` is not set or
+    Default value is ``"none"`` (if :nl:arg:`&Process out_type_line_label` is not set or
     ``out_type_line_label=location_time``) or "standard" otherwise.
    
 
@@ -2381,9 +2484,10 @@ Out type attributes for special situations
 Some output types support special 'dialects' to make them consistent
 with downstream applications. 
 
-.. py:attribute:: out_type_lagranto
-    :type: <LAGRANTO compatible NetCDF output>
-    :value: .FALSE.
+.. nl:argument:: out_type_lagranto
+    :default: .FALSE.
+
+    :format: <LAGRANTO compatible NetCDF output>
 
     Compatible with ``NETCDF``
 
@@ -2391,20 +2495,21 @@ with downstream applications.
     (see http://iacweb.ethz.ch/staff/sprenger/lagranto/) which requires input
     files expressed in NetCDF. The standard NetCDF CF format produced by
     fieldextra is not compatible with LAGRANTO when working with GME of IFS
-    model output, and the switch :py:attr:`&Process.out_type_lagranto` must be set to true in this
-    case. In particular, :py:attr:`&Process.out_type_lagranto` triggers the coding of (Ak,Bk)
+    model output, and the switch :nl:arg:`&Process out_type_lagranto` must be set to true in this
+    case. In particular, :nl:arg:`&Process out_type_lagranto` triggers the coding of (Ak,Bk)
     vertical coordinates coefficients and change the naming convention of
     some NetCDF dimensions.
 
-.. py:attribute:: out_type_dwhhack
-    :type: <DWH compatible FLD_TABLE output>
-    :value: .FALSE.
+.. nl:argument:: out_type_dwhhack
+    :default: .FALSE.
+
+    :format: <DWH compatible FLD_TABLE output>
 
     Compatible with ``FLD_TABLE``
 
     DWH is the MeteoSwiss database, and some naming conventions used in the
     standard fieldextra ASCII output must be changed to make ``FLD_TABLE`` output
-    compatible with this software. In particular, :py:attr:`&Process.out_type_dwhhack` triggers
+    compatible with this software. In particular, :nl:arg:`&Process out_type_dwhhack` triggers
     the use of special field descriptor for EPS probabilities.
 
 
@@ -2413,8 +2518,9 @@ of the whole domain ...
 
 **by specifying a frame** 
 
-.. py:attribute:: frame_ngp
-    :type: <frame width, in grid points>
+.. nl:argument:: frame_ngp
+
+    :format: <frame width, in grid points>
 
     The frame is the set of grid points whose euclidean distance to
     the border of the original domain is smaller or equal to 'frame_ngp'
@@ -2422,58 +2528,68 @@ of the whole domain ...
 **by specifying a rectangle in grid point coordinates**
 (dense subset when iinc=1 and jinc=1, sparse subset otherwise)
 
-.. py:attribute:: imin
-    :type: <minimal value of i-component>     
+.. nl:argument:: imin
+
+    :format: <minimal value of i-component>     
     
     -1 means no subdomain
 
-.. py:attribute:: imax
-    :type: <maximal value of i-component> 
+.. nl:argument:: imax
 
-.. py:attribute:: jmin
-    :type: <minimal value of j-component> 
+    :format: <maximal value of i-component> 
 
-.. py:attribute:: jmax
-    :type: <maximal value of j-component> 
+.. nl:argument:: jmin
 
-.. py:attribute:: iinc
-    :type: <i-increment> 
+    :format: <minimal value of j-component> 
 
-.. py:attribute:: jinc
-    :type: <j-increment> 
+.. nl:argument:: jmax
+
+    :format: <maximal value of j-component> 
+
+.. nl:argument:: iinc
+
+    :format: <i-increment> 
+
+.. nl:argument:: jinc
+
+    :format: <j-increment> 
 
 **by specifying a region in geographical coordinates**
 
-.. py:attribute:: region_bbox
-    :type: <region_set_tag,region_tag>
+.. nl:argument:: region_bbox
+
+    :format: <region_set_tag,region_tag>
 
     The subdomain will be the bounding box of the region, expressed as 
     the smallest rectangle in grid point coordinates containing the
     specified region. The region is defined as a polygon in geographical
     lat/lon coordinates; the values of 'region_set_tag' and 'region_tag'
-    refer to the definition of regions in the :py:attr:`&GlobalResource.region_list` file (see :ref:`section 6.4`).
+    refer to the definition of regions in the :nl:arg:`&GlobalResource region_list` file (see :ref:`section 6.4`).
 
     ..
       TODO: references in above paragraph
 
 **by specifying a set of grid point coordinates**
 
-.. py:attribute:: ilist
-    :type: <i-component>,<i-component>,...
+.. nl:argument:: ilist
 
-.. py:attribute:: jlist
-    :type: <j-component>,<j-component>,...
+    :format: <i-component>,<i-component>,...
+
+.. nl:argument:: jlist
+
+    :format: <j-component>,<j-component>,...
 
     Grid point coordinates either refer to the grid specified by
-    :py:attr:`&Process.in_regrid_target` or to the native grid of the input field when 
+    :nl:arg:`&Process in_regrid_target` or to the native grid of the input field when 
     this former variable is not set.
 
 **by specifying a set of locations in geographical coordinates**
 
-.. py:attribute:: locgroup
-    :type: <location group>
+.. nl:argument:: locgroup
 
-.. py:attribute:: loclist
+    :format: <location group>
+
+.. nl:argument:: loclist
 
   Can be either
 
@@ -2481,26 +2597,26 @@ of the whole domain ...
   *  ``<location name>,<location name>,...``
 
 The set of locations is defined by a list of geographical locations,
-which are either defined in the :py:attr:`&GlobalResource.location_list` file or automatically
-generated as region representative (see description of :py:attr:`&GlobalResource.region_list`).
+which are either defined in the :nl:arg:`&GlobalResource location_list` file or automatically
+generated as region representative (see description of :nl:arg:`&GlobalResource region_list`).
 The list of locations can be specified by using the location id's,
-or by exploiting the location aliases defined in the :py:attr:`&GlobalResource.location_list`
+or by exploiting the location aliases defined in the :nl:arg:`&GlobalResource location_list`
 file (of the form ``<group>:<name>``). In this latter case, the location
 group has to be specified with ``locgroup=...``, and the associated list
-of names with ``loclist=...`` Only one group may be specified. If :py:attr:`&Process.loclist`
+of names with ``loclist=...`` Only one group may be specified. If :nl:arg:`&Process loclist`
 is empty, all group members are selected.
 
 The definition of a dynamic set of locations is supported by specifying
-:py:attr:`&Process.locgroup` and letting :py:attr:`&Process.loclist` empty; in this case, and in this case only,
+:nl:arg:`&Process locgroup` and letting :nl:arg:`&Process loclist` empty; in this case, and in this case only,
 the set of locations considered for the current output are all the
 locations belonging to the specified group which are also resolved. In
 other words, all locations associated with empty regions, outside of 
 incore grid, or outside of target grid are filtred out.
 
 Geographical locations are associated to grid points according to the
-algorithm defined by location_to_gridpoint in :py:mod:`&GlobalSettings`. The
+algorithm defined by location_to_gridpoint in :nl:nl:`&GlobalSettings`. The
 reference grid is always the common base grid associated with the output 
-file (i.e. the grid specified with :py:attr:`&Process.in_regrid_target`, or the grid common
+file (i.e. the grid specified with :nl:arg:`&Process in_regrid_target`, or the grid common
 to *all* collected fields). Consequently, when mixing staggered with
 un-staggered fields, the coordinates of the grid point associated with
 a specific location are the same on the un-staggered as on the staggered
@@ -2508,12 +2624,13 @@ grid (i.e. they are not re-adjusted to take into account the staggering).
 
 **by specifying a slice, i.e. a path on the surface of the earth**
 
-.. py:attribute:: slice
-    :type: <slice_tag>
+.. nl:argument:: slice
+
+    :format: <slice_tag>
 
     A slice is a broken line on the surface of the earth. The value of
     slice_tag refers to the definition of the slice found in the file 
-    specified by slice_list (as defined in :py:mod:`&GlobalResource`). See :ref:`section 6.5` for more detailed information.
+    specified by slice_list (as defined in :nl:nl:`&GlobalResource`). See :ref:`section 6.5` for more detailed information.
    
    
 .. note::
@@ -2541,13 +2658,13 @@ grid (i.e. they are not re-adjusted to take into account the staggering).
       .. flat-table:: 
         :header-rows: 1
 
-        * - :py:attr:`&Process.out_type`
+        * - :nl:arg:`&Process out_type`
           - subset
           - order
         
         * - ``GRIB1``, ``GRIB2``, ``BLK_TABLE``
           - all
-          - follow native scanning mode or scanning mode specified by :py:attr:`&Process.out_type_scanmode`
+          - follow native scanning mode or scanning mode specified by :nl:arg:`&Process out_type_scanmode`
 
         * - ``NETCDF``
           - all
@@ -2567,28 +2684,35 @@ grid (i.e. they are not re-adjusted to take into account the staggering).
 It is also possible to restrict the data to a subset of the whole domain
 defined by some logical conditions on the extracted or generated fields:
 
-.. py:attribute:: in_filter
-    :type: <logical condition>     
+.. nl:argument:: in_filter
+
+    :format: <logical condition>     
     
     e.g. ``in_filter='FR_LAND>0.5 && T<273.0'``
 
-.. py:attribute:: tmp1_filter
-    :type: <logical condition>     
+.. nl:argument:: tmp1_filter
 
-.. py:attribute:: tmp2_filter
-    :type: <logical condition>     
+    :format: <logical condition>     
 
-.. py:attribute:: tmp3_filter
-    :type: <logical condition>     
+.. nl:argument:: tmp2_filter
 
-.. py:attribute:: tmp4_filter
-    :type: <logical condition>     
+    :format: <logical condition>     
 
-.. py:attribute:: tmp5_filter
-    :type: <logical condition>     
+.. nl:argument:: tmp3_filter
 
-.. py:attribute:: out_filter
-    :type: <logical condition>     
+    :format: <logical condition>     
+
+.. nl:argument:: tmp4_filter
+
+    :format: <logical condition>     
+
+.. nl:argument:: tmp5_filter
+
+    :format: <logical condition>     
+
+.. nl:argument:: out_filter
+
+    :format: <logical condition>     
 
 
 Each logical condition is applied at the end of the corresponding processing
@@ -2621,7 +2745,7 @@ Extracted fields
 
 For each pair of input/output file the set of fields to extract is defined
 by specifying one or many ``&Process in_field=...`` blocks. The way this
-information is interpreted is defined by the value of :py:attr:`&Process.selection_mode`.
+information is interpreted is defined by the value of :nl:arg:`&Process selection_mode`.
 
 For each output file, all extracted fields from all contributing input files
 are available for the generation of the final product.
@@ -2648,8 +2772,9 @@ Note that these rules do not apply for output composed of constant
 fields only.
 
 
-.. py:attribute:: selection_mode
-    :type: <INCLUDE_ONLY, INCLUDE_ALL or EXCLUDE>
+.. nl:argument:: selection_mode
+
+    :format: <INCLUDE_ONLY, INCLUDE_ALL or EXCLUDE>
 
 
     This defines how the ``&Process in_field= ...`` specifications are
@@ -2666,23 +2791,27 @@ fields only.
       all the fields which do *not* match the specifications are extracted and are available for further processing.
    
     When using INCLUDE_ALL or EXCLUDE mode, it is recommended to explicitely
-    specify :py:attr:`&Process.in_size_field` to minimize the memory footprint (otherwise the
+    specify :nl:arg:`&Process in_size_field` to minimize the memory footprint (otherwise the
     maximum number of fields is assumed, as defined in fxtr_definition).
    
     Only INCLUDE_ONLY is supported when working with INCORE pseudo-input. 
 
-.. py:attribute:: in_field
-    :type: <short name of field to collect>        
+.. nl:argument:: in_field
 
-.. py:attribute:: skip_time
-    :type: <time>,<time>...
+    :format: <short name of field to collect>        
 
-.. py:attribute:: keep_time
-    :type: <time>,<time>...
+.. nl:argument:: skip_time
 
-.. py:attribute:: expect_missing_field
-    :type: <not exception for missing field>
-    :value: false
+    :format: <time>,<time>...
+
+.. nl:argument:: keep_time
+
+    :format: <time>,<time>...
+
+.. nl:argument:: expect_missing_field
+    :default: false
+
+    :format: <not exception for missing field>
 
 
 The identity of the field associated with the in_field is defined in the
@@ -2707,20 +2836,20 @@ This is useful to write compact namelist, e.g., when some of the input
 fields are not available for all lead times, or when a different field
 is used for lead time 0, like SOSB_RAD and ASOB_S.
 
-By default, an exception is raised when a specified :py:attr:`&Process.in_field` is not found
-in the associated :py:attr:`&Process.in_file`, or when the record is rejected. This behaviour
-can be changed by setting :py:attr:`&Process.expect_missing_field` to true; this is useful e.g.
+By default, an exception is raised when a specified :nl:arg:`&Process in_field` is not found
+in the associated :nl:arg:`&Process in_file`, or when the record is rejected. This behaviour
+can be changed by setting :nl:arg:`&Process expect_missing_field` to true; this is useful e.g.
 when missing fields are expected and are replaced by interpolated values
-from contiguous time levels (see ``'fill_undef'`` in :py:attr:`&Process.toper`).
+from contiguous time levels (see ``'fill_undef'`` in :nl:arg:`&Process toper`).
 
-.. py:attribute:: ignore_model_identity
+.. nl:argument:: ignore_model_identity
+    :default: .FALSE.
     :type: logical
-    :value: .FALSE.
 
 
     When true, the model name and the model type of the associated field are
     ignored, and the default model name and default dictionary, as specified
-    in :py:mod:`&GlobalSettings`, are used instead. Furthermore, the values of any other
+    in :nl:nl:`&GlobalSettings`, are used instead. Furthermore, the values of any other
     meta-information associated with the new model name are also reset (this
     concerns the originatingCenter, the originatingSubcenter, and the
     generatingProcessIdentifier).
@@ -2731,9 +2860,9 @@ from contiguous time levels (see ``'fill_undef'`` in :py:attr:`&Process.toper`).
     interpolating one model output to the levels defined for a different
     model.
 
-.. py:attribute:: ignore_vcoord
+.. nl:argument:: ignore_vcoord
+    :default: .FALSE.
     :type: logical
-    :value: .FALSE.
 
 
     When true, the vertical coordinate information of the associated field
@@ -2748,25 +2877,28 @@ from contiguous time levels (see ``'fill_undef'`` in :py:attr:`&Process.toper`).
     for different vertical coordinates (in such a case, having the same 
     surface value does not guarantee that the same level is considered).
 
-.. py:attribute:: reference_field
-    :type: <true of false>
-    :value: is true
+.. nl:argument:: reference_field
+    :default: is true
+
+    :format: <true of false>
 
 
     Used to discriminate in INCORE storage between fields associated with the
-    reference grid and other instances of the field (see :py:attr:`&Process.out_type`).
+    reference grid and other instances of the field (see :nl:arg:`&Process out_type`).
 
-.. py:attribute:: use_tag
-    :type: <tag1, tag2, ... (string)>  
+.. nl:argument:: use_tag
+
+    :format: <tag1, tag2, ... (string)>  
     :noindex:
 
     The set of fields collected from some input files can be filtred on the
     basis of their tags. This can be necessary when multiple instances of
     the same field are stored in the contributing input.
 
-.. py:attribute:: product_category
-    :type: <product category>
-    :value: 'all'
+.. nl:argument:: product_category
+    :default: 'all'
+
+    :format: <product category>
     :noindex:
 
 
@@ -2784,9 +2916,10 @@ from contiguous time levels (see ``'fill_undef'`` in :py:attr:`&Process.toper`).
       | 'satellite', 'radar', 
       | 'all'            
 
-.. py:attribute:: level_class
-    :type: <type of level to select>
-    :value: 'all'
+.. nl:argument:: level_class
+    :default: 'all'
+
+    :format: <type of level to select>
 
 
     The type of levels to select may be explicitely specified
@@ -2830,21 +2963,25 @@ Levels
 
 * a list of values
 
-  .. py:attribute:: levlist
-      :type: <level>,<level>,...   
+  .. nl:argument:: levlist
+
+      :format: <level>,<level>,...   
       
       -1 means all available levels
 
 * or by specifying start value, end value and increment
 
-  .. py:attribute:: levmin
-      :type: <min value>
+  .. nl:argument:: levmin
 
-  .. py:attribute:: levmax
-      :type: <max value>
+      :format: <min value>
 
-  .. py:attribute:: levinc
-      :type: <increment>
+  .. nl:argument:: levmax
+
+      :format: <max value>
+
+  .. nl:argument:: levinc
+
+      :format: <increment>
 
 .. note:: 
   for fields defined on layers, the values specified by levlist or
@@ -2854,8 +2991,9 @@ Levels
 
 The associated physical units may be specified by
 
-.. py:attribute:: level_units 
-  :type: <units>
+.. nl:argument:: level_units 
+
+  :format: <units>
 
   optional
 
@@ -2872,7 +3010,7 @@ The associated physical units may be specified by
   'kgm-3', 'gm-3', 'mgm-3', 'mugm-3'    density , mugm-3 = 10**-6 g/m**3       
   ==================================== ==================================
   
-  When :py:attr:`&Process.level_units` is missing, the following default units are assumed
+  When :nl:arg:`&Process level_units` is missing, the following default units are assumed
 
   ================================= ==================================
   ================================= ==================================
@@ -2898,25 +3036,29 @@ constant (e.g. a layer defined between a pressure surface and the ground).
 
 * a list of values
 
-  .. py:attribute:: epslist
-      :type: <member>,<member>,...  
+  .. nl:argument:: epslist
+
+      :format: <member>,<member>,...  
       :noindex: 
       
       -1 means all available members
 
 * specifying start value, end value and increment
 
-  .. py:attribute:: epsstart
-      :type: <start eps member>
+  .. nl:argument:: epsstart
+
+      :format: <start eps member>
       :noindex:
 
-  .. py:attribute:: epsstop
-      :type: <stop eps member>
+  .. nl:argument:: epsstop
+
+      :format: <stop eps member>
       :noindex:
 
-  .. py:attribute:: epsincr
-      :type: <increment eps member>
-      :value: 1
+  .. nl:argument:: epsincr
+      :default: 1
+
+      :format: <increment eps member>
       :noindex:
 
 PDF Characteristics
@@ -2926,8 +3068,9 @@ Characteristics of PDF related fields are specified by:
 
 * for probability
         
-  .. py:attribute:: prob_interval
-      :type: <[x,y], [x,y[, ]x,y] or ]x,y[, as string>
+  .. nl:argument:: prob_interval
+
+      :format: <[x,y], [x,y[, ]x,y] or ]x,y[, as string>
 
       interval of values, expressed in field units
 
@@ -2938,25 +3081,29 @@ Characteristics of PDF related fields are specified by:
   interval lower and upper boundaries, expressed in field units,
   the boundaries are *not* included in the interval
 
-  .. py:attribute:: prob_tlow
-      :type: <interval lower threshold (real)>
-      :value: -infinite
+  .. nl:argument:: prob_tlow
+      :default: -infinite
 
-  .. py:attribute:: prob_thigh
-      :type: <interval higher threshold (real)>
-      :value: infinite
+      :format: <interval lower threshold (real)>
+
+  .. nl:argument:: prob_thigh
+      :default: infinite
+
+      :format: <interval higher threshold (real)>
 
 * for quantile
          
-  .. py:attribute:: quantile
-      :type: <quantile, real> 
+  .. nl:argument:: quantile
+
+      :format: <quantile, real> 
 
       a value for a quantile, between 0 and 100
 
 * for difference of quantiles
          
-  .. py:attribute:: quantile
-      :type: <quantile1,real>, <quantile2,real>
+  .. nl:argument:: quantile
+
+      :format: <quantile1,real>, <quantile2,real>
       :noindex:
       
       two quantile values, both between 0 and 100, representing
@@ -2964,8 +3111,9 @@ Characteristics of PDF related fields are specified by:
 
 * for probability with respect to a reference distribution
          
-  .. py:attribute:: ref_quantile
-      :type: <order of reference quantile, integer> [,<number of reference quantile, integer>]
+  .. nl:argument:: ref_quantile
+
+      :format: <order of reference quantile, integer> [,<number of reference quantile, integer>]
 
       the order of the quantile in the reference distribution and
       the total number of quantiles used to represent the reference
@@ -2973,8 +3121,9 @@ Characteristics of PDF related fields are specified by:
 
 * for shift of tail index
          
-  .. py:attribute:: efi_order
-      :type: <percentile fcst, integer>[,<percentile climate, integer>]
+  .. nl:argument:: efi_order
+
+      :format: <percentile fcst, integer>[,<percentile climate, integer>]
 
       two percentile values, both between 0 and 100; the first
       value is the forecast percentile and the second the climate
@@ -2983,8 +3132,9 @@ Characteristics of PDF related fields are specified by:
 Misc
 ^^^^
 
-.. py:attribute:: tag
-    :type: <tag associated with field (string, <= 24 characters)>
+.. nl:argument:: tag
+
+    :format: <tag associated with field (string, <= 24 characters)>
 
 
     Normally a single tag can be associated with each field. As long as
@@ -3006,7 +3156,7 @@ Misc
 
     .. [#] either a short name attribute is found or a varname_translation table is available
    
-    Tags are *never* inherited from INCORE storage (but :py:attr:`&Process.use_tag` can
+    Tags are *never* inherited from INCORE storage (but :nl:arg:`&Process use_tag` can
     be set to filter the fields collected from INCORE storage).
    
     When computing a new field, tags are *not* transfered from the contributing
@@ -3035,9 +3185,10 @@ Misc
       it is also recommended, in order to differentiate tags from short names,
       to use lower case for tags.
 
-.. py:attribute:: shared_eps_member
-    :type: <logical>
-    :value: false
+.. nl:argument:: shared_eps_member
+    :default: false
+
+    :format: <logical>
 
 
     Mark associated field as shared EPS member; this is used to share a single
@@ -3058,35 +3209,35 @@ The following only applies when ``selection_mode=INCLUDE_ALL`` or
 Each extracted field may be transformed by one or more operators, in the
 order 
 
-:py:attr:`&Process.regrid`, ``set_*``, :py:attr:`&Process.merge_with`, :py:attr:`&Process.compare_with`, :py:attr:`&Process.hoper`, :py:attr:`&Process.scale`/:py:attr:`&Process.offset`, :py:attr:`&Process.voper`,
-:py:attr:`&Process.toper`, :py:attr:`&Process.poper`, :py:attr:`&Process.poper2`, :py:attr:`&Process.poper3`, :py:attr:`&Process.poper4`, :py:attr:`&Process.poper5`, spatial filter, :py:attr:`&Process.new_field_id`
+:nl:arg:`&Process regrid`, ``set_*``, :nl:arg:`&Process merge_with`, :nl:arg:`&Process compare_with`, :nl:arg:`&Process hoper`, :nl:arg:`&Process scale`/:nl:arg:`&Process offset`, :nl:arg:`&Process voper`,
+:nl:arg:`&Process toper`, :nl:arg:`&Process poper`, :nl:arg:`&Process poper2`, :nl:arg:`&Process poper3`, :nl:arg:`&Process poper4`, :nl:arg:`&Process poper5`, spatial filter, :nl:arg:`&Process new_field_id`
 
 (the order is hardcoded and does not depend on the way the namelist is defined). 
 Each class of operators is applied in turn to all the relevant fields; 
 within a class the processing order is arbitrary.
 
-Some of these transformations can be iterated by using the :py:attr:`&Process.tmp1_field`,
-:py:attr:`&Process.tmp2_field`, :py:attr:`&Process.tmp3_field`, :py:attr:`&Process.tmp4_field`, :py:attr:`&Process.tmp5_field`, and :py:attr:`&Process.out_field`
+Some of these transformations can be iterated by using the :nl:arg:`&Process tmp1_field`,
+:nl:arg:`&Process tmp2_field`, :nl:arg:`&Process tmp3_field`, :nl:arg:`&Process tmp4_field`, :nl:arg:`&Process tmp5_field`, and :nl:arg:`&Process out_field`
 construct (see :ref:`section 4.3.5`).
 
-.. py:attribute:: regrid
+.. nl:argument:: regrid
     :type: logical 
 
-    re-gridding as defined by :py:attr:`&Process.in_regrid_target` and :py:attr:`&Process.in_regrid_method`
+    re-gridding as defined by :nl:arg:`&Process in_regrid_target` and :nl:arg:`&Process in_regrid_method`
 
     Activate re-gridding of the associated input field onto the mesh specified by
-    :py:attr:`&Process.in_regrid_target`. When all input fields need to be re-regidded, it is possible
-    to set :py:attr:`&Process.in_regrid_all` to true instead.
+    :nl:arg:`&Process in_regrid_target`. When all input fields need to be re-regidded, it is possible
+    to set :nl:arg:`&Process in_regrid_all` to true instead.
 
 Some field meta-information can be (re)set by the user; this will overwite
 any existing value in the current record, as well as any default value set
-in :py:mod:`&GlobalSettings`. Depending on the information being set, this can be done
+in :nl:nl:`&GlobalSettings`. Depending on the information being set, this can be done
 in the extraction phase (i.e. while collecting fields from input data) or
 in the last processing iteration, before producing the output. 
 
 Operations which are restricted to the extract iteration:
 
-:py:attr:`&Process.set_vcoord`, :py:attr:`&Process.set_time_range`
+:nl:arg:`&Process set_vcoord`, :nl:arg:`&Process set_time_range`
 
 Operations not restricted (can be defined both in the extract iteration and
 in the last processing iteration - when defined in the extract iteration, the
@@ -3094,13 +3245,14 @@ operator is applied just after collecting the record, at the very beginning
 of the processing, whereas, when defined in the last processing iteration, the
 operator is applied at the very end of the iteration):
 
-:py:attr:`&Process.set_level_property`, :py:attr:`&Process.set_epsmember_identity`,
-:py:attr:`&Process.set_units`, :py:attr:`&Process.set_genproc_type`, :py:attr:`&Process.set_product_category`, 
-:py:attr:`&Process.set_reference_date`, :py:attr:`&Process.set_trange_type`, :py:attr:`&Process.set_leadtime`
-:py:attr:`&Process.set_auxiliary_metainfo`
+:nl:arg:`&Process set_level_property`, :nl:arg:`&Process set_epsmember_identity`,
+:nl:arg:`&Process set_units`, :nl:arg:`&Process set_genproc_type`, :nl:arg:`&Process set_product_category`, 
+:nl:arg:`&Process set_reference_date`, :nl:arg:`&Process set_trange_type`, :nl:arg:`&Process set_leadtime`
+:nl:arg:`&Process set_auxiliary_metainfo`
 
-.. py:attribute:: set_units
-    :type: <string>
+.. nl:argument:: set_units
+
+    :format: <string>
 
     reset the field units, as declared in the active dictionary,
     with a user defined text (which should be compatible with
@@ -3111,8 +3263,9 @@ operator is applied at the very end of the iteration):
     * part of description string in table of content associated 
       with ``GRIB1``, ``GRIB2``, and ``NETCDF`` output.
 
-.. py:attribute:: set_genproc_type
-    :type: <string> 
+.. nl:argument:: set_genproc_type
+
+    :format: <string> 
 
     reset type of generating process; possible values are:
 
@@ -3123,8 +3276,9 @@ operator is applied at the very end of the iteration):
     'eps_forecast', 'eps_probability', 'neighbourhood_probability'
     (not available in GRIB 1; defined in code table 4.3 of GRIB 2, including reserve for local use; supported by dictionary)
 
-.. py:attribute:: set_product_category
-    :type: <string>
+.. nl:argument:: set_product_category
+
+    :format: <string>
 
     reset product category; possible values are:
 
@@ -3148,23 +3302,26 @@ operator is applied at the very end of the iteration):
     correct set of parent fields when computing a new field,
     and to choose the correct template for GRIB coding.
 
-.. py:attribute:: set_epsmember_identity
-    :type: <member value>[,<number of members>]
+.. nl:argument:: set_epsmember_identity
+
+    :format: <member value>[,<number of members>]
 
     reset value of EPS identity, either the value of the EPS member, or the value of the EPS member and the total number of EPS members
 
-.. py:attribute:: set_vcoord
-    :type: <logical>
-    :value: false
+.. nl:argument:: set_vcoord
+    :default: false
+
+    :format: <logical>
 
     reset vertical coefficients, using values
-    specified in active :py:mod:`&ModelSpecification`;
+    specified in active :nl:nl:`&ModelSpecification`;
     must be specified for all multi-levels in_field
-    (see documentation of :py:attr:`&ModelSpecification.vertical_coordinate_coef` for more
+    (see documentation of :nl:arg:`&ModelSpecification vertical_coordinate_coef` for more
     details)
 
-.. py:attribute:: set_level_property
-    :type: <string>
+.. nl:argument:: set_level_property
+
+    :format: <string>
 
     reset level characteristics
     
@@ -3228,8 +3385,9 @@ operator is applied at the very end of the iteration):
           output will only depend on the type of output and on the 
           information available in the active dictionary.
 
-.. py:attribute:: set_leadtime
-    :type: <integer, in minutes>
+.. nl:argument:: set_leadtime
+
+    :format: <integer, in minutes>
 
     reset the lead time (expressed in minutes);
 
@@ -3243,8 +3401,9 @@ operator is applied at the very end of the iteration):
       interval (if any) are not changed, the lead time is reset to
       the specified value, and the reference date is adapted.
 
-.. py:attribute:: set_time_range
-    :type: <integer, in minutes>
+.. nl:argument:: set_time_range
+
+    :format: <integer, in minutes>
 
     reset time range, value expressed as a string
     ``[x,y]`` with  ``x`` and ``y`` being real numbers, or ``x`` being ``'-infinite'`` 
@@ -3256,8 +3415,9 @@ operator is applied at the very end of the iteration):
     Limited to extract iteration, only allowed when the type of
     time range is associated with an interval.
 
-.. py:attribute:: set_trange_type
-    :type: <string>
+.. nl:argument:: set_trange_type
+
+    :format: <string>
 
     reset the type of time range (type of statistical processing);
 
@@ -3267,8 +3427,9 @@ operator is applied at the very end of the iteration):
       'standard_deviation', 'covariance', 
       'difference\_(start-end)', 'summation'
 
-.. py:attribute:: set_reference_date
-    :type: <integer, yyyymmddhhmm>
+.. nl:argument:: set_reference_date
+
+    :format: <integer, yyyymmddhhmm>
 
     reset the reference date (yyyymmddhhmm);
 
@@ -3283,15 +3444,16 @@ operator is applied at the very end of the iteration):
       interval (if any) are not changed, the reference date is reset
       to the specified value, and the lead time is adapted.
 
-.. py:attribute:: set_auxiliary_metainfo
-    :type: <sring>[,<string> ...] 
+.. nl:argument:: set_auxiliary_metainfo
+
+    :format: <sring>[,<string> ...] 
     
     each ``<string>`` expressed as ``key=value``
 
-    reset specified auxiliary meta-information; see :py:attr:`&GlobalSettings.auxiliary_metainfo`
+    reset specified auxiliary meta-information; see :nl:arg:`&GlobalSettings auxiliary_metainfo`
     for more details. When used in the last processing
-    iteration, override any key=value specified in :py:attr:`&GlobalSettings.auxiliary_metainfo`
-    and in :py:attr:`&Process.out_auxiliary_metainfo`
+    iteration, override any key=value specified in :nl:arg:`&GlobalSettings auxiliary_metainfo`
+    and in :nl:arg:`&Process out_auxiliary_metainfo`
 
 .. note::
       additional operators which can be used to re-set some meta-information ...
@@ -3299,35 +3461,37 @@ operator is applied at the very end of the iteration):
       *   globally for all output defined in the active namelist, at the end of 
           the last processing iteration:
 
-          :py:attr:`&GlobalSettings.originating_center`, :py:attr:`&GlobalSettings.production_status`, :py:attr:`&GlobalSettings.genproc_type`, :py:attr:`&GlobalSettings.auxiliary_metainfo`
+          :nl:arg:`&GlobalSettings originating_center`, :nl:arg:`&GlobalSettings production_status`, :nl:arg:`&GlobalSettings genproc_type`, :nl:arg:`&GlobalSettings auxiliary_metainfo`
       *   for all fields of a specified output, at the end of the last processing
           iteration:
 
-          :py:attr:`&Process.out_model_name`, :py:attr:`&Process.out_genproc_type`, :py:attr:`&Process.out_product_category`,
-          :py:attr:`&Process.out_vertical_coordinate`, :py:attr:`&Process.out_auxiliary_metainfo`
+          :nl:arg:`&Process out_model_name`, :nl:arg:`&Process out_genproc_type`, :nl:arg:`&Process out_product_category`,
+          :nl:arg:`&Process out_vertical_coordinate`, :nl:arg:`&Process out_auxiliary_metainfo`
 
 .. note::
-      these operators differ from :py:attr:`&Process.default_product_category` and 
-      :py:attr:`&GlobalSettings.default_model_name` and :py:mod:`&GlobalSettings.default_product_category`
+      these operators differ from :nl:arg:`&Process default_product_category` and 
+      :nl:arg:`&GlobalSettings default_model_name` and :nl:nl:`&GlobalSettings.default_product_category`
       
       the latter ones are used to supplement missing meta-information whereas the
       operators descibed here always re-set the corresponding meta-information.
 
-.. py:attribute:: merge_with
-    :type: <tag>
+.. nl:argument:: merge_with
+
+    :format: <tag>
 
     define the layer field           
 
-.. py:attribute:: merge_mask
-    :type: <logical condition>
+.. nl:argument:: merge_mask
+
+    :format: <logical condition>
 
     defines where the layer field is used
 
 
     Conditionally replace the current field with the incore field defined by
-    :py:attr:`&Process.merge_with`. The operation
+    :nl:arg:`&Process merge_with`. The operation
     takes place where the incore field is defined and the logical condition
-    specified by :py:attr:`&Process.merge_mask` is true.
+    specified by :nl:arg:`&Process merge_mask` is true.
    
     The mask is defined as described in :ref:`section 4.3.7`, 
     with the following restrictions:
@@ -3339,7 +3503,7 @@ operator is applied at the very end of the iteration):
       supported in this case).
    
     The layer field is either uniquely specified by its tag, the value of
-    :py:attr:`&Process.merge_with`, or by its tag and the characteristics of the current field
+    :nl:arg:`&Process merge_with`, or by its tag and the characteristics of the current field
     (first using the short name and the level, and then also using the EPS
     and PDF identity if name and level are not enough to define a unique
     field). The current and the layer fields must have the same physical units.
@@ -3351,23 +3515,26 @@ operator is applied at the very end of the iteration):
     the current field. 
 
 
-.. py:attribute:: compare_with
-    :type: <tag (or __INCORE__)>
+.. nl:argument:: compare_with
+
+    :format: <tag (or __INCORE__)>
 
     define the field(s) to compare with
 
-.. py:attribute:: compare_fct
-    :type: <comparison operator to apply>
+.. nl:argument:: compare_fct
 
-.. py:attribute:: compare_mask
-    :type: <logical condition>
+    :format: <comparison operator to apply>
+
+.. nl:argument:: compare_mask
+
+    :format: <logical condition>
 
     define where the comparison takes place
 
 
     Replace the current field with a function of the current field and of the
-    incore field defined by :py:attr:`&Process.compare_with`. The function to apply is defined by :py:attr:`&Process.compare_fct`; when 
-    :py:attr:`&Process.compare_mask` is defined, the original field is only modified where the
+    incore field defined by :nl:arg:`&Process compare_with`. The function to apply is defined by :nl:arg:`&Process compare_fct`; when 
+    :nl:arg:`&Process compare_mask` is defined, the original field is only modified where the
     corresponding logical condition is true.
    
     The mask is defined as described in :ref:`section 4.3.7`, 
@@ -3380,7 +3547,7 @@ operator is applied at the very end of the iteration):
       supported in this case).
    
     The incore field is either uniquely specified by its tag, the value of
-    :py:attr:`&Process.compare_with`, or by its tag and the characteristics of the current field
+    :nl:arg:`&Process compare_with`, or by its tag and the characteristics of the current field
     (first using the short name and the level, and then also using the EPS
     and PDF identity if name and level are not enough to define a unique
     field). Both current and incore fields must have the same physical units.
@@ -3396,7 +3563,7 @@ operator is applied at the very end of the iteration):
     The attributes of the resulting field (pds,gds) will be the attributes of
     the current field.
    
-    The values of the resulting field is computed according to :py:attr:`&Process.compare_fct`:
+    The values of the resulting field is computed according to :nl:arg:`&Process compare_fct`:
     
     1.  ``"ratio; a1,a2,a3,b1,b2,b3"`` [4]_ [5]_
         ::
@@ -3441,16 +3608,18 @@ operator is applied at the very end of the iteration):
 
       (in particular the result is undefined outside of the common domain of the considered fields)
     
-    .. note:: the ratio/ratio_abs operators change the field identity, and :py:attr:`&Process.new_field_id` must be set.
+    .. note:: the ratio/ratio_abs operators change the field identity, and :nl:arg:`&Process new_field_id` must be set.
 
 Horizontal Operators
 ^^^^^^^^^^^^^^^^^^^^
 
-.. py:attribute:: hoper
-    :type: <horizontal operator>
+.. nl:argument:: hoper
 
-.. py:attribute:: hoper_mask
-    :type: <logical condition>      
+    :format: <horizontal operator>
+
+.. nl:argument:: hoper_mask
+
+    :format: <logical condition>      
     
     e.g. ``hoper_mask='>0. && FR_LAND>0.5'`` 
 
@@ -3607,7 +3776,7 @@ other
 .. note::
   Note about ``destagger`` operator:
   
-  The same effect can be applied by using :py:attr:`&Process.in_regrid_method`
+  The same effect can be applied by using :nl:arg:`&Process in_regrid_method`
 
 .. note::
   Note about ``tiled_*`` operators:
@@ -3620,7 +3789,7 @@ other
     be larger than the operator radius (e.g. imin, jmin > 2).  
   * No operation should be defined which postpone the lateral reduction of
     the field after the iteration where the tiled operator is used; this 
-    concerns the usage of any :py:attr:`&Process.hoper` and the usage of any named operator
+    concerns the usage of any :nl:arg:`&Process hoper` and the usage of any named operator
     requiring a lateral halo (as defined in the active dictionary). The
     reason of these condition is that the undefined values created by the
     tiled operator makes the usage of any lateral halo meaningless and
@@ -3671,7 +3840,7 @@ other
 .. note::
   Notes about ``regavg`` / ``regmin`` / ``regmax`` / ``regcnt``/ ``regcnt%`` / ``regqtl`` / ``regfit`` operators:
 
-  * The file defining user defined regions is specified by :py:attr:`&GlobalResource.region_list`. 
+  * The file defining user defined regions is specified by :nl:arg:`&GlobalResource region_list`. 
     This file may contain multiple sets of regions, and the argument 's'
     defines which set is used in the computation.
   * All points of the same region have the same value after the transformation,
@@ -3705,11 +3874,13 @@ other
 Linear Transformation
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. py:attribute:: scale
-    :type: <field scaling> 
+.. nl:argument:: scale
 
-.. py:attribute:: offset
-    :type: <field offset> 
+    :format: <field scaling> 
+
+.. nl:argument:: offset
+
+    :format: <field offset> 
 
 
     Linear transformation of the field according to ::
@@ -3721,23 +3892,27 @@ Linear Transformation
 Vertical Operators
 ^^^^^^^^^^^^^^^^^^
 
-.. py:attribute:: voper
-    :type: <vertical operator>
+.. nl:argument:: voper
 
-.. py:attribute:: voper_lev
-    :type: <level>,<level>,...
+    :format: <vertical operator>
+
+.. nl:argument:: voper_lev
+
+    :format: <level>,<level>,...
     
-    target levels for :py:attr:`&Process.voper`, integer array
+    target levels for :nl:arg:`&Process voper`, integer array
 
-.. py:attribute:: voper_lev_units
-    :type: <units>              
+.. nl:argument:: voper_lev_units
+
+    :format: <units>              
     
     associated physical units, optional
     > 
-    see :py:attr:`&Process.level_units`
+    see :nl:arg:`&Process level_units`
 
-.. py:attribute:: voper_use_tag
-    :type: <tag1, tag2, ...> 
+.. nl:argument:: voper_use_tag
+
+    :format: <tag1, tag2, ...> 
     
     optional string; tag of auxiliary fields
 
@@ -3859,7 +4034,7 @@ C.  Vertical interpolation of atmospheric fields from full to half levels,
 D.  Vertical interpolation of atmospheric fields from model levels to specified
     height levels.
 
-    Target levels are either specified by :py:attr:`&Process.voper_lev`...
+    Target levels are either specified by :nl:arg:`&Process voper_lev`...
       from model level to height above ground
         | ``'intpl_k2h,mode'``  
         | ``'intpl_k2h+,mode'``
@@ -3979,7 +4154,7 @@ D.  Vertical interpolation of atmospheric fields from model levels to specified
         all auxiliary fields used for the extrapolation mode must be
         available.
         
-        When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+        When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
         level(s) are expressed in [m].
 
 E.  Vertical interpolation of atmospheric fields from model levels to
@@ -3997,7 +4172,7 @@ E.  Vertical interpolation of atmospheric fields from model levels to
     Pressure field must be available on all levels where the field
     to interpolate is defined.
 
-    When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [hPa].
 
 F.  Vertical interpolation of atmospheric fields from model levels to
@@ -4019,7 +4194,7 @@ F.  Vertical interpolation of atmospheric fields from model levels to
     Potential temperature field must be available on all levels where
     the field to interpolate is defined.
 
-    When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [cK].
 
 G.  Vertical interpolation of atmospheric fields from model levels to
@@ -4040,10 +4215,10 @@ G.  Vertical interpolation of atmospheric fields from model levels to
     Potential vorticity field must be available on all levels where
     the field to interpolate is defined.
 
-    When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [mPVU].
 
-H.  Integral of soil fields in the layers defined by :py:attr:`&Process.voper_lev`; the field to
+H.  Integral of soil fields in the layers defined by :nl:arg:`&Process voper_lev`; the field to
     integrate must be an integral quantity (e.g. soil water content):
 
     ``'integ_soil'`` 
@@ -4051,7 +4226,7 @@ H.  Integral of soil fields in the layers defined by :py:attr:`&Process.voper_le
     source layers must be contiguous, boundaries of source and target
     layers are expessed as depth below surface.
 
-    When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [cm].
 
 I.  (Normalized) integral of atmospheric field
@@ -4059,10 +4234,10 @@ I.  (Normalized) integral of atmospheric field
     | ``'integ_sfc2h'``, ``'norm_integ_sfc2h'``,
     | ``'integ_sfc2z'``, ``'norm_integ_sfc2z'``
 
-    Integral from the surface to the upper boundary specified by :py:attr:`&Process.voper_lev`.
-    Values of :py:attr:`&Process.voper_lev` are expressed in height above ground (integ_sfc2h)
+    Integral from the surface to the upper boundary specified by :nl:arg:`&Process voper_lev`.
+    Values of :nl:arg:`&Process voper_lev` are expressed in height above ground (integ_sfc2h)
     or in height above mean sea level (integ_sfc2z); when multiple values
-    of :py:attr:`&Process.voper_lev` are defined, a new field is computed for each value.
+    of :nl:arg:`&Process voper_lev` are defined, a new field is computed for each value.
 
     ``'integ_h2h,lbound,ubound'``, ``'norm_integ_h2h,lbound,ubound'``
                 (lbound in height agl, ubound in height agl)
@@ -4074,7 +4249,7 @@ I.  (Normalized) integral of atmospheric field
                 (lbound in height amsl, ubound in height amsl)
 
     Vertical integral between lower and upper boundary, as specified by
-    the arguments of the operator (:py:attr:`&Process.voper_lev` is not supported for these
+    the arguments of the operator (:nl:arg:`&Process voper_lev` is not supported for these
     operators). The integral is normalized by the height difference
     between upper and lower bounds when ``'norm_integ_*'`` operator is used:
     result = (1/ubound-lbound) * integral[lbound -> ubound](field(z) * dz) 
@@ -4085,7 +4260,7 @@ I.  (Normalized) integral of atmospheric field
     represent a height above mean sea level or above ground (depending
     on the operator).
 
-    When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [m].
 
     .. note::
@@ -4116,9 +4291,9 @@ J.  Minimum or maximum of atmospheric field in a specified height interval
 
     Maximum or minimum of the field computed for the height interval 
     starting at the surface and ending at the height specified in
-    :py:attr:`&Process.voper_lev`. Values of :py:attr:`&Process.voper_lev` are expressed in height above ground
+    :nl:arg:`&Process voper_lev`. Values of :nl:arg:`&Process voper_lev` are expressed in height above ground
     (``*_sfc2h``) or in height above mean sea level (``*_sfc2z``); when multiple
-    values of :py:attr:`&Process.voper_lev` are defined, a new field is computed for each value.
+    values of :nl:arg:`&Process voper_lev` are defined, a new field is computed for each value.
 
     | ``'max_h2h,lbound,ubound'``,     (lbound in meter agl, ubound in meter agl)
     | ``'max_h2z,lbound,ubound'``,     (lbound in meter agl, ubound in meter amsl)
@@ -4130,14 +4305,14 @@ J.  Minimum or maximum of atmospheric field in a specified height interval
     | ``'min_z2z,lbound,ubound'``      (lbound in meter amsl, ubound in meter amsl)
 
     Maximum or minimum of the field computed for the height interval specified
-    by the arguments of the operator (:py:attr:`&Process.voper_lev` is not supported for these
+    by the arguments of the operator (:nl:arg:`&Process voper_lev` is not supported for these
     operators). Each of lbound and ubound may be expressed as an integer,
     or as a tag refering to a 2d field available in the same computing
     iteration. In this latter case, the associated field values must 
     represent a height above mean sea level or above ground (depending
     on the operator).
 
-    When :py:attr:`&Process.voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [m].
 
     .. note::
@@ -4262,11 +4437,13 @@ field tags in the current iteration.
 Time Operators
 ^^^^^^^^^^^^^^
 
-.. py:attribute:: toper
-    :type: <time operator>     
+.. nl:argument:: toper
 
-.. py:attribute:: toper_mask
-    :type: <logical condition>      e.g. toper_mask='lead_time>0'
+    :format: <time operator>     
+
+.. nl:argument:: toper_mask
+
+    :format: <logical condition>      e.g. toper_mask='lead_time>0'
 
  
 The following time operators are implemented
@@ -4522,29 +4699,34 @@ Point Operators
 ^^^^^^^^^^^^^^^
 
  
-.. py:attribute:: poper
-    :type: <point operator> 
+.. nl:argument:: poper
 
-.. py:attribute:: poper2
-    :type: <point operator> 
+    :format: <point operator> 
 
-.. py:attribute:: poper3
-    :type: <point operator> 
+.. nl:argument:: poper2
 
-.. py:attribute:: poper4
-    :type: <point operator> 
+    :format: <point operator> 
 
-.. py:attribute:: poper5
-    :type: <point operator> 
+.. nl:argument:: poper3
+
+    :format: <point operator> 
+
+.. nl:argument:: poper4
+
+    :format: <point operator> 
+
+.. nl:argument:: poper5
+
+    :format: <point operator> 
 
 
 Unlike other operators, up to three different point operators can be defined
 for each field; this supports more compact and comprehensible namelists.
 
-As already mentioned, :py:attr:`&Process.poper` is first applied  to all the relevant fields, then
-:py:attr:`&Process.poper2` is applied  to all the relevant fields, ... and finally poper 5 is applied
+As already mentioned, :nl:arg:`&Process poper` is first applied  to all the relevant fields, then
+:nl:arg:`&Process poper2` is applied  to all the relevant fields, ... and finally poper 5 is applied
 to all the relevant fields. That means in particular that the results of the
-transformation by :py:attr:`&Process.poper`, for any field, is available to :py:attr:`&Process.poper2`, ... :py:attr:`&Process.poper5`.
+transformation by :nl:arg:`&Process poper`, for any field, is available to :nl:arg:`&Process poper2`, ... :nl:arg:`&Process poper5`.
 
 The following point operators are implemented:
 
@@ -4884,10 +5066,10 @@ pr_n         field tags refering to other fields available in the current
     Kalman filter and MOS coefficients, respectively, as specified in location_list_additional
     (see 6.3 for more details). The consistency of internal location coordinates with those
     given in the external coefficient files is checked when the respective coefficient files
-    are read. In addition, the value of :py:attr:`&Process.kf_model_name` and mos_model_name, respectively, as declared
+    are read. In addition, the value of :nl:arg:`&Process kf_model_name` and mos_model_name, respectively, as declared
     in location_list_additional, is checked against the internal model name value. The behaviour
     of the program in case of missing correction data is controlled by the namelist variable
-    :py:attr:`&Process.out_mode_kfcor_na` and out_mode_moscor_na, respectively (see 4.3.2).
+    :nl:arg:`&Process out_mode_kfcor_na` and out_mode_moscor_na, respectively (see 4.3.2).
 
   * The operator
       ``'moscor_global'``
@@ -4907,7 +5089,7 @@ pr_n         field tags refering to other fields available in the current
   * Only Kalman filter and MOS with linear statistical model are supported. All predictor
     fields have to be present in the iteration in which the operator is applied. They are
     defined in the Error_model and Forecast_model, respectively, in the corresponding
-    :py:attr:`&Process.location_list_additional` file. If more than one copy of one of the predictor fields exists
+    :nl:arg:`&Process location_list_additional` file. If more than one copy of one of the predictor fields exists
     in the same iteration, the field must be uniquely tagged, and the list of unique predictor
     field names and/or tags pr_1 to pr_n must be given as operator argument. The predictor
     fields in the list must occur in the same order as in the Error_model and Forecast_model,
@@ -4934,7 +5116,7 @@ pr_n         field tags refering to other fields available in the current
   Note about logarithm_e/exponential/inverse/product/quotient/ratio/
   azimut_class/rate/moscor_logreg/moscor_extlogreg operators: 
 
-  * These operators change the field identity, and :py:attr:`&Process.new_field_id` must be set. 
+  * These operators change the field identity, and :nl:arg:`&Process new_field_id` must be set. 
 
 .. note::
   Note about all operators:
@@ -4942,8 +5124,9 @@ pr_n         field tags refering to other fields available in the current
   * The result is undefined where some of the operands are undefined
    
  
-.. py:attribute:: new_field_id
-    :type: <string>              where <string> = name[,units]
+.. nl:argument:: new_field_id
+
+    :format: <string>              where <string> = name[,units]
 
 
     It is possible to re-set the name and the units of the active field with 'new_field_id'.
@@ -4965,23 +5148,23 @@ pr_n         field tags refering to other fields available in the current
     
     A side effect of some operators is to change the identity of the field being 
     transformed; in such a case it is mandatory to reset the field name (or to set
-    :py:attr:`&Process.strict_usage` to false). 
+    :nl:arg:`&Process strict_usage` to false). 
     This concerns the following operators:
 
-    :py:attr:`&Process.voper`        
+    :nl:arg:`&Process voper`        
       in {``derivate_k``, ``upscale_gradient_min``, ``upscale_gradient_max``}
-    :py:attr:`&Process.hoper`        
+    :nl:arg:`&Process hoper`        
       in {``regcnt``, ``regcnt%``, ``regfit``, ``tiled_sqcnt%``, ``sqcnt%``, ``diskcnt%``}
-    :py:attr:`&Process.poper`        
+    :nl:arg:`&Process poper`        
       in {``product``, ``quotient``, ``ratio``, ``azimut_class``, ``rate``, ``moscor_logreg``, ``moscor_extlogreg``}
-    :py:attr:`&Process.compare_fct`  
+    :nl:arg:`&Process compare_fct`  
       in {``ratio``, ``ratio_abs``}
    
     It is possible to reset the field units only, by using the same name as the field 
     being transformed and by defining new units. Note that no internal consistency check
     is currently made on field units; this value is only used when producing some output
-    (e.g. NetCDF). Note also that field units may be reset with the :py:attr:`&Process.set_units` operator;
-    when used in the last iteration, :py:attr:`&Process.set_units` has precedance over new_field_id.
+    (e.g. NetCDF). Note also that field units may be reset with the :nl:arg:`&Process set_units` operator;
+    when used in the last iteration, :nl:arg:`&Process set_units` has precedance over new_field_id.
 
 .. _section 4.3.5:
 
@@ -5089,8 +5272,8 @@ of 'use_tag'.
 
 Once all fields for the current iteration have been collected or
 computed, an optional tag is associated to each one. Each field may
-then be transformed by one or more operators, in the order :py:attr:`&Process.hoper`,
-scale/offset, :py:attr:`&Process.voper`, :py:attr:`&Process.toper`, poper, :py:attr:`&Process.poper2`, :py:attr:`&Process.poper3`, poper4, :py:attr:`&Process.poper5`,
+then be transformed by one or more operators, in the order :nl:arg:`&Process hoper`,
+scale/offset, :nl:arg:`&Process voper`, :nl:arg:`&Process toper`, poper, :nl:arg:`&Process poper2`, :nl:arg:`&Process poper3`, poper4, :nl:arg:`&Process poper5`,
 spatial filter, new_field_id; the order is hardcoded and does not
 depend on the way the namelist is defined. Each class of operators 
 is applied in turn to all the concerned fields; within a class the
@@ -5098,11 +5281,11 @@ processing order is arbitrary.
 
 Before creating the final product, a last set of global operations
 may be applied, in the order n to m operator (out_postproc_module),
-re-gridding (out_regrid_target, :py:attr:`&Process.out_regrid_method` ...), re-setting
-meta-information (originating_center, :py:attr:`&Process.production_status`, genproc_type, 
-auxiliary_metainfo, :py:attr:`&Process.out_model_name`, :py:attr:`&Process.out_genproc_type`,
-out_product_category, :py:attr:`&Process.out_vertical_coordinate`,
-:py:attr:`&Process.out_auxiliary_metainfo`, set_*), filtering data set 
+re-gridding (out_regrid_target, :nl:arg:`&Process out_regrid_method` ...), re-setting
+meta-information (originating_center, :nl:arg:`&Process production_status`, genproc_type, 
+auxiliary_metainfo, :nl:arg:`&Process out_model_name`, :nl:arg:`&Process out_genproc_type`,
+out_product_category, :nl:arg:`&Process out_vertical_coordinate`,
+:nl:arg:`&Process out_auxiliary_metainfo`, set_*), filtering data set 
 (out_filter_cst, out_filter_time).
 Unlike the operators described in this section, with the exception 
 of the set_* operators, these transformations apply on all available
@@ -5114,49 +5297,52 @@ transformations with multiple iterations.
     
 **First iteration:**
 
-.. py:attribute:: tmp1_field
-    :type: <name or tag of field to transfer> OR <name of field to compute>
+.. nl:argument:: tmp1_field
+
+    :format: <name or tag of field to transfer> OR <name of field to compute>
 
 
     The specified field is either computed, when not available in the previous
-    iteration or when :py:attr:`&Process.use_operator` is set, or transfered from the previous
+    iteration or when :nl:arg:`&Process use_operator` is set, or transfered from the previous
     iteration.
 
-.. py:attribute:: use_tag
-    :type: <tag1, tag2, ... (string)>
+.. nl:argument:: use_tag
+
+    :format: <tag1, tag2, ... (string)>
 
     When ambiguous, the set of parents used to derive a specific field can be
     restricted to the list defined by use_tag; this is required when multiple
     instances of the same field are available in the previous iteration, or
     when multiple sets of parent fields are supported by the associated operator.
    
-    The :py:attr:`&Process.use_tag` list refers to tags of fields within the previous iteration.
+    The :nl:arg:`&Process use_tag` list refers to tags of fields within the previous iteration.
     If present, this list must be exhaustive, and its first element defines 
     the operator main parent. This is the only way to filter the list of parent 
     fields.
    
-    Besides the possibility to filter the list of parents, :py:attr:`&Process.use_tag` may also
+    Besides the possibility to filter the list of parents, :nl:arg:`&Process use_tag` may also
     be used to re-define the main parent of the field to be computed; the
-    first element of :py:attr:`&Process.use_tag` overrides any main parent set in the active
+    first element of :nl:arg:`&Process use_tag` overrides any main parent set in the active
     dictionary (but information on operator halo remains the one derived
     from dictonary). 
    
-    The :py:attr:`&Process.use_tag` list will also filter the set of fields to transfer from 
+    The :nl:arg:`&Process use_tag` list will also filter the set of fields to transfer from 
     one iteration to the next, when no new field is computed.
       
-.. py:attribute:: use_operator
-    :type: <name of operator (string)>
+.. nl:argument:: use_operator
+
+    :format: <name of operator (string)>
 
 
     It is also possible to explicitely select the operator used to compute a 
-    new field. In this case, :py:attr:`&Process.use_operator` must be associated with use_tag,
+    new field. In this case, :nl:arg:`&Process use_operator` must be associated with use_tag,
     and the main parent of the derived field is defined to be the first
     element of use_tag. The name of the operator must match the name of a
-    procedure available in one of the module :py:attr:`&Process.fxtr_operator_generic` or
-    :py:attr:`&Process.fxtr_operator_specific` (see section 5.2 of this file for the list of
+    procedure available in one of the module :nl:arg:`&Process fxtr_operator_generic` or
+    :nl:arg:`&Process fxtr_operator_specific` (see section 5.2 of this file for the list of
     available operators; see also README.user.locale).
     
-    By specifying :py:attr:`&Process.use_operator` one forces the associated field to be
+    By specifying :nl:arg:`&Process use_operator` one forces the associated field to be
     computed, even when readily available in the previous iteration.
     
     A special operator, '__CREATE\__', is available to create a new field by
@@ -5164,48 +5350,53 @@ transformations with multiple iterations.
     The field to create must be defined in the active dictionary; all values
     of the field are set to undefined. When used in conjunction with 'moscor_mlr',
     this feature supports a MOS forecast by deriving a new field from a set
-    of predictors (see :py:attr:`&Process.moscor_mlr`).
+    of predictors (see :nl:arg:`&Process moscor_mlr`).
 
 Levels
 ^^^^^^
 
-.. py:attribute:: level_class
-    :type: <type of level to consider>
-    :value: 'all'
+.. nl:argument:: level_class
+    :default: 'all'
+
+    :format: <type of level to consider>
     :noindex:
 
-    The type of levels to consider may be explicitely specified; see :py:attr:`&Process.level_class`
+    The type of levels to consider may be explicitely specified; see :nl:arg:`&Process level_class`
     for more details.
 
 **Levels, can be defined by ...**
 
 * a list of values
 
-  .. py:attribute:: levlist
-      :type: <level>,<level>,...    
+  .. nl:argument:: levlist
+
+      :format: <level>,<level>,...    
       :noindex:
       
       -1 means all available levels
 
 * specifying start value, end value and increment
 
-  .. py:attribute:: levmin
-      :type: <min value>
+  .. nl:argument:: levmin
+
+      :format: <min value>
       :noindex:
 
-  .. py:attribute:: levmax
-      :type: <max value>
+  .. nl:argument:: levmax
+
+      :format: <max value>
       :noindex:
 
-  .. py:attribute:: levinc
-      :type: <increment>
+  .. nl:argument:: levinc
+
+      :format: <increment>
       :noindex:
 
 The associated physical units may be specified by ::
 
   level_units = <units>  (optional)
 
-see :py:attr:`&Process.levlist` for a full description.
+see :nl:arg:`&Process levlist` for a full description.
    
 .. note:: for fields defined on layers, the values specified by levlist or
           levmin ... always refer to the top surface of the layer (e.g. the
@@ -5216,33 +5407,38 @@ see :py:attr:`&Process.levlist` for a full description.
 
 * a list of values
 
-  .. py:attribute:: epslist
-      :type: <member>,<member>,...   
+  .. nl:argument:: epslist
+
+      :format: <member>,<member>,...   
       :noindex:
       
       -1 means all available members
 
 * specifying start value, end value and increment
 
-  .. py:attribute:: epsstart
-      :type: <start eps member>
+  .. nl:argument:: epsstart
+
+      :format: <start eps member>
       :noindex:
 
-  .. py:attribute:: epsstop
-      :type: <stop eps member>
+  .. nl:argument:: epsstop
+
+      :format: <stop eps member>
       :noindex:
 
-  .. py:attribute:: epsincr
-      :type: <increment eps member>
-      :value: 1
+  .. nl:argument:: epsincr
+      :default: 1
+
+      :format: <increment eps member>
       :noindex:
 
 Product Category
 ^^^^^^^^^^^^^^^^
 
-.. py:attribute:: product_category
-    :type: <product category>
-    :value: 'all'
+.. nl:argument:: product_category
+    :default: 'all'
+
+    :format: <product category>
 
 
     The product category may be explicitely specified; supported values are:
@@ -5271,41 +5467,41 @@ Product Category
 
         * - eps_member
           - eps_mean
-          - :py:attr:`&Process.out_mode_weighted_member`
+          - :nl:arg:`&Process out_mode_weighted_member`
 
         * - eps_member
           - eps_perturbation
-          - :py:attr:`&Process.out_mode_weighted_member`
+          - :nl:arg:`&Process out_mode_weighted_member`
 
         * - eps_member
           - eps_standard_deviation
-          - :py:attr:`&Process.out_mode_weighted_member`
+          - :nl:arg:`&Process out_mode_weighted_member`
 
         * - eps_member
           - eps_standard_deviation_normed
-          - :py:attr:`&Process.out_mode_weighted_member`
+          - :nl:arg:`&Process out_mode_weighted_member`
             
 
         * - eps_member
           - eps_quantile
-          - | :py:attr:`&Process.quantile` (one value)
-            | :py:attr:`&Process.out_mode_weighted_member`
+          - | :nl:arg:`&Process quantile` (one value)
+            | :nl:arg:`&Process out_mode_weighted_member`
 
         * - eps_member
           - eps_quantile_difference
-          - | :py:attr:`&Process.quantile` (2 values)
-            | :py:attr:`&Process.out_mode_weighted_member`
+          - | :nl:arg:`&Process quantile` (2 values)
+            | :nl:arg:`&Process out_mode_weighted_member`
 
         * - eps_member
           - eps_probability
-          - | :py:attr:`&Process.prob_interval` or
-            | :py:attr:`&Process.prob_tlow` or/and :py:attr:`&Process.prob_thigh`
-            | :py:attr:`&Process.out_mode_weighted_member`
+          - | :nl:arg:`&Process prob_interval` or
+            | :nl:arg:`&Process prob_tlow` or/and :nl:arg:`&Process prob_thigh`
+            | :nl:arg:`&Process out_mode_weighted_member`
 
         * - deterministic
           - neighbourhood_probability
-          - | :py:attr:`&Process.prob_interval` or
-            | :py:attr:`&Process.prob_tlow` or/and :py:attr:`&Process.prob_thigh`
+          - | :nl:arg:`&Process prob_interval` or
+            | :nl:arg:`&Process prob_tlow` or/and :nl:arg:`&Process prob_thigh`
    
     Some remarks on the way these quantities are computed:
 
@@ -5334,9 +5530,10 @@ Characteristics of PDF related fields are specified by:
 
 * for probability
 
-  .. py:attribute:: prob_interval
+  .. nl:argument:: prob_interval
       :noindex:
-      :type: <[x,y], [x,y[, ]x,y] or ]x,y[, as string>
+
+      :format: <[x,y], [x,y[, ]x,y] or ]x,y[, as string>
 
       interval of values, expressed in field units
 
@@ -5347,20 +5544,23 @@ Characteristics of PDF related fields are specified by:
 
   interval lower and upper boundaries, expressed in field units, the boundaries are *not* included in the interval
     
-  .. py:attribute:: prob_tlow
+  .. nl:argument:: prob_tlow
       :noindex:
-      :type: <interval lower threshold (real)>
-      :value: -infinity
+      :default: -infinity
 
-  .. py:attribute:: prob_thigh
+      :format: <interval lower threshold (real)>
+
+  .. nl:argument:: prob_thigh
       :noindex:
-      :type: <interval higher threshold> (real, default is plus infinite)
+
+      :format: <interval higher threshold> (real, default is plus infinite)
 
 * for quantile
   
-  .. py:attribute:: quantile
+  .. nl:argument:: quantile
       :noindex:
-      :type: <quantile, real>
+
+      :format: <quantile, real>
 
       a value for a quantile, betwen 0 and 100
 
@@ -5368,17 +5568,19 @@ OR
 
 * for difference of quantiles
 
-  .. py:attribute:: quantile
+  .. nl:argument:: quantile
       :noindex:
-      :type: <quantile1,real>, <quantile2,real>
+
+      :format: <quantile1,real>, <quantile2,real>
 
       two quantile values, both between 0 and 100
 
 * for probability with respect to a reference distribution
 
-  .. py:attribute:: ref_quantile
+  .. nl:argument:: ref_quantile
       :noindex:
-      :type: <order of reference quantile, integer> [,<number of reference quantile, integer>]
+
+      :format: <order of reference quantile, integer> [,<number of reference quantile, integer>]
 
       the order of the quantile in the reference distribution and
       the total number of quantiles used to represent the reference
@@ -5386,14 +5588,16 @@ OR
 
 * for shift of tail index
 
-  .. py:attribute:: efi_order
+  .. nl:argument:: efi_order
       :noindex:
-      :type: <percentile fcst, integer>[,<percentile climate, integer>]
+
+      :format: <percentile fcst, integer>[,<percentile climate, integer>]
 
 
-.. py:attribute:: tag
+.. nl:argument:: tag
     :noindex:
-    :type: <tag associated with field (string, <= 24 characters)>
+
+    :format: <tag associated with field (string, <= 24 characters)>
 
 
 Transformations
@@ -5401,103 +5605,126 @@ Transformations
 
 Available transformations are ...
 
-.. py:attribute:: hoper
+.. nl:argument:: hoper
     :noindex:
-    :type: <horizontal operator> 
 
-.. py:attribute:: hoper_mask
-    :noindex:
-    :type: <associated logical condition>
+    :format: <horizontal operator> 
 
-.. py:attribute:: scale
+.. nl:argument:: hoper_mask
     :noindex:
-    :type: <scaling factor> 
 
-.. py:attribute:: offset
-    :noindex:
-    :type: <offset factor> 
+    :format: <associated logical condition>
 
-.. py:attribute:: voper
+.. nl:argument:: scale
     :noindex:
-    :type: <vertical operator>
 
-.. py:attribute:: voper_lev
-    :noindex:
-    :type: <level>,<level>,...  (target levels for vertical operator)
+    :format: <scaling factor> 
 
-.. py:attribute:: voper_lev_units
+.. nl:argument:: offset
     :noindex:
-    :type: <units>              (associated physical units, optional; see level_units)
 
-.. py:attribute:: voper_use_tag
-    :noindex:
-    :type: <tag1, tag2, ...>    (optional; tag of auxiliary fields)
+    :format: <offset factor> 
 
-.. py:attribute:: toper
+.. nl:argument:: voper
     :noindex:
-    :type: <time operator>     
 
-.. py:attribute:: toper_mask
-    :noindex:
-    :type: <associated logical condition>
+    :format: <vertical operator>
 
-.. py:attribute:: poper
+.. nl:argument:: voper_lev
     :noindex:
-    :type: <point operator> 
 
-.. py:attribute:: poper2
-    :noindex:
-    :type: <point operator> 
+    :format: <level>,<level>,...  (target levels for vertical operator)
 
-.. py:attribute:: poper3
+.. nl:argument:: voper_lev_units
     :noindex:
-    :type: <point operator> 
 
-.. py:attribute:: poper4
-    :noindex:
-    :type: <point operator> 
+    :format: <units>              (associated physical units, optional; see level_units)
 
-.. py:attribute:: poper5
+.. nl:argument:: voper_use_tag
     :noindex:
-    :type: <point operator> 
 
-.. py:attribute:: new_field_id
+    :format: <tag1, tag2, ...>    (optional; tag of auxiliary fields)
+
+.. nl:argument:: toper
     :noindex:
-    :type: <string>              where <string> = name[,units]
+
+    :format: <time operator>     
+
+.. nl:argument:: toper_mask
+    :noindex:
+
+    :format: <associated logical condition>
+
+.. nl:argument:: poper
+    :noindex:
+
+    :format: <point operator> 
+
+.. nl:argument:: poper2
+    :noindex:
+
+    :format: <point operator> 
+
+.. nl:argument:: poper3
+    :noindex:
+
+    :format: <point operator> 
+
+.. nl:argument:: poper4
+    :noindex:
+
+    :format: <point operator> 
+
+.. nl:argument:: poper5
+    :noindex:
+
+    :format: <point operator> 
+
+.. nl:argument:: new_field_id
+    :noindex:
+
+    :format: <string>              where <string> = name[,units]
 
 and also, but only if it is the last processing iteration
 
-.. py:attribute:: set_units
+.. nl:argument:: set_units
     :noindex:
-    :type: <string>
 
-.. py:attribute:: set_reference_date
-    :noindex:
-    :type: <integer, yyyymmddhhmm>
+    :format: <string>
 
-.. py:attribute:: set_trange_type
+.. nl:argument:: set_reference_date
     :noindex:
-    :type: <string>
 
-.. py:attribute:: set_product_category
-    :noindex:
-    :type: <string>
+    :format: <integer, yyyymmddhhmm>
 
-.. py:attribute:: set_epsmember_identity
+.. nl:argument:: set_trange_type
     :noindex:
-    :type: <member value>[,<number of members>]
 
-.. py:attribute:: set_genproc_type
-    :noindex:
-    :type: <string>
+    :format: <string>
 
-.. py:attribute:: set_auxiliary_metainfo
+.. nl:argument:: set_product_category
     :noindex:
-    :type: <sring>[,<string> ...] (each string expressed as key=value)
+
+    :format: <string>
+
+.. nl:argument:: set_epsmember_identity
+    :noindex:
+
+    :format: <member value>[,<number of members>]
+
+.. nl:argument:: set_genproc_type
+    :noindex:
+
+    :format: <string>
+
+.. nl:argument:: set_auxiliary_metainfo
+    :noindex:
+
+    :format: <sring>[,<string> ...] (each string expressed as key=value)
 
 
 .. note:: 
-  Note about the usage of :py:attr:`&Process.hoper` in one of the generate field iteration:
+  Note about the usage of :nl:arg:`&Process hoper` in one of the generate field iteration:
   data reduction from full field to the user defined subset is only done
   after the last horizontal transformation has been applied. This has as
   consequences:
@@ -5509,36 +5736,41 @@ Further Iterations
 ^^^^^^^^^^^^^^^^^^
 
 **Second iteration:**
-  .. py:attribute:: tmp2_field
-      :type: <name or tag of field to transfer> OR <name of field to compute>
+  .. nl:argument:: tmp2_field
+
+      :format: <name or tag of field to transfer> OR <name of field to compute>
 
       The same set of operators are available as for the second iteration
       (see above).
 
 **Third iteration:**
-  .. py:attribute:: tmp3_field
-      :type: <name or tag of field to transfer> OR <name of field to compute>
+  .. nl:argument:: tmp3_field
+
+      :format: <name or tag of field to transfer> OR <name of field to compute>
 
       The same set of operators are available as for the second iteration
       (see above).
 
 **Fourth iteration:**
-  .. py:attribute:: tmp4_field
-      :type: <name or tag of field to transfer> OR <name of field to compute>
+  .. nl:argument:: tmp4_field
+
+      :format: <name or tag of field to transfer> OR <name of field to compute>
 
       The same set of operators are available as for the second iteration
       (see above).
 
 **Fifth iteration:**
-  .. py:attribute:: tmp5_field
-      :type: <name or tag of field to transfer> OR <name of field to compute>
+  .. nl:argument:: tmp5_field
+
+      :format: <name or tag of field to transfer> OR <name of field to compute>
 
       The same set of operators are available as for the second iteration
       (see above).
 
 **Sixth iteration:**
-  .. py:attribute:: out_field
-      :type: <name or tag of field to transfer> OR <name of field to compute>
+  .. nl:argument:: out_field
+
+      :format: <name or tag of field to transfer> OR <name of field to compute>
 
       The same set of operators are available as for the second iteration
       (see above).
@@ -5554,23 +5786,26 @@ These settings always override any global setting defined for the concerned
 output. Most of these operations are limited to some types of output (see
 :ref:`chapter 7` for the details).
 
-.. py:attribute:: set_undefcode
-    :type: <missing value code, real>
+.. nl:argument:: set_undefcode
 
-    code used to mark undefined values, override value of :py:attr:`&Process.out_type_undefcode`. 
+    :format: <missing value code, real>
+
+    code used to mark undefined values, override value of :nl:arg:`&Process out_type_undefcode`. 
 
     One must be cautious when using set_undefcode, because this value is not declared
     explicitely in the output file, and may differ from the global undef code used
     for the concerned output file.
 
-.. py:attribute:: set_packing
-    :type: <packing method, string>
+.. nl:argument:: set_packing
 
-    packing algorithm (see :py:attr:`&Process.out_type_packing` for a description). 
+    :format: <packing method, string>
+
+    packing algorithm (see :nl:arg:`&Process out_type_packing` for a description). 
     When set, override out_type_packing.
 
-.. py:attribute:: set_description
-    :type: <string>
+.. nl:argument:: set_description
+
+    :format: <string>
 
     set the field description (otherwise this value is taken from the active dictionary).
     This information is used at the following places:
@@ -5580,15 +5815,17 @@ output. Most of these operations are limited to some types of output (see
       with GRIB1, GRIB2, and NETCDF output.
     * field description in ASCII_TABLE extra header 
 
-.. py:attribute:: set_comment
-    :type: <string>
+.. nl:argument:: set_comment
+
+    :format: <string>
 
     associate a comment with the current field; a comment is any freely definable string, and is used at the following place:
     
     * field attribute 'comment' in NETCDF output.
 
-.. py:attribute:: use_alternate_code
-    :type: <logical>
+.. nl:argument:: use_alternate_code
+
+    :format: <logical>
 
     when set to true, alternate GRIB 1 code found in active
     dictionary will be used; alternate code is defined in the
@@ -5596,7 +5833,7 @@ output. Most of these operations are limited to some types of output (see
     'alternateParameter'. When no alternate code is defined,
     the usual code is applied.
     The same effect can be obtained by setting to true the
-    key :py:attr:`&Process.out_type_alternate_code`, but for all fields of the
+    key :nl:arg:`&Process out_type_alternate_code`, but for all fields of the
     concerned output.
  
 .. _section 4.3.7:

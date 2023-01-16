@@ -1,11 +1,11 @@
-:py:mod:`&RunSpecification`
+:nl:nl:`&RunSpecification`
 ===========================
 
-.. py:module:: &RunSpecification
+.. nl:namelist:: RunSpecification
     
-    This namelist block must be present and unique.
+This namelist block must be present and unique.
 
-.. py:attribute:: strict_nl_parsing
+.. nl:argument::  strict_nl_parsing
     :type: logical
     
     Some non-recommended usage of the namelist can be useful in some
@@ -14,7 +14,7 @@
     specifications, existence of at least one xtr_field, all xtr_field 
     defined before tmp\_ and out\_ iterations).
 
-.. py:attribute:: strict_usage
+.. nl:argument::  strict_usage
     :type: logical
 
     To guarantee as much as possible the consistency of the results,
@@ -25,7 +25,7 @@
     The following conditions are only enforced when strict_usage is
     true:
 
-    * critical :py:mod:`&ModelSpecifications` parameters are set;
+    * critical :nl:nl:`&ModelSpecifications` parameters are set;
     * a default model name is specified by the user, and its value is registered;
     * except for fields collected in INCORE storage, all fields are compatible with the user specified name;
     * core meta-information of each used record is complete and consistent; 
@@ -39,9 +39,9 @@
     * interrupt output production, as soon as an exception is detected during the production of this output; 
     * do not allow some potentially dangerous options.
 
-.. py:attribute:: enable_exit_status
+.. nl:argument::  enable_exit_status
     :type: Logical
-    :value: .false.
+    :default: .false.
 
     enable process exit status
 
@@ -54,9 +54,9 @@
     standard recommendation, an exception will cause a program
     exit status of 1.
 
-.. py:attribute:: enable_repeat_mode
+.. nl:argument::  enable_repeat_mode
     :type: {'none','regular','all'}
-    :value: 'none'
+    :default: 'none'
 
     When enable_repeat_mode is distinct from 'none', the file 'fieldextra.rmode'
     will be created in the working directory; this file contains the full list
@@ -80,15 +80,15 @@
     edited. This can be useful to test a single product out of a complex 
     namelist.
 
-.. py:attribute:: ready_flag_dir 
+.. nl:argument::  ready_flag_dir 
     
     directory path
 
-.. py:attribute:: ready_flag_prefix_pure 
+.. nl:argument::  ready_flag_prefix_pure 
     
     file name prefix
 
-.. py:attribute:: ready_flag_prefix_other 
+.. nl:argument::  ready_flag_prefix_other 
     
     file name prefix, CURRENTLY NOT USED
 
@@ -113,7 +113,7 @@
     
     An exception is raised if the ready flag already exists.
 
-.. py:attribute:: out_noready_postfix 
+.. nl:argument::  out_noready_postfix 
     
     file name postfix, incomplete files
 
@@ -123,7 +123,7 @@
     'out_noready_postfix' to the definitive name. This mechanism is active
     if a non blank value is specified for out_noready_postfix.
 
-.. py:attribute:: out_snapshot_postfix 
+.. nl:argument::  out_snapshot_postfix 
     
     file name postfix, snapshot files
 
@@ -133,19 +133,19 @@
     to the normal output file name, where <time stamp> is the time stamp
     of the input file triggering the snapshot production.
 
-.. py:attribute:: clone_missing_input 
+.. nl:argument::  clone_missing_input 
     :type: logical
-    :value: false
+    :default: .false.
 
-.. py:attribute:: wait_time 
+.. nl:argument::  wait_time 
     
     wait time increment [s]
 
-.. py:attribute:: mx_wait_time
+.. nl:argument::  mx_wait_time
 
     maximum cumulated wait time [s]
 
-.. py:attribute:: stop_wait_flag 
+.. nl:argument::  stop_wait_flag 
     
     file name with full path
 		
@@ -230,22 +230,22 @@
     Order of input files processing is described later on in
     'Definition of input files' section.
 
-.. py:attribute:: stop_flag 
+.. nl:argument::  stop_flag 
     
     file name with full path
     
     If this file is present, the program stops before reading the next 
     input (this also interrupts any active input wait loop).
 
-.. py:attribute:: n_ompthread_total
+.. nl:argument::  n_ompthread_total
     
     number of OpenMP threads used by program
 
-.. py:attribute:: n_ompthread_collect  
+.. nl:argument::  n_ompthread_collect  
 
     number of concurrent output processed in collect
 
-.. py:attribute:: n_ompthread_generate 
+.. nl:argument::  n_ompthread_generate 
     
     number of concurrent output processed in generate
     
@@ -270,7 +270,7 @@
     The default value for these parameters is 1 and a different value
     is only allowed when the program runs in OpenMP mode. 
 
-.. py:attribute:: out_cost_expensive 
+.. nl:argument::  out_cost_expensive 
     
     threshold for expensive products
     
@@ -280,14 +280,14 @@
       computed first, using n_ompthread_generate(2);
     * all other products are computed next using n_ompthread_generate(1).
 
-.. py:attribute:: out_production_granularity 
+.. nl:argument::  out_production_granularity 
     :type: integer, larger or equal to 1
 
     Control the output production granularity; the larger the value the
     higher the potential OpenMP speedup, but also the higher the memory
     footprint. Default value is 1. See section 2.6 for more details.
 
-.. py:attribute:: soft_memory_limit 
+.. nl:argument::  soft_memory_limit 
     :type: positive real
 
     Soft limit on memory allocation (in gigabyte), default: 20.0 .
@@ -303,14 +303,14 @@
     Memory usage is logged in the profiling part of the file
     'fieldextra.diagnostic', under the name 'High water mark'.
 
-.. py:attribute:: grib1_bufferin_release 
+.. nl:argument::  grib1_bufferin_release 
     :type: logical
 
     When set to true, attempt to free cached memory pages after data
     has been used (call to posix_fadvise(...POSIX_FADV_DONTNEED...)).
     Default is false.
 
-.. py:attribute:: grib1_bufferin_size 
+.. nl:argument::  grib1_bufferin_size 
     :type: integer, in [1024(=2**10),134217728(=2**27)]
 
     Suggested buffer size for reading GRIB 1 files, in bytes. Default
@@ -320,7 +320,7 @@
     Large impact on performance can be expected if the value is too
     small compared to the size of the processed records.
 
-.. py:attribute:: verbosity
+.. nl:argument::  verbosity
 
     Control the type of information written to the standard output:
 
@@ -336,13 +336,13 @@
     When verbosity is set to 'debug', additional_diagnostic and 
     additional_profiling are also automatically set to true.
 
-.. py:attribute:: diagnostic_length
+.. nl:argument::  diagnostic_length
 
     Specifies the maximum length of diagnostic lines; when necessary, the
     diagnostic is wrapped to respect this value. A value of 0 means that no
     word wrapping takes place. A minimum length is enforced.
 
-.. py:attribute:: additional_diagnostic
+.. nl:argument::  additional_diagnostic
     :type: logical
 
     Control the production of additional diagnostic, default is false.
@@ -370,7 +370,7 @@
     
     .. attention:: significant degredation of code performance may result from the activation of this mode.
 
-.. py:attribute:: additional_profiling
+.. nl:argument::  additional_profiling
     :type: logical
 
     Control the production of detailed code profiling, default is false.
@@ -382,7 +382,7 @@
     
     .. note:: value of additional_profiling is automatically set to true when verbosity is set to 'debug'
 
-.. py:attribute:: ictools_debug_level
+.. nl:argument::  ictools_debug_level
     :type: integer
     
     Control the level of debugging information produced by the ICON tools

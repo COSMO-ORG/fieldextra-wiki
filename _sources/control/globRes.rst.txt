@@ -1,14 +1,14 @@
-:py:mod:`&GlobalResource`
+:nl:nl:`&GlobalResource`
 =========================
 
-.. py:module:: &GlobalResource
+.. nl:namelist:: &GlobalResource
     
-    This namelist block must be present and unique.
+This namelist block must be present and unique.
 
-.. py:attribute:: dictionary
-    :type: <file_path>[,<file path>...]
+.. nl:argument:: dictionary
+    :required:
 
-    **compulsory**
+    :format: <file_path>[,<file path>...]
 
     Within fieldextra, fields are identified by a unique string, the
     so-called field short name (this is the same short name which is
@@ -19,9 +19,9 @@
     The information stored in the active dictionary is used at different 
     steps of the processing (decoding of input file, computation of
     new field, creation of GRIB and NetCDF output). The default active
-    dictionary is defined by the variable :py:attr:`&GlobalSettings.default_dictionary`; an alternate dictionary can be used to decode
-    a specific input file by setting the variable :py:attr:`&Process.in_dictionary` in
-    the associated :py:mod:`&Process` block.
+    dictionary is defined by the variable :nl:arg:`&GlobalSettings default_dictionary`; an alternate dictionary can be used to decode
+    a specific input file by setting the variable :nl:arg:`&Process in_dictionary` in
+    the associated :nl:nl:`&Process` block.
     
     Some field names have a special meaning to fieldextra, and should
     always be defined in the default dictionary:
@@ -40,10 +40,10 @@
     
     A detailed description of dictionaries is found in section 6.1 below.
 
-.. py:attribute:: grib_definition_path
-    :type: <path1>[,<path2>,<path3>]
+.. nl:argument:: grib_definition_path
+    :required:
 
-    **compulsory**
+    :format: <path1>[,<path2>,<path3>]
 
     Path of directory containing the definitions files for the
     ECMWF ecCodes.
@@ -67,38 +67,43 @@
         grib_definition_path = "../resources/eccodes_definitions_cosmo",
                                "../resources/eccodes_definitions_vendor"
 
-.. py:attribute:: grib2_sample
-    :type: <file path>
+.. nl:argument:: grib2_sample
+
+    :format: <file path>
 
     Path of file used as GRIB sample by ECMWF ecCodes when encoding
     GRIB 2 records. It is possible to supersede this value on an
     output basis by setting out_type_template in the corresponding
-    :py:mod:`&Process` block (GRIB2 output only).
+    :nl:nl:`&Process` block (GRIB2 output only).
     Important: see remark in 7.12 about the choice of the GRIB 2 sample.
 
-.. py:attribute:: grib_bitmap_path 
-    :type: <directory path> 
+.. nl:argument:: grib_bitmap_path 
+
+    :format: <directory path> 
 
     Path of directory containing external binary bitmap files used by
     DWD GRIB library when decoding/encoding GRIB 1 data.
 
-.. py:attribute:: icon_grid_description 
-    :type: <file path>[,<file path>...]
+.. nl:argument:: icon_grid_description 
+
+    :format: <file path>[,<file path>...]
 
     Path of NetCDF file(s) containing the description of ICON unstructured
-    grids. All grid descriptions must be loaded before processing ICON fields. 
+    grids. All grid descriptions must be loaded before processing ICON fields.
     All ICON fields must be re-gridded on a regular grid before further
-    processing (see in_regrid_method='from_unstructured_grid' later on).
+    processing (see :nl:val:`&Process in_regrid_method='from_unstructured_grid'`).
 
-.. py:attribute:: rttov_coefs_path 
-    :type: <directory path>
+.. nl:argument:: rttov_coefs_path 
+
+    :format: <directory path>
 
     Path of directory containing RTTOV coefficient files, as required
     by RTTOV library when computing synthetic satellites fields. See
     also the description of rttovID and rttovChan in chapter 6.1.
 
-.. py:attribute:: location_list 
-    :type: <file path> 
+.. nl:argument:: location_list 
+
+    :format: <file path> 
 
     Path of the file containing the definition of geographic locations.
     
@@ -109,7 +114,7 @@
     The association between locations and grid points is based on the
     algorithm defined by ocation_to_gridpoint; however, the user has the
     possibility to enforce some specific association by specifying gpi/gpj
-    in the location list (see 6.2).        
+    in the location list (see 6.2).
     When 'additional_diagnostic' is set to true, the list of locations
     and their associated grid points is written on disk in file
     fieldextra.location, in a format compatible with location_list.
@@ -124,8 +129,9 @@
     derive new quantities (e.g. height corrected fields, Kalman
     filtered fields).
 
-.. py:attribute:: location_list_additional 
-    :type: <file path>[,<file path>...]
+.. nl:argument:: location_list_additional 
+
+    :format: <file path>[,<file path>...]
 
     Additional information can be associated with the locations defined
     in location_list. Each set of additional information must be coded
@@ -137,8 +143,9 @@
     2. Kalman filter coefficients
     3. MOS coefficients
 
-.. py:attribute:: region_list 
-    :type: <file path>
+.. nl:argument:: region_list 
+
+    :format: <file path>
 
     Path of the file used to define geographical regions.
     Multiple sets of regions may be defined in the same file.
@@ -185,12 +192,13 @@
     shp_fxtr available at https://github.com/dcesari/fortrangis
     (thanks to Davide Cesari <dcesari@arpa.emr.it>).
 
-.. py:attribute:: slice_list 
-    :type: <file path>
+.. nl:argument:: slice_list 
+
+    :format: <file path>
 
     Path of the file used to define slices, for the computation of
     vertical cross-sections.
-    !
+    
     Each slice is defined by a broken line, with control points expressed either
     as geographical latitude/longitude, or as locations (refering to the active
     location_list file), or as grid coordinates. Segments between control points
@@ -200,14 +208,15 @@
     upscale (smooth) the fields along the slice by setting "slice_upscaling_factor".
     Each slice is recognized by a unique tag. Currently, only NETCDF output is
     compatible with slices.
-    !
+    
     When 'additional_diagnostic' is set to true, a summary of slices
     characteristics is produced in the filed fieldextra.slice.
-    !
+    
     Details on the file format is found in section 6.5.
 
-.. py:attribute:: adaboost_coefs 
-    :type: <file path>[,<file path>...]
+.. nl:argument:: adaboost_coefs 
+
+    :format: <file path>[,<file path>...]
     
     Path of file(s) containing AdaBoost coefficients. A file contains
     all necessary parameters to compute a single classification field

@@ -160,13 +160,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
@@ -214,227 +214,241 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-InspectSpecification">
-<span id="inspectspecification"></span><h1><a class="reference internal" href="#module-InspectSpecification" title="&amp;InspectSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a><a class="headerlink" href="#module-InspectSpecification" title="Permalink to this heading">#</a></h1>
+          <section id="nl-nl-InspectSpecification">
+<span id="inspectspecification"></span><h1><a class="reference internal" href="#nl-nl-InspectSpecification" title="&amp;InspectSpecification"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a><a class="headerlink" href="#nl-nl-InspectSpecification" title="Permalink to this heading">#</a></h1>
 <p>This namelist block is optional, but must be unique.</p>
 <p>It is used to specify the information produced in relation with
-out_type = ‘INSPECT’. It is ignored when no such output is active.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.digits_per_data">
-<span class="sig-name descname"><span class="pre">digits_per_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span> <span class="pre">(meaning</span> <span class="pre">G12.4</span> <span class="pre">is</span> <span class="pre">used</span> <span class="pre">as</span> <span class="pre">format)</span></em><a class="headerlink" href="#InspectSpecification.digits_per_data" title="Permalink to this definition">#</a></dt>
+<a class="reference internal" href="process.html#nl-attr-Process-out_type" title="&amp;Process out_type"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">out_type='INSPECT'</span></code></a>. It is ignored when no such output is active.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-digits_per_data">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">digits_per_data</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-digits_per_data" title="Permalink to this definition">#</a></dt>
 <dd><p>Output data with digits_per_data decimal digits.</p>
+<p>0 means G12.4 is used as format</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.select_record">
-<span class="sig-name descname"><span class="pre">select_record</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span> <span class="pre">(all</span> <span class="pre">records)</span></em><a class="headerlink" href="#InspectSpecification.select_record" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-select_record">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">select_record</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-select_record" title="Permalink to this definition">#</a></dt>
 <dd><p>Output only for record number select_record.</p>
+<p>0 means all records.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.select_data_column">
-<span class="sig-name descname"><span class="pre">select_data_column</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span> <span class="pre">(no</span> <span class="pre">selection)</span></em><a class="headerlink" href="#InspectSpecification.select_data_column" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-select_data_column">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">select_data_column</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-select_data_column" title="Permalink to this definition">#</a></dt>
 <dd><p>Print data of grid column select_data_column, may be combined with select_data_row.</p>
+<p>0 means no selection.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.select_data_row">
-<span class="sig-name descname"><span class="pre">select_data_row</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">integer</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span> <span class="pre">(no</span> <span class="pre">selection)</span></em><a class="headerlink" href="#InspectSpecification.select_data_row" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-select_data_row">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">select_data_row</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-select_data_row" title="Permalink to this definition">#</a></dt>
 <dd><p>Print data of grid row select_data_row, may be combined with select_data_column.</p>
+<p>0 means no selection.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_file_creation_date">
-<span class="sig-name descname"><span class="pre">print_file_creation_date</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_file_creation_date" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_file_creation_date">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_file_creation_date</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_file_creation_date" title="Permalink to this definition">#</a></dt>
 <dd><p>Print creation date of file content.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_experiment_version">
-<span class="sig-name descname"><span class="pre">print_experiment_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_experiment_version" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_experiment_version">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_experiment_version</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_experiment_version" title="Permalink to this definition">#</a></dt>
 <dd><p>Print experiment tag.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_number">
-<span class="sig-name descname"><span class="pre">print_rec_number</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.TRUE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_number" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_number">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_number</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.TRUE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_number" title="Permalink to this definition">#</a></dt>
 <dd><p>Print record number.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_format">
-<span class="sig-name descname"><span class="pre">print_rec_format</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_format" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_format">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_format</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_format" title="Permalink to this definition">#</a></dt>
 <dd><p>Print record format</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_parameter_table">
-<span class="sig-name descname"><span class="pre">print_rec_parameter_table</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_parameter_table" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_parameter_table">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_parameter_table</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_parameter_table" title="Permalink to this definition">#</a></dt>
 <dd><p>Print GRIB table version number.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_parameter_number">
-<span class="sig-name descname"><span class="pre">print_rec_parameter_number</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_parameter_number" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_parameter_number">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_parameter_number</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_parameter_number" title="Permalink to this definition">#</a></dt>
 <dd><p>Print GRIB identifier of parameter.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_name">
-<span class="sig-name descname"><span class="pre">print_rec_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.TRUE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_name" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_name">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_name</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.TRUE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_name" title="Permalink to this definition">#</a></dt>
 <dd><p>Print record alternate name</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_altname">
-<span class="sig-name descname"><span class="pre">print_rec_altname</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_altname" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_altname">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_altname</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_altname" title="Permalink to this definition">#</a></dt>
 <dd><p>Print field short name.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_level">
-<span class="sig-name descname"><span class="pre">print_rec_level</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.TRUE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_level" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_level">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_level</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.TRUE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_level" title="Permalink to this definition">#</a></dt>
 <dd><p>Print GRIB level values.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_level_type">
-<span class="sig-name descname"><span class="pre">print_rec_level_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_level_type" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_level_type">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_level_type</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_level_type" title="Permalink to this definition">#</a></dt>
 <dd><p>Print GRIB level type.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_hgrid_type">
-<span class="sig-name descname"><span class="pre">print_rec_hgrid_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_hgrid_type" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_hgrid_type">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_hgrid_type</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_hgrid_type" title="Permalink to this definition">#</a></dt>
 <dd><p>Print type of horizontal coordinates</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_hgrid_size">
-<span class="sig-name descname"><span class="pre">print_rec_hgrid_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_hgrid_size" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_hgrid_size">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_hgrid_size</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_hgrid_size" title="Permalink to this definition">#</a></dt>
 <dd><p>Print size of horizontal grid (ni, nj)</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_hgrid_delta">
-<span class="sig-name descname"><span class="pre">print_rec_hgrid_delta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_hgrid_delta" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_hgrid_delta">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_hgrid_delta</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_hgrid_delta" title="Permalink to this definition">#</a></dt>
 <dd><p>Print increment of horizontal grid (di, dj)</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_hgrid_start">
-<span class="sig-name descname"><span class="pre">print_rec_hgrid_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_hgrid_start" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_hgrid_start">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_hgrid_start</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_hgrid_start" title="Permalink to this definition">#</a></dt>
 <dd><p>Print start coordinates of horizontal grid (swi, swj) (South-West)</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_hgrid_end">
-<span class="sig-name descname"><span class="pre">print_rec_hgrid_end</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_hgrid_end" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_hgrid_end">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_hgrid_end</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_hgrid_end" title="Permalink to this definition">#</a></dt>
 <dd><p>Print end coordinates of horizontal grid (nei, nej) (North-East)</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_initial_date">
-<span class="sig-name descname"><span class="pre">print_rec_initial_date</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.TRUE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_initial_date" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_initial_date">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_initial_date</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.TRUE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_initial_date" title="Permalink to this definition">#</a></dt>
 <dd><p>Print initial (reference) date of field.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_time_range_short">
-<span class="sig-name descname"><span class="pre">print_rec_time_range_short</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.TRUE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_time_range_short" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_time_range_short">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_time_range_short</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.TRUE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_time_range_short" title="Permalink to this definition">#</a></dt>
 <dd><p>Print time range, short version (withozt time range type).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_time_range_long">
-<span class="sig-name descname"><span class="pre">print_rec_time_range_long</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.TRUE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_time_range_long" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_time_range_long">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_time_range_long</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.TRUE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_time_range_long" title="Permalink to this definition">#</a></dt>
 <dd><p>Print time range, long version.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_validation_date">
-<span class="sig-name descname"><span class="pre">print_rec_validation_date</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_validation_date" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_validation_date">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_validation_date</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_validation_date" title="Permalink to this definition">#</a></dt>
 <dd><p>Print record validation date, as YYYYMMDDHHMM</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_ntuple">
-<span class="sig-name descname"><span class="pre">print_rec_ntuple</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_ntuple" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_ntuple">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_ntuple</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_ntuple" title="Permalink to this definition">#</a></dt>
 <dd><p>Print n-tuple identificator for current record</p>
 <p>(GRIB1: table version number, parameter number;</p>
 <p>GRIB2: discipline, category, parameter)</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_pds">
-<span class="sig-name descname"><span class="pre">print_rec_pds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_pds" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_pds">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_pds</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_pds" title="Permalink to this definition">#</a></dt>
 <dd><p>Print product definition section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_gds">
-<span class="sig-name descname"><span class="pre">print_rec_gds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_gds" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_gds">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_gds</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_gds" title="Permalink to this definition">#</a></dt>
 <dd><p>Print grid description section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_vcoord">
-<span class="sig-name descname"><span class="pre">print_rec_vcoord</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_vcoord" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_vcoord">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_vcoord</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_vcoord" title="Permalink to this definition">#</a></dt>
 <dd><p>Print vertical coordinates parameters.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_data">
-<span class="sig-name descname"><span class="pre">print_rec_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_data" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_data">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_data</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_data" title="Permalink to this definition">#</a></dt>
 <dd><p>Print all values of data section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_minmax">
-<span class="sig-name descname"><span class="pre">print_rec_minmax</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_minmax" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_minmax">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_minmax</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_minmax" title="Permalink to this definition">#</a></dt>
 <dd><p>Print minimum and maximum of data section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_mean">
-<span class="sig-name descname"><span class="pre">print_rec_mean</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_mean" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_mean">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_mean</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_mean" title="Permalink to this definition">#</a></dt>
 <dd><p>Print mean value of data section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_std">
-<span class="sig-name descname"><span class="pre">print_rec_std</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_std" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_std">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_std</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_std" title="Permalink to this definition">#</a></dt>
 <dd><p>Print standard deviation of data section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_median">
-<span class="sig-name descname"><span class="pre">print_rec_median</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_median" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_median">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_median</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_median" title="Permalink to this definition">#</a></dt>
 <dd><p>Print median value of data section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_minmax_location">
-<span class="sig-name descname"><span class="pre">print_rec_minmax_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_minmax_location" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_minmax_location">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_minmax_location</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_minmax_location" title="Permalink to this definition">#</a></dt>
 <dd><p>Print location of minimum and maximum in data grid.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_undef">
-<span class="sig-name descname"><span class="pre">print_rec_undef</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.FALSE.</span></em><a class="headerlink" href="#InspectSpecification.print_rec_undef" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_undef">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_undef</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.FALSE.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_undef" title="Permalink to this definition">#</a></dt>
 <dd><p>Print value of undef as used in data section, and number of undefined values.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_moment">
-<span class="sig-name descname"><span class="pre">print_rec_moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">comma</span> <span class="pre">separated</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">integers</span></em><a class="headerlink" href="#InspectSpecification.print_rec_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>For each value p in the list, print the p-th cental moment of the data section.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_moment">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_moment</span></span><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_moment" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>comma separated list of integers</p>
+</dd>
+</dl>
+<p>For each value p in the list, print the p-th cental moment of the data section.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="InspectSpecification.print_rec_percentile">
-<span class="sig-name descname"><span class="pre">print_rec_percentile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">comma</span> <span class="pre">separated</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">reals</span></em><a class="headerlink" href="#InspectSpecification.print_rec_percentile" title="Permalink to this definition">#</a></dt>
-<dd><p>For each value p in the list, print the p-th percentile of the data section.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-InspectSpecification-print_rec_percentile">
+<span class="sig-prename descclassname"><span class="pre">&amp;InspectSpecification</span> </span><span class="sig-name descname"><span class="pre">print_rec_percentile</span></span><a class="headerlink" href="#nl-attr-InspectSpecification-print_rec_percentile" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>comma separated list of reals</p>
+</dd>
+</dl>
+<p>For each value p in the list, print the p-th percentile of the data section.</p>
 </dd></dl>
 
 <p>More information on INSPECT pseudo-output is available in section 7.2.</p>
@@ -450,7 +464,7 @@ out_type = ‘INSPECT’. It is ignored when no such output is active.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -461,7 +475,7 @@ out_type = ‘INSPECT’. It is ignored when no such output is active.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></div>
                 
               </div>
             </a>
@@ -495,43 +509,43 @@ out_type = ‘INSPECT’. It is ignored when no such output is active.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a><ul>
-<li><a class="reference internal" href="#InspectSpecification.digits_per_data"><code class="docutils literal notranslate"><span class="pre">digits_per_data</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.select_record"><code class="docutils literal notranslate"><span class="pre">select_record</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.select_data_column"><code class="docutils literal notranslate"><span class="pre">select_data_column</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.select_data_row"><code class="docutils literal notranslate"><span class="pre">select_data_row</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_file_creation_date"><code class="docutils literal notranslate"><span class="pre">print_file_creation_date</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_experiment_version"><code class="docutils literal notranslate"><span class="pre">print_experiment_version</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_number"><code class="docutils literal notranslate"><span class="pre">print_rec_number</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_format"><code class="docutils literal notranslate"><span class="pre">print_rec_format</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_parameter_table"><code class="docutils literal notranslate"><span class="pre">print_rec_parameter_table</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_parameter_number"><code class="docutils literal notranslate"><span class="pre">print_rec_parameter_number</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_name"><code class="docutils literal notranslate"><span class="pre">print_rec_name</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_altname"><code class="docutils literal notranslate"><span class="pre">print_rec_altname</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_level"><code class="docutils literal notranslate"><span class="pre">print_rec_level</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_level_type"><code class="docutils literal notranslate"><span class="pre">print_rec_level_type</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_hgrid_type"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_type</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_hgrid_size"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_size</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_hgrid_delta"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_delta</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_hgrid_start"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_start</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_hgrid_end"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_end</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_initial_date"><code class="docutils literal notranslate"><span class="pre">print_rec_initial_date</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_time_range_short"><code class="docutils literal notranslate"><span class="pre">print_rec_time_range_short</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_time_range_long"><code class="docutils literal notranslate"><span class="pre">print_rec_time_range_long</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_validation_date"><code class="docutils literal notranslate"><span class="pre">print_rec_validation_date</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_ntuple"><code class="docutils literal notranslate"><span class="pre">print_rec_ntuple</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_pds"><code class="docutils literal notranslate"><span class="pre">print_rec_pds</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_gds"><code class="docutils literal notranslate"><span class="pre">print_rec_gds</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_vcoord"><code class="docutils literal notranslate"><span class="pre">print_rec_vcoord</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_data"><code class="docutils literal notranslate"><span class="pre">print_rec_data</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_minmax"><code class="docutils literal notranslate"><span class="pre">print_rec_minmax</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_mean"><code class="docutils literal notranslate"><span class="pre">print_rec_mean</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_std"><code class="docutils literal notranslate"><span class="pre">print_rec_std</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_median"><code class="docutils literal notranslate"><span class="pre">print_rec_median</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_minmax_location"><code class="docutils literal notranslate"><span class="pre">print_rec_minmax_location</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_undef"><code class="docutils literal notranslate"><span class="pre">print_rec_undef</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_moment"><code class="docutils literal notranslate"><span class="pre">print_rec_moment</span></code></a></li>
-<li><a class="reference internal" href="#InspectSpecification.print_rec_percentile"><code class="docutils literal notranslate"><span class="pre">print_rec_percentile</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a><ul>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-digits_per_data"><code class="docutils literal notranslate"><span class="pre">digits_per_data</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-select_record"><code class="docutils literal notranslate"><span class="pre">select_record</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-select_data_column"><code class="docutils literal notranslate"><span class="pre">select_data_column</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-select_data_row"><code class="docutils literal notranslate"><span class="pre">select_data_row</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_file_creation_date"><code class="docutils literal notranslate"><span class="pre">print_file_creation_date</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_experiment_version"><code class="docutils literal notranslate"><span class="pre">print_experiment_version</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_number"><code class="docutils literal notranslate"><span class="pre">print_rec_number</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_format"><code class="docutils literal notranslate"><span class="pre">print_rec_format</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_parameter_table"><code class="docutils literal notranslate"><span class="pre">print_rec_parameter_table</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_parameter_number"><code class="docutils literal notranslate"><span class="pre">print_rec_parameter_number</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_name"><code class="docutils literal notranslate"><span class="pre">print_rec_name</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_altname"><code class="docutils literal notranslate"><span class="pre">print_rec_altname</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_level"><code class="docutils literal notranslate"><span class="pre">print_rec_level</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_level_type"><code class="docutils literal notranslate"><span class="pre">print_rec_level_type</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_hgrid_type"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_type</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_hgrid_size"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_size</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_hgrid_delta"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_delta</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_hgrid_start"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_start</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_hgrid_end"><code class="docutils literal notranslate"><span class="pre">print_rec_hgrid_end</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_initial_date"><code class="docutils literal notranslate"><span class="pre">print_rec_initial_date</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_time_range_short"><code class="docutils literal notranslate"><span class="pre">print_rec_time_range_short</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_time_range_long"><code class="docutils literal notranslate"><span class="pre">print_rec_time_range_long</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_validation_date"><code class="docutils literal notranslate"><span class="pre">print_rec_validation_date</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_ntuple"><code class="docutils literal notranslate"><span class="pre">print_rec_ntuple</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_pds"><code class="docutils literal notranslate"><span class="pre">print_rec_pds</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_gds"><code class="docutils literal notranslate"><span class="pre">print_rec_gds</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_vcoord"><code class="docutils literal notranslate"><span class="pre">print_rec_vcoord</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_data"><code class="docutils literal notranslate"><span class="pre">print_rec_data</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_minmax"><code class="docutils literal notranslate"><span class="pre">print_rec_minmax</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_mean"><code class="docutils literal notranslate"><span class="pre">print_rec_mean</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_std"><code class="docutils literal notranslate"><span class="pre">print_rec_std</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_median"><code class="docutils literal notranslate"><span class="pre">print_rec_median</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_minmax_location"><code class="docutils literal notranslate"><span class="pre">print_rec_minmax_location</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_undef"><code class="docutils literal notranslate"><span class="pre">print_rec_undef</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_moment"><code class="docutils literal notranslate"><span class="pre">print_rec_moment</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-InspectSpecification-print_rec_percentile"><code class="docutils literal notranslate"><span class="pre">print_rec_percentile</span></code></a></li>
 </ul>
 </li>
 </ul>

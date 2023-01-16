@@ -160,13 +160,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
@@ -214,27 +214,25 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-GlobalSettings">
-<span id="globalsettings"></span><h1><a class="reference internal" href="#module-GlobalSettings" title="&amp;GlobalSettings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a><a class="headerlink" href="#module-GlobalSettings" title="Permalink to this heading">#</a></h1>
+          <section id="nl-nl-GlobalSettings">
+<span id="globalsettings"></span><h1><a class="reference internal" href="#nl-nl-GlobalSettings" title="&amp;GlobalSettings"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a><a class="headerlink" href="#nl-nl-GlobalSettings" title="Permalink to this heading">#</a></h1>
 <p>namelist block must be present and unique.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.default_dictionary">
-<span class="sig-name descname"><span class="pre">default_dictionary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.default_dictionary" title="Permalink to this definition">#</a></dt>
-<dd><p><strong>compulsory</strong></p>
-<p>The value of default dictionary refers to the DICTIONARY_NAME values
-in the dictionary files specified in <a class="reference internal" href="globRes.html#module-GlobalResource" title="&amp;GlobalResource"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a> it specifies
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-default_dictionary">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">default_dictionary</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-default_dictionary" title="Permalink to this definition">#</a></dt>
+<dd><strong>Required</strong><p>The value of default dictionary refers to the DICTIONARY_NAME values
+in the dictionary files specified in <code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code> it specifies
 the default active dictionary.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.default_model_name">
-<span class="sig-name descname"><span class="pre">default_model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.default_model_name" title="Permalink to this definition">#</a></dt>
-<dd><p><strong>compulsory</strong></p>
-<p>The default model name is used to</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-default_model_name">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">default_model_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-default_model_name" title="Permalink to this definition">#</a></dt>
+<dd><strong>Required</strong><p>The default model name is used to</p>
 <ul class="simple">
-<li><p>select the active <a class="reference internal" href="modelSpec.html#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> block;</p></li>
+<li><p>select the active <a class="reference internal" href="modelSpec.html#nl-nl-ModelSpecification" title="&amp;ModelSpecification"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> block;</p></li>
 <li><p>select data containers in TMPL_BASE template;</p></li>
-<li><p>check compatibility with some data defined in <a class="reference internal" href="globRes.html#GlobalResource.location_list_additional" title="&amp;GlobalResource.location_list_additional"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalResource.location_list_additional</span></code></a> (e.g. kalman coefficients);</p></li>
+<li><p>check compatibility with some data defined in <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">location_list_additional</span></code> (e.g. kalman coefficients);</p></li>
 <li><p>supplement unrecognized or missing information in input records (model
 name, model type, originating center; only when it is a registred name;
 see also <a class="reference internal" href="../products.html#section-3-1"><span class="std std-ref">Model names</span></a>).</p></li>
@@ -255,30 +253,30 @@ see also <a class="reference internal" href="../products.html#section-3-1"><span
 </aside>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a> must be a registred name (except when <a class="reference internal" href="runSpec.html#RunSpecification.strict_usage" title="&amp;RunSpecification.strict_usage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;RunSpecification.strict_usage</span></code></a> is false).</p>
+<p><a class="reference internal" href="#nl-attr-GlobalSettings-default_model_name" title="&amp;GlobalSettings default_model_name"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_model_name</span></code></a> must be a registred name (except when <a class="reference internal" href="runSpec.html#nl-attr-RunSpecification-strict_usage" title="&amp;RunSpecification strict_usage"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;RunSpecification</span> <span class="pre">strict_usage</span></code></a> is false).</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a> is not used to overwrite correctly decoded values but must be compatible with these decoded values (except when decoding records collected in incore storage or when <a class="reference internal" href="runSpec.html#RunSpecification.strict_usage" title="&amp;RunSpecification.strict_usage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;RunSpecification.strict_usage</span></code></a> is false).</p>
+<p><a class="reference internal" href="#nl-attr-GlobalSettings-default_model_name" title="&amp;GlobalSettings default_model_name"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_model_name</span></code></a> is not used to overwrite correctly decoded values but must be compatible with these decoded values (except when decoding records collected in incore storage or when <a class="reference internal" href="runSpec.html#nl-attr-RunSpecification-strict_usage" title="&amp;RunSpecification strict_usage"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;RunSpecification</span> <span class="pre">strict_usage</span></code></a> is false).</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>when a generic model name is used, only the decoded model type must be compatible with <a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a>; otherwise, the model name, the model type and the originating center must be compatible. The former mechanism supports working with multiple models at the same type, the latter allows a stricter control of the production stream.</p>
+<p>when a generic model name is used, only the decoded model type must be compatible with <a class="reference internal" href="#nl-attr-GlobalSettings-default_model_name" title="&amp;GlobalSettings default_model_name"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_model_name</span></code></a>; otherwise, the model name, the model type and the originating center must be compatible. The former mechanism supports working with multiple models at the same type, the latter allows a stricter control of the production stream.</p>
 </div>
 <p>For usage of fieldextra with an unsupported configuration of cosmo
 (i.e. the center specific coding is not implemented), setting the
-<a class="reference internal" href="#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a> to ‘cosmo’ open all functionalities of the
+<a class="reference internal" href="#nl-attr-GlobalSettings-default_model_name" title="&amp;GlobalSettings default_model_name"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_model_name</span></code></a> to ‘cosmo’ open all functionalities of the
 program. Note that local coding, such as EPS information, is
 interpreted according to a default COSMO implementation.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.default_product_category">
-<span class="sig-name descname"><span class="pre">default_product_category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.default_product_category" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-default_product_category">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">default_product_category</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-default_product_category" title="Permalink to this definition">#</a></dt>
 <dd><p>The default product category is used to supplement missing or unrecognized
 information and to interpret local coding in input records. This value can
 be overwritten on an input file basis by setting default_product_category
-in the <a class="reference internal" href="process.html#module-Process" title="&amp;Process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block used to define the corresponding input file (see <a class="reference internal" href="process.html#section-4-3-1"><span class="std std-ref">Input files</span></a>).</p>
+in the <a class="reference internal" href="process.html#nl-nl-Process" title="&amp;Process"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block used to define the corresponding input file (see <a class="reference internal" href="process.html#section-4-3-1"><span class="std std-ref">Input files</span></a>).</p>
 <dl class="simple">
 <dt>Supported values:</dt><dd><p>‘determinist’,
 ‘eps_control’, ‘eps_member’, ‘eps_mean’, ‘eps_perturbation’,
@@ -300,14 +298,14 @@ sometimes missing in input records and prohibits the use of some or all
 of fieldextra features (depending on the value of strict_usage).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.default_out_type_">
-<span class="sig-name descname"><span class="pre">default_out_type_</span></span><a class="headerlink" href="#GlobalSettings.default_out_type_" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-default_out_type_">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">default_out_type_</span></span><a class="headerlink" href="#nl-attr-GlobalSettings-default_out_type_" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.default_out_mode_">
-<span class="sig-name descname"><span class="pre">default_out_mode_</span></span><a class="headerlink" href="#GlobalSettings.default_out_mode_" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-default_out_mode_">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">default_out_mode_</span></span><a class="headerlink" href="#nl-attr-GlobalSettings-default_out_mode_" title="Permalink to this definition">#</a></dt>
 <dd><p>All default values of namelist variables <code class="docutils literal notranslate"><span class="pre">out_type_*</span></code> and <code class="docutils literal notranslate"><span class="pre">out_mode_*</span></code>, as
 defined in <a class="reference internal" href="process.html#section-4-3-2"><span class="std std-ref">Output files</span></a>, can be reset.</p>
 <p>In some case, the default value is out_type dependent, this is recognized
@@ -315,125 +313,163 @@ by <code class="docutils literal notranslate"><span class="pre">default_out_type
 <code class="docutils literal notranslate"><span class="pre">default_out_type_g_&lt;name&gt;</span></code> (default got GRIB1 and GRIB2).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.location_to_gridpoint">
-<span class="sig-name descname"><span class="pre">location_to_gridpoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;algorithm&gt;</span></em><a class="headerlink" href="#GlobalSettings.location_to_gridpoint" title="Permalink to this definition">#</a></dt>
-<dd><p>Define the algorithm used to associate a grid point to a geographic
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-location_to_gridpoint">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">location_to_gridpoint</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-location_to_gridpoint" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;algorithm&gt;</p>
+</dd>
+</dl>
+<p>Define the algorithm used to associate a grid point to a geographic
 location:</p>
-<dl class="simple">
-<dt>‘nn’</dt><dd><p>nearest neighbour</p>
+<dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-GlobalSettings-location_to_gridpoint-nn"><code class="docutils literal notranslate"><span class="pre">'nn'</span></code></span></dt><dd><p>nearest neighbour</p>
 </dd>
-<dt>‘n4’</dt><dd><p>nearest neighbour or smallest delta(h) among 4 GP</p>
+<dt><span class="target" id="nl-val-GlobalSettings-location_to_gridpoint-n4"><code class="docutils literal notranslate"><span class="pre">'n4'</span></code></span></dt><dd><p>nearest neighbour or smallest delta(h) among 4 GP</p>
 </dd>
-<dt>‘n9’</dt><dd><p>nearest neighbour or smallest delta(h) among 9 GP</p>
+<dt><span class="target" id="nl-val-GlobalSettings-location_to_gridpoint-n9"><code class="docutils literal notranslate"><span class="pre">'n9'</span></code></span></dt><dd><p>nearest neighbour or smallest delta(h) among 9 GP</p>
 </dd>
-<dt>‘sn’</dt><dd><p>nearest gridpoints within given radius (over land: 1.415,
+<dt><span class="target" id="nl-val-GlobalSettings-location_to_gridpoint-sn"><code class="docutils literal notranslate"><span class="pre">'sn'</span></code></span></dt><dd><p>nearest gridpoints within given radius (over land: 1.415,
 over water: 2) for the optimal distance, where distance is
 the sum of the horizontal distance in meter plus the vertical
 height difference in meter multiplied by the vertical emphasis
 factor (500). This is the COSMO standard.</p>
 </dd>
 </dl>
+</dd>
+</dl>
 <p>n4, n9 nd sn skip water points when possible.</p>
-<p>Compulsory when <a class="reference internal" href="globRes.html#GlobalResource.location_list" title="&amp;GlobalResource.location_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalResource.location_list</span></code></a> is used.</p>
+<p>Compulsory when <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">location_list</span></code> is used.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.slice_resolution_factor">
-<span class="sig-name descname"><span class="pre">slice_resolution_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">strictly</span> <span class="pre">positive</span> <span class="pre">real</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3</span></em><a class="headerlink" href="#GlobalSettings.slice_resolution_factor" title="Permalink to this definition">#</a></dt>
-<dd><p>Define the resolution used to discretized the user specified slices.</p>
-<p>Slice resolution is given by <a class="reference internal" href="#GlobalSettings.slice_resolution_factor" title="&amp;GlobalSettings.slice_resolution_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_resolution_factor</span></code></a> times a
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-slice_resolution_factor">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">slice_resolution_factor</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="pre">0.3</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">real</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-slice_resolution_factor" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>strictly positive real</p>
+</dd>
+</dl>
+<p>Define the resolution used to discretized the user specified slices.</p>
+<p>Slice resolution is given by <a class="reference internal" href="#nl-attr-GlobalSettings-slice_resolution_factor" title="&amp;GlobalSettings slice_resolution_factor"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">slice_resolution_factor</span></code></a> times a
 ‘representative’ grid resolution, the ‘representative’ grid resolution
 being expressed in lat/lon space when the slice follows geodesic or in
 (i,j) space when the slice follows straight lines in grid space.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.slice_to_gridpoint">
-<span class="sig-name descname"><span class="pre">slice_to_gridpoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;algorithm&gt;</span></em><a class="headerlink" href="#GlobalSettings.slice_to_gridpoint" title="Permalink to this definition">#</a></dt>
-<dd><p>Define the algorithm used to compute a field along a specified slice:</p>
-<dl class="simple">
-<dt>‘nn’</dt><dd><p>the slice follows the specified path, with a resolution
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-slice_to_gridpoint">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">slice_to_gridpoint</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-slice_to_gridpoint" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;algorithm&gt;</p>
+</dd>
+</dl>
+<p>Define the algorithm used to compute a field along a specified slice:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-GlobalSettings-slice_to_gridpoint-nn"><code class="docutils literal notranslate"><span class="pre">'nn'</span></code></span></dt><dd><p>the slice follows the specified path, with a resolution
 which is programatically derived but can also be user
-specified (see <a class="reference internal" href="#GlobalSettings.slice_resolution_factor" title="&amp;GlobalSettings.slice_resolution_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_resolution_factor</span></code></a>),
+specified (see <a class="reference internal" href="#nl-attr-GlobalSettings-slice_resolution_factor" title="&amp;GlobalSettings slice_resolution_factor"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">slice_resolution_factor</span></code></a>),
 and, for each slice point, the field value at the nearest
 grid point is used.</p>
 </dd>
-<dt>‘nn_on_grid’</dt><dd><p>the slice is approximated by a path following
+<dt><span class="target" id="nl-val-GlobalSettings-slice_to_gridpoint-nn_on_grid"><code class="docutils literal notranslate"><span class="pre">'nn_on_grid'</span></code></span></dt><dd><p>the slice is approximated by a path following
 the mass points on the horizontal grid, by taking
 the grid nearest grid points to the original slice.</p>
 </dd>
 </dl>
-<p>Compulsory when <a class="reference internal" href="globRes.html#GlobalResource.slice_list" title="&amp;GlobalResource.slice_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalResource.slice_list</span></code></a> is used.</p>
+</dd>
+</dl>
+<p>Compulsory when <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">slice_list</span></code> is used.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.slice_upscaling_factor">
-<span class="sig-name descname"><span class="pre">slice_upscaling_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">strictly</span> <span class="pre">positive</span> <span class="pre">integer</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#GlobalSettings.slice_upscaling_factor" title="Permalink to this definition">#</a></dt>
-<dd><p>Define a possible upscaling of the fields along the slice.
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-slice_upscaling_factor">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">slice_upscaling_factor</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">1</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-slice_upscaling_factor" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>strictly positive integer</p>
+</dd>
+</dl>
+<p>Define a possible upscaling of the fields along the slice.
 A value of 1 means no upscaling is applied.
-Not compatible with <a class="reference internal" href="#GlobalSettings.slice_to_gridpoint" title="&amp;GlobalSettings.slice_to_gridpoint"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_to_gridpoint</span></code></a> set to “nn_on_grid”.</p>
+Not compatible with <a class="reference internal" href="#nl-attr-GlobalSettings-slice_to_gridpoint" title="&amp;GlobalSettings slice_to_gridpoint"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">slice_to_gridpoint</span></code></a> set to “nn_on_grid”.</p>
 <p>The upcsaling is obtained by convoluting each field along the slice with
 a boxcar function (“rectangular” function) of size (“footprint”) equal to <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">*</span> <span class="pre">slice_upscaling_factor</span> <span class="pre">/</span> <span class="pre">slice_resolution_factor</span></code>
 (expressed in terms of discretized slice resolution)
-This roughly corresponds to keeping wave lengths <a class="reference internal" href="#GlobalSettings.slice_upscaling_factor" title="&amp;GlobalSettings.slice_upscaling_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.slice_upscaling_factor</span></code></a>
+This roughly corresponds to keeping wave lengths <a class="reference internal" href="#nl-attr-GlobalSettings-slice_upscaling_factor" title="&amp;GlobalSettings slice_upscaling_factor"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">slice_upscaling_factor</span></code></a>
 times the grid spacing upwards.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.originating_center">
-<span class="sig-name descname"><span class="pre">originating_center</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.originating_center" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-originating_center">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">originating_center</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-originating_center" title="Permalink to this definition">#</a></dt>
 <dd><p>according to GRIB table 0</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.production_status">
-<span class="sig-name descname"><span class="pre">production_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.production_status" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-production_status">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">production_status</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-production_status" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.genproc_type">
-<span class="sig-name descname"><span class="pre">genproc_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">string</span></em><a class="headerlink" href="#GlobalSettings.genproc_type" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-genproc_type">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">genproc_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-GlobalSettings-genproc_type" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalSettings.auxiliary_metainfo">
-<span class="sig-name descname"><span class="pre">auxiliary_metainfo</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;sring&gt;[,&lt;string&gt;</span> <span class="pre">...]</span> <span class="pre">(each</span> <span class="pre">string</span> <span class="pre">expressed</span> <span class="pre">as</span> <span class="pre">key=value)</span></em><a class="headerlink" href="#GlobalSettings.auxiliary_metainfo" title="Permalink to this definition">#</a></dt>
-<dd><p>Set after the last processing iteration, before producing the output.
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalSettings-auxiliary_metainfo">
+<span class="sig-prename descclassname"><span class="pre">&amp;GlobalSettings</span> </span><span class="sig-name descname"><span class="pre">auxiliary_metainfo</span></span><a class="headerlink" href="#nl-attr-GlobalSettings-auxiliary_metainfo" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;sring&gt;[,&lt;string&gt; …] (each string expressed as key=value)</p>
+</dd>
+</dl>
+<p>Set after the last processing iteration, before producing the output.
 Override any value extracted from input records.</p>
-<dl>
-<dt>originating_center :</dt><dd><p>reset value of originating center (see code table 0
+<dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-GlobalSettings-auxiliary_metainfo-originating_center"><code class="docutils literal notranslate"><span class="pre">originating_center</span></code></span></dt><dd><p><p>reset value of originating center (see code table 0
 of GRIB standard).</p>
 <dl class="simple">
-<dt>Possible values:</dt><dd><p>‘Moscow’, ‘Offenbach’, ‘Roma’, ‘Zurich’, ‘ARPA-SIMC’,
+<dt>Possible values:</dt><dd><p>’Moscow’, ‘Offenbach’, ‘Roma’, ‘Zurich’, ‘ARPA-SIMC’,
 ‘COSMO’, ‘ECMWF’</p>
 </dd>
 </dl>
+</p>
 </dd>
-<dt>production_status :</dt><dd><p>reset value of production status (see code table 1.3
+<dt><span class="target" id="nl-val-GlobalSettings-auxiliary_metainfo-production_status"><code class="docutils literal notranslate"><span class="pre">production_status</span></code></span></dt><dd><p><p>reset value of production status (see code table 1.3
 of GRIB 2 standard).</p>
 <dl class="simple">
-<dt>Possible values:</dt><dd><p>‘operational’, ‘test_operational’, ‘research’,
+<dt>Possible values:</dt><dd><p>’operational’, ‘test_operational’, ‘research’,
 ‘reanalysis’, ‘TIGGE_operational’, ‘TIGGE_test’</p>
 </dd>
 </dl>
+</p>
 </dd>
-<dt>genproc_type :</dt><dd><p>reset value of type of generating process (see code table 4.3
+<dt><span class="target" id="nl-val-GlobalSettings-auxiliary_metainfo-genproc_type"><code class="docutils literal notranslate"><span class="pre">genproc_type</span></code></span></dt><dd><p><p>reset value of type of generating process (see code table 4.3
 of GRIB 2 standard).</p>
 <dl class="simple">
-<dt>Possible values:</dt><dd><p>‘observation’, ‘climatology’, ‘initialization’,
+<dt>Possible values:</dt><dd><p>’observation’, ‘climatology’, ‘initialization’,
 ‘analysis’, ‘analysis_error’,
 ‘forecast’, ‘bias_corrected_forecast’, ‘forecast_error’,
 ‘smoothed_forecast’, ‘smoothed_calibrated_forecast’,
 ‘eps_forecast’, ‘eps_probability’, ‘neighbourhood_probability’</p>
 </dd>
 </dl>
+</p>
 </dd>
-<dt>auxiliary_metainfo :</dt><dd><p>reset specified field meta-information; expressed as
+<dt><span class="target" id="nl-val-GlobalSettings-auxiliary_metainfo-auxiliary_metainfo"><code class="docutils literal notranslate"><span class="pre">auxiliary_metainfo</span></code></span></dt><dd><p><p>reset specified field meta-information; expressed as
 a list of ‘key=value’, where value is an integer
 and key is one of the following keyword:</p>
 <dl class="simple">
-<dt>keys defined in GRIB standard (value is universal)</dt><dd><p>‘masterTablesVersion’,
+<dt>keys defined in GRIB standard (value is universal)</dt><dd><p>’masterTablesVersion’,
 ‘hoursAfterDataCutoff’, ‘minutesAfterDataCutoff’,
 ‘forecastProbabilityNumber’, ‘totalNumberOfForecastProbabilities’, (aerosol characteristics)
 ‘scaleFactorOfFirstSize’, ‘scaledValueOfFirstSize’
@@ -443,15 +479,15 @@ and key is one of the following keyword:</p>
 ‘numberOfModeOfDistribution’
 ‘numberOfDistributionFunctionParameters’</p>
 </dd>
-<dt>keys defined in GRIB standard (value is either a standard or a local code)</dt><dd><p>‘typeOfProcessedData’                             [GRIB 2 table 1.4]
+<dt>keys defined in GRIB standard (value is either a standard or a local code)</dt><dd><p>’typeOfProcessedData’                             [GRIB 2 table 1.4]
 ‘typeOfEnsembleForecast’                          [GRIB 2 table 4.6]
 ‘typeOfSizeInterval’, ‘typeOfWavelengthInterval’  [GRIB 2 table 4.91]</p>
 </dd>
-<dt>keys defined in GRIB standard (value is a local code)</dt><dd><p>‘subCentre’, ‘localTablesVersion’
+<dt>keys defined in GRIB standard (value is a local code)</dt><dd><p>’subCentre’, ‘localTablesVersion’
 ‘generatingProcessIdentifier’,
 ‘backgroundGeneratingProcessIdentifier’</p>
 </dd>
-<dt>local keys (value is a local code)</dt><dd><p>‘localNumberOfExperiment’, ‘localInformationNumber’,
+<dt>local keys (value is a local code)</dt><dd><p>’localNumberOfExperiment’, ‘localInformationNumber’,
 ‘localHostIdentifier’, ‘localVersionNumber’,
 ‘localCreationDateYear’, ‘localCreationDateMonth’,
 ‘localCreationDateDay’, ‘localCreationDateHour’,
@@ -472,11 +508,14 @@ and key is one of the following keyword:</p>
 </dd>
 </dl>
 <p>This information can also be set independently for each
-output (see <a class="reference internal" href="process.html#Process.out_auxiliary_metainfo" title="&amp;Process.out_auxiliary_metainfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.out_auxiliary_metainfo</span></code></a>), or, even,
-independently for each field (see <a class="reference internal" href="process.html#Process.set_auxiliary_metainfo" title="&amp;Process.set_auxiliary_metainfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.set_auxiliary_metainfo</span></code></a>
+output (see <a class="reference internal" href="process.html#nl-attr-Process-out_auxiliary_metainfo" title="&amp;Process out_auxiliary_metainfo"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">out_auxiliary_metainfo</span></code></a>), or, even,
+independently for each field (see <a class="reference internal" href="process.html#nl-attr-Process-set_auxiliary_metainfo" title="&amp;Process set_auxiliary_metainfo"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">set_auxiliary_metainfo</span></code></a>
 later on).</p>
 <p>This feature supports, in particular, the setting of any
 supported GRIB 2 local use section.</p>
+</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -493,7 +532,7 @@ supported GRIB 2 local use section.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -504,7 +543,7 @@ supported GRIB 2 local use section.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></div>
                 
               </div>
             </a>
@@ -538,20 +577,20 @@ supported GRIB 2 local use section.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a><ul>
-<li><a class="reference internal" href="#GlobalSettings.default_dictionary"><code class="docutils literal notranslate"><span class="pre">default_dictionary</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.default_model_name"><code class="docutils literal notranslate"><span class="pre">default_model_name</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.default_product_category"><code class="docutils literal notranslate"><span class="pre">default_product_category</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.default_out_type_"><code class="docutils literal notranslate"><span class="pre">default_out_type_</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.default_out_mode_"><code class="docutils literal notranslate"><span class="pre">default_out_mode_</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.location_to_gridpoint"><code class="docutils literal notranslate"><span class="pre">location_to_gridpoint</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.slice_resolution_factor"><code class="docutils literal notranslate"><span class="pre">slice_resolution_factor</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.slice_to_gridpoint"><code class="docutils literal notranslate"><span class="pre">slice_to_gridpoint</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.slice_upscaling_factor"><code class="docutils literal notranslate"><span class="pre">slice_upscaling_factor</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.originating_center"><code class="docutils literal notranslate"><span class="pre">originating_center</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.production_status"><code class="docutils literal notranslate"><span class="pre">production_status</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.genproc_type"><code class="docutils literal notranslate"><span class="pre">genproc_type</span></code></a></li>
-<li><a class="reference internal" href="#GlobalSettings.auxiliary_metainfo"><code class="docutils literal notranslate"><span class="pre">auxiliary_metainfo</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a><ul>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-default_dictionary"><code class="docutils literal notranslate"><span class="pre">default_dictionary</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-default_model_name"><code class="docutils literal notranslate"><span class="pre">default_model_name</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-default_product_category"><code class="docutils literal notranslate"><span class="pre">default_product_category</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-default_out_type_"><code class="docutils literal notranslate"><span class="pre">default_out_type_</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-default_out_mode_"><code class="docutils literal notranslate"><span class="pre">default_out_mode_</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-location_to_gridpoint"><code class="docutils literal notranslate"><span class="pre">location_to_gridpoint</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-slice_resolution_factor"><code class="docutils literal notranslate"><span class="pre">slice_resolution_factor</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-slice_to_gridpoint"><code class="docutils literal notranslate"><span class="pre">slice_to_gridpoint</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-slice_upscaling_factor"><code class="docutils literal notranslate"><span class="pre">slice_upscaling_factor</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-originating_center"><code class="docutils literal notranslate"><span class="pre">originating_center</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-production_status"><code class="docutils literal notranslate"><span class="pre">production_status</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-genproc_type"><code class="docutils literal notranslate"><span class="pre">genproc_type</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalSettings-auxiliary_metainfo"><code class="docutils literal notranslate"><span class="pre">auxiliary_metainfo</span></code></a></li>
 </ul>
 </li>
 </ul>

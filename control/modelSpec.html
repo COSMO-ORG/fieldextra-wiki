@@ -160,13 +160,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globRes.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
@@ -214,30 +214,40 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-ModelSpecification">
-<span id="modelspecification"></span><h1><a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a><a class="headerlink" href="#module-ModelSpecification" title="Permalink to this heading">#</a></h1>
+          <section id="nl-nl-ModelSpecification">
+<span id="modelspecification"></span><h1><a class="reference internal" href="#nl-nl-ModelSpecification" title="&amp;ModelSpecification"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a><a class="headerlink" href="#nl-nl-ModelSpecification" title="Permalink to this heading">#</a></h1>
 <p>This namelist block must be present and can be repeated as many times
 as necessary.</p>
-<p>Each set of <a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> defines common characteristics of input
+<p>Each set of <a class="reference internal" href="#nl-nl-ModelSpecification" title="&amp;ModelSpecification"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> defines common characteristics of input
 fields associated with a certain model configuration.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.model_name">
-<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;string&gt;</span></em><a class="headerlink" href="#ModelSpecification.model_name" title="Permalink to this definition">#</a></dt>
-<dd><p>must be unique among all <a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> blocks</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-model_name">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-model_name" title="Permalink to this definition">#</a></dt>
+<dd><p>must be unique among all <a class="reference internal" href="#nl-nl-ModelSpecification" title="&amp;ModelSpecification"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> blocks</p>
 <p>Name of model related to current specifications. The active set is defined
-by setting <a class="reference internal" href="globSet.html#GlobalSettings.default_model_name" title="&amp;GlobalSettings.default_model_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_model_name</span></code></a>. Only one set can be active
+by setting <a class="reference internal" href="globSet.html#nl-attr-GlobalSettings-default_model_name" title="&amp;GlobalSettings default_model_name"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_model_name</span></code></a>. Only one set can be active
 at the same time.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.earth_axis_large">
-<span class="sig-name descname"><span class="pre">earth_axis_large</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;real</span> <span class="pre">in</span> <span class="pre">[m]&gt;</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ModelSpecification.earth_axis_large" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-earth_axis_large">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">earth_axis_large</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">real</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-earth_axis_large" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;real in [m]&gt;</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.earth_axis_small">
-<span class="sig-name descname"><span class="pre">earth_axis_small</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;real</span> <span class="pre">in</span> <span class="pre">[m]&gt;</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ModelSpecification.earth_axis_small" title="Permalink to this definition">#</a></dt>
-<dd><p>Coding of earth model in GRIB 1 is limited; in particular the earth axis can
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-earth_axis_small">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">earth_axis_small</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">real</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-earth_axis_small" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;real in [m]&gt;</p>
+</dd>
+</dl>
+<p>Coding of earth model in GRIB 1 is limited; in particular the earth axis can
 only take one of the value prescribed in the GRIB 1 table 7. Consequently,
 the coded values may differ from the effective values used in the associated
 model, leading to incorrect computation of some differential operators. To
@@ -245,43 +255,73 @@ overcome this difficulty, the earth axis may be explicitely set; in case of
 a spherical earth model both values must be set to the earth radius.
 When set and processing a GRIB 1 record, the specified values overwrite the
 information coded in the record meta-information.
-When <a class="reference internal" href="runSpec.html#RunSpecification.strict_usage" title="&amp;RunSpecification.strict_usage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;RunSpecification.strict_usage</span></code></a> is true and GRIB 1 records are decoded, it is compulsory
+When <a class="reference internal" href="runSpec.html#nl-attr-RunSpecification-strict_usage" title="&amp;RunSpecification strict_usage"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;RunSpecification</span> <span class="pre">strict_usage</span></code></a> is true and GRIB 1 records are decoded, it is compulsory
 to set these values.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.hydrometeor">
-<span class="sig-name descname"><span class="pre">hydrometeor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.hydrometeor" title="Permalink to this definition">#</a></dt>
-<dd><p>Specifies the list of hydrometeors in the concerned model; this is used in
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-hydrometeor">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">hydrometeor</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-hydrometeor" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+<p>Specifies the list of hydrometeors in the concerned model; this is used in
 some operators to take into account the effect of water loading. Each field
 name refers to the active dictionary. The list must be defined when the
-variable <a class="reference internal" href="process.html#Process.out_mode_ignore_wloading" title="&amp;Process.out_mode_ignore_wloading"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.out_mode_ignore_wloading</span></code></a> is false.</p>
+variable <a class="reference internal" href="process.html#nl-attr-Process-out_mode_ignore_wloading" title="&amp;Process out_mode_ignore_wloading"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">out_mode_ignore_wloading</span></code></a> is false.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.precip_all">
-<span class="sig-name descname"><span class="pre">precip_all</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_all" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-precip_all">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">precip_all</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-precip_all" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;[coefficient:]name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.precip_snow">
-<span class="sig-name descname"><span class="pre">precip_snow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_snow" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-precip_snow">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">precip_snow</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-precip_snow" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;[coefficient:]name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.precip_rain">
-<span class="sig-name descname"><span class="pre">precip_rain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_rain" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-precip_rain">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">precip_rain</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-precip_rain" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;[coefficient:]name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.precip_convective">
-<span class="sig-name descname"><span class="pre">precip_convective</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_convective" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-precip_convective">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">precip_convective</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-precip_convective" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;[coefficient:]name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.precip_gridscale">
-<span class="sig-name descname"><span class="pre">precip_gridscale</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;[coefficient:]name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.precip_gridscale" title="Permalink to this definition">#</a></dt>
-<dd><p>The set of hydrometeors is model dependent. Furthermore, only a subset of hydrometerors
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-precip_gridscale">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">precip_gridscale</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-precip_gridscale" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;[coefficient:]name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+<p>The set of hydrometeors is model dependent. Furthermore, only a subset of hydrometerors
 may be available in the model output. Each one of these variables defines the linear
 combination of fields to compute the corresponding type of precipitation.
 Each field name refers to the active dictionary. The default value of coefficient,
@@ -290,24 +330,46 @@ By default these lists are empty, meaning that the corresponding type of precipi
 can not be generated by fieldextra.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.radiation_topo_corrected">
-<span class="sig-name descname"><span class="pre">radiation_topo_corrected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;string,</span> <span class="pre">'yes',</span> <span class="pre">'no'</span> <span class="pre">or</span> <span class="pre">blank&gt;</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">blank</span></em><a class="headerlink" href="#ModelSpecification.radiation_topo_corrected" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-radiation_topo_corrected">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">radiation_topo_corrected</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="pre">blank</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-radiation_topo_corrected" title="Permalink to this definition">#</a></dt>
 <dd><p>Radiation at surface can be derived on horizontal plane, or may take
 into account the slope associated with the topography. This information
 is however not available in the field meta-information and must be
 externally specified when using some radiation operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-ModelSpecification-radiation_topo_corrected-yes"><code class="docutils literal notranslate"><span class="pre">'yes'</span></code></span></dt><dd><p></p>
+</dd>
+<dt><span class="target" id="nl-val-ModelSpecification-radiation_topo_corrected-no"><code class="docutils literal notranslate"><span class="pre">'no'</span></code></span></dt><dd><p></p>
+</dd>
+<dt><span class="target" id="nl-val-ModelSpecification-radiation_topo_corrected-blank"><code class="docutils literal notranslate"><span class="pre">blank</span></code></span></dt><dd><p></p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.passive_sfc2">
-<span class="sig-name descname"><span class="pre">passive_sfc2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.passive_sfc2" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-passive_sfc2">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">passive_sfc2</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-passive_sfc2" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.not_passive_sfc2">
-<span class="sig-name descname"><span class="pre">not_passive_sfc2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.not_passive_sfc2" title="Permalink to this definition">#</a></dt>
-<dd><p>Set ‘passive second surface’ attribute for all fields listed; the value derived
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-not_passive_sfc2">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">not_passive_sfc2</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-not_passive_sfc2" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+<p>Set ‘passive second surface’ attribute for all fields listed; the value derived
 from the active dictionary will be ignored.</p>
 <p>The ‘passive second surface’ attribute defines the role of the second surface
 information of all mentioned fields. If the second surface is passive, the
@@ -316,15 +378,25 @@ ignored; furthermore, the vertical coordinate coefficients may be coded as
 value of the second surface. See passiveSfc2 for additional information.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.constant_in_time">
-<span class="sig-name descname"><span class="pre">constant_in_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.constant_in_time" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-constant_in_time">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">constant_in_time</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-constant_in_time" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.not_constant_in_time">
-<span class="sig-name descname"><span class="pre">not_constant_in_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;name</span> <span class="pre">of</span> <span class="pre">field</span> <span class="pre">(uppercase)&gt;,</span> <span class="pre">...</span>&#160; <span class="pre">(list</span> <span class="pre">of</span> <span class="pre">strings)</span></em><a class="headerlink" href="#ModelSpecification.not_constant_in_time" title="Permalink to this definition">#</a></dt>
-<dd><p>Set ‘constant in time’ attribute for all fields listed; the value derived
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-not_constant_in_time">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">not_constant_in_time</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-not_constant_in_time" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;name of field (uppercase)&gt;, …  (list of strings)</p>
+</dd>
+</dl>
+<p>Set ‘constant in time’ attribute for all fields listed; the value derived
 from the active dictionary will be ignored.</p>
 <p>The ‘constant in time’ status drives the behaviour of fieldextra by missing
 time information, and also the time slots considered when mixing constant
@@ -334,36 +406,58 @@ and non constant fields in the same product.</p>
 (e.g. Z0 as model output).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_id">
-<span class="sig-name descname"><span class="pre">vertical_coordinate_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;integer,</span> <span class="pre">value</span> <span class="pre">refers</span> <span class="pre">to</span> <span class="pre">external</span> <span class="pre">look-up</span> <span class="pre">table&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_id" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-vertical_coordinate_id">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">vertical_coordinate_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-vertical_coordinate_id" title="Permalink to this definition">#</a></dt>
+<dd><p>value refers to external look-up table</p>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_uuid">
-<span class="sig-name descname"><span class="pre">vertical_coordinate_uuid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">[0-9A-Fa-f]&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_uuid" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-vertical_coordinate_uuid">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">vertical_coordinate_uuid</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-vertical_coordinate_uuid" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx, x in [0-9A-Fa-f]&gt;</p>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_nlev">
-<span class="sig-name descname"><span class="pre">vertical_coordinate_nlev</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;integer,</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">surfaces</span> <span class="pre">(half-levels)&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_nlev" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-vertical_coordinate_nlev">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">vertical_coordinate_nlev</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-vertical_coordinate_nlev" title="Permalink to this definition">#</a></dt>
+<dd><p>number of surfaces (half-levels)</p>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_positive">
-<span class="sig-name descname"><span class="pre">vertical_coordinate_positive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;'up'</span> <span class="pre">or</span> <span class="pre">'down'&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_positive" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-vertical_coordinate_positive">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">vertical_coordinate_positive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-vertical_coordinate_positive" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-ModelSpecification-vertical_coordinate_positive-up"><code class="docutils literal notranslate"><span class="pre">'up'</span></code></span></dt><dd><p></p>
+</dd>
+<dt><span class="target" id="nl-val-ModelSpecification-vertical_coordinate_positive-down"><code class="docutils literal notranslate"><span class="pre">'down'</span></code></span></dt><dd><p></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_coef">
-<span class="sig-name descname"><span class="pre">vertical_coordinate_coef</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">real</span> <span class="pre">numbers&gt;</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_coef" title="Permalink to this definition">#</a></dt>
-<dd><p>The vertical coordinate attributes can be specified either as ID, UUID,
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-vertical_coordinate_coef">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">vertical_coordinate_coef</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-vertical_coordinate_coef" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;list of real numbers&gt;</p>
+</dd>
+</dl>
+<p>The vertical coordinate attributes can be specified either as ID, UUID,
 dimension, and positive direction, for generalized height based vertical
 coordinates, or as a list of real numbers. In the latter case, the numbers
 are interpreted according to the value of model_name.
 This is used to supplement the information about the vertical coordinates
 obtained from the decoded records, when missing or unrecognized, or to
-reset the coded information when <a class="reference internal" href="process.html#Process.set_vcoord" title="&amp;Process.set_vcoord"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.set_vcoord</span></code></a> or <a class="reference internal" href="#ModelSpecification.vertical_coordinate_reset" title="&amp;ModelSpecification.vertical_coordinate_reset"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;ModelSpecification.vertical_coordinate_reset</span></code></a>
+reset the coded information when <a class="reference internal" href="process.html#nl-attr-Process-set_vcoord" title="&amp;Process set_vcoord"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">set_vcoord</span></code></a> or <a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_reset" title="&amp;ModelSpecification vertical_coordinate_reset"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span> <span class="pre">vertical_coordinate_reset</span></code></a>
 is true.</p>
 <p>A typical application of this feature is related to the use of generalized
 height based vertical coordinates, when these coordinates also support an
@@ -378,9 +472,9 @@ definition of the vertical coordinates, the surface type of all fields
 defined on model levels will be re-set to the correct type.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.vertical_coordinate_reset">
-<span class="sig-name descname"><span class="pre">vertical_coordinate_reset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">logical</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">.false.</span></em><a class="headerlink" href="#ModelSpecification.vertical_coordinate_reset" title="Permalink to this definition">#</a></dt>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-vertical_coordinate_reset">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">vertical_coordinate_reset</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="k"><span class="pre">.false.</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-ModelSpecification-vertical_coordinate_reset" title="Permalink to this definition">#</a></dt>
 <dd><p>As previously explained, the values of vertical_coordinate_* are default
 values used to supplement missing values. Hovever, it is also possible
 to unconditionaly replace the decoded values by the user specified values
@@ -389,15 +483,19 @@ possible by using set_vcoord); in this case, the information is replaced
 while collecting input fields.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ModelSpecification.regrid_method">
-<span class="sig-name descname"><span class="pre">regrid_method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;default</span> <span class="pre">re-gridding</span> <span class="pre">algorithm(s)&gt;</span></em><a class="headerlink" href="#ModelSpecification.regrid_method" title="Permalink to this definition">#</a></dt>
-<dd><p>Instead of replicating the definition of the re-gridding algorithm for each
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-ModelSpecification-regrid_method">
+<span class="sig-prename descclassname"><span class="pre">&amp;ModelSpecification</span> </span><span class="sig-name descname"><span class="pre">regrid_method</span></span><a class="headerlink" href="#nl-attr-ModelSpecification-regrid_method" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;default re-gridding algorithm(s)&gt;</p>
+</dd>
+</dl>
+<p>Instead of replicating the definition of the re-gridding algorithm for each
 concerned input/output, it is possible to define a default value by setting
-regrid_method in <a class="reference internal" href="#module-ModelSpecification" title="&amp;ModelSpecification"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a> and to refer to this default value by
-setting <code class="docutils literal notranslate"><span class="pre">in_regrid_method='default'</span></code> in each concerned <a class="reference internal" href="process.html#module-Process" title="&amp;Process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block (see
-<a class="reference internal" href="process.html#Process.in_regrid_method" title="&amp;Process.in_regrid_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.in_regrid_method</span></code></a>).
-The values supported by <a class="reference internal" href="#ModelSpecification.regrid_method" title="&amp;ModelSpecification.regrid_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;ModelSpecification.regrid_method</span></code></a> are similar to those supported by <a class="reference internal" href="process.html#Process.in_regrid_method" title="&amp;Process.in_regrid_method"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.in_regrid_method</span></code></a>.</p>
+<a class="reference internal" href="#nl-attr-ModelSpecification-regrid_method" title="&amp;ModelSpecification regrid_method"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span> <span class="pre">regrid_method</span></code></a> and to refer to this default value by
+setting <a class="reference internal" href="process.html#nl-attr-Process-in_regrid_method" title="&amp;Process in_regrid_method"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">in_regrid_method='default'</span></code></a> in each concerned <a class="reference internal" href="process.html#nl-nl-Process" title="&amp;Process"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block.
+The values supported by <a class="reference internal" href="#nl-attr-ModelSpecification-regrid_method" title="&amp;ModelSpecification regrid_method"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span> <span class="pre">regrid_method</span></code></a> are similar to those supported by <a class="reference internal" href="process.html#nl-attr-Process-in_regrid_method" title="&amp;Process in_regrid_method"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">in_regrid_method</span></code></a>.</p>
 </dd></dl>
 
 </section>
@@ -412,7 +510,7 @@ The values supported by <a class="reference internal" href="#ModelSpecification.
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -423,7 +521,7 @@ The values supported by <a class="reference internal" href="#ModelSpecification.
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></div>
                 
               </div>
             </a>
@@ -457,28 +555,28 @@ The values supported by <a class="reference internal" href="#ModelSpecification.
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a><ul>
-<li><a class="reference internal" href="#ModelSpecification.model_name"><code class="docutils literal notranslate"><span class="pre">model_name</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.earth_axis_large"><code class="docutils literal notranslate"><span class="pre">earth_axis_large</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.earth_axis_small"><code class="docutils literal notranslate"><span class="pre">earth_axis_small</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.hydrometeor"><code class="docutils literal notranslate"><span class="pre">hydrometeor</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.precip_all"><code class="docutils literal notranslate"><span class="pre">precip_all</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.precip_snow"><code class="docutils literal notranslate"><span class="pre">precip_snow</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.precip_rain"><code class="docutils literal notranslate"><span class="pre">precip_rain</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.precip_convective"><code class="docutils literal notranslate"><span class="pre">precip_convective</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.precip_gridscale"><code class="docutils literal notranslate"><span class="pre">precip_gridscale</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.radiation_topo_corrected"><code class="docutils literal notranslate"><span class="pre">radiation_topo_corrected</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.passive_sfc2"><code class="docutils literal notranslate"><span class="pre">passive_sfc2</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.not_passive_sfc2"><code class="docutils literal notranslate"><span class="pre">not_passive_sfc2</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.constant_in_time"><code class="docutils literal notranslate"><span class="pre">constant_in_time</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.not_constant_in_time"><code class="docutils literal notranslate"><span class="pre">not_constant_in_time</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_id"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_id</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_uuid"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_uuid</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_nlev"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_nlev</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_positive"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_positive</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_coef"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_coef</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.vertical_coordinate_reset"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_reset</span></code></a></li>
-<li><a class="reference internal" href="#ModelSpecification.regrid_method"><code class="docutils literal notranslate"><span class="pre">regrid_method</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a><ul>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-model_name"><code class="docutils literal notranslate"><span class="pre">model_name</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-earth_axis_large"><code class="docutils literal notranslate"><span class="pre">earth_axis_large</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-earth_axis_small"><code class="docutils literal notranslate"><span class="pre">earth_axis_small</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-hydrometeor"><code class="docutils literal notranslate"><span class="pre">hydrometeor</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-precip_all"><code class="docutils literal notranslate"><span class="pre">precip_all</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-precip_snow"><code class="docutils literal notranslate"><span class="pre">precip_snow</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-precip_rain"><code class="docutils literal notranslate"><span class="pre">precip_rain</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-precip_convective"><code class="docutils literal notranslate"><span class="pre">precip_convective</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-precip_gridscale"><code class="docutils literal notranslate"><span class="pre">precip_gridscale</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-radiation_topo_corrected"><code class="docutils literal notranslate"><span class="pre">radiation_topo_corrected</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-passive_sfc2"><code class="docutils literal notranslate"><span class="pre">passive_sfc2</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-not_passive_sfc2"><code class="docutils literal notranslate"><span class="pre">not_passive_sfc2</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-constant_in_time"><code class="docutils literal notranslate"><span class="pre">constant_in_time</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-not_constant_in_time"><code class="docutils literal notranslate"><span class="pre">not_constant_in_time</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_id"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_id</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_uuid"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_uuid</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_nlev"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_nlev</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_positive"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_positive</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_coef"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_coef</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-vertical_coordinate_reset"><code class="docutils literal notranslate"><span class="pre">vertical_coordinate_reset</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-ModelSpecification-regrid_method"><code class="docutils literal notranslate"><span class="pre">regrid_method</span></code></a></li>
 </ul>
 </li>
 </ul>

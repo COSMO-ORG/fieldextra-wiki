@@ -1,16 +1,17 @@
 
-:py:mod:`&NetCDFImport`
+:nl:nl:`&NetCDFImport`
 =======================
 
-.. py:module:: &NetCDFImport
+.. nl:namelist:: NetCDFImport
     
-    This namelist block is optional, but must be unique.
+This namelist block is optional, but must be unique.
 
-    It is used to specify missing attributes associated with imported
-    NetCDF file. It is ignored when no NetCDF file is imported.
+It is used to specify missing attributes associated with imported
+NetCDF file. It is ignored when no NetCDF file is imported.
 
-.. py:attribute:: varname_translation 
-    :type: "nc_var_1:short_name_1", "nc_var_2:short_name_2" ...
+.. nl:argument::  varname_translation 
+
+    :format: "nc_var_1:short_name_1", "nc_var_2:short_name_2" ...
 
     Translation table for NetCDF variables.
 
@@ -36,8 +37,9 @@
         * the attributes of the variable define the (optional) sleve coefficients and the reference atmosphere
 
 
-.. py:attribute:: var_default_attribute 
-    :type: "nc_var_1:attribute_list_1", "nc_var_2:attribute_list_2" ...
+.. nl:argument::  var_default_attribute 
+    
+    :format: "nc_var_1:attribute_list_1", "nc_var_2:attribute_list_2" ...
 
     Default attributes for NetCDF variables.
     
@@ -67,8 +69,9 @@
     associated with all NetCDF variables; ``"__ALL__"`` has lower precedence
     than any specific variable name.
 
-.. py:attribute:: dim_default_attribute
-    :type: "nc_dim_1:attribute_list_1", "nc_dim_2:attribute_list_2" ...
+.. nl:argument::  dim_default_attribute
+    
+    :format: "nc_dim_1:attribute_list_1", "nc_dim_2:attribute_list_2" ...
     
     Default attributes for NetCDF dimensions.
     

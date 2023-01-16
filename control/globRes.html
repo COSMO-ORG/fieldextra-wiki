@@ -160,13 +160,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Program usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../products.html">Supported products and data representations</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="intro.html">Control file</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="runSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="globSet.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;NetCDFImport</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inspectSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;InspectSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelSpec.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;ModelSpecification</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operators to compute new fields</a></li>
@@ -214,13 +214,17 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-GlobalResource">
-<span id="globalresource"></span><h1><a class="reference internal" href="#module-GlobalResource" title="&amp;GlobalResource"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a><a class="headerlink" href="#module-GlobalResource" title="Permalink to this heading">#</a></h1>
+          <section id="nl-nl-GlobalResource">
+<span id="globalresource"></span><h1><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code><a class="headerlink" href="#nl-nl-GlobalResource" title="Permalink to this heading">#</a></h1>
 <p>This namelist block must be present and unique.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.dictionary">
-<span class="sig-name descname"><span class="pre">dictionary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file_path&gt;[,&lt;file</span> <span class="pre">path&gt;...]</span></em><a class="headerlink" href="#GlobalResource.dictionary" title="Permalink to this definition">#</a></dt>
-<dd><p><strong>compulsory</strong></p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-dictionary">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">dictionary</span></span><a class="headerlink" href="#nl-attr-GlobalResource-dictionary" title="Permalink to this definition">#</a></dt>
+<dd><strong>Required</strong><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file_path&gt;[,&lt;file path&gt;…]</p>
+</dd>
+</dl>
 <p>Within fieldextra, fields are identified by a unique string, the
 so-called field short name (this is the same short name which is
 used e.g. in the ecCodes localConcepts, or in the COSMO model).
@@ -230,9 +234,9 @@ name).
 The information stored in the active dictionary is used at different
 steps of the processing (decoding of input file, computation of
 new field, creation of GRIB and NetCDF output). The default active
-dictionary is defined by the variable <a class="reference internal" href="globSet.html#GlobalSettings.default_dictionary" title="&amp;GlobalSettings.default_dictionary"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;GlobalSettings.default_dictionary</span></code></a>; an alternate dictionary can be used to decode
-a specific input file by setting the variable <a class="reference internal" href="process.html#Process.in_dictionary" title="&amp;Process.in_dictionary"><code class="xref py py-attr docutils literal notranslate"><span class="pre">&amp;Process.in_dictionary</span></code></a> in
-the associated <a class="reference internal" href="process.html#module-Process" title="&amp;Process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block.</p>
+dictionary is defined by the variable <a class="reference internal" href="globSet.html#nl-attr-GlobalSettings-default_dictionary" title="&amp;GlobalSettings default_dictionary"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_dictionary</span></code></a>; an alternate dictionary can be used to decode
+a specific input file by setting the variable <a class="reference internal" href="process.html#nl-attr-Process-in_dictionary" title="&amp;Process in_dictionary"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">in_dictionary</span></code></a> in
+the associated <a class="reference internal" href="process.html#nl-nl-Process" title="&amp;Process"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block.</p>
 <p>Some field names have a special meaning to fieldextra, and should
 always be defined in the default dictionary:</p>
 <ul class="simple">
@@ -253,10 +257,14 @@ coordinates:</p>
 <p>A detailed description of dictionaries is found in section 6.1 below.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.grib_definition_path">
-<span class="sig-name descname"><span class="pre">grib_definition_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;path1&gt;[,&lt;path2&gt;,&lt;path3&gt;]</span></em><a class="headerlink" href="#GlobalResource.grib_definition_path" title="Permalink to this definition">#</a></dt>
-<dd><p><strong>compulsory</strong></p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-grib_definition_path">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">grib_definition_path</span></span><a class="headerlink" href="#nl-attr-GlobalResource-grib_definition_path" title="Permalink to this definition">#</a></dt>
+<dd><strong>Required</strong><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;path1&gt;[,&lt;path2&gt;,&lt;path3&gt;]</p>
+</dd>
+</dl>
 <p>Path of directory containing the definitions files for the
 ECMWF ecCodes.
 The decoding rules used by ecCodes are stored in a set of
@@ -280,44 +288,69 @@ the following setting:</p>
 </div>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.grib2_sample">
-<span class="sig-name descname"><span class="pre">grib2_sample</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;</span></em><a class="headerlink" href="#GlobalResource.grib2_sample" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of file used as GRIB sample by ECMWF ecCodes when encoding
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-grib2_sample">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">grib2_sample</span></span><a class="headerlink" href="#nl-attr-GlobalResource-grib2_sample" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;</p>
+</dd>
+</dl>
+<p>Path of file used as GRIB sample by ECMWF ecCodes when encoding
 GRIB 2 records. It is possible to supersede this value on an
 output basis by setting out_type_template in the corresponding
-<a class="reference internal" href="process.html#module-Process" title="&amp;Process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block (GRIB2 output only).
+<a class="reference internal" href="process.html#nl-nl-Process" title="&amp;Process"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;Process</span></code></a> block (GRIB2 output only).
 Important: see remark in 7.12 about the choice of the GRIB 2 sample.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.grib_bitmap_path">
-<span class="sig-name descname"><span class="pre">grib_bitmap_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;directory</span> <span class="pre">path&gt;</span></em><a class="headerlink" href="#GlobalResource.grib_bitmap_path" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of directory containing external binary bitmap files used by
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-grib_bitmap_path">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">grib_bitmap_path</span></span><a class="headerlink" href="#nl-attr-GlobalResource-grib_bitmap_path" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;directory path&gt;</p>
+</dd>
+</dl>
+<p>Path of directory containing external binary bitmap files used by
 DWD GRIB library when decoding/encoding GRIB 1 data.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.icon_grid_description">
-<span class="sig-name descname"><span class="pre">icon_grid_description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;[,&lt;file</span> <span class="pre">path&gt;...]</span></em><a class="headerlink" href="#GlobalResource.icon_grid_description" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of NetCDF file(s) containing the description of ICON unstructured
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-icon_grid_description">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">icon_grid_description</span></span><a class="headerlink" href="#nl-attr-GlobalResource-icon_grid_description" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;[,&lt;file path&gt;…]</p>
+</dd>
+</dl>
+<p>Path of NetCDF file(s) containing the description of ICON unstructured
 grids. All grid descriptions must be loaded before processing ICON fields.
 All ICON fields must be re-gridded on a regular grid before further
-processing (see in_regrid_method=’from_unstructured_grid’ later on).</p>
+processing (see <a class="reference internal" href="process.html#nl-attr-Process-in_regrid_method" title="&amp;Process in_regrid_method"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">in_regrid_method='from_unstructured_grid'</span></code></a>).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.rttov_coefs_path">
-<span class="sig-name descname"><span class="pre">rttov_coefs_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;directory</span> <span class="pre">path&gt;</span></em><a class="headerlink" href="#GlobalResource.rttov_coefs_path" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of directory containing RTTOV coefficient files, as required
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-rttov_coefs_path">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">rttov_coefs_path</span></span><a class="headerlink" href="#nl-attr-GlobalResource-rttov_coefs_path" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;directory path&gt;</p>
+</dd>
+</dl>
+<p>Path of directory containing RTTOV coefficient files, as required
 by RTTOV library when computing synthetic satellites fields. See
 also the description of rttovID and rttovChan in chapter 6.1.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.location_list">
-<span class="sig-name descname"><span class="pre">location_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;</span></em><a class="headerlink" href="#GlobalResource.location_list" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of the file containing the definition of geographic locations.</p>
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-location_list">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">location_list</span></span><a class="headerlink" href="#nl-attr-GlobalResource-location_list" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;</p>
+</dd>
+</dl>
+<p>Path of the file containing the definition of geographic locations.</p>
 <p>Each location is defined by a unique id and its geographical coordinates.
 Each location is recognized by its id. The user may additionally specify
 a list of unique location aliases of the form &lt;group&gt;:&lt;name&gt; which may
@@ -341,10 +374,15 @@ derive new quantities (e.g. height corrected fields, Kalman
 filtered fields).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.location_list_additional">
-<span class="sig-name descname"><span class="pre">location_list_additional</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;[,&lt;file</span> <span class="pre">path&gt;...]</span></em><a class="headerlink" href="#GlobalResource.location_list_additional" title="Permalink to this definition">#</a></dt>
-<dd><p>Additional information can be associated with the locations defined
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-location_list_additional">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">location_list_additional</span></span><a class="headerlink" href="#nl-attr-GlobalResource-location_list_additional" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;[,&lt;file path&gt;…]</p>
+</dd>
+</dl>
+<p>Additional information can be associated with the locations defined
 in location_list. Each set of additional information must be coded
 in a separate file. Each location is recognized either by its id, or
 by one of its aliases in location_list. The possible kind of additional
@@ -356,10 +394,15 @@ information is (see 6.3 below):</p>
 </ol>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.region_list">
-<span class="sig-name descname"><span class="pre">region_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;</span></em><a class="headerlink" href="#GlobalResource.region_list" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of the file used to define geographical regions.
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-region_list">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">region_list</span></span><a class="headerlink" href="#nl-attr-GlobalResource-region_list" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;</p>
+</dd>
+</dl>
+<p>Path of the file used to define geographical regions.
 Multiple sets of regions may be defined in the same file.
 Within each set, the regions must not overlap.</p>
 <p>Each region is build from one or more non overlapping polygons,
@@ -399,13 +442,17 @@ shp_fxtr available at <a class="reference external" href="https://github.com/dce
 (thanks to Davide Cesari &lt;<a class="reference external" href="mailto:dcesari&#37;&#52;&#48;arpa&#46;emr&#46;it">dcesari<span>&#64;</span>arpa<span>&#46;</span>emr<span>&#46;</span>it</a>&gt;).</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.slice_list">
-<span class="sig-name descname"><span class="pre">slice_list</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;</span></em><a class="headerlink" href="#GlobalResource.slice_list" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of the file used to define slices, for the computation of
-vertical cross-sections.
-!
-Each slice is defined by a broken line, with control points expressed either
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-slice_list">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">slice_list</span></span><a class="headerlink" href="#nl-attr-GlobalResource-slice_list" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;</p>
+</dd>
+</dl>
+<p>Path of the file used to define slices, for the computation of
+vertical cross-sections.</p>
+<p>Each slice is defined by a broken line, with control points expressed either
 as geographical latitude/longitude, or as locations (refering to the active
 location_list file), or as grid coordinates. Segments between control points
 are either along earth (sphere) geodesic, or along straight line in grid
@@ -413,18 +460,21 @@ coordinate space. A slice is discretized according to the values of the keys
 “slice_to_gridpoint” and “slice_resolution_factor”; it is also possible to
 upscale (smooth) the fields along the slice by setting “slice_upscaling_factor”.
 Each slice is recognized by a unique tag. Currently, only NETCDF output is
-compatible with slices.
-!
-When ‘additional_diagnostic’ is set to true, a summary of slices
-characteristics is produced in the filed fieldextra.slice.
-!
-Details on the file format is found in section 6.5.</p>
+compatible with slices.</p>
+<p>When ‘additional_diagnostic’ is set to true, a summary of slices
+characteristics is produced in the filed fieldextra.slice.</p>
+<p>Details on the file format is found in section 6.5.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="GlobalResource.adaboost_coefs">
-<span class="sig-name descname"><span class="pre">adaboost_coefs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">&lt;file</span> <span class="pre">path&gt;[,&lt;file</span> <span class="pre">path&gt;...]</span></em><a class="headerlink" href="#GlobalResource.adaboost_coefs" title="Permalink to this definition">#</a></dt>
-<dd><p>Path of file(s) containing AdaBoost coefficients. A file contains
+<dl class="nl argument">
+<dt class="sig sig-object nl" id="nl-attr-GlobalResource-adaboost_coefs">
+<span class="sig-prename descclassname"><span class="pre">&amp;&amp;GlobalResource</span> </span><span class="sig-name descname"><span class="pre">adaboost_coefs</span></span><a class="headerlink" href="#nl-attr-GlobalResource-adaboost_coefs" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;file path&gt;[,&lt;file path&gt;…]</p>
+</dd>
+</dl>
+<p>Path of file(s) containing AdaBoost coefficients. A file contains
 all necessary parameters to compute a single classification field
 (C_TSTORM,…).</p>
 </dd></dl>
@@ -441,7 +491,7 @@ all necessary parameters to compute a single classification field
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -452,7 +502,7 @@ all necessary parameters to compute a single classification field
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></div>
+                <div class="title"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;RunSpecification</span></code></div>
                 
               </div>
             </a>
@@ -486,18 +536,18 @@ all necessary parameters to compute a single classification field
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a><ul>
-<li><a class="reference internal" href="#GlobalResource.dictionary"><code class="docutils literal notranslate"><span class="pre">dictionary</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.grib_definition_path"><code class="docutils literal notranslate"><span class="pre">grib_definition_path</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.grib2_sample"><code class="docutils literal notranslate"><span class="pre">grib2_sample</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.grib_bitmap_path"><code class="docutils literal notranslate"><span class="pre">grib_bitmap_path</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.icon_grid_description"><code class="docutils literal notranslate"><span class="pre">icon_grid_description</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.rttov_coefs_path"><code class="docutils literal notranslate"><span class="pre">rttov_coefs_path</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.location_list"><code class="docutils literal notranslate"><span class="pre">location_list</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.location_list_additional"><code class="docutils literal notranslate"><span class="pre">location_list_additional</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.region_list"><code class="docutils literal notranslate"><span class="pre">region_list</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.slice_list"><code class="docutils literal notranslate"><span class="pre">slice_list</span></code></a></li>
-<li><a class="reference internal" href="#GlobalResource.adaboost_coefs"><code class="docutils literal notranslate"><span class="pre">adaboost_coefs</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a><ul>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-dictionary"><code class="docutils literal notranslate"><span class="pre">dictionary</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-grib_definition_path"><code class="docutils literal notranslate"><span class="pre">grib_definition_path</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-grib2_sample"><code class="docutils literal notranslate"><span class="pre">grib2_sample</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-grib_bitmap_path"><code class="docutils literal notranslate"><span class="pre">grib_bitmap_path</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-icon_grid_description"><code class="docutils literal notranslate"><span class="pre">icon_grid_description</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-rttov_coefs_path"><code class="docutils literal notranslate"><span class="pre">rttov_coefs_path</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-location_list"><code class="docutils literal notranslate"><span class="pre">location_list</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-location_list_additional"><code class="docutils literal notranslate"><span class="pre">location_list_additional</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-region_list"><code class="docutils literal notranslate"><span class="pre">region_list</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-slice_list"><code class="docutils literal notranslate"><span class="pre">slice_list</span></code></a></li>
+<li><a class="reference internal" href="#nl-attr-GlobalResource-adaboost_coefs"><code class="docutils literal notranslate"><span class="pre">adaboost_coefs</span></code></a></li>
 </ul>
 </li>
 </ul>

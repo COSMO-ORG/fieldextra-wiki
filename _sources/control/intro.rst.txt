@@ -5,20 +5,20 @@ Control file
 The program control data file is an ASCII file containing Fortran 90
 namelist input. The template for this file is:
 
-:py:mod:`&RunSpecification`
+:nl:nl:`&RunSpecification`
     Run time specifications, compulsory
-:py:mod:`&GlobalResource`
+:nl:nl:`&GlobalResource`
     Program resources & configuration, compulsory
 
-:py:mod:`&GlobalSettings`
+:nl:nl:`&GlobalSettings`
 
-:py:mod:`&NetCDFImport`
+:nl:nl:`&NetCDFImport`
     Attributes of NetCDF imported file, 0 or 1 occurence
-:py:mod:`&InspectSpecification`
+:nl:nl:`&InspectSpecification`
     Attributes of INSPECT ouput, 0 or 1 occurence
-:py:mod:`&ModelSpecification`
+:nl:nl:`&ModelSpecification`
     Model specifications, at least 1 occurence
-:py:mod:`&Process`
+:nl:nl:`&Process`
     Operations to perform, 0 or more occurences
 
 
