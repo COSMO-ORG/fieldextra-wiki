@@ -1040,6 +1040,7 @@ radiation
                     [m]
 
 .. nl:value:: "ASOD_SvX"
+
     (X=E,S,W,N)
             global shortwave radiation on vertical oriented surfaces
             at surface level [W/m**2]; model implemented following Perez
@@ -1091,6 +1092,7 @@ radiation
                 T_S or T_SO(level 0):
 
 .. nl:value:: "ATHD_S_T2M"
+
     incoming longwave radiation at surface level, based on T_2M [W/m**2]
             ATHD_S_T2M = (1/emissivity) * (ATHB_S + emissivity*boltzman*T_2M**4)
                 :nl:val:`"ATHB_S"`
@@ -1202,6 +1204,7 @@ thermodynamic quantities
                     (in [Pa])
 
 .. nl:value:: "THETA_2M"
+
     2m potential temperature (in [K])
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M; the previous formula for THETA is then used.
@@ -1225,6 +1228,7 @@ thermodynamic quantities
                     
 
 .. nl:value:: "THETAE_2M"
+
     2m-equivalent potential temperature (in [K])
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M; QV_2M is computed on the basis of this
@@ -1253,6 +1257,7 @@ thermodynamic quantities
                     
 
 .. nl:value:: "THETA_V_2M"
+
     2-m virtual potential temperature (in [K])
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M; QV_2M is computed on the basis of this
@@ -1298,6 +1303,7 @@ thermodynamic quantities
                     (in[kg/kg])
 
 .. nl:value:: "TW_2M"
+
     2m wet bulb temperature [K];
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M.
@@ -1344,6 +1350,7 @@ thermodynamic quantities
                     offset = 0. (in [Pa])
 
 .. nl:value:: "TD_2M"
+
     2m-dew point temperature (in [Kelvin]);
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M, and the dew point is then calculated
@@ -1372,6 +1379,7 @@ thermodynamic quantities
                     offset = 0. (in [Pa])
 
 .. nl:value:: "D_TD_2M"
+
     2m-dew point depression; 
             Compute TD_2M using PS, QV_2M and T_2M (see TD_2M), and then 
             compute the depression
@@ -1401,6 +1409,7 @@ thermodynamic quantities
                     (in[K])
 
 .. nl:value:: "ENTH_2M"
+
     2m enthalpy (heat content) of air based on specific humidity and temperature
             [J/kg];
             ENTH_2M = f(QV_2M,T_2M)
@@ -1436,6 +1445,7 @@ thermodynamic quantities
                     (in [Pa])
 
 .. nl:value:: "QV_2M"
+
     2m specific humidity based on surface pressure and dew point [kg/kg];
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M.
@@ -1448,6 +1458,7 @@ thermodynamic quantities
                     (in[K])
 
 .. nl:value:: "QV_SAT_2M"
+
     2m specific humidity at saturation [kg/kg];
             The specific humidity at saturation uses the same formula as for the
             computation of the specific humidity, but takes T_2M instead of TD_2M
@@ -1470,6 +1481,7 @@ thermodynamic quantities
 
 
 .. nl:value:: "MIXRAT_2M"
+
     2m mixing ratio;
             MIXRAT_2M = QV_2M/(1-QV_2M)
                 :nl:val:`"QV_2M"`
@@ -1496,6 +1508,7 @@ thermodynamic quantities
                     offset = 0. (in [Pa])
 
 .. nl:value:: "RELHUM_2M"
+
     2m-relative humidity over water [%];
             RELHUM = 100 * PVsat_water(TD_2M)/PVsat_water(T_2M)
             (standard physical definition)
@@ -1558,6 +1571,7 @@ thermodynamic quantities
                     
 
 .. nl:value:: "T_2M_SNOWC"
+
     snow corrected 2m temperature;
             T_2M_SNOWC = T_2M              if W_SNOW < 0.1
                         = T(lowest level)   if W_SNOW > 0.1
@@ -1833,6 +1847,7 @@ Turbulence variables
             This algorithm is only supported for the COSMO model.
 
 .. nl:value:: "CAT_TI1"
+
     Ellrod and Knapp turbulence index 1 (in [1/s**2])
             CAT_TI1 = WSHEAR * WDEF_H
                 :nl:val:`"WSHEAR"`
@@ -1841,6 +1856,7 @@ Turbulence variables
                     (in [1/s])
 
 .. nl:value:: "CAT_TI2"
+
     Ellrod and Knapp turbulence index 2 (in [1/s**2])
             CAT_TI2 = WSHEAR * (WDEF_H - WDIV)
                 :nl:val:`"WSHEAR"`
@@ -2343,6 +2359,7 @@ indices
         HEIGHT or HHL : (in [m], on model half levels) 
 
 .. nl:value:: "ADEDO2"
+
     Adedokun 2 index: Lowering a parcel from 500hPa to surface moist
                             adiabatically and comparing the wet bulb temperature
                             of this parcel (THETAW_500S) with the wet bulb 
@@ -2493,6 +2510,7 @@ Generic operators are characterized by a main parent which is arbitrary,
 and whose identity is set in the namelist.
 
 .. nl:value:: "AD2D_TRACER"
+
     horizontal advection of TRACER on model surface.
                 AD2D_TRACER(tracer) = (u,v) * GRADIENT(tracer)
                         :nl:val:`"TRACER"`
