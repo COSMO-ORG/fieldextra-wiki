@@ -1,7 +1,7 @@
 :nl:nl:`&GlobalResource`
 =========================
 
-.. nl:namelist:: &GlobalResource
+.. nl:namelist:: GlobalResource
     
 This namelist block must be present and unique.
 

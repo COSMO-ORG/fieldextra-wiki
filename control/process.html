@@ -702,7 +702,7 @@ record.</p>
 <p>The special value __AUTO__ is used to defer the choice of the dictionary
 till a record is decoded, independently for each record. The dictionary
 is selected on the basis of the decoded model type and product category,
-in the list of dictionaries specified in <code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code>
+in the list of dictionaries specified in <a class="reference internal" href="globRes.html#nl-nl-GlobalResource" title="&amp;GlobalResource"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a>
 is associated with a model type (keyword MODEL_TYPE) and, optionaly, with
 a list of product category (keyword PRODUCT_CATEGORY), and these
 information are used to select the active dictionary:
@@ -1410,8 +1410,8 @@ The choice of the re-gridding method is set with <a class="reference internal" h
 methods may be defined, including a default method and a set of field specific
 methods (using the <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code> mechanism).
 When re-gridding from unstructured grid, the description of the source grid
-must be made available through <code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code>; this case is currently only
-implemented for the ICON grid (use <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">icon_grid_description</span></code>
+must be made available through <a class="reference internal" href="globRes.html#nl-nl-GlobalResource" title="&amp;GlobalResource"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a>; this case is currently only
+implemented for the ICON grid (use <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-icon_grid_description" title="&amp;GlobalResource icon_grid_description"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">icon_grid_description</span></code></a>
 to load the description of the source grid).</p>
 <p>Re-gridding on a regular grid is required before further processing of any field
 defined on an unstructured grid.</p>
@@ -2982,7 +2982,7 @@ which is necessary to generate multi-models products.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">GRIB2</span></code> :</dt><dd><p>the template is a GRIB 2 file containing a generic record used
 by ecCodes to construct the final GRIB 2 record. When
-out_type_template is not set, the value of <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">grib2_sample</span></code> is used instead.</p>
+out_type_template is not set, the value of <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-grib2_sample" title="&amp;GlobalResource grib2_sample"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">grib2_sample</span></code></a> is used instead.</p>
 <p>Important: see remark in <a class="reference internal" href="../output.html#section-7-12"><span class="std std-ref">GRIB2</span></a> about the choice of the GRIB 2 sample.</p>
 </dd>
 </dl>
@@ -3367,7 +3367,7 @@ the border of the original domain is smaller or equal to ‘frame_ngp’</p>
 the smallest rectangle in grid point coordinates containing the
 specified region. The region is defined as a polygon in geographical
 lat/lon coordinates; the values of ‘region_set_tag’ and ‘region_tag’
-refer to the definition of regions in the <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">region_list</span></code> file (see <a class="reference internal" href="../support.html#section-6-4"><span class="std std-ref">region_list</span></a>).</p>
+refer to the definition of regions in the <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-region_list" title="&amp;GlobalResource region_list"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">region_list</span></code></a> file (see <a class="reference internal" href="../support.html#section-6-4"><span class="std std-ref">region_list</span></a>).</p>
 </dd></dl>
 
 <p><strong>by specifying a set of grid point coordinates</strong></p>
@@ -3416,10 +3416,10 @@ this former variable is not set.</p>
 </dd></dl>
 
 <p>The set of locations is defined by a list of geographical locations,
-which are either defined in the <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">location_list</span></code> file or automatically
-generated as region representative (see description of <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">region_list</span></code>).
+which are either defined in the <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-location_list" title="&amp;GlobalResource location_list"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">location_list</span></code></a> file or automatically
+generated as region representative (see description of <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-region_list" title="&amp;GlobalResource region_list"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">region_list</span></code></a>).
 The list of locations can be specified by using the location id’s,
-or by exploiting the location aliases defined in the <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">location_list</span></code>
+or by exploiting the location aliases defined in the <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-location_list" title="&amp;GlobalResource location_list"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">location_list</span></code></a>
 file (of the form <code class="docutils literal notranslate"><span class="pre">&lt;group&gt;:&lt;name&gt;</span></code>). In this latter case, the location
 group has to be specified with <code class="docutils literal notranslate"><span class="pre">locgroup=...</span></code>, and the associated list
 of names with <code class="docutils literal notranslate"><span class="pre">loclist=...</span></code> Only one group may be specified. If <a class="reference internal" href="#nl-attr-Process-loclist" title="&amp;Process loclist"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">loclist</span></code></a>
@@ -3449,7 +3449,7 @@ grid (i.e. they are not re-adjusted to take into account the staggering).</p>
 </dl>
 <p>A slice is a broken line on the surface of the earth. The value of
 slice_tag refers to the definition of the slice found in the file
-specified by slice_list (as defined in <code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code>). See <a class="reference internal" href="../support.html#section-6-5"><span class="std std-ref">slice_list</span></a> for more detailed information.</p>
+specified by slice_list (as defined in <a class="reference internal" href="globRes.html#nl-nl-GlobalResource" title="&amp;GlobalResource"><code class="xref nl nl-nl docutils literal notranslate"><span class="pre">&amp;GlobalResource</span></code></a>). See <a class="reference internal" href="../support.html#section-6-5"><span class="std std-ref">slice_list</span></a> for more detailed information.</p>
 </dd></dl>
 
 <div class="admonition note">
@@ -5131,7 +5131,7 @@ next_neighbour interpolation.</p>
 <p class="admonition-title">Note</p>
 <p>Notes about <code class="docutils literal notranslate"><span class="pre">regavg</span></code> / <code class="docutils literal notranslate"><span class="pre">regmin</span></code> / <code class="docutils literal notranslate"><span class="pre">regmax</span></code> / <code class="docutils literal notranslate"><span class="pre">regcnt</span></code>/ <code class="docutils literal notranslate"><span class="pre">regcnt%</span></code> / <code class="docutils literal notranslate"><span class="pre">regqtl</span></code> / <code class="docutils literal notranslate"><span class="pre">regfit</span></code> operators:</p>
 <ul class="simple">
-<li><p>The file defining user defined regions is specified by <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">region_list</span></code>.
+<li><p>The file defining user defined regions is specified by <a class="reference internal" href="globRes.html#nl-attr-GlobalResource-region_list" title="&amp;GlobalResource region_list"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">region_list</span></code></a>.
 This file may contain multiple sets of regions, and the argument ‘s’
 defines which set is used in the computation.</p></li>
 <li><p>All points of the same region have the same value after the transformation,
