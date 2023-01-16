@@ -9,10 +9,10 @@ This namelist block must be present and unique.
     :type: logical
     
     Some non-recommended usage of the namelist can be useful in some
-    situations. In this case this switch should be set to .FALSE.
+    situations. In this case this switch should be set to ``.FALSE.``
     (the following tests are then skipped: orthogonality of xtr_field
     specifications, existence of at least one xtr_field, all xtr_field 
-    defined before tmp\_ and out\_ iterations).
+    defined before ``tmp_`` and ``out_`` iterations).
 
 .. nl:argument::  strict_usage
     :type: logical
@@ -55,8 +55,12 @@ This namelist block must be present and unique.
     exit status of 1.
 
 .. nl:argument::  enable_repeat_mode
-    :type: {'none','regular','all'}
+    :type: string
     :default: 'none'
+
+    :value 'none':
+    :value 'regular':
+    :value 'all':
 
     When enable_repeat_mode is distinct from 'none', the file 'fieldextra.rmode'
     will be created in the working directory; this file contains the full list
@@ -97,17 +101,17 @@ This namelist block must be present and unique.
     been processed. This is used to synchronize fieldextra with downstream
     processing modules.
     
-    The processing order of input files is described at the beginning of
-    section 4.3.1; as soon as all pure input files associated with a specific
+    The processing order of input files is described at the beginning of :ref:`section 4.3.1`
+    ; as soon as all pure input files associated with a specific
     time stamp have been processed, and the associated output produced, including
     those output depending on temporary buffer, an empty file with a time stamp
-    dependent name will be created. These files are created in the directory
-    ready_flag_dir and are named <ready_flag_prefix_pure><time stamp> .
+    dependent name will be created. These files are created in the directory :nl:arg:`&RunSpecification ready_flag_dir`
+    and are named <ready_flag_prefix_pure><time stamp> .
     
     The association of input files with a certain time stamp is only done
     for files explicitely declared within a time loop. The time stamp
     format depends on the time loop keyword specified in the namelist
-    (see 4.3.1 --> time loop). If several time loop keywords are used
+    (see :ref:`section 4.3.1`). If several time loop keywords are used
     within the same namelist, a ready flag will be created for each 
     (time stamp, time loop keyword) pair.
     
@@ -128,7 +132,7 @@ This namelist block must be present and unique.
     file name postfix, snapshot files
 
     It is possible to produce snapshots of currently processed output at
-    specified times (see out_type_snapshot in &Process specification). The
+    specified times (see :nl:arg:`&Process out_type_snapshot`). The
     name of the snapshot is constructed by appending the string <out_snapshot_postfix><time stamp>
     to the normal output file name, where <time stamp> is the time stamp
     of the input file triggering the snapshot production.
@@ -155,7 +159,7 @@ This namelist block must be present and unique.
     template, with all field values associated with the missing file set
     to undef.
     
-    By default these mechanisms are inactive and  missing input files
+    By default these mechanisms are inactive and missing input files
     are skipped (and the program will return an unsuccessful exit status).
     Each of these two mechanisms can be enabled independently.
     
@@ -265,7 +269,7 @@ This namelist block must be present and unique.
 
     Two values may be specified for n_ompthread_generate, to use
     a distinct partition of threads for expensive products
-    (see out_cost_expensive below, see 2.6 for more details).
+    (see :nl:arg:`&RunSpecification out_cost_expensive` below, see :ref:`section 2.6` for more details).
     
     The default value for these parameters is 1 and a different value
     is only allowed when the program runs in OpenMP mode. 
@@ -285,12 +289,13 @@ This namelist block must be present and unique.
 
     Control the output production granularity; the larger the value the
     higher the potential OpenMP speedup, but also the higher the memory
-    footprint. Default value is 1. See section 2.6 for more details.
+    footprint. Default value is 1. See :ref:`section 2.6` for more details.
 
 .. nl:argument::  soft_memory_limit 
     :type: positive real
+    :default: 20.0
 
-    Soft limit on memory allocation (in gigabyte), default: 20.0 .
+    Soft limit on memory allocation (in gigabyte).
     This defines a soft limit for the memory usage at run time. Memory
     allocation is tracked within the program and the program stops when
     reaching this limit. Note that the total memory usage at that point
@@ -324,17 +329,17 @@ This namelist block must be present and unique.
 
     Control the type of information written to the standard output:
 
-    * 'silent'  : only errors
-    * 'low'     : key status,  errors
-    * 'moderate': usage, key status, warning and errors
-    * 'high'    : usage, all status, warning and errors
-    * 'debug    : as 'high', with additional information required
+    :val 'silent': only errors
+    :val 'low': key status, errors
+    :val 'moderate': usage, key status, warning and errors
+    :val 'high': usage, all status, warning and errors
+    :val 'debug': as :nl:val:`'high'`, with additional information required
       to understand code behaviour (can be very verbose!)
 
     The high verbosity level should be used when encountering problems
     with the program.
-    When verbosity is set to 'debug', additional_diagnostic and 
-    additional_profiling are also automatically set to true.
+    When verbosity is set to :nl:val:`'debug'`, :nl:arg:`additional_diagnostic` and 
+    :nl:arg:`additional_profiling` are also automatically set to true.
 
 .. nl:argument::  diagnostic_length
 

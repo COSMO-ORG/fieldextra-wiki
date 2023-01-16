@@ -221,10 +221,10 @@
 <dt class="sig sig-object nl" id="nl-attr-RunSpecification-strict_nl_parsing">
 <span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">strict_nl_parsing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">logical</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-strict_nl_parsing" title="Permalink to this definition">#</a></dt>
 <dd><p>Some non-recommended usage of the namelist can be useful in some
-situations. In this case this switch should be set to .FALSE.
+situations. In this case this switch should be set to <code class="docutils literal notranslate"><span class="pre">.FALSE.</span></code>
 (the following tests are then skipped: orthogonality of xtr_field
 specifications, existence of at least one xtr_field, all xtr_field
-defined before tmp_ and out_ iterations).</p>
+defined before <code class="docutils literal notranslate"><span class="pre">tmp_</span></code> and <code class="docutils literal notranslate"><span class="pre">out_</span></code> iterations).</p>
 </dd></dl>
 
 <dl class="nl argument">
@@ -269,8 +269,20 @@ exit status of 1.</p>
 
 <dl class="nl argument">
 <dt class="sig sig-object nl" id="nl-attr-RunSpecification-enable_repeat_mode">
-<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">enable_repeat_mode</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="pre">'none'</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">{'none','regular','all'}</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-enable_repeat_mode" title="Permalink to this definition">#</a></dt>
-<dd><p>When enable_repeat_mode is distinct from ‘none’, the file ‘fieldextra.rmode’
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">enable_repeat_mode</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="pre">'none'</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">string</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-enable_repeat_mode" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-RunSpecification-enable_repeat_mode-none"><code class="docutils literal notranslate"><span class="pre">'none'</span></code></span></dt><dd><p></p>
+</dd>
+<dt><span class="target" id="nl-val-RunSpecification-enable_repeat_mode-regular"><code class="docutils literal notranslate"><span class="pre">'regular'</span></code></span></dt><dd><p></p>
+</dd>
+<dt><span class="target" id="nl-val-RunSpecification-enable_repeat_mode-all"><code class="docutils literal notranslate"><span class="pre">'all'</span></code></span></dt><dd><p></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>When enable_repeat_mode is distinct from ‘none’, the file ‘fieldextra.rmode’
 will be created in the working directory; this file contains the full list
 of products and their production status. This file is generated at the
 end of the fieldextra task, the first time enable_repeat_mode is activated.
@@ -310,16 +322,16 @@ namelist.</p>
 so called ready file, as soon as a specific group of input files has
 been processed. This is used to synchronize fieldextra with downstream
 processing modules.</p>
-<p>The processing order of input files is described at the beginning of
-section 4.3.1; as soon as all pure input files associated with a specific
+<p>The processing order of input files is described at the beginning of <a class="reference internal" href="process.html#section-4-3-1"><span class="std std-ref">Input files</span></a>
+; as soon as all pure input files associated with a specific
 time stamp have been processed, and the associated output produced, including
 those output depending on temporary buffer, an empty file with a time stamp
-dependent name will be created. These files are created in the directory
-ready_flag_dir and are named &lt;ready_flag_prefix_pure&gt;&lt;time stamp&gt; .</p>
+dependent name will be created. These files are created in the directory <a class="reference internal" href="#nl-attr-RunSpecification-ready_flag_dir" title="&amp;RunSpecification ready_flag_dir"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;RunSpecification</span> <span class="pre">ready_flag_dir</span></code></a>
+and are named &lt;ready_flag_prefix_pure&gt;&lt;time stamp&gt; .</p>
 <p>The association of input files with a certain time stamp is only done
 for files explicitely declared within a time loop. The time stamp
 format depends on the time loop keyword specified in the namelist
-(see 4.3.1 –&gt; time loop). If several time loop keywords are used
+(see <a class="reference internal" href="process.html#section-4-3-1"><span class="std std-ref">Input files</span></a>). If several time loop keywords are used
 within the same namelist, a ready flag will be created for each
 (time stamp, time loop keyword) pair.</p>
 <p>An exception is raised if the ready flag already exists.</p>
@@ -341,7 +353,7 @@ if a non blank value is specified for out_noready_postfix.</p>
 <span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">out_snapshot_postfix</span></span><a class="headerlink" href="#nl-attr-RunSpecification-out_snapshot_postfix" title="Permalink to this definition">#</a></dt>
 <dd><p>file name postfix, snapshot files</p>
 <p>It is possible to produce snapshots of currently processed output at
-specified times (see out_type_snapshot in &amp;Process specification). The
+specified times (see <a class="reference internal" href="process.html#nl-attr-Process-out_type_snapshot" title="&amp;Process out_type_snapshot"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">out_type_snapshot</span></code></a>). The
 name of the snapshot is constructed by appending the string &lt;out_snapshot_postfix&gt;&lt;time stamp&gt;
 to the normal output file name, where &lt;time stamp&gt; is the time stamp
 of the input file triggering the snapshot production.</p>
@@ -373,7 +385,7 @@ seconds, up to a maximum of mx_wait_time cumulated seconds. If the
 file is still not present, it may be cloned using a previous file as
 template, with all field values associated with the missing file set
 to undef.</p>
-<p>By default these mechanisms are inactive and  missing input files
+<p>By default these mechanisms are inactive and missing input files
 are skipped (and the program will return an unsuccessful exit status).
 Each of these two mechanisms can be enabled independently.</p>
 <p>If the flag stop_wait_flag is found while waiting for an input file,
@@ -485,7 +497,7 @@ with INT(n_ompthread_total/n_ompthread_generate) threads.</p></li>
 </ul>
 <p>Two values may be specified for n_ompthread_generate, to use
 a distinct partition of threads for expensive products
-(see out_cost_expensive below, see 2.6 for more details).</p>
+(see <a class="reference internal" href="#nl-attr-RunSpecification-out_cost_expensive" title="&amp;RunSpecification out_cost_expensive"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;RunSpecification</span> <span class="pre">out_cost_expensive</span></code></a> below, see <a class="reference internal" href="../usage.html#section-2-6"><span class="std std-ref">Shared memory multitasking</span></a> for more details).</p>
 <p>The default value for these parameters is 1 and a different value
 is only allowed when the program runs in OpenMP mode.</p>
 </dd></dl>
@@ -507,13 +519,13 @@ computed first, using n_ompthread_generate(2);</p></li>
 <span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">out_production_granularity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer,</span> <span class="pre">larger</span> <span class="pre">or</span> <span class="pre">equal</span> <span class="pre">to</span> <span class="pre">1</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-out_production_granularity" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the output production granularity; the larger the value the
 higher the potential OpenMP speedup, but also the higher the memory
-footprint. Default value is 1. See section 2.6 for more details.</p>
+footprint. Default value is 1. See <a class="reference internal" href="../usage.html#section-2-6"><span class="std std-ref">Shared memory multitasking</span></a> for more details.</p>
 </dd></dl>
 
 <dl class="nl argument">
 <dt class="sig sig-object nl" id="nl-attr-RunSpecification-soft_memory_limit">
-<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">soft_memory_limit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">positive</span> <span class="pre">real</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-soft_memory_limit" title="Permalink to this definition">#</a></dt>
-<dd><p>Soft limit on memory allocation (in gigabyte), default: 20.0 .
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">soft_memory_limit</span></span><em class="property"><span class="p"><span class="pre">=</span></span><span class="pre">20.0</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">positive</span> <span class="pre">real</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-soft_memory_limit" title="Permalink to this definition">#</a></dt>
+<dd><p>Soft limit on memory allocation (in gigabyte).
 This defines a soft limit for the memory usage at run time. Memory
 allocation is tracked within the program and the program stops when
 reaching this limit. Note that the total memory usage at that point
@@ -547,18 +559,27 @@ small compared to the size of the processed records.</p>
 <dt class="sig sig-object nl" id="nl-attr-RunSpecification-verbosity">
 <span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">verbosity</span></span><a class="headerlink" href="#nl-attr-RunSpecification-verbosity" title="Permalink to this definition">#</a></dt>
 <dd><p>Control the type of information written to the standard output:</p>
-<ul class="simple">
-<li><p>‘silent’  : only errors</p></li>
-<li><p>‘low’     : key status,  errors</p></li>
-<li><p>‘moderate’: usage, key status, warning and errors</p></li>
-<li><p>‘high’    : usage, all status, warning and errors</p></li>
-<li><p>‘debug    : as ‘high’, with additional information required
-to understand code behaviour (can be very verbose!)</p></li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Possible Values<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><span class="target" id="nl-val-RunSpecification-verbosity-silent"><code class="docutils literal notranslate"><span class="pre">'silent'</span></code></span></dt><dd><p>only errors</p>
+</dd>
+<dt><span class="target" id="nl-val-RunSpecification-verbosity-low"><code class="docutils literal notranslate"><span class="pre">'low'</span></code></span></dt><dd><p>key status, errors</p>
+</dd>
+<dt><span class="target" id="nl-val-RunSpecification-verbosity-moderate"><code class="docutils literal notranslate"><span class="pre">'moderate'</span></code></span></dt><dd><p>usage, key status, warning and errors</p>
+</dd>
+<dt><span class="target" id="nl-val-RunSpecification-verbosity-high"><code class="docutils literal notranslate"><span class="pre">'high'</span></code></span></dt><dd><p>usage, all status, warning and errors</p>
+</dd>
+<dt><span class="target" id="nl-val-RunSpecification-verbosity-debug"><code class="docutils literal notranslate"><span class="pre">'debug'</span></code></span></dt><dd><p>as <a class="reference internal" href="#nl-val-RunSpecification-verbosity-high" title="&amp;RunSpecification verbosity='high'"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">'high'</span></code></a>, with additional information required
+to understand code behaviour (can be very verbose!)</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p>The high verbosity level should be used when encountering problems
 with the program.
-When verbosity is set to ‘debug’, additional_diagnostic and
-additional_profiling are also automatically set to true.</p>
+When verbosity is set to <a class="reference internal" href="#nl-val-RunSpecification-verbosity-debug" title="&amp;RunSpecification verbosity='debug'"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">'debug'</span></code></a>, <a class="reference internal" href="#nl-attr-RunSpecification-additional_diagnostic" title="&amp;RunSpecification additional_diagnostic"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">additional_diagnostic</span></code></a> and
+<a class="reference internal" href="#nl-attr-RunSpecification-additional_profiling" title="&amp;RunSpecification additional_profiling"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">additional_profiling</span></code></a> are also automatically set to true.</p>
 </dd></dl>
 
 <dl class="nl argument">
