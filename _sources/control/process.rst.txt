@@ -10,7 +10,7 @@ Fieldextra supports the simultaneous generation of multiple products.
 The operations required to generate each product are defined by a set
 of :nl:nl:`&Process` blocks in the namelist file. Multiple :nl:nl:`&Process` blocks are
 associated with a specified product using the name of the output file
-(:nl:arg:`&Process out_file`); until a new output file name is defined, all :nl:nl:`&Process`
+(:nl:arg:`out_file`); until a new output file name is defined, all :nl:nl:`&Process`
 blocks belong to the same product definition (following the order
 of :nl:nl:`&Process` blocks in the control file).
     
@@ -24,7 +24,7 @@ on extracted fields and computation of derived fields are applied before
 writing the output on disk (see :ref:`section 4.3.4`
 and :ref:`section 4.3.5`).
 
-The typical sequence of :nl:nl:`&Process` blocks for a specific :nl:arg:`&Process out_file` is: ::
+The typical sequence of :nl:nl:`&Process` blocks for a specific :nl:arg:`out_file` is: ::
 
     &Process  in_file= ...                                    | This can be repeated when
               out_file= ...    /                              | multiple input contribute
@@ -78,8 +78,8 @@ iterations that are made.
 
 As explained in detail further on, it is possible to use some shortcuts to
 write more compact namelists. In particular it is possible to use an implicit
-time loop in the definition of :nl:arg:`&Process in_file`, and to suppress the out_field group
-when all extracted fields have to be available in :nl:arg:`&Process out_file`.
+time loop in the definition of :nl:arg:`in_file`, and to suppress the out_field group
+when all extracted fields have to be available in :nl:arg:`out_file`.
 
 .. _section 4.3.1:
     
@@ -167,7 +167,7 @@ Input files are processed twice: first to collect data for pseudo-output
 
 Processing order of input files is defined by the following rules:
 
-Case A : :nl:arg:`&Process in_read_order` is not set
+Case A : :nl:arg:`in_read_order` is not set
     1.  files with the same time stamp are grouped together
         (a file defined both with and without a time stamp is 
         recognized as a unique input file and sorting is based
@@ -182,7 +182,7 @@ Case A : :nl:arg:`&Process in_read_order` is not set
         follows increasing alphanumeric order of associated
         time stamp;
     4.  re-order some special files
-        (pure input: :nl:arg:`&Process in_file` not declared as :nl:arg:`&Process out_file`)
+        (pure input: :nl:arg:`in_file` not declared as :nl:arg:`out_file`)
         
         1.  move non pure input at the end of the group containing
             the last contributing pure input, respecting otherwise
@@ -193,14 +193,14 @@ Case A : :nl:arg:`&Process in_read_order` is not set
     5.  INCORE pseudo-file is accessed on-demand, and, for each
         output, before the first contributing standard input file.
 
-Case B : :nl:arg:`&Process in_read_order` is set
-    in this case, :nl:arg:`&Process in_read_order` must be set for all 
+Case B : :nl:arg:`in_read_order` is set
+    in this case, :nl:arg:`in_read_order` must be set for all 
     input files, and in_sort_first is not allowed
 
     1.  files are processed following increasing values of
-        :nl:arg:`&Process in_read_order`;
+        :nl:arg:`in_read_order`;
     2.  within a group of files having the same value of
-        :nl:arg:`&Process in_read_order`, rules 1-3 of case A applies; 
+        :nl:arg:`in_read_order`, rules 1-3 of case A applies; 
     3.  INCORE pseudo-file is accessed on-demand, and, for each
         output, before the first contributing standard input file.
 
@@ -399,7 +399,7 @@ other characteristics
     INCORE  : 
             pseudo input type to support direct access to fields
             stored in INCORE storage (see 4.3.2 below). The
-            parameter :nl:arg:`&Process in_file` must not be set in this case.
+            parameter :nl:arg:`in_file` must not be set in this case.
     PLAIN   : 
             plain input file; the format currently supported are
             WMO GRIB, edition 1 and 2, NetCDF (CF convention), and
@@ -488,7 +488,7 @@ this ouput is limited to the contributing input files.
 
 The set of contributing input depends on the usage of time and eps
 keywords in the definition of the input and the output, on the
-usage of :nl:arg:`&Process tlag` and on the usage of :nl:arg:`&Process out_group_eps`, as explained below.
+usage of :nl:arg:`tlag` and on the usage of :nl:arg:`out_group_eps`, as explained below.
 
 Normally, the production of any specified output is done only once all
 contributing input files have been processed, or, at the latest, at the
@@ -499,7 +499,7 @@ has been processed. This is the so-called 'just on time' mode.
 
 **'just on time mode'**
     *   by default, automatically set, independently for each output
-        (but :nl:arg:`&Process out_type_justontime` allows explicit control)
+        (but :nl:arg:`out_type_justontime` allows explicit control)
     *   this mode controls the way multiple validation times are
         processed: either in one pass at the end of the program,
         or each time the data for a specific validation time have
@@ -509,12 +509,12 @@ has been processed. This is the so-called 'just on time' mode.
         to be active:
 
         *   output supports just on time mode (supports the use 
-            of :nl:arg:`&Process out_type_justontime`, see output characteristics in
+            of :nl:arg:`out_type_justontime`, see output characteristics in
             :ref:`chapter 7`)
         *   all time operators are set to identity
         *   no computed fields requiring parents on multiple time levels
         *   no use of out_postproc_module (could contain time operator)
-        *   no use of time stamp in :nl:arg:`&Process out_file` definition
+        *   no use of time stamp in :nl:arg:`out_file` definition
         *   all contributing input files, with the exception of INCORE,
             are declared with the same non trivial time keyword and are
             associated with the same time list.
@@ -548,16 +548,16 @@ setting :nl:arg:`&RunSpecification out_noready_postfix`.
 time and eps loop
 ^^^^^^^^^^^^^^^^^
 
-As for the definition of :nl:arg:`&Process in_file`, it is possible to use a generic
-name for :nl:arg:`&Process out_file`, using one of the following keyword:
+As for the definition of :nl:arg:`in_file`, it is possible to use a generic
+name for :nl:arg:`out_file`, using one of the following keyword:
 
-time related, refer to :nl:arg:`&Process tstart` or :nl:arg:`&Process tlist` :
+time related, refer to :nl:arg:`tstart` or :nl:arg:`tlist` :
     ``<hh>`` [1]_, ``<hhh>`` [1]_, ``<ddhh>`` [1]_, ``<ddhhmmss>`` [1]_,
     ``<yyyy:start_year>``, ``<reference_yyyy:start_year>``
     ``<yyyymmddhh:start_date>``, ``<reference_yyyymmddhh:start_date>``
     ``<yyyymmddhhmm:start_date>``, ``<reference_yyyymmddhhmm:start_date>``
     ``<nnnnnnnn>`` [1]_
-eps related, refer to :nl:arg:`&Process epsstart` or :nl:arg:`&Process epslist` :
+eps related, refer to :nl:arg:`epsstart` or :nl:arg:`epslist` :
     ``<mm>``, ``<mmm>``
 
 .. [1] 
@@ -567,22 +567,22 @@ eps related, refer to :nl:arg:`&Process epsstart` or :nl:arg:`&Process epslist` 
     This functionality supports in particular the construction of lagged
     ensemble.
 
-As for :nl:arg:`&Process in_file`, the list of output files is constructed by replacing 
+As for :nl:arg:`in_file`, the list of output files is constructed by replacing 
 the eps or time keyword with each element of the specified eps or time
-list in turn (as specified by :nl:arg:`&Process epslist`, :nl:arg:`&Process epsstart`... or :nl:arg:`&Process tlist`, :nl:arg:`&Process tstart`...).
+list in turn (as specified by :nl:arg:`epslist`, :nl:arg:`epsstart`... or :nl:arg:`tlist`, :nl:arg:`tstart`...).
 In case of time keyword, the units for the values of the time list
-are defined according to the :nl:arg:`&Process in_file` time keyword, if present; 
-otherwise the :nl:arg:`&Process out_file` time keyword defines these units.
+are defined according to the :nl:arg:`in_file` time keyword, if present; 
+otherwise the :nl:arg:`out_file` time keyword defines these units.
 
 These keywords are primary used to group similar output files created
 with the same operations, which supports more compact namelist and
 help optimize some internal operations. However, this feature also
 supports some additional functionalities, such as distributing the
-input file records in multiple output (see :nl:arg:`&Process out_shuffle_time` and :nl:arg:`&Process out_shuffle_eps`).
+input file records in multiple output (see :nl:arg:`out_shuffle_time` and :nl:arg:`out_shuffle_eps`).
     
 When the set of contributing input files has been defined by an
 implicit time loop (generic name), it is possible to restrict the
-set of output files, when :nl:arg:`&Process out_file` is defined by a generic name,
+set of output files, when :nl:arg:`out_file` is defined by a generic name,
 and the set of active dates collected in each output, by defining
 a new time list :
 
@@ -606,7 +606,7 @@ The effects of this time list are:
 2.  For each output, restrict the set of collected dates to the ones
     present in the contributing input files with a matching time stamp
     (files without time stamp are not filtered out). Note that any
-    operator defined for the production of the output (e.g. :nl:arg:`&Process toper` )
+    operator defined for the production of the output (e.g. :nl:arg:`toper` )
     has access to all time levels, the filter acting only after the
     generation of the output fields.
 
@@ -617,22 +617,22 @@ definition, the default rule is to associate the files with the same
 time or eps keyword.
 This default behaviour does not support the case where multiple time
 levels or multiple EPS members are required to compute the output
-fields (e.g. use of :nl:arg:`&Process toper`, computation of EPS derived fields). For 
-this reason the default rule can be changed by the usage of :nl:arg:`&Process tlag`
-or :nl:arg:`&Process out_group_eps`, as explained below.
+fields (e.g. use of :nl:arg:`toper`, computation of EPS derived fields). For 
+this reason the default rule can be changed by the usage of :nl:arg:`tlag`
+or :nl:arg:`out_group_eps`, as explained below.
 
 .. nl:argument:: tlag
 
     :format: <start time>[,<stop time>[,<increment>]]
 
 
-    The variable :nl:arg:`&Process tlag` defines a set of times through an implicit time loop;
+    The variable :nl:arg:`tlag` defines a set of times through an implicit time loop;
     the following conditions must be respected:
 
     *  start time <= 0, start time <= stop time, increment > 0
     *  0 must be part of the set of time
    
-    The set of times defined through :nl:arg:`&Process tlag` specifies the set of input files
+    The set of times defined through :nl:arg:`tlag` specifies the set of input files
     contributing to each output, expressed as time differences relatively
     to the time stamp defined for each concerned output:
 
@@ -647,7 +647,7 @@ or :nl:arg:`&Process out_group_eps`, as explained below.
    
     Two optional syntax are also supported:
 
-    * When :nl:arg:`&Process tlag` is only defined through <start time>, the other components
+    * When :nl:arg:`tlag` is only defined through <start time>, the other components
       take the values ::     
 
         <stop time> = 0
@@ -664,13 +664,13 @@ or :nl:arg:`&Process out_group_eps`, as explained below.
       with irregular list of times.
    
     The variable tlag is mostly used in relation with a temporal operator
-    (:nl:arg:`&Process toper`), when the fields in each output file are the result of some
+    (:nl:arg:`toper`), when the fields in each output file are the result of some
     temporal transformation, but a unique output file is desired for each
     time level; in this situation, it is important to make sure that the
-    set of contributing times specified by :nl:arg:`&Process tlag` is compatible with the
-    set of times levels required by :nl:arg:`&Process toper`, as specified in :nl:arg:`&Process toper` argument.
+    set of contributing times specified by :nl:arg:`tlag` is compatible with the
+    set of times levels required by :nl:arg:`toper`, as specified in :nl:arg:`toper` argument.
    
-    Note that :nl:arg:`&Process tlag` can only be set when both :nl:arg:`&Process in_file` and :nl:arg:`&Process out_file` are
+    Note that :nl:arg:`tlag` can only be set when both :nl:arg:`in_file` and :nl:arg:`out_file` are
     defined as generic name, with a time keyword. 
 
 .. nl:argument:: out_group_eps
@@ -693,7 +693,7 @@ or :nl:arg:`&Process out_group_eps`, as explained below.
     of a set of EPS members, with each member in a unique file, where the
     transformation uses EPS reduction operators (e.g. mean, deviation).
    
-    When setting :nl:arg:`&Process in_size_field`, consider all fields contributing to the
+    When setting :nl:arg:`in_size_field`, consider all fields contributing to the
     common internal storage (this means in particular multiplying the
     number of extracted fields by the number of distinct EPS members in
     the contributing input).
@@ -709,10 +709,10 @@ grouping fields with the same characteristics in the same output.
 
     :format: <.TRUE. or .FALSE.>
 
-    By setting :nl:arg:`&Process out_shuffle_time` to true, the fields are dispatched in
+    By setting :nl:arg:`out_shuffle_time` to true, the fields are dispatched in
     different output on the basis of their reference date, validation
     date or lead time. A time keyword must be used in the definition
-    of :nl:arg:`&Process out_file`, and a list of times must be specified. The way the
+    of :nl:arg:`out_file`, and a list of times must be specified. The way the
     fields are grouped depends on the time keyword:
 
     *   when using <yyyy:start_year>, fields with the same year
@@ -735,9 +735,9 @@ grouping fields with the same characteristics in the same output.
 
     :format: <.TRUE. or .FALSE.>
 
-    By setting :nl:arg:`&Process out_shuffle_eps` to true, the fields are distributed 
+    By setting :nl:arg:`out_shuffle_eps` to true, the fields are distributed 
     in different output on the basis of their EPS member values. An
-    EPS member keyword must be used in the definition of :nl:arg:`&Process out_file`,
+    EPS member keyword must be used in the definition of :nl:arg:`out_file`,
     and a list of EPS members must be specified. EPS fields not
     associated with a specific EPS member value (e.g. mean), and 
     non EPS fields are dispatched in all output.
@@ -752,13 +752,13 @@ in field manipulation
     :format: <.TRUE. or .FALSE.>
 
     By default a single instance of each 2d field is allowed in the
-    :nl:arg:`&Process in_field` iteration (a 2d field is characterized by its short name,
+    :nl:arg:`in_field` iteration (a 2d field is characterized by its short name,
     level, eps identity...). This can be changed by setting
-    :nl:arg:`&Process in_duplicate_field` to true.
+    :nl:arg:`in_duplicate_field` to true.
 
-    When :nl:arg:`&Process in_duplicate_field` is true, tags in the :nl:arg:`&Process in_field` iteration
+    When :nl:arg:`in_duplicate_field` is true, tags in the :nl:arg:`in_field` iteration
     may be inherited from the input file or may be programatically set,
-    as explained in :nl:arg:`&Process tag`.
+    as explained in :nl:arg:`tag`.
     This is required to discriminate between multiple instances of the same field.
 
 .. nl:argument:: out_autotag
@@ -766,7 +766,7 @@ in field manipulation
 
     :format: <.TRUE. or .FALSE.>
 
-    Tags are programatically set when :nl:arg:`&Process out_autotag` is true. Each input
+    Tags are programatically set when :nl:arg:`out_autotag` is true. Each input
     field not associated with a user defined tag or an inherited tag is
     tagged with '__autotag_fn\_#__', # being the order of occurence
     of the corresponding field in the input stream and fn the field
@@ -777,13 +777,13 @@ or automatic tags is documented in 'fieldextra.diagnostic' when
 :nl:arg:`&RunSpecification additional_diagnostic` is set to true.
 
 
-A specific instance of a field can be selected in the :nl:arg:`&Process in_field`
-iteration by setting :nl:arg:`&Process use_tag` to the value of the inherited or 
+A specific instance of a field can be selected in the :nl:arg:`in_field`
+iteration by setting :nl:arg:`use_tag` to the value of the inherited or 
 automatic tag.
 
 Note that it is necessary to explicitely set the number of
-contributing fields when setting :nl:arg:`&Process in_duplicate_field`, by
-using :nl:arg:`&Process in_size_field`.
+contributing fields when setting :nl:arg:`in_duplicate_field`, by
+using :nl:arg:`in_size_field`.
 
 .. nl:argument:: in_size_field
     :default: 0,0
@@ -800,18 +800,18 @@ The size of the internal storage is automatically evaluated on the
 assumption mentioned at the beginning of the section :ref:`section 4.3.1`. If some of these assumptions are not respected, it may
 be necessary to manually set these values. These parameters can also
 be used to minimize the memory footprint when the program is unable
-to precisely estimate the required storage (``selection_mode=EXCLUDE``,
-``selection_mode=INCLUDE_ALL``, ``in_field=__ALL__``). 
+to precisely estimate the required storage (:nl:val:`selection_mode=EXCLUDE`,
+:nl:val:`selection_mode=INCLUDE_ALL`, :nl:val:`in_field=__ALL__`). 
 
-The value of :nl:arg:`&Process in_size_field` specifies the field dimension of the 
+The value of :nl:arg:`in_size_field` specifies the field dimension of the 
 storage size (each 2d field takes one slot), and the value of
-:nl:arg:`&Process in_size_vdate`  specifies the validation date dimension of the
+:nl:arg:`in_size_vdate`  specifies the validation date dimension of the
 storage size.
 
-When two :nl:arg:`&Process in_size_field` values are specified, the first value refers
+When two :nl:arg:`in_size_field` values are specified, the first value refers
 to the size of the storage required for the first contributing input
 file, and the second value refers to the total required size; this is
-used to support memory optimization :nl:arg:`&Process in_read_first`.
+used to support memory optimization :nl:arg:`in_read_first`.
 
 These values must not be exact, but should define an upper bound
 of the required storage size.
@@ -842,7 +842,7 @@ when the target grid is a subset of the grid associated with the input field.
 
 It is possible to re-grid any input fields from its native grid to a common
 base grid; one has to specify a re-gridding algorithm, and each input field
-flagged with ``regrid=.true.`` (or all fields when  :nl:arg:`&Process in_regrid_all` is true) will
+flagged with :nl:val:`regrid=.true.` (or all fields when  :nl:arg:`in_regrid_all` is true) will
 be interpolated on the common base grid just after being extracted from the
 input file (see detailed description below).
 
@@ -850,12 +850,12 @@ The following possibilities are available when working with fields defined
 on staggered grid:
 
 1.  The user re-grid the fields defined on the staggered grid by using the
-    :nl:arg:`&Process in_regrid_method` operator described below. This method is global,
+    :nl:arg:`in_regrid_method` operator described below. This method is global,
     meaning that de-staggering is computed once when collecting the 
     concerned fields, the de-staggered field being dispatch in all
     output using this field.
 2.  The user re-grid the fields defined on the staggered grid by using the
-    horizontal operator ``hoper='destagger'`` (see :nl:arg:`&Process hoper`). This
+    horizontal operator :nl:val:`hoper='destagger'` (see :nl:arg:`hoper`). This
     operator can be used in any processing iteration; with the use of tags,
     this operator support having both staggered and un-staggered version
     of the same field (or of derived fields) in the same output.
@@ -866,7 +866,7 @@ on staggered grid:
     chosen output type supports staggered grids, e.g. GRIB1 or BLK_TABLE,
     or when the staggered fields are only used temporarily to compute some
     derived quantity).
-4.  The user specifies the model base grid with ``in_regrid_target='__AUTO__'``, 
+4.  The user specifies the model base grid with :nl:val:`in_regrid_target='__AUTO__'`, 
     without defining a re-gridding algorithm; this is in principle equivalent
     to 3., the model base grid being in this case defined as the grid
     associated with the first collected field. This switch is mainly used
@@ -879,10 +879,10 @@ The following possibilities are available when the target grid is a subset
 of the grid associated with the input field:
 
 1.  The user re-grid the fields defined on the original grid by using the
-    :nl:arg:`&Process in_regrid_method` operator described below. 
-2.  The user specifies the common target grid with ``in_regrid_target='tag'``,
+    :nl:arg:`in_regrid_method` operator described below. 
+2.  The user specifies the common target grid with :nl:val:`in_regrid_target='tag'`,
     without defining a re-gridding algorithm (tag refers to some INCORE
-    field); all input fields will be cropped to match :nl:arg:`&Process in_regrid_target`.
+    field); all input fields will be cropped to match :nl:arg:`in_regrid_target`.
 
 This latter mechanism (point 2 above) can also be used when working with
 fields which are both staggered and defined on a larger domain than the
@@ -890,9 +890,9 @@ target domain. However, in this case, the de-staggering is not always
 unambiguously defined; the convention is then to use a positive staggering.
 
 Further opportunity to re-grid all collected fields associated with a specific
-output is provided by the operator  :nl:arg:`&Process out_regrid_target`  (see description later on).
+output is provided by the operator  :nl:arg:`out_regrid_target`  (see description later on).
 
-When both  :nl:arg:`&Process in_regrid_target`  and  :nl:arg:`&Process in_regrid_method`  are defined, field interpolation 
+When both  :nl:arg:`in_regrid_target`  and  :nl:arg:`in_regrid_method`  are defined, field interpolation 
 will take place:
 
 .. nl:argument:: in_regrid_target
@@ -1056,14 +1056,14 @@ will take place:
 
     switch to re-grid all input fields
 
-    When :nl:arg:`&Process in_regrid_all` is true, all input fields are re-gridded; otherwise, only the
-    fields marked with ``regrid=.true.`` are re-gridded (see the description of regrid
+    When :nl:arg:`in_regrid_all` is true, all input fields are re-gridded; otherwise, only the
+    fields marked with :nl:val:`regrid=.true.` are re-gridded (see the description of regrid
     later on).
             
    
 Both re-gridding from regular grids and from unstructured grids are supported.
-The definition of the target grid is done with :nl:arg:`&Process in_regrid_target`.
-The choice of the re-gridding method is set with :nl:arg:`&Process in_regrid_method`; multiple
+The definition of the target grid is done with :nl:arg:`in_regrid_target`.
+The choice of the re-gridding method is set with :nl:arg:`in_regrid_method`; multiple
 methods may be defined, including a default method and a set of field specific
 methods (using the ``"default"`` mechanism).
 When re-gridding from unstructured grid, the description of the source grid
@@ -1119,7 +1119,7 @@ A different re-gridding algorithm may be defined for each input / output pair.
 
 .. note::
       it is possible to work on a subdomain of the grid specified by
-      :nl:arg:`&Process in_regrid_target`, by setting the values of imin, imax, jmin, jmax
+      :nl:arg:`in_regrid_target`, by setting the values of imin, imax, jmin, jmax
       (see later on for the definition of these parameters)
 
 .. note::
@@ -1159,7 +1159,7 @@ Each model run contributing to such a composed EPS is tagged by a unique
     When set, the product category of all fields contributing to the specified
     output is set to eps_member, and the member identity is built from the
     specified epsgroup value and from the existing member identity (if any).
-    The value of :nl:arg:`&Process epsgroup_size` and :nl:arg:`&Process epscomposed_size` must always be set.
+    The value of :nl:arg:`epsgroup_size` and :nl:arg:`epscomposed_size` must always be set.
 
 
 Global operations
@@ -1209,14 +1209,14 @@ with the following optional attributes:
 
     filter to select contributing source points
 
-The same usage as for :nl:arg:`&Process in_regrid_target` / :nl:arg:`&Process in_regrid_method` is supported 
-(including ``out_regrid_method='default'``). In addition, a different 
+The same usage as for :nl:arg:`in_regrid_target` / :nl:arg:`in_regrid_method` is supported 
+(including :nl:val:`out_regrid_method='default'`). In addition, a different 
 distance than the the lateral distance in ij-space can be specifid
-(:nl:arg:`&Process out_regrid_method_distance`) and the set of source points contributing
-to each target point can be further restricted (:nl:arg:`&Process out_regrid_method_filter`).
+(:nl:arg:`out_regrid_method_distance`) and the set of source points contributing
+to each target point can be further restricted (:nl:arg:`out_regrid_method_filter`).
 
 
-When :nl:arg:`&Process out_regrid_method_distance` is specified, the distance "distance_ij" in
+When :nl:arg:`out_regrid_method_distance` is specified, the distance "distance_ij" in
 (i,j) space used by the regridding operator is replaced by a generalized distance.
 The generalized distance is defined by:
 
@@ -1224,7 +1224,7 @@ The generalized distance is defined by:
 
 where ``d_height`` is the height difference between source and target topography
 
-The value of :py:attr:`out_regrid_topography` must be set when :py:attr:`out_regrid_method_distance`
+The value of :nl:arg:`out_regrid_topography` must be set when :nl:arg:`out_regrid_method_distance`
 is used. Both incore_tag_s and incore_tag_t must refer to INCORE fields 
 representing the source topography (incore_tag_s) or the target topography
 (incore_tag_t).
@@ -1233,15 +1233,15 @@ Usage of generalized distance is restricted to the following methods:
     next_neighbour, dist_average, exp_weight .
 
 
-When :py:attr:`out_regrid_method_filter` is specified, the source points contributing 
+When :nl:arg:`out_regrid_method_filter` is specified, the source points contributing 
 to each target point are those with the same value of "incore_tag_s" as the 
 target value of "incore_tag_t". Both incore_tag_s and incore_tag_t must refer
 to INCORE fields taking integer values, defined everywhere, and associated with
 the source grid (incore_tag_s) or the target grid (incore_tag_t).
 
 Note that the set of source points contributing to each target point is always
-restricted to the neighbourhood specified in :py:attr:`out_regrid_method`, independently
-on the use or not of :py:attr:`out_regrid_method_filter`.
+restricted to the neighbourhood specified in :nl:arg:`out_regrid_method`, independently
+on the use or not of :nl:arg:`out_regrid_method_filter`.
 
 Usage of filter is restricted to the following methods:
     next_neighbour, average, dist_average, log_average, exp_weight, linear_fit,
@@ -1258,7 +1258,7 @@ The domain subset may be a rectangle with a non trivial stride (``iinc/=1`` or
 about ``tiled_*`` operators).
 
 Data reduction to the smaller sudomain contributing to the target grid,
-including the halo for applying :py:attr:`out_regrid_method`, is automatically applied.
+including the halo for applying :nl:arg:`out_regrid_method`, is automatically applied.
 However, this automated data reduction is inactive when a domain subset is
 explicitely specified, or when the amount of data reduction is not significant.
 
@@ -1283,12 +1283,12 @@ the curent output
     processed field must be compatible with the new model name.
    
     When the originatingCenter is changed, make sure that all local meta-
-    information codes are still valid; if necessary, use :py:attr:`out_auxiliary_metainfo`
+    information codes are still valid; if necessary, use :nl:arg:`out_auxiliary_metainfo`
     to also adapt these local codes.
    
-    The effect of :py:attr:`out_model_name` has precedence over all resetting operators
+    The effect of :nl:arg:`out_model_name` has precedence over all resetting operators
     defined in :nl:nl:`&GlobalSettings`, but not over operators defined in the same 
-    block (e.g. :py:attr:`out_auxiliary_metainfo`) or over field specific resetting
+    block (e.g. :nl:arg:`out_auxiliary_metainfo`) or over field specific resetting
     operators (e.g. set_auxiliary_metainfo).
 
 .. nl:argument:: out_genproc_type
@@ -1297,13 +1297,13 @@ the curent output
 
 
     Reset value of generating process type; value must be a registred
-    generating process type (see the list in :nl:arg:`&Process set_genproc_type`)
+    generating process type (see the list in :nl:arg:`set_genproc_type`)
    
-    The effect of :py:attr:`out_genproc_type` has precedence over all resetting
+    The effect of :nl:arg:`out_genproc_type` has precedence over all resetting
     operators defined in :nl:nl:`&GlobalSettings`, but not over the field specific
-    operator :nl:arg:`&Process set_genproc_type`.
+    operator :nl:arg:`set_genproc_type`.
    
-    See also the definition of :nl:arg:`&Process set_genproc_type` for more information.
+    See also the definition of :nl:arg:`set_genproc_type` for more information.
 
 .. nl:argument:: out_product_category
 
@@ -1313,7 +1313,7 @@ the curent output
     Reset value of product category; value must be a registred product category
     (see the list in the description of "default_product_category")
    
-    The effect of :py:attr:`out_product_category` has precedence over all resetting
+    The effect of :nl:arg:`out_product_category` has precedence over all resetting
     operators defined in :nl:nl:`&GlobalSettings`, but not over the field specific
     operator "set_product_category".
    
@@ -1357,7 +1357,7 @@ can be filtred
       always dismiss constant fields
     ``"keep_in_first_output"``
       dismiss constant fields, except in the first output of a temporal serie 
-      (i.e. when :nl:arg:`&Process out_file` is a generic name using a time stamp in its definition).
+      (i.e. when :nl:arg:`out_file` is a generic name using a time stamp in its definition).
 
 .. nl:argument:: out_filter_time
     :default: blank
@@ -1367,8 +1367,8 @@ can be filtred
 
     Filter the data written in the output file in the time dimension. 
     Unlike out_tstart... this operator does not depend on the presence
-    and on the values of time stamps in the definition of :nl:arg:`&Process in_file` and
-    of :nl:arg:`&Process out_file`. It is typically used when input files contain  multiple
+    and on the values of time stamps in the definition of :nl:arg:`in_file` and
+    of :nl:arg:`out_file`. It is typically used when input files contain  multiple
     validation dates and the mechanism provided by out_tstart... can
     not be used.
    
@@ -1413,7 +1413,7 @@ following parameters ...
     * ``(out_mode_mismemb_limit/100) * ensemble_size``
     * ``2``
 
-    The action taken when an exception is detected depends on the value of :nl:arg:`&Process out_mode_mismemb_abort`
+    The action taken when an exception is detected depends on the value of :nl:arg:`out_mode_mismemb_abort`
     : either abort production of corresponding product,
     when this variable is true, or silently set the resulting values to undefined.
     Note that the evaluation of the missing members exception is done independently
@@ -1456,7 +1456,7 @@ following parameters ...
     must be explicitely specified by setting the variable "hydrometeor" in 
     &ModelSpecification
    
-**computation of algorithm for lapse rate base height correction** (``voper=translate_simple``)
+**computation of algorithm for lapse rate base height correction** (:nl:val:`voper=translate_simple`)
 
 .. nl:argument:: out_mode_hcor_dhmin
     :default: 50.
@@ -1552,7 +1552,7 @@ following parameters ...
 
     handling of missing Kalman correction
 
-    supported values are listed at :nl:arg:`&Process out_mode_moscor_na`
+    supported values are listed at :nl:arg:`out_mode_moscor_na`
 
 .. nl:argument:: out_mode_moscor_na
     :default: 'undef'
@@ -1601,15 +1601,15 @@ below.
           * produce grid point height information for some output
             (require field HSURF);
           * specify model base grid when working with staggered fields
-            (see :nl:arg:`&Process in_regrid_target`);
+            (see :nl:arg:`in_regrid_target`);
           * specify model base grid when working with fields defined on a large domain
-            (see :nl:arg:`&Process in_regrid_target`);
+            (see :nl:arg:`in_regrid_target`);
           * specify grid and auxiliary fields for re-gridding
-            (see :nl:arg:`&Process in_regrid_target`, <out_regrid_target>);
+            (see :nl:arg:`in_regrid_target`, <out_regrid_target>);
           * merge different fields and define associated mask
-            (see :nl:arg:`&Process merge_with`);
+            (see :nl:arg:`merge_with`);
           * compare different fields and define associated mask
-            (see :nl:arg:`&Process compare_with`);
+            (see :nl:arg:`compare_with`);
           * provide access to additional constant fields 
             (see below).
      
@@ -1656,8 +1656,8 @@ below.
                it is possible to have multiple instances of these special fields in INCORE,
                but the fields associated with the reference grid must be marked by setting
                "reference_field" to false for all other instances.
-          .. note:: the parameter :nl:arg:`&Process out_file` may be omitted when out_type='INCORE'
-          .. note:: mixing INCORE fields with other fields defined on a sub-mesh is supported (see the documentation of :nl:arg:`&Process in_regrid_target`).
+          .. note:: the parameter :nl:arg:`out_file` may be omitted when out_type='INCORE'
+          .. note:: mixing INCORE fields with other fields defined on a sub-mesh is supported (see the documentation of :nl:arg:`in_regrid_target`).
    
     2.  Pseudo output type used to extract the characteristics of the records contained
         in the associated input files
@@ -1742,7 +1742,7 @@ Out type attributes acting on file production
     mode incorrectly enable just on time mode. For example:
 
     1. all conditions for just on time are fulfilled (:ref:`section 4.3.2`), but
-       some of the :nl:arg:`&Process in_field` are not available for all processed time 
+       some of the :nl:arg:`in_field` are not available for all processed time 
        planes, which will generate some sort of 'missing parent'
        exception when just on time is active.
        
@@ -1845,7 +1845,7 @@ Out type attributes acting on data
     Compatible with ``BLK_TABLE``, ``GRIB1``, ``GRIB2``
 
     The mapping of a rectangular domain in some output may be explicitely
-    specified by :nl:arg:`&Process out_type_scanmode`:
+    specified by :nl:arg:`out_type_scanmode`:
 
     *  the data order follows the original scanning mode 'native'
     *  the data order follows a user specified scanning mode
@@ -1891,8 +1891,8 @@ Out type attributes acting on data
           | ``'aec,16'``   generates a file x2.5 smaller, in x1.5 the time 
           | ``'jpeg,16'``  generates a file x3 smaller, in x3 the time 
     .. note::
-          the value of :nl:arg:`&Process out_type_packing` can be overriden on a field basis
-          by setting :nl:arg:`&Process set_packing`
+          the value of :nl:arg:`out_type_packing` can be overriden on a field basis
+          by setting :nl:arg:`set_packing`
 
 .. nl:argument:: out_type_ncformat
     :default: 'nc3_64boffset'
@@ -1916,7 +1916,7 @@ Out type attributes acting on data
           format supports both files larger than 2 GB and file compression.
     .. note::
           in order to get good performances when choosing ``'nc4_classic'``, it 
-          is strongly recommended to set ``out_type_ncunlimitedtime=.false.``
+          is strongly recommended to set :nl:val:`out_type_ncunlimitedtime=.false.`
 
 .. nl:argument:: out_type_ncunlimitedtime
     :default: true
@@ -1928,10 +1928,10 @@ Out type attributes acting on data
     Very bad write performances are observed when producing 'nc4_classic'
     format if the time dimension is unlimited; furthermore, unlimited time
     dimension may be detrimental to NetCDF file compression. For these
-    reasons, it is possible to set ``out_type_ncunlimitedtime=.false.``
+    reasons, it is possible to set :nl:val:`out_type_ncunlimitedtime=.false.`
     to prohibit unlimited time dimension. 
    
-    Note however, that, setting ``out_type_ncunlimitedtime=.false.`` may lead
+    Note however, that, setting :nl:val:`out_type_ncunlimitedtime=.false.` may lead
     to much larger memory footprint at run time (in the case multiple time
     levels are stored in the same output).
 
@@ -1946,25 +1946,25 @@ Out type attributes acting on data
 
     :format: <logical>
 
-    Compatible with ``NETCDF``, but requires ``out_type_ncformat="nc4_classic"``
+    Compatible with ``NETCDF``, but requires :nl:val:`out_type_ncformat="nc4_classic"`
 
-    When :nl:arg:`&Process out_type_ncdeflate` is defined, the NetCDF will be compressed.
+    When :nl:arg:`out_type_ncdeflate` is defined, the NetCDF will be compressed.
     Variable data is compressed, not metadata such as attributes.
     Deflation level 1 is intended to compress faster than level 9.
     Deflation level 9 is intended to compress smaller than level 1.
     ALl levels use losless data compression.
    
     .. note::
-          shuffling (``out_type_ncshuffle=.true.``) often improves compression
+          shuffling (:nl:val:`out_type_ncshuffle=.true.`) often improves compression
           for little cost.
     .. note::
           not using an unlimited dimension for the time
-          (``out_type_ncunlimitedtime=.false.``) may improve compression.
+          (:nl:val:`out_type_ncunlimitedtime=.false.`) may improve compression.
     .. note::
           very good compression factor may be obtained with the lowest deflation 
           level. For example, the size of a full laf output from COSMO-1 is 
-          reduced by a factor of about 4 when setting ``out_type_ncdeflate=1`` and
-          ``out_type_ncshuffle=.true.`` (from 5.084GB to 1.330GB, the same file in
+          reduced by a factor of about 4 when setting :nl:val:`out_type_ncdeflate=1` and
+          :nl:val:`out_type_ncshuffle=.true.` (from 5.084GB to 1.330GB, the same file in
           GRIB 2 has a size of 2.310GB), for a 3.5 increase in computation time.
 
 .. nl:argument:: out_type_simplenc
@@ -1997,10 +1997,10 @@ Out type attributes acting on data
     A NetCDF data is stored in a n-dimensional array, with the set of n-dimensions
     being dependent on the type of field. Normally all relevant dimensions are
     considered, even when the dimension is degenerate; this behaviour is changed
-    by setting :nl:arg:`&Process out_type_nodegeneratedim` to true. 
+    by setting :nl:arg:`out_type_nodegeneratedim` to true. 
     Example: a single level EPS field is stored in an array of dimensions
     (t,m,y,x), m being the perturbation number dimension; if a different output
-    is used for each member and ``out_type_nodegeneratedim=.TRUE.``, the dimensions
+    is used for each member and :nl:val:`out_type_nodegeneratedim=.TRUE.`, the dimensions
     (t,y,x) will be used instead.
 
    
@@ -2023,7 +2023,7 @@ Out type attributes acting on meta-data
 
     When the name of the field is coded in the output file, the value of the
     short name is used, or, if set, of the field tag. When out_type_nousetag
-    is true, the value of the tag is always ignored. When :nl:arg:`&Process out_type_alternate_name`
+    is true, the value of the tag is always ignored. When :nl:arg:`out_type_alternate_name`
     is true, and an alternate short name is defined in the active dictionary, the
     alternate short name is used instead of the short name.
     An alternate short name is defined when the attribute ``keyUsedInProgram`` is
@@ -2062,7 +2062,7 @@ Out type attributes acting on meta-data
     ``alternateTable`` and ``alternateParameter``. When no alternate code is defined,
     the usual code is applied.
    
-    A similar feature is offered by :nl:arg:`&Process use_alternate_code`, but on a field basis.
+    A similar feature is offered by :nl:arg:`use_alternate_code`, but on a field basis.
     The alternate code will be used as soon as one of the two switches is set.
    
     This may be used, e.g., to code probabilities differently than determinist
@@ -2139,8 +2139,8 @@ Out type attributes acting on meta-data
    
     For sigma and hybrid coordinates, the description of the vertical coordinates is
     coded as a set of coefficients (in each GRIB record, or in a NetCDF variable). When
-    :nl:arg:`&Process out_type_novcoord` is 'no', fieldextra will produce this information in each GRIB
-    record, or in a special 'vcoord' NetCDF variable; when :nl:arg:`&Process out_type_novcoord` is 'yes',
+    :nl:arg:`out_type_novcoord` is 'no', fieldextra will produce this information in each GRIB
+    record, or in a special 'vcoord' NetCDF variable; when :nl:arg:`out_type_novcoord` is 'yes',
     this information is skipped (GRIB 1, NETCDF) or restricted to records associated
     with a sigma or hybrid surface (GRIB 2).
    
@@ -2154,7 +2154,7 @@ Out type attributes acting on meta-data
    
     For NETCDF output, support for coding vertical coordinate coefficients is only
     available for the COSMO model (release 3.18 or better), independently from the
-    value of :nl:arg:`&Process out_type_novcoord`.
+    value of :nl:arg:`out_type_novcoord`.
 
 .. nl:argument:: out_type_stdlongitude
     :default: .FALSE.
@@ -2164,7 +2164,7 @@ Out type attributes acting on meta-data
     Compatible with ``FLD_TABLE``, ``DAT_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``BLK_TABLE``, ``TMPL_BASE``, ``GRIB1``, ``GRIB2``, ``NETCDF``
 
     By default, coding of longitude meta-information in output is in [-180.,180.[;
-    by setting :nl:arg:`&Process out_type_stdlongitude` to true, longitude will be coded in [0.,360.[.
+    by setting :nl:arg:`out_type_stdlongitude` to true, longitude will be coded in [0.,360.[.
     Note that this switch does not affect the coding of any longitude field (such as
     RLON).
 
@@ -2173,9 +2173,9 @@ Out type attributes acting on meta-data
 
     :format: <reset constant fields meta-info>
 
-    Compatible with any :nl:arg:`&Process out_type`
+    Compatible with any :nl:arg:`out_type`
 
-    When :nl:arg:`&Process out_type_mapcst` is true, and when mixing constant and non constant
+    When :nl:arg:`out_type_mapcst` is true, and when mixing constant and non constant
     fields in the same output, the following meta-information associated with
     the constant fields are set to the common value of the non constant fields:
     the lead time, the type of generating process.
@@ -2191,14 +2191,14 @@ Out type attributes acting on data format
 
     :format: <format of values in output file>
 
-    :nl:arg:`&Process out_type_fmt` is either a Fortran edit descriptor (``FLD_TABLE``, ``DAT_TABLE``,
+    :nl:arg:`out_type_fmt` is either a Fortran edit descriptor (``FLD_TABLE``, ``DAT_TABLE``,
     ``BLK_TABLE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``TMPL_BASE``, ``N_TUPLE``) or a key defining
     a specific table format (``METEOG``, see table below). 
    
-    Default values are :nl:arg:`&Process out_type` dependent:
+    Default values are :nl:arg:`out_type` dependent:
       | ``FLD_TABLE``, ``DAT_TABLE``, ``BLK_TABLE`` (default 6G13.5)
       | ``TMPL_BASE``, ``XLS_TABLE``, ``ASCII_TABLE``, ``N_TUPLE`` (default G13.5)
-      | ``METEOG`` (no default, :nl:arg:`&Process out_type_fmt` mut be set)
+      | ``METEOG`` (no default, :nl:arg:`out_type_fmt` mut be set)
    
     **Table format keys for METEOG**
 
@@ -2267,7 +2267,7 @@ Out type attributes acting on data format
             fieldextra are replaced by special keywords ('data container').
             The default action when finding unresolved data container is
             to raise an exception; it is however possible to control this
-            behaviour by setting :nl:arg:`&Process out_type_nomatch_action` to one of
+            behaviour by setting :nl:arg:`out_type_nomatch_action` to one of
 
             ``'raise_exception'`` 
               default
@@ -2369,7 +2369,7 @@ Out type attributes acting on data format
 
 Some of these parameters support an automatic mode (``'auto'``); in this case the
 format is derived from the content of the internal storage, or from the definition
-of the time loop in the namelist (:nl:arg:`&Process out_type_mminfo`).
+of the time loop in the namelist (:nl:arg:`out_type_mminfo`).
       
 .. nl:argument:: out_type_separator
 
@@ -2405,16 +2405,16 @@ The above parameters define the characteristics of CSV oriented output.
 
     ``XLS_TABLE`` output can either be expressed as a MS Excel compatible csv
     data, or as a column oriented fixed format data. The active option is
-    defined by the value of :nl:arg:`&Process out_type_separator`.
+    defined by the value of :nl:arg:`out_type_separator`.
     
-    :nl:arg:`&Process out_type_separator` is a single character used to separate fields in
+    :nl:arg:`out_type_separator` is a single character used to separate fields in
     output; date information and time information are also represented
-    in a form compatible with MS Excel. When :nl:arg:`&Process out_type_separator` is missing
+    in a form compatible with MS Excel. When :nl:arg:`out_type_separator` is missing
     or blank, output is column oriented and fields are separated by one or
     more blanks.
     
     The csv variant supports additional customizing:
-    :nl:arg:`&Process out_type_cheader` is a string specifiying the way data is arranged in lines and columns:
+    :nl:arg:`out_type_cheader` is a string specifiying the way data is arranged in lines and columns:
          
     ``'gp'``    : 
       each column is uniquely specified by a location (grid point)
@@ -2423,15 +2423,15 @@ The above parameters define the characteristics of CSV oriented output.
     ``''``      : 
       default, same as ``'gp'``
 
-    :nl:arg:`&Process out_type_fusedt` is a logical switch controlling the fusion of date and time information into a single string. 
+    :nl:arg:`out_type_fusedt` is a logical switch controlling the fusion of date and time information into a single string. 
 
 2.  ``ASCII_TABLE``
 
-    :nl:arg:`&Process out_type_separator` is a single character used to separate fields in
+    :nl:arg:`out_type_separator` is a single character used to separate fields in
     output; default value is ';', blank value is supported.
   
     Five options for the arrangement of output values are possible; the option
-    is choosen by the namelist :nl:arg:`&Process out_type_line_label`:
+    is choosen by the namelist :nl:arg:`out_type_line_label`:
 
     ``location_time``      
                           one new line for each location and each validation
@@ -2473,8 +2473,8 @@ The above parameters define the characteristics of CSV oriented output.
     ``extra``    
       minimal header in data file, full header as extra file
 
-    Default value is ``"none"`` (if :nl:arg:`&Process out_type_line_label` is not set or
-    ``out_type_line_label=location_time``) or "standard" otherwise.
+    Default value is ``"none"`` (if :nl:arg:`out_type_line_label` is not set or
+    :nl:val:`out_type_line_label=location_time`) or "standard" otherwise.
    
 
    
@@ -2495,8 +2495,8 @@ with downstream applications.
     (see http://iacweb.ethz.ch/staff/sprenger/lagranto/) which requires input
     files expressed in NetCDF. The standard NetCDF CF format produced by
     fieldextra is not compatible with LAGRANTO when working with GME of IFS
-    model output, and the switch :nl:arg:`&Process out_type_lagranto` must be set to true in this
-    case. In particular, :nl:arg:`&Process out_type_lagranto` triggers the coding of (Ak,Bk)
+    model output, and the switch :nl:arg:`out_type_lagranto` must be set to true in this
+    case. In particular, :nl:arg:`out_type_lagranto` triggers the coding of (Ak,Bk)
     vertical coordinates coefficients and change the naming convention of
     some NetCDF dimensions.
 
@@ -2509,7 +2509,7 @@ with downstream applications.
 
     DWH is the MeteoSwiss database, and some naming conventions used in the
     standard fieldextra ASCII output must be changed to make ``FLD_TABLE`` output
-    compatible with this software. In particular, :nl:arg:`&Process out_type_dwhhack` triggers
+    compatible with this software. In particular, :nl:arg:`out_type_dwhhack` triggers
     the use of special field descriptor for EPS probabilities.
 
 
@@ -2580,7 +2580,7 @@ of the whole domain ...
     :format: <j-component>,<j-component>,...
 
     Grid point coordinates either refer to the grid specified by
-    :nl:arg:`&Process in_regrid_target` or to the native grid of the input field when 
+    :nl:arg:`in_regrid_target` or to the native grid of the input field when 
     this former variable is not set.
 
 **by specifying a set of locations in geographical coordinates**
@@ -2603,11 +2603,11 @@ The list of locations can be specified by using the location id's,
 or by exploiting the location aliases defined in the :nl:arg:`&GlobalResource location_list`
 file (of the form ``<group>:<name>``). In this latter case, the location
 group has to be specified with ``locgroup=...``, and the associated list
-of names with ``loclist=...`` Only one group may be specified. If :nl:arg:`&Process loclist`
+of names with ``loclist=...`` Only one group may be specified. If :nl:arg:`loclist`
 is empty, all group members are selected.
 
 The definition of a dynamic set of locations is supported by specifying
-:nl:arg:`&Process locgroup` and letting :nl:arg:`&Process loclist` empty; in this case, and in this case only,
+:nl:arg:`locgroup` and letting :nl:arg:`loclist` empty; in this case, and in this case only,
 the set of locations considered for the current output are all the
 locations belonging to the specified group which are also resolved. In
 other words, all locations associated with empty regions, outside of 
@@ -2616,7 +2616,7 @@ incore grid, or outside of target grid are filtred out.
 Geographical locations are associated to grid points according to the
 algorithm defined by location_to_gridpoint in :nl:nl:`&GlobalSettings`. The
 reference grid is always the common base grid associated with the output 
-file (i.e. the grid specified with :nl:arg:`&Process in_regrid_target`, or the grid common
+file (i.e. the grid specified with :nl:arg:`in_regrid_target`, or the grid common
 to *all* collected fields). Consequently, when mixing staggered with
 un-staggered fields, the coordinates of the grid point associated with
 a specific location are the same on the un-staggered as on the staggered
@@ -2658,13 +2658,13 @@ grid (i.e. they are not re-adjusted to take into account the staggering).
       .. flat-table:: 
         :header-rows: 1
 
-        * - :nl:arg:`&Process out_type`
+        * - :nl:arg:`out_type`
           - subset
           - order
         
         * - ``GRIB1``, ``GRIB2``, ``BLK_TABLE``
           - all
-          - follow native scanning mode or scanning mode specified by :nl:arg:`&Process out_type_scanmode`
+          - follow native scanning mode or scanning mode specified by :nl:arg:`out_type_scanmode`
 
         * - ``NETCDF``
           - all
@@ -2745,7 +2745,7 @@ Extracted fields
 
 For each pair of input/output file the set of fields to extract is defined
 by specifying one or many ``&Process in_field=...`` blocks. The way this
-information is interpreted is defined by the value of :nl:arg:`&Process selection_mode`.
+information is interpreted is defined by the value of :nl:arg:`selection_mode`.
 
 For each output file, all extracted fields from all contributing input files
 are available for the generation of the final product.
@@ -2757,7 +2757,7 @@ is not possible to extract twice the same field even if different tags
 or operators are subsequently applied to this field (this restriction
 does not exist for the definition of generated fields, see :ref:`section 4.3.5`).
 
-Fields declared as constant in time in the active dictionary (``constant=T``)
+Fields declared as constant in time in the active dictionary (:nl:val:`constant=T`)
 are processed in a special way when mixed with non-constant fields; the
 validation date and the time range information of each constant field is
 automatically reset according to the following rules:     
@@ -2791,7 +2791,7 @@ fields only.
       all the fields which do *not* match the specifications are extracted and are available for further processing.
    
     When using INCLUDE_ALL or EXCLUDE mode, it is recommended to explicitely
-    specify :nl:arg:`&Process in_size_field` to minimize the memory footprint (otherwise the
+    specify :nl:arg:`in_size_field` to minimize the memory footprint (otherwise the
     maximum number of fields is assumed, as defined in fxtr_definition).
    
     Only INCLUDE_ONLY is supported when working with INCORE pseudo-input. 
@@ -2836,11 +2836,11 @@ This is useful to write compact namelist, e.g., when some of the input
 fields are not available for all lead times, or when a different field
 is used for lead time 0, like SOSB_RAD and ASOB_S.
 
-By default, an exception is raised when a specified :nl:arg:`&Process in_field` is not found
-in the associated :nl:arg:`&Process in_file`, or when the record is rejected. This behaviour
-can be changed by setting :nl:arg:`&Process expect_missing_field` to true; this is useful e.g.
+By default, an exception is raised when a specified :nl:arg:`in_field` is not found
+in the associated :nl:arg:`in_file`, or when the record is rejected. This behaviour
+can be changed by setting :nl:arg:`expect_missing_field` to true; this is useful e.g.
 when missing fields are expected and are replaced by interpolated values
-from contiguous time levels (see ``'fill_undef'`` in :nl:arg:`&Process toper`).
+from contiguous time levels (see ``'fill_undef'`` in :nl:arg:`toper`).
 
 .. nl:argument:: ignore_model_identity
     :default: .FALSE.
@@ -2884,7 +2884,7 @@ from contiguous time levels (see ``'fill_undef'`` in :nl:arg:`&Process toper`).
 
 
     Used to discriminate in INCORE storage between fields associated with the
-    reference grid and other instances of the field (see :nl:arg:`&Process out_type`).
+    reference grid and other instances of the field (see :nl:arg:`out_type`).
 
 .. nl:argument:: use_tag
 
@@ -3010,7 +3010,7 @@ The associated physical units may be specified by
   'kgm-3', 'gm-3', 'mgm-3', 'mugm-3'    density , mugm-3 = 10**-6 g/m**3       
   ==================================== ==================================
   
-  When :nl:arg:`&Process level_units` is missing, the following default units are assumed
+  When :nl:arg:`level_units` is missing, the following default units are assumed
 
   ================================= ==================================
   ================================= ==================================
@@ -3156,7 +3156,7 @@ Misc
 
     .. [#] either a short name attribute is found or a varname_translation table is available
    
-    Tags are *never* inherited from INCORE storage (but :nl:arg:`&Process use_tag` can
+    Tags are *never* inherited from INCORE storage (but :nl:arg:`use_tag` can
     be set to filter the fields collected from INCORE storage).
    
     When computing a new field, tags are *not* transfered from the contributing
@@ -3203,31 +3203,31 @@ Misc
 Operations applied on extracted fields
 --------------------------------------
 
-The following only applies when ``selection_mode=INCLUDE_ALL`` or
-``selection_mode=INCLUDE_ONLY``.
+The following only applies when :nl:val:`selection_mode=INCLUDE_ALL` or
+:nl:val:`selection_mode=INCLUDE_ONLY`.
 
 Each extracted field may be transformed by one or more operators, in the
 order 
 
-:nl:arg:`&Process regrid`, ``set_*``, :nl:arg:`&Process merge_with`, :nl:arg:`&Process compare_with`, :nl:arg:`&Process hoper`, :nl:arg:`&Process scale`/:nl:arg:`&Process offset`, :nl:arg:`&Process voper`,
-:nl:arg:`&Process toper`, :nl:arg:`&Process poper`, :nl:arg:`&Process poper2`, :nl:arg:`&Process poper3`, :nl:arg:`&Process poper4`, :nl:arg:`&Process poper5`, spatial filter, :nl:arg:`&Process new_field_id`
+:nl:arg:`regrid`, ``set_*``, :nl:arg:`merge_with`, :nl:arg:`compare_with`, :nl:arg:`hoper`, :nl:arg:`scale`/:nl:arg:`offset`, :nl:arg:`voper`,
+:nl:arg:`toper`, :nl:arg:`poper`, :nl:arg:`poper2`, :nl:arg:`poper3`, :nl:arg:`poper4`, :nl:arg:`poper5`, spatial filter, :nl:arg:`new_field_id`
 
 (the order is hardcoded and does not depend on the way the namelist is defined). 
 Each class of operators is applied in turn to all the relevant fields; 
 within a class the processing order is arbitrary.
 
-Some of these transformations can be iterated by using the :nl:arg:`&Process tmp1_field`,
-:nl:arg:`&Process tmp2_field`, :nl:arg:`&Process tmp3_field`, :nl:arg:`&Process tmp4_field`, :nl:arg:`&Process tmp5_field`, and :nl:arg:`&Process out_field`
+Some of these transformations can be iterated by using the :nl:arg:`tmp1_field`,
+:nl:arg:`tmp2_field`, :nl:arg:`tmp3_field`, :nl:arg:`tmp4_field`, :nl:arg:`tmp5_field`, and :nl:arg:`out_field`
 construct (see :ref:`section 4.3.5`).
 
 .. nl:argument:: regrid
     :type: logical 
 
-    re-gridding as defined by :nl:arg:`&Process in_regrid_target` and :nl:arg:`&Process in_regrid_method`
+    re-gridding as defined by :nl:arg:`in_regrid_target` and :nl:arg:`in_regrid_method`
 
     Activate re-gridding of the associated input field onto the mesh specified by
-    :nl:arg:`&Process in_regrid_target`. When all input fields need to be re-regidded, it is possible
-    to set :nl:arg:`&Process in_regrid_all` to true instead.
+    :nl:arg:`in_regrid_target`. When all input fields need to be re-regidded, it is possible
+    to set :nl:arg:`in_regrid_all` to true instead.
 
 Some field meta-information can be (re)set by the user; this will overwite
 any existing value in the current record, as well as any default value set
@@ -3237,7 +3237,7 @@ in the last processing iteration, before producing the output.
 
 Operations which are restricted to the extract iteration:
 
-:nl:arg:`&Process set_vcoord`, :nl:arg:`&Process set_time_range`
+:nl:arg:`set_vcoord`, :nl:arg:`set_time_range`
 
 Operations not restricted (can be defined both in the extract iteration and
 in the last processing iteration - when defined in the extract iteration, the
@@ -3245,10 +3245,10 @@ operator is applied just after collecting the record, at the very beginning
 of the processing, whereas, when defined in the last processing iteration, the
 operator is applied at the very end of the iteration):
 
-:nl:arg:`&Process set_level_property`, :nl:arg:`&Process set_epsmember_identity`,
-:nl:arg:`&Process set_units`, :nl:arg:`&Process set_genproc_type`, :nl:arg:`&Process set_product_category`, 
-:nl:arg:`&Process set_reference_date`, :nl:arg:`&Process set_trange_type`, :nl:arg:`&Process set_leadtime`
-:nl:arg:`&Process set_auxiliary_metainfo`
+:nl:arg:`set_level_property`, :nl:arg:`set_epsmember_identity`,
+:nl:arg:`set_units`, :nl:arg:`set_genproc_type`, :nl:arg:`set_product_category`, 
+:nl:arg:`set_reference_date`, :nl:arg:`set_trange_type`, :nl:arg:`set_leadtime`
+:nl:arg:`set_auxiliary_metainfo`
 
 .. nl:argument:: set_units
 
@@ -3453,7 +3453,7 @@ operator is applied at the very end of the iteration):
     reset specified auxiliary meta-information; see :nl:arg:`&GlobalSettings auxiliary_metainfo`
     for more details. When used in the last processing
     iteration, override any key=value specified in :nl:arg:`&GlobalSettings auxiliary_metainfo`
-    and in :nl:arg:`&Process out_auxiliary_metainfo`
+    and in :nl:arg:`out_auxiliary_metainfo`
 
 .. note::
       additional operators which can be used to re-set some meta-information ...
@@ -3465,11 +3465,11 @@ operator is applied at the very end of the iteration):
       *   for all fields of a specified output, at the end of the last processing
           iteration:
 
-          :nl:arg:`&Process out_model_name`, :nl:arg:`&Process out_genproc_type`, :nl:arg:`&Process out_product_category`,
-          :nl:arg:`&Process out_vertical_coordinate`, :nl:arg:`&Process out_auxiliary_metainfo`
+          :nl:arg:`out_model_name`, :nl:arg:`out_genproc_type`, :nl:arg:`out_product_category`,
+          :nl:arg:`out_vertical_coordinate`, :nl:arg:`out_auxiliary_metainfo`
 
 .. note::
-      these operators differ from :nl:arg:`&Process default_product_category` and 
+      these operators differ from :nl:arg:`default_product_category` and 
       :nl:arg:`&GlobalSettings default_model_name` and :nl:nl:`&GlobalSettings.default_product_category`
       
       the latter ones are used to supplement missing meta-information whereas the
@@ -3489,9 +3489,9 @@ operator is applied at the very end of the iteration):
 
 
     Conditionally replace the current field with the incore field defined by
-    :nl:arg:`&Process merge_with`. The operation
+    :nl:arg:`merge_with`. The operation
     takes place where the incore field is defined and the logical condition
-    specified by :nl:arg:`&Process merge_mask` is true.
+    specified by :nl:arg:`merge_mask` is true.
    
     The mask is defined as described in :ref:`section 4.3.7`, 
     with the following restrictions:
@@ -3503,7 +3503,7 @@ operator is applied at the very end of the iteration):
       supported in this case).
    
     The layer field is either uniquely specified by its tag, the value of
-    :nl:arg:`&Process merge_with`, or by its tag and the characteristics of the current field
+    :nl:arg:`merge_with`, or by its tag and the characteristics of the current field
     (first using the short name and the level, and then also using the EPS
     and PDF identity if name and level are not enough to define a unique
     field). The current and the layer fields must have the same physical units.
@@ -3533,8 +3533,8 @@ operator is applied at the very end of the iteration):
 
 
     Replace the current field with a function of the current field and of the
-    incore field defined by :nl:arg:`&Process compare_with`. The function to apply is defined by :nl:arg:`&Process compare_fct`; when 
-    :nl:arg:`&Process compare_mask` is defined, the original field is only modified where the
+    incore field defined by :nl:arg:`compare_with`. The function to apply is defined by :nl:arg:`compare_fct`; when 
+    :nl:arg:`compare_mask` is defined, the original field is only modified where the
     corresponding logical condition is true.
    
     The mask is defined as described in :ref:`section 4.3.7`, 
@@ -3547,7 +3547,7 @@ operator is applied at the very end of the iteration):
       supported in this case).
    
     The incore field is either uniquely specified by its tag, the value of
-    :nl:arg:`&Process compare_with`, or by its tag and the characteristics of the current field
+    :nl:arg:`compare_with`, or by its tag and the characteristics of the current field
     (first using the short name and the level, and then also using the EPS
     and PDF identity if name and level are not enough to define a unique
     field). Both current and incore fields must have the same physical units.
@@ -3556,14 +3556,14 @@ operator is applied at the very end of the iteration):
     resulting field is set to undefined.
    
     Instead of explicitely specifying the field to compare with, the expression
-    ``compare_with='__INCORE__'`` may be used to automatically look for matching
+    :nl:val:`compare_with='__INCORE__'` may be used to automatically look for matching
     fields in incore storage; criteria for matching field is based on short
     name, level, EPS identity, and PDF identity as explained above.
    
     The attributes of the resulting field (pds,gds) will be the attributes of
     the current field.
    
-    The values of the resulting field is computed according to :nl:arg:`&Process compare_fct`:
+    The values of the resulting field is computed according to :nl:arg:`compare_fct`:
     
     1.  ``"ratio; a1,a2,a3,b1,b2,b3"`` [4]_ [5]_
         ::
@@ -3608,7 +3608,7 @@ operator is applied at the very end of the iteration):
 
       (in particular the result is undefined outside of the common domain of the considered fields)
     
-    .. note:: the ratio/ratio_abs operators change the field identity, and :nl:arg:`&Process new_field_id` must be set.
+    .. note:: the ratio/ratio_abs operators change the field identity, and :nl:arg:`new_field_id` must be set.
 
 Horizontal Operators
 ^^^^^^^^^^^^^^^^^^^^
@@ -3693,7 +3693,7 @@ operator                    description
                             When the fit is not possible (less than 2 active
                             points, tag values are all identical), undefined
                             is returned.
-                            Example: ``hoper="regfit,reg_m27,linreg,a2,tp24h_mean"``
+                            Example: :nl:val:`hoper="regfit,reg_m27,linreg,a2,tp24h_mean"`
 =========================== ========================================================================
 
 **Index**
@@ -3776,7 +3776,7 @@ other
 .. note::
   Note about ``destagger`` operator:
   
-  The same effect can be applied by using :nl:arg:`&Process in_regrid_method`
+  The same effect can be applied by using :nl:arg:`in_regrid_method`
 
 .. note::
   Note about ``tiled_*`` operators:
@@ -3789,7 +3789,7 @@ other
     be larger than the operator radius (e.g. imin, jmin > 2).  
   * No operation should be defined which postpone the lateral reduction of
     the field after the iteration where the tiled operator is used; this 
-    concerns the usage of any :nl:arg:`&Process hoper` and the usage of any named operator
+    concerns the usage of any :nl:arg:`hoper` and the usage of any named operator
     requiring a lateral halo (as defined in the active dictionary). The
     reason of these condition is that the undefined values created by the
     tiled operator makes the usage of any lateral halo meaningless and
@@ -3900,7 +3900,7 @@ Vertical Operators
 
     :format: <level>,<level>,...
     
-    target levels for :nl:arg:`&Process voper`, integer array
+    target levels for :nl:arg:`voper`, integer array
 
 .. nl:argument:: voper_lev_units
 
@@ -3908,7 +3908,7 @@ Vertical Operators
     
     associated physical units, optional
     > 
-    see :nl:arg:`&Process level_units`
+    see :nl:arg:`level_units`
 
 .. nl:argument:: voper_use_tag
 
@@ -3961,8 +3961,8 @@ B.  Compute the height or the pressure of a surface defined by a condition on so
           units as the parent field, and specifies the
           end of the interval. When missing, the interval
           extends form tag2 to the top of atmosphere
-          (if ``mode='up'``) or to the bottom of atmosphere
-          (if ``mode='down'``)
+          (if :nl:val:`mode='up'`) or to the bottom of atmosphere
+          (if :nl:val:`mode='down'`)
     ``mode``   
           is one of "up" or "down", and specifies how
           the interval is scanned when looking for the
@@ -4034,7 +4034,7 @@ C.  Vertical interpolation of atmospheric fields from full to half levels,
 D.  Vertical interpolation of atmospheric fields from model levels to specified
     height levels.
 
-    Target levels are either specified by :nl:arg:`&Process voper_lev`...
+    Target levels are either specified by :nl:arg:`voper_lev`...
       from model level to height above ground
         | ``'intpl_k2h,mode'``  
         | ``'intpl_k2h+,mode'``
@@ -4154,7 +4154,7 @@ D.  Vertical interpolation of atmospheric fields from model levels to specified
         all auxiliary fields used for the extrapolation mode must be
         available.
         
-        When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+        When :nl:arg:`voper_lev_units` is missing, it is assumed that target
         level(s) are expressed in [m].
 
 E.  Vertical interpolation of atmospheric fields from model levels to
@@ -4172,7 +4172,7 @@ E.  Vertical interpolation of atmospheric fields from model levels to
     Pressure field must be available on all levels where the field
     to interpolate is defined.
 
-    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [hPa].
 
 F.  Vertical interpolation of atmospheric fields from model levels to
@@ -4194,7 +4194,7 @@ F.  Vertical interpolation of atmospheric fields from model levels to
     Potential temperature field must be available on all levels where
     the field to interpolate is defined.
 
-    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [cK].
 
 G.  Vertical interpolation of atmospheric fields from model levels to
@@ -4215,10 +4215,10 @@ G.  Vertical interpolation of atmospheric fields from model levels to
     Potential vorticity field must be available on all levels where
     the field to interpolate is defined.
 
-    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [mPVU].
 
-H.  Integral of soil fields in the layers defined by :nl:arg:`&Process voper_lev`; the field to
+H.  Integral of soil fields in the layers defined by :nl:arg:`voper_lev`; the field to
     integrate must be an integral quantity (e.g. soil water content):
 
     ``'integ_soil'`` 
@@ -4226,7 +4226,7 @@ H.  Integral of soil fields in the layers defined by :nl:arg:`&Process voper_lev
     source layers must be contiguous, boundaries of source and target
     layers are expessed as depth below surface.
 
-    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [cm].
 
 I.  (Normalized) integral of atmospheric field
@@ -4234,10 +4234,10 @@ I.  (Normalized) integral of atmospheric field
     | ``'integ_sfc2h'``, ``'norm_integ_sfc2h'``,
     | ``'integ_sfc2z'``, ``'norm_integ_sfc2z'``
 
-    Integral from the surface to the upper boundary specified by :nl:arg:`&Process voper_lev`.
-    Values of :nl:arg:`&Process voper_lev` are expressed in height above ground (integ_sfc2h)
+    Integral from the surface to the upper boundary specified by :nl:arg:`voper_lev`.
+    Values of :nl:arg:`voper_lev` are expressed in height above ground (integ_sfc2h)
     or in height above mean sea level (integ_sfc2z); when multiple values
-    of :nl:arg:`&Process voper_lev` are defined, a new field is computed for each value.
+    of :nl:arg:`voper_lev` are defined, a new field is computed for each value.
 
     ``'integ_h2h,lbound,ubound'``, ``'norm_integ_h2h,lbound,ubound'``
                 (lbound in height agl, ubound in height agl)
@@ -4249,7 +4249,7 @@ I.  (Normalized) integral of atmospheric field
                 (lbound in height amsl, ubound in height amsl)
 
     Vertical integral between lower and upper boundary, as specified by
-    the arguments of the operator (:nl:arg:`&Process voper_lev` is not supported for these
+    the arguments of the operator (:nl:arg:`voper_lev` is not supported for these
     operators). The integral is normalized by the height difference
     between upper and lower bounds when ``'norm_integ_*'`` operator is used:
     result = (1/ubound-lbound) * integral[lbound -> ubound](field(z) * dz) 
@@ -4260,7 +4260,7 @@ I.  (Normalized) integral of atmospheric field
     represent a height above mean sea level or above ground (depending
     on the operator).
 
-    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [m].
 
     .. note::
@@ -4291,9 +4291,9 @@ J.  Minimum or maximum of atmospheric field in a specified height interval
 
     Maximum or minimum of the field computed for the height interval 
     starting at the surface and ending at the height specified in
-    :nl:arg:`&Process voper_lev`. Values of :nl:arg:`&Process voper_lev` are expressed in height above ground
+    :nl:arg:`voper_lev`. Values of :nl:arg:`voper_lev` are expressed in height above ground
     (``*_sfc2h``) or in height above mean sea level (``*_sfc2z``); when multiple
-    values of :nl:arg:`&Process voper_lev` are defined, a new field is computed for each value.
+    values of :nl:arg:`voper_lev` are defined, a new field is computed for each value.
 
     | ``'max_h2h,lbound,ubound'``,     (lbound in meter agl, ubound in meter agl)
     | ``'max_h2z,lbound,ubound'``,     (lbound in meter agl, ubound in meter amsl)
@@ -4305,14 +4305,14 @@ J.  Minimum or maximum of atmospheric field in a specified height interval
     | ``'min_z2z,lbound,ubound'``      (lbound in meter amsl, ubound in meter amsl)
 
     Maximum or minimum of the field computed for the height interval specified
-    by the arguments of the operator (:nl:arg:`&Process voper_lev` is not supported for these
+    by the arguments of the operator (:nl:arg:`voper_lev` is not supported for these
     operators). Each of lbound and ubound may be expressed as an integer,
     or as a tag refering to a 2d field available in the same computing
     iteration. In this latter case, the associated field values must 
     represent a height above mean sea level or above ground (depending
     on the operator).
 
-    When :nl:arg:`&Process voper_lev_units` is missing, it is assumed that target
+    When :nl:arg:`voper_lev_units` is missing, it is assumed that target
     level(s) are expressed in [m].
 
     .. note::
@@ -4644,7 +4644,7 @@ The following time operators are implemented
   Example: accumulated precipitation, with lead times +3 and +4 hour
   missing, and with lead time +5 hour available and representing an
   accumulation from +2 to +5 hour (this configuration could be obtained
-  after applying ``toper=delta_g``): the ``'distribute'`` method will associate 
+  after applying :nl:val:`toper=delta_g`): the ``'distribute'`` method will associate 
   1/3 of the +5 hour value to the interval +2 to +3 hour, 1/3 to the
   interval +3 to +4 hour, will change the time range of the +5 hour 
   to the interval +4 to +5 hour, and will change the value of the
@@ -4723,10 +4723,10 @@ Point Operators
 Unlike other operators, up to three different point operators can be defined
 for each field; this supports more compact and comprehensible namelists.
 
-As already mentioned, :nl:arg:`&Process poper` is first applied  to all the relevant fields, then
-:nl:arg:`&Process poper2` is applied  to all the relevant fields, ... and finally poper 5 is applied
+As already mentioned, :nl:arg:`poper` is first applied  to all the relevant fields, then
+:nl:arg:`poper2` is applied  to all the relevant fields, ... and finally poper 5 is applied
 to all the relevant fields. That means in particular that the results of the
-transformation by :nl:arg:`&Process poper`, for any field, is available to :nl:arg:`&Process poper2`, ... :nl:arg:`&Process poper5`.
+transformation by :nl:arg:`poper`, for any field, is available to :nl:arg:`poper2`, ... :nl:arg:`poper5`.
 
 The following point operators are implemented:
 
@@ -5066,10 +5066,10 @@ pr_n         field tags refering to other fields available in the current
     Kalman filter and MOS coefficients, respectively, as specified in location_list_additional
     (see 6.3 for more details). The consistency of internal location coordinates with those
     given in the external coefficient files is checked when the respective coefficient files
-    are read. In addition, the value of :nl:arg:`&Process kf_model_name` and mos_model_name, respectively, as declared
+    are read. In addition, the value of :nl:arg:`kf_model_name` and mos_model_name, respectively, as declared
     in location_list_additional, is checked against the internal model name value. The behaviour
     of the program in case of missing correction data is controlled by the namelist variable
-    :nl:arg:`&Process out_mode_kfcor_na` and out_mode_moscor_na, respectively (see 4.3.2).
+    :nl:arg:`out_mode_kfcor_na` and out_mode_moscor_na, respectively (see 4.3.2).
 
   * The operator
       ``'moscor_global'``
@@ -5089,7 +5089,7 @@ pr_n         field tags refering to other fields available in the current
   * Only Kalman filter and MOS with linear statistical model are supported. All predictor
     fields have to be present in the iteration in which the operator is applied. They are
     defined in the Error_model and Forecast_model, respectively, in the corresponding
-    :nl:arg:`&Process location_list_additional` file. If more than one copy of one of the predictor fields exists
+    :nl:arg:`location_list_additional` file. If more than one copy of one of the predictor fields exists
     in the same iteration, the field must be uniquely tagged, and the list of unique predictor
     field names and/or tags pr_1 to pr_n must be given as operator argument. The predictor
     fields in the list must occur in the same order as in the Error_model and Forecast_model,
@@ -5116,7 +5116,7 @@ pr_n         field tags refering to other fields available in the current
   Note about logarithm_e/exponential/inverse/product/quotient/ratio/
   azimut_class/rate/moscor_logreg/moscor_extlogreg operators: 
 
-  * These operators change the field identity, and :nl:arg:`&Process new_field_id` must be set. 
+  * These operators change the field identity, and :nl:arg:`new_field_id` must be set. 
 
 .. note::
   Note about all operators:
@@ -5148,23 +5148,23 @@ pr_n         field tags refering to other fields available in the current
     
     A side effect of some operators is to change the identity of the field being 
     transformed; in such a case it is mandatory to reset the field name (or to set
-    :nl:arg:`&Process strict_usage` to false). 
+    :nl:arg:`strict_usage` to false). 
     This concerns the following operators:
 
-    :nl:arg:`&Process voper`        
+    :nl:arg:`voper`        
       in {``derivate_k``, ``upscale_gradient_min``, ``upscale_gradient_max``}
-    :nl:arg:`&Process hoper`        
+    :nl:arg:`hoper`        
       in {``regcnt``, ``regcnt%``, ``regfit``, ``tiled_sqcnt%``, ``sqcnt%``, ``diskcnt%``}
-    :nl:arg:`&Process poper`        
+    :nl:arg:`poper`        
       in {``product``, ``quotient``, ``ratio``, ``azimut_class``, ``rate``, ``moscor_logreg``, ``moscor_extlogreg``}
-    :nl:arg:`&Process compare_fct`  
+    :nl:arg:`compare_fct`  
       in {``ratio``, ``ratio_abs``}
    
     It is possible to reset the field units only, by using the same name as the field 
     being transformed and by defining new units. Note that no internal consistency check
     is currently made on field units; this value is only used when producing some output
-    (e.g. NetCDF). Note also that field units may be reset with the :nl:arg:`&Process set_units` operator;
-    when used in the last iteration, :nl:arg:`&Process set_units` has precedance over new_field_id.
+    (e.g. NetCDF). Note also that field units may be reset with the :nl:arg:`set_units` operator;
+    when used in the last iteration, :nl:arg:`set_units` has precedance over new_field_id.
 
 .. _section 4.3.5:
 
@@ -5272,8 +5272,8 @@ of 'use_tag'.
 
 Once all fields for the current iteration have been collected or
 computed, an optional tag is associated to each one. Each field may
-then be transformed by one or more operators, in the order :nl:arg:`&Process hoper`,
-scale/offset, :nl:arg:`&Process voper`, :nl:arg:`&Process toper`, poper, :nl:arg:`&Process poper2`, :nl:arg:`&Process poper3`, poper4, :nl:arg:`&Process poper5`,
+then be transformed by one or more operators, in the order :nl:arg:`hoper`,
+scale/offset, :nl:arg:`voper`, :nl:arg:`toper`, poper, :nl:arg:`poper2`, :nl:arg:`poper3`, poper4, :nl:arg:`poper5`,
 spatial filter, new_field_id; the order is hardcoded and does not
 depend on the way the namelist is defined. Each class of operators 
 is applied in turn to all the concerned fields; within a class the
@@ -5281,11 +5281,11 @@ processing order is arbitrary.
 
 Before creating the final product, a last set of global operations
 may be applied, in the order n to m operator (out_postproc_module),
-re-gridding (out_regrid_target, :nl:arg:`&Process out_regrid_method` ...), re-setting
-meta-information (originating_center, :nl:arg:`&Process production_status`, genproc_type, 
-auxiliary_metainfo, :nl:arg:`&Process out_model_name`, :nl:arg:`&Process out_genproc_type`,
-out_product_category, :nl:arg:`&Process out_vertical_coordinate`,
-:nl:arg:`&Process out_auxiliary_metainfo`, set_*), filtering data set 
+re-gridding (out_regrid_target, :nl:arg:`out_regrid_method` ...), re-setting
+meta-information (originating_center, :nl:arg:`production_status`, genproc_type, 
+auxiliary_metainfo, :nl:arg:`out_model_name`, :nl:arg:`out_genproc_type`,
+out_product_category, :nl:arg:`out_vertical_coordinate`,
+:nl:arg:`out_auxiliary_metainfo`, set_*), filtering data set 
 (out_filter_cst, out_filter_time).
 Unlike the operators described in this section, with the exception 
 of the set_* operators, these transformations apply on all available
@@ -5303,7 +5303,7 @@ transformations with multiple iterations.
 
 
     The specified field is either computed, when not available in the previous
-    iteration or when :nl:arg:`&Process use_operator` is set, or transfered from the previous
+    iteration or when :nl:arg:`use_operator` is set, or transfered from the previous
     iteration.
 
 .. nl:argument:: use_tag
@@ -5315,18 +5315,18 @@ transformations with multiple iterations.
     instances of the same field are available in the previous iteration, or
     when multiple sets of parent fields are supported by the associated operator.
    
-    The :nl:arg:`&Process use_tag` list refers to tags of fields within the previous iteration.
+    The :nl:arg:`use_tag` list refers to tags of fields within the previous iteration.
     If present, this list must be exhaustive, and its first element defines 
     the operator main parent. This is the only way to filter the list of parent 
     fields.
    
-    Besides the possibility to filter the list of parents, :nl:arg:`&Process use_tag` may also
+    Besides the possibility to filter the list of parents, :nl:arg:`use_tag` may also
     be used to re-define the main parent of the field to be computed; the
-    first element of :nl:arg:`&Process use_tag` overrides any main parent set in the active
+    first element of :nl:arg:`use_tag` overrides any main parent set in the active
     dictionary (but information on operator halo remains the one derived
     from dictonary). 
    
-    The :nl:arg:`&Process use_tag` list will also filter the set of fields to transfer from 
+    The :nl:arg:`use_tag` list will also filter the set of fields to transfer from 
     one iteration to the next, when no new field is computed.
       
 .. nl:argument:: use_operator
@@ -5335,14 +5335,14 @@ transformations with multiple iterations.
 
 
     It is also possible to explicitely select the operator used to compute a 
-    new field. In this case, :nl:arg:`&Process use_operator` must be associated with use_tag,
+    new field. In this case, :nl:arg:`use_operator` must be associated with use_tag,
     and the main parent of the derived field is defined to be the first
     element of use_tag. The name of the operator must match the name of a
-    procedure available in one of the module :nl:arg:`&Process fxtr_operator_generic` or
-    :nl:arg:`&Process fxtr_operator_specific` (see section 5.2 of this file for the list of
+    procedure available in one of the module :nl:arg:`fxtr_operator_generic` or
+    :nl:arg:`fxtr_operator_specific` (see section 5.2 of this file for the list of
     available operators; see also README.user.locale).
     
-    By specifying :nl:arg:`&Process use_operator` one forces the associated field to be
+    By specifying :nl:arg:`use_operator` one forces the associated field to be
     computed, even when readily available in the previous iteration.
     
     A special operator, '__CREATE\__', is available to create a new field by
@@ -5350,7 +5350,7 @@ transformations with multiple iterations.
     The field to create must be defined in the active dictionary; all values
     of the field are set to undefined. When used in conjunction with 'moscor_mlr',
     this feature supports a MOS forecast by deriving a new field from a set
-    of predictors (see :nl:arg:`&Process moscor_mlr`).
+    of predictors (see :nl:arg:`moscor_mlr`).
 
 Levels
 ^^^^^^
@@ -5361,7 +5361,7 @@ Levels
     :format: <type of level to consider>
     :noindex:
 
-    The type of levels to consider may be explicitely specified; see :nl:arg:`&Process level_class`
+    The type of levels to consider may be explicitely specified; see :nl:arg:`level_class`
     for more details.
 
 **Levels, can be defined by ...**
@@ -5396,7 +5396,7 @@ The associated physical units may be specified by ::
 
   level_units = <units>  (optional)
 
-see :nl:arg:`&Process levlist` for a full description.
+see :nl:arg:`levlist` for a full description.
    
 .. note:: for fields defined on layers, the values specified by levlist or
           levmin ... always refer to the top surface of the layer (e.g. the
@@ -5467,41 +5467,41 @@ Product Category
 
         * - eps_member
           - eps_mean
-          - :nl:arg:`&Process out_mode_weighted_member`
+          - :nl:arg:`out_mode_weighted_member`
 
         * - eps_member
           - eps_perturbation
-          - :nl:arg:`&Process out_mode_weighted_member`
+          - :nl:arg:`out_mode_weighted_member`
 
         * - eps_member
           - eps_standard_deviation
-          - :nl:arg:`&Process out_mode_weighted_member`
+          - :nl:arg:`out_mode_weighted_member`
 
         * - eps_member
           - eps_standard_deviation_normed
-          - :nl:arg:`&Process out_mode_weighted_member`
+          - :nl:arg:`out_mode_weighted_member`
             
 
         * - eps_member
           - eps_quantile
-          - | :nl:arg:`&Process quantile` (one value)
-            | :nl:arg:`&Process out_mode_weighted_member`
+          - | :nl:arg:`quantile` (one value)
+            | :nl:arg:`out_mode_weighted_member`
 
         * - eps_member
           - eps_quantile_difference
-          - | :nl:arg:`&Process quantile` (2 values)
-            | :nl:arg:`&Process out_mode_weighted_member`
+          - | :nl:arg:`quantile` (2 values)
+            | :nl:arg:`out_mode_weighted_member`
 
         * - eps_member
           - eps_probability
-          - | :nl:arg:`&Process prob_interval` or
-            | :nl:arg:`&Process prob_tlow` or/and :nl:arg:`&Process prob_thigh`
-            | :nl:arg:`&Process out_mode_weighted_member`
+          - | :nl:arg:`prob_interval` or
+            | :nl:arg:`prob_tlow` or/and :nl:arg:`prob_thigh`
+            | :nl:arg:`out_mode_weighted_member`
 
         * - deterministic
           - neighbourhood_probability
-          - | :nl:arg:`&Process prob_interval` or
-            | :nl:arg:`&Process prob_tlow` or/and :nl:arg:`&Process prob_thigh`
+          - | :nl:arg:`prob_interval` or
+            | :nl:arg:`prob_tlow` or/and :nl:arg:`prob_thigh`
    
     Some remarks on the way these quantities are computed:
 
@@ -5724,7 +5724,7 @@ and also, but only if it is the last processing iteration
 
 
 .. note:: 
-  Note about the usage of :nl:arg:`&Process hoper` in one of the generate field iteration:
+  Note about the usage of :nl:arg:`hoper` in one of the generate field iteration:
   data reduction from full field to the user defined subset is only done
   after the last horizontal transformation has been applied. This has as
   consequences:
@@ -5790,7 +5790,7 @@ output. Most of these operations are limited to some types of output (see
 
     :format: <missing value code, real>
 
-    code used to mark undefined values, override value of :nl:arg:`&Process out_type_undefcode`. 
+    code used to mark undefined values, override value of :nl:arg:`out_type_undefcode`. 
 
     One must be cautious when using set_undefcode, because this value is not declared
     explicitely in the output file, and may differ from the global undef code used
@@ -5800,7 +5800,7 @@ output. Most of these operations are limited to some types of output (see
 
     :format: <packing method, string>
 
-    packing algorithm (see :nl:arg:`&Process out_type_packing` for a description). 
+    packing algorithm (see :nl:arg:`out_type_packing` for a description). 
     When set, override out_type_packing.
 
 .. nl:argument:: set_description
@@ -5833,7 +5833,7 @@ output. Most of these operations are limited to some types of output (see
     'alternateParameter'. When no alternate code is defined,
     the usual code is applied.
     The same effect can be obtained by setting to true the
-    key :nl:arg:`&Process out_type_alternate_code`, but for all fields of the
+    key :nl:arg:`out_type_alternate_code`, but for all fields of the
     concerned output.
  
 .. _section 4.3.7:
