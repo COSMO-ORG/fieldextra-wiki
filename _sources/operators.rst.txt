@@ -174,9 +174,8 @@ constant fields (produced in INCORE)
             P0FL(k) = f(HSURF, gds)
 
     **Parents**
-                
-    :nl:val:`"HSURF"` (main)
-        [required in INCORE, from COSMO]
+        :nl:val:`"HSURF"` (main)
+            [required in INCORE, from COSMO]
     
 soil and surface
 ----------------
@@ -258,8 +257,7 @@ soil and surface
         :nl:val:`"T_S"` or :nl:val:`"T_SO"`
             (level 0)
         :nl:val:`"FR_LAND"`
-
-mass field
+            mass field
 ----------
 
 .. nl:value:: "PS"
@@ -272,7 +270,6 @@ mass field
 
     Parents:
         :nl:val:`"LNSP"` (main)
-    
 
 .. nl:value:: "QNH"
 
@@ -343,7 +340,7 @@ mass field
 
     Parents:
         :nl:val:`"TOP_CON"` (main)
-    
+
         :nl:val:`"BAS_CON"`
 
         :nl:val:`"P"`
@@ -354,7 +351,9 @@ mass field
 
     geopotential [m**2/s**2]: ::
 
-        FI = height * g, where g is the gravitational acceleration
+        FI = height * g
+        
+    where g is the gravitational acceleration
 
     Parents:
         :nl:val:`"HEIGHT"` (main)
@@ -373,7 +372,9 @@ mass field
 
     geopotential at surface [m**2/s**2]: ::
 
-        FIS = surface_height * g, where g is the gravitational acceleration
+        FIS = surface_height * g
+        
+    where g is the gravitational acceleration
 
     Parents:
         :nl:val:`"HSURF"` (main)
@@ -386,7 +387,9 @@ mass field
 
     derived from geopotential::
 
-        HEIGHT = FI / g, where g is the gravitational acceleration
+        HEIGHT = FI / g
+        
+    where g is the gravitational acceleration
 
     Parents:
         :nl:val:`"FI"` (main)
@@ -410,7 +413,7 @@ mass field
         :nl:val:`"PS"`
             (in[Pa])
         :nl:val:`"LNSP"`
-            
+
         :nl:val:`"FIS"`
             (in[m**2/s**2])
 
@@ -452,7 +455,9 @@ mass field
 
     derived from geopotential ::
 
-        HHL = FI / g, where g is the gravitational acceleration
+        HHL = FI / g
+        
+    where g is the gravitational acceleration
 
     Parents:
         :nl:val:`"FI"` (main)
@@ -464,8 +469,7 @@ mass field
             
         HHL(k) = f(HSURF, gds)
 
-    Parents:        
-        :nl:val:`"HSURF"` (main)
+    Parents:        :nl:val:`"HSURF"` (main)
             [required in INCORE, fromCOSMO]
 
 wind
@@ -482,7 +486,7 @@ wind
 
     Parents:
         :nl:val:`"ETADOT"`
-            
+
         :nl:val:`"PS"`
             [Pa]
 
@@ -490,7 +494,7 @@ wind
 
     Parents:
         :nl:val:`"ETADOT"`
-            
+
         :nl:val:`"LNSP"`
                 
 
@@ -507,7 +511,7 @@ wind
 
     Parents:
         :nl:val:`"U"`
-            
+
         :nl:val:`"V"`
                     
 
@@ -536,7 +540,7 @@ wind
 
     Parents:
         :nl:val:`"U_10M"`
-            
+
         :nl:val:`"V_10M"`
                     
 
@@ -697,30 +701,30 @@ wind
     norm of vertical wind shear between lowest model level and 3km above sea level [m s-1]
 
     Parents:
-                :nl:val:`"U"`
-                    (in[m/s])
-                :nl:val:`"V"`
-                    (in[m/s])
+        :nl:val:`"U"`
+            (in[m/s])
+        :nl:val:`"V"`
+            (in[m/s])
 
 .. nl:value:: "WSHEAR_0-6km"
 
     norm of vertical wind shear between lowest model level and 6km above sea level [m s-1]
 
     Parents:
-                :nl:val:`"U"`
-                    (in[m/s])
-                :nl:val:`"V"`
-                    (in[m/s])
+        :nl:val:`"U"`
+            (in[m/s])
+        :nl:val:`"V"`
+            (in[m/s])
 
 .. nl:value:: "WSHEAR_3-6km"
 
     norm of vertical wind shear between 3km and 6km above sea level [m s-1]
 
     Parents:
-                :nl:val:`"U"`
-                    (in[m/s])
-                :nl:val:`"V"`
-                    (in[m/s])
+        :nl:val:`"U"`
+            (in[m/s])
+        :nl:val:`"V"`
+            (in[m/s])
 
 .. nl:value:: "ABSV"
 
@@ -747,10 +751,10 @@ wind
     which is perpendicular to constant height levels.
 
     Parents:
-                :nl:val:`"U"`
-                    (in [m/s], on p-surface, in native ref. system)
-                :nl:val:`"V"`
-                    (in [m/s], on p-surface, in native ref. system)
+        :nl:val:`"U"`
+            (in [m/s], on p-surface, in native ref. system)
+        :nl:val:`"V"`
+            (in [m/s], on p-surface, in native ref. system)
 
 .. nl:value:: "POT_VORTIC"
 
@@ -788,7 +792,7 @@ wind
         :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
             (in [m], on model half levels) 
     
-    only when out_mode_ignore_wloading=.F., depending on the list specified in :nl:nl:`&ModelSpecification`: one or more of
+    only when :nl:val:`&Process out_mode_ignore_wloading=.false.`, depending on the list specified in :nl:nl:`&ModelSpecification`: one or more of
         :nl:val:`"QR"`
             (in [kg/kg])  
         :nl:val:`"QS"`
@@ -810,55 +814,65 @@ quasi-geostrophic approximation
 
 .. nl:value:: "V_G"
 
-    northward component of geostrophic wind on model surface in native ref. system [m/s]
+    northward component of geostrophic wind on model surface in native ref. system [m/s] ::
 
-            (U_G,V_G) = -1/(rho*f) (e_r) x (grad p)
-                where rho       is the total air density
-                        grad p    is the pressure gradient
-                        f         is the Coriolis factor 2 Omega sin(lat)
-                        e_r       is the radial base vector for spherical polar
-                                coordinates
-                Effect of water loading is normally ignored, but can be included
-                by setting out_mode_ignore_wloading to false.
-                        :nl:val:`"P"`
-                            (in [Pa])
-                        :nl:val:`"T"`
-                            (in [K])
-                    :nl:val:`"QC"`
-                        (in [kg/kg])
-                    :nl:val:`"QV"`
-                        (in [kg/kg])
-                    :nl:val:`"QI"`
-                        (in [kg/kg])
-            HEIGHT or HHL : (in [m], on model half levels) 
-            ... only when out_mode_ignore_wloading=.F., depending on the list
-                specified in &ModelSpecification: one or more of
-                    :nl:val:`"QR"`
-                        (in [kg/kg])  
-                    :nl:val:`"QS"`
-                        (in [kg/kg])  
-                    :nl:val:`"QG"`
-                        (in [kg/kg])  
-                ...
-            When computing U_G (respectively V_G) on level k, all listed fields must be
-            available on level k, HEIGHT must also be available on level k+1, P must be
-            available on at least one adjacent level (left or right derivative in k
-            is applied when k+1 or k-1 level is missing)
+        (U_G,V_G) = -1/(rho*f) (e_r) x (grad p)
+
+    where 
+    
+    | ``rho``       is the total air density
+    | ``grad p``    is the pressure gradient
+    | ``f``         is the Coriolis factor 2 Omega sin(lat)
+    | ``e_r``       is the radial base vector for spherical polar coordinates
+                
+    Effect of water loading is normally ignored, but can be included
+    by setting :nl:val:`&Process out_mode_ignore_wloading=.false.`.
+
+    Parents:
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"QC"`
+            (in [kg/kg])
+        :nl:val:`"QV"`
+            (in [kg/kg])
+        :nl:val:`"QI"`
+            (in [kg/kg])
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels) 
+
+    only when :nl:val:`&Process out_mode_ignore_wloading=.false.`, depending on the list specified in :nl:nl:`&ModelSpecification`: one or more of
+        :nl:val:`"QR"`
+            (in [kg/kg])  
+        :nl:val:`"QS"`
+            (in [kg/kg])  
+        :nl:val:`"QG"`
+            (in [kg/kg])  
+
+    When computing U_G (respectively V_G) on level k, all listed fields must be
+    available on level k, HEIGHT must also be available on level k+1, P must be
+    available on at least one adjacent level (left or right derivative in k
+    is applied when k+1 or k-1 level is missing)
 
 .. nl:value:: "DD_G"
 
-    direction of geostrophic wind (in geog. coord.) [degree];
+    direction of geostrophic wind (in geog. coord.) [degree]; ::
 
-            DD_G = 0.                         if U_G = V_G = 0.
-                180.0 + atan2(U_G, V_G)      otherwise
-            where U_G and V_G are the components of the geostrophic wind, either in
-            geographical lat/lon reference system or in native reference system (in this
-            latter case the components are first rotated from native to geographical
-            reference system)
-                :nl:val:`"U_G"`
-                    (in[m/s])
-                :nl:val:`"V_G"`
-                    (in[m/s])
+        DD_G = 0.                         if U_G = V_G = 0.
+             180.0 + atan2(U_G, V_G)      otherwise
+
+            
+    where U_G and V_G are the components of the geostrophic wind, either in
+    geographical lat/lon reference system or in native reference system (in this
+    latter case the components are first rotated from native to geographical
+    reference system)
+
+    Parents:
+        :nl:val:`"U_G"`
+            (in[m/s])
+        :nl:val:`"V_G"`
+            (in[m/s])
 
 .. nl:value:: "FF_G"
 
@@ -869,9 +883,8 @@ quasi-geostrophic approximation
     Parents:
         :nl:val:`"U_G"` (main)
             scale = 1.0 (FF_G in [m/s]),   = 1.94 (FF_G in [knots]) 
-
-                :nl:val:`"V_G"`
-                    scale = 1.0 (FF_G in [m/s]),   = 1.94 (FF_G in[knots])
+        :nl:val:`"V_G"`
+            scale = 1.0 (FF_G in [m/s]),   = 1.94 (FF_G in[knots])
 
 .. nl:value:: "RELV_G"
 
@@ -879,23 +892,29 @@ quasi-geostrophic approximation
 
 .. nl:value:: "ABSV_G"
 
-    absolute geostrophic vorticity on model surface [s-1]
+    absolute geostrophic vorticity on model surface [s-1] ::
 
             RELV_G  =  [e_r * ( curl v_g )]
             ABSV_G  =  [e_r * ( curl v_g + 2 Omega )]
-                where curl v_g  is the curl of the geostrophic wind v_g = (U_G,V_G)
-                        e_r       is the radial base vector for spherical polar
-                                coordinates
-                        2 Omega   is the Coriolis term
-                    :nl:val:`"U_G"`
-                        (in [m/s], on k-surface, in native ref. system)
-                    :nl:val:`"V_G"`
-                        (in [m/s], on k-surface, in native ref. system)
-            HEIGHT or HHL : (in [m], on model half levels) 
-            When computing RELV_G (respectively ABSV_G) on level k, all listed fields
-            must be available on level k, HEIGHT must also be available on level k+1, U_G
-            and V_G must be available on at least one adjacent level (left or right
-            derivative in k is applied when k+1 or k-1 level is missing)
+
+    where 
+    
+    | ``curl v_g``  is the curl of the geostrophic wind v_g = (U_G,V_G)
+    | ``e_r``       is the radial base vector for spherical polar coordinates
+    | ``2 Omega``   is the Coriolis term
+
+    Parents:
+        :nl:val:`"U_G"`
+            (in [m/s], on k-surface, in native ref. system)
+        :nl:val:`"V_G"`
+            (in [m/s], on k-surface, in native ref. system)
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels) 
+
+    When computing RELV_G (respectively ABSV_G) on level k, all listed fields
+    must be available on level k, HEIGHT must also be available on level k+1, U_G
+    and V_G must be available on at least one adjacent level (left or right
+    derivative in k is applied when k+1 or k-1 level is missing)
 
 .. nl:value:: "RELV_ADV_G"
 
@@ -903,88 +922,113 @@ quasi-geostrophic approximation
 
 .. nl:value:: "ABSV_ADV_G"
 
-    absolute geostrophic vorticity advection on model surface [s-1 m-1]
+    absolute geostrophic vorticity advection on model surface [s-1 m-1] ::
 
             RELV_ADV_G  =  - [ v_g * grad RELV_G ]
             ABSV_ADV_G  =  - [ v_g * grad ABSV_G ]
-                where v_g  is the geostrophic wind (U_G,V_G)
-                        grad RELV_G is the gradient of the relative geostrophic vorticity
-                        grad ABSV_G is the gradient of the absolute geostrophic vorticity
-                    :nl:val:`"RELV_G"`
-                        (in [s-1], on k-surface)
-                    :nl:val:`"ABSV_G"`
-                        (in [s-1], on k-surface)
-                    :nl:val:`"U_G"`
-                        (in [m/s], on k-surface, in native ref. system)
-                    :nl:val:`"V_G"`
-                        (in [m/s], on k-surface, in native ref. system)
-            HEIGHT or HHL : (in [m], on model half levels) 
-            When computing RELV_ADV_G (respectively ABSV_ADV_G) on level k, all listed
-            fields must be available on level k, HEIGHT must also be available on level k+1,
-            RELV_ADV (respectively ABSV_ADV) must be available on at least one adjacent
-            level (left or right derivative in k is applied when k+1 or k-1 level is missing)
+
+    where 
+
+    | ``v_g``  is the geostrophic wind (U_G,V_G)
+    | ``grad RELV_G`` is the gradient of the relative geostrophic vorticity
+    | ``grad ABSV_G`` is the gradient of the absolute geostrophic vorticity
+
+    Parents:
+        :nl:val:`"RELV_G"`
+            (in [s-1], on k-surface)
+        :nl:val:`"ABSV_G"`
+            (in [s-1], on k-surface)
+        :nl:val:`"U_G"`
+            (in [m/s], on k-surface, in native ref. system)
+        :nl:val:`"V_G"`
+            (in [m/s], on k-surface, in native ref. system)
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)
+
+    When computing RELV_ADV_G (respectively ABSV_ADV_G) on level k, all listed
+    fields must be available on level k, HEIGHT must also be available on level k+1,
+    RELV_ADV (respectively ABSV_ADV) must be available on at least one adjacent
+    level (left or right derivative in k is applied when k+1 or k-1 level is missing)
 
 .. nl:value:: "THICK_ADV_G"
 
-    geostrophic thickness advection for layer between two p-surfaces p1 < p2 [m s-1]
+    geostrophic thickness advection for layer between two p-surfaces p1 < p2 [m s-1] ::
 
             THICK_ADV_G  =  - [ v_g * grad ( h(p1) - h(p2) ) ]
-                where v_g  is the geostrophic wind (U_G,V_G)
-                        h(p) is the height of the p-surface
-            :nl:val:`"U_G"`
-                (in [m/s], on p-surface, in geog. ref. system)
-            :nl:val:`"V_G"`
-                (in [m/s], on p-surface, in geog. ref. system)
-            :nl:val:`"HEIGHT"`
-                (in [m], on pressure surface)
-            When computing THICK_ADV_G for the layer between the two p-surfaces p1 and p2
-            U_G, V_G, and HEIGHT must be available on p1 and p2. The value of THICK_ADV_G
-            is set to undefined if the directional shear of the geostrophic wind between p1
-            and p2 is larger than 90 degrees.
+
+    where
+
+    | ``v_g``  is the geostrophic wind (U_G,V_G)
+    | ``h(p)`` is the height of the p-surface
+
+    Parents:
+        :nl:val:`"U_G"`
+            (in [m/s], on p-surface, in geog. ref. system)
+        :nl:val:`"V_G"`
+            (in [m/s], on p-surface, in geog. ref. system)
+        :nl:val:`"HEIGHT"`
+            (in [m], on pressure surface)
+
+    When computing THICK_ADV_G for the layer between the two p-surfaces p1 and p2
+    U_G, V_G, and HEIGHT must be available on p1 and p2. The value of THICK_ADV_G
+    is set to undefined if the directional shear of the geostrophic wind between p1
+    and p2 is larger than 90 degrees.
 
 radiation
 ---------
 
 .. nl:value:: "ASOD_SH"
 
-    global (downward) shortwave radiation at surface level on horizontal
-
-            plane [W/m**2].
-            (1)  ASOD_SH = max( ASOB_SH / max((1.-ALB_RAD) , 1.e-10) , 0. )
-            Note: ASOB_SH is cumulated in time, ALB_RAD is instantaneous,
+    global (downward) shortwave radiation at surface level on horizontal plane [W/m**2]. ::
+        
+        ASOD_SH = max( ASOB_SH / max((1.-ALB_RAD) , 1.e-10) , 0. )
+            
+    .. note::
+                    ASOB_SH is cumulated in time, ALB_RAD is instantaneous,
                     which means this is only an approximation (but in most
                     cases ALB_RAD does not vary strongly within the time
                     scale of two model output)
-                :nl:val:`"ASOB_SH"`
-                    toper = tdelta
-                :nl:val:`"ALB_RAD"`
-                    scale = 0.01
+
+    Parents:
+        :nl:val:`"ASOB_SH"`
+            toper = tdelta
+        :nl:val:`"ALB_RAD"`
+            scale = 0.01
             (2) ASOD_SH = ASWDIFD_S + ASWDIR_SH
-                :nl:val:`"ASWDIR_SH"`
-                    toper = tdelta
-                :nl:val:`"ASWDIFD_S"`
-                    toper =tdelta
+        :nl:val:`"ASWDIR_SH"`
+            toper = tdelta
+        :nl:val:`"ASWDIFD_S"`
+            toper =tdelta
 
 .. nl:value:: "GLOB"
 
     global (downward) shortwave radiation at surface level [W/m**2];
 
-            on terrain following plane when radiative topo corrections are 
-            active, on horizontal plane otherwise.
-            (1)  GLOB = max( ASOB_S / max((1.-ALB_RAD) , 1.e-10) , 0. )
-            Note: ASOB_S is cumulated in time, ALB_RAD is instantaneous,
-                    which means this is only an approximation (but in most
-                    cases ALB_RAD does not vary strongly within the time
-                    scale of two model output)
-                :nl:val:`"ASOB_S"`
-                    toper = tdelta
-                :nl:val:`"ALB_RAD"`
-                    scale = 0.01
-            (2) GLOB = ASWDIFD_S + ASWDIR_S
-                :nl:val:`"ASWDIR_S"`
-                    toper = tdelta
-                :nl:val:`"ASWDIFD_S"`
-                    toper =tdelta
+    on terrain following plane when radiative topo corrections are 
+    active, on horizontal plane otherwise. ::
+
+        GLOB = max( ASOB_S / max((1.-ALB_RAD) , 1.e-10) , 0. )
+    
+    .. note:: 
+        ASOB_S is cumulated in time, ALB_RAD is instantaneous,
+        which means this is only an approximation (but in most
+        cases ALB_RAD does not vary strongly within the time
+        scale of two model output)
+
+    Parents:
+        :nl:val:`"ASOB_S"`
+            toper = tdelta
+        :nl:val:`"ALB_RAD"`
+            scale = 0.01
+    ::
+
+        GLOB = ASWDIFD_S + ASWDIR_S
+    
+    Parents:
+        :nl:val:`"ASWDIR_S"`
+            toper = tdelta
+        :nl:val:`"ASWDIFD_S"`
+            toper =tdelta
 
 .. nl:value:: "ASWDIR_S"
 
@@ -994,90 +1038,116 @@ radiation
 
     (if radiative topo corrections are active)
 
-            direct shortwave radiation at surface level on horizontal 
-            plane [W/m**2]; empirical model implemented following Perez et
-            al. (1992) and the code of Antoine Zelenka / MeteoSwiss.
-            Note 1: when available, it is recommended to use direct model output
-                    instead
-            Note 2: radiation_topo_corrected in &ModelSpecification must be defined
-            (1) when radiative topo corrections are not active
-                :nl:val:`"GLOB"`
-                    [W/m**2]
-                :nl:val:`"TD_2M"`
-                    [K]
-                :nl:val:`"HSURF"`
-                    [m]
-            (2) when radiative topo corrections are active
-                :nl:val:`"ASOD_SH"`
-                    [W/m**2]
-                :nl:val:`"TD_2M"`
-                    [K]
-                :nl:val:`"HSURF"`
-                    [m]
+    direct shortwave radiation at surface level on horizontal plane [W/m**2]; 
+            
+    empirical model implemented following Perez et
+    al. (1992) and the code of Antoine Zelenka / MeteoSwiss.
+
+    .. note::
+        when available, it is recommended to use direct model output instead
+
+    .. note::
+        :nl:arg:`&ModelSpecification radiation_topo_corrected` must be defined
+
+    1.  when radiative topo corrections are not active
+
+        Parents:
+            :nl:val:`"GLOB"`
+                [W/m**2]
+            :nl:val:`"TD_2M"`
+                [K]
+            :nl:val:`"HSURF"`
+                [m]
+    2.  when radiative topo corrections are active
+
+        Parents:
+            :nl:val:`"ASOD_SH"`
+                [W/m**2]
+            :nl:val:`"TD_2M"`
+                [K]
+            :nl:val:`"HSURF"`
+                [m]
 
 .. nl:value:: "ASWDIFD_S"
 
     diffuse shortwave radiation at surface level [W/m**2]; empirical model
 
-            implemented following Perez et al. (1992) and the code of Antoine 
-            Zelenka / MeteoSwiss 
-            Note 1: when available, it is recommended to use direct model output
-                    instead
-            Note 2: radiation_topo_corrected in &ModelSpecification must be defined
-            (1) when radiative topo corrections are not active
-                :nl:val:`"GLOB"`
-                    [W/m**2]
-                :nl:val:`"TD_2M"`
-                    [K]
-                :nl:val:`"HSURF"`
-                    [m]
-            (2) when radiative topo corrections are active
-                :nl:val:`"ASOD_SH"`
-                    [W/m**2]
-                :nl:val:`"TD_2M"`
-                    [K]
-                :nl:val:`"HSURF"`
-                    [m]
+    implemented following Perez et al. (1992) and the code of Antoine 
+    Zelenka / MeteoSwiss 
+    
+    .. note:: when available, it is recommended to use direct model output instead
+    .. note:: :nl:arg:`&ModelSpecification radiation_topo_corrected` must be defined
+
+    1.  when radiative topo corrections are not active
+
+        Parents:
+            :nl:val:`"GLOB"`
+                [W/m**2]
+            :nl:val:`"TD_2M"`
+                [K]
+            :nl:val:`"HSURF"`
+                [m]
+
+    2.  when radiative topo corrections are active
+
+        Parents:
+            :nl:val:`"ASOD_SH"`
+                [W/m**2]
+            :nl:val:`"TD_2M"`
+                [K]
+            :nl:val:`"HSURF"`
+                [m]
 
 .. nl:value:: "ASOD_SvX"
 
-    (X=E,S,W,N)
-            global shortwave radiation on vertical oriented surfaces
-            at surface level [W/m**2]; model implemented following Perez
-            et al. (1987) and the code of Antoine Zelenka / MeteoSwiss
-            (1) when radiative topo corrections are not active
-                :nl:val:`"GLOB"`
-                    [W/m**2]
-                :nl:val:`"ASWDIR_S"`
-                    toper = tdelta[W/m**2]
-                :nl:val:`"ASWDIFD_S"`
-                    toper = tdelta[W/m**2]
-                :nl:val:`"ALB_RAD"`
-                    scale=0.01
-                :nl:val:`"HSURF"`
-                    [m]
-            (2) when radiative topo corrections are active
-                :nl:val:`"ASOD_SH"`
-                    [W/m**2]
-                :nl:val:`"ASWDIR_SH"`
-                    toper = tdelta [W/m**2]
-                :nl:val:`"ASWDIFD_S"`
-                    toper = tdelta [W/m**2]
-                :nl:val:`"ALB_RAD"`
-                    scale=0.01
-                :nl:val:`"HSURF"`
-                    [m]
+    ::
+    
+        (X=E,S,W,N)
+
+    global shortwave radiation on vertical oriented surfaces
+    at surface level [W/m**2]; model implemented following Perez
+    et al. (1987) and the code of Antoine Zelenka / MeteoSwiss
+
+    1.  when radiative topo corrections are not active
+
+        Parents:
+            :nl:val:`"GLOB"`
+                [W/m**2]
+            :nl:val:`"ASWDIR_S"`
+                toper = tdelta[W/m**2]
+            :nl:val:`"ASWDIFD_S"`
+                toper = tdelta[W/m**2]
+            :nl:val:`"ALB_RAD"`
+                scale=0.01
+            :nl:val:`"HSURF"`
+                [m]
+
+    2.  when radiative topo corrections are active
+
+        Parents:
+            :nl:val:`"ASOD_SH"`
+                [W/m**2]
+            :nl:val:`"ASWDIR_SH"`
+                toper = tdelta [W/m**2]
+            :nl:val:`"ASWDIFD_S"`
+                toper = tdelta [W/m**2]
+            :nl:val:`"ALB_RAD"`
+                scale=0.01
+            :nl:val:`"HSURF"`
+                [m]
 
 .. nl:value:: "ATHD_S_TG"
 
     incoming longwave radiation at surface level, based on T(ground) [W/m**2];
 
-            Note that at grid points without snow: T(ground) = T(surf)
+    Note that at grid points without snow: ``T(ground) = T(surf)`` ::
+
             ATHD_S_TG = (1/emissivity) * (ATHB_S + emissivity*boltzman*T(ground)**4)
-                :nl:val:`"ATHB_S"`
-                    toper = tdelta
-                :nl:val:`"T_G"`
-                    
+
+    Parents:
+        :nl:val:`"ATHB_S"`
+            toper = tdelta
+        :nl:val:`"T_G"`
 
 .. nl:value:: "ATHD_S_TS"
 
@@ -1088,76 +1158,98 @@ radiation
     Parents:
         :nl:val:`"ATHB_S"` (main)
             toper = tdelta 
-
-                T_S or T_SO(level 0):
+        :nl:val:`"T_S"` or :nl:val:`"T_SO"`
+            (level 0)
 
 .. nl:value:: "ATHD_S_T2M"
 
-    incoming longwave radiation at surface level, based on T_2M [W/m**2]
+    incoming longwave radiation at surface level, based on T_2M [W/m**2] ::
+
             ATHD_S_T2M = (1/emissivity) * (ATHB_S + emissivity*boltzman*T_2M**4)
-                :nl:val:`"ATHB_S"`
-                    toper = tdelta
-                :nl:val:`"T_2M"`
-                    
+
+    Parents:
+        :nl:val:`"ATHB_S"`
+            toper = tdelta
+        :nl:val:`"T_2M"`
 
 .. nl:value:: "LUM"
 
-    luminosity [klux];
+    luminosity [klux]; ::
 
             LUM = 0.001 * EXP{ LOG(GLOB/0.013) / 0.963 }
-            (1) GLOB computed from radiation budget
-                :nl:val:`"ASOB_S"`
-                    toper = tdelta 
-                :nl:val:`"ALB_RAD"`
-                    scale = 0.01 
-            (2) GLOB computed from radiation components
-                :nl:val:`"ASWDIR_S"`
-                    toper = tdelta 
-                :nl:val:`"ASWDIFD_S"`
-                    toper = tdelta
+
+    1.  GLOB computed from radiation budget
+
+    Parents:
+        :nl:val:`"ASOB_S"`
+            toper = tdelta 
+        :nl:val:`"ALB_RAD"`
+            scale = 0.01 
+
+    2.  GLOB computed from radiation components
+
+        :nl:val:`"ASWDIR_S"`
+            toper = tdelta 
+        :nl:val:`"ASWDIFD_S"`
+            toper = tdelta
 
 .. nl:value:: "DURSUN_M"
 
     maximum sunshine duration [s];
 
-            Compute maximal sunshine duration, using solar geometry only; the
-            solar refraction in the atmosphere is not considered. When 
-            out_mode_sun_topo is true, the topography derived horizon is
-            considered and the parent field HORIZON must be present, otherwise
-            the horizon is defined everywhere with an elevation of 0 deg.
-            The parent field DURSUN must be present, and DURSUN_M is computed
-            for the same time intervals as DURSUN.
-            (1) out_mode_sun_topo = .false.
-                :nl:val:`"DURSUN"`
-                    [s]    
-            (2) out_mode_sun_topo = .true.
-                :nl:val:`"DURSUN"`
-                    [s]    
-                :nl:val:`"HORIZON"`
-                    elevation in [degree], for n sectors coded as levels;
-                        all sectors (levels) must be present.
+    Compute maximal sunshine duration, using solar geometry only; the
+    solar refraction in the atmosphere is not considered. When 
+    out_mode_sun_topo is true, the topography derived horizon is
+    considered and the parent field HORIZON must be present, otherwise
+    the horizon is defined everywhere with an elevation of 0 deg.
+    The parent field DURSUN must be present, and DURSUN_M is computed
+    for the same time intervals as DURSUN.
+
+    1.  :nl:val:`out_mode_sun_topo=.false.`
+
+        Parents:
+            :nl:val:`"DURSUN"`
+                [s]    
+
+    2.  :nl:val:`out_mode_sun_topo=.true.`
+
+        Parents:
+            :nl:val:`"DURSUN"`
+                [s]    
+            :nl:val:`"HORIZON"`
+                elevation in [degree], for n sectors coded as levels; all sectors (levels) must be present.
 
 .. nl:value:: "DURSUN_R"
 
     relative sunshine duration [%];
 
-            When DURSUN_M is missing, DURSUN_M will be computed internally
-            on the fly (see description of DURSUN_M).
-            (1) DURSUN_M available in list of parents
+    When :nl:val:`"DURSUN_M"` is missing, :nl:val:`"DURSUN_M"` will be computed internally
+    on the fly (see description of :nl:val:`"DURSUN_M"`).
+
+    1.  :nl:val:`"DURSUN_M"` available in list of parents
+        ::
+
             DURSUN_R = 100. * DURSUN / DURSUN_M
-                :nl:val:`"DURSUN"`
-                    [s]   
-                :nl:val:`"DURSUN_M"`
-                    [s]
-            (2) DURSUN_M missing, out_mode_sun_topo = .false.
-                :nl:val:`"DURSUN"`
-                    [s]    
-            (3) DURSUN_M missing, out_mode_sun_topo = .true.
-                :nl:val:`"DURSUN"`
-                    [s]    
-                :nl:val:`"HORIZON"`
-                    elevation in [degree], for n sectors coded as levels;
-                        all sectors (levels) must be present.
+            
+        Parents:
+            :nl:val:`"DURSUN"`
+                [s]   
+            :nl:val:`"DURSUN_M"`
+                [s]
+
+    2.  :nl:val:`"DURSUN_M"` missing, :nl:val:`out_mode_sun_topo=.false.`
+
+        Parents:
+            :nl:val:`"DURSUN"`
+                [s]    
+
+    3.  :nl:val:`"DURSUN_M"` missing, :nl:val:`out_mode_sun_topo=.true.`
+
+        Parents:
+            :nl:val:`"DURSUN"`
+                [s]    
+            :nl:val:`"HORIZON"`
+                elevation in [degree], for n sectors coded as levels; all sectors (levels) must be present.
 
 thermodynamic quantities
 ------------------------
@@ -1166,28 +1258,31 @@ thermodynamic quantities
 
     total density of air mixture (in [kg/m**3]).
 
-            Based on perfect gas law, pressure as sum of partial pressures.
-            Effect of water loading is normally ignored, but can be included
-            by setting out_mode_ignore_wloading to false.
+    Based on perfect gas law, pressure as sum of partial pressures.
+    Effect of water loading is normally ignored, but can be included
+    by setting out_mode_ignore_wloading to false. ::
+
             DEN = f(T, P, QV, QC, QI, [QR, QS, QG ...])
-                :nl:val:`"T"`
-                    [K]
-                :nl:val:`"P"`
-                    [Pa]
-                :nl:val:`"QV"`
-                    [kg/kg]
-                :nl:val:`"QC"`
-                    [kg/kg]
-                :nl:val:`"QI"`
-                    [kg/kg]
-            ... only when out_mode_ignore_wloading=.F., depending on the list
-                specified in &ModelSpecification: one or more of
-                :nl:val:`"QR"`
-                    [kg/kg]  
-                :nl:val:`"QS"`
-                    [kg/kg]  
-                :nl:val:`"QG"`
-                    [kg/kg]  
+
+    Parents:
+        :nl:val:`"T"`
+            [K]
+        :nl:val:`"P"`
+            [Pa]
+        :nl:val:`"QV"`
+            [kg/kg]
+        :nl:val:`"QC"`
+            [kg/kg]
+        :nl:val:`"QI"`
+            [kg/kg]
+
+    only when :nl:val:`out_mode_ignore_wloading=.F.`, depending on the list specified in :nl:nl:`&ModelSpecification`: one or more of
+        :nl:val:`"QR"`
+            [kg/kg]  
+        :nl:val:`"QS"`
+            [kg/kg]  
+        :nl:val:`"QG"`
+            [kg/kg]  
                 ...
 
 .. nl:value:: "THETA"
@@ -1200,107 +1295,135 @@ thermodynamic quantities
         :nl:val:`"T"` (main)
             (in [K]) 
 
-                :nl:val:`"P"`
-                    (in [Pa])
+        :nl:val:`"P"`
+            (in [Pa])
 
 .. nl:value:: "THETA_2M"
 
     2m potential temperature (in [K])
-            The surface pressure is reduced hydrostatically to a 2 meter pressure,
-            using constant temperature T_2M; the previous formula for THETA is then used.
-                :nl:val:`"T_2M"`
-                    (in [K])
-                :nl:val:`"PS"`
-                    (in [P])
+
+    The surface pressure is reduced hydrostatically to a 2 meter pressure,
+    using constant temperature T_2M; the previous formula for THETA is then used.
+
+    Parents:
+        :nl:val:`"T_2M"`
+            (in [K])
+        :nl:val:`"PS"`
+            (in [P])
 
 .. nl:value:: "THETAE"
 
-    equivalent potential temperature (in [K])
+    equivalent potential temperature (in [K]) ::
 
             THETAE = T * (1.E5/P)**(pc_r_d/pc_c_p) * exp((L*m)/(pc_c_p*T)),
-                where pc_r_d (gas constant for dry air), pc_c_p (specific 
-                heat), L (latent heat of water vapor) and m=QV/(1-QV)
-                :nl:val:`"T"`
-                    offset = 0. (in [K])
-                :nl:val:`"P"`
-                    offset = 0. (in [Pa])
-                :nl:val:`"QV"`
-                    
 
+    where
+
+    ``pc_r_d`` (gas constant for dry air), ``pc_c_p`` (specific heat), ``L`` (latent heat of water vapor) and ``m=QV/(1-QV)``
+
+    Parents:
+        :nl:val:`"T"`
+            offset = 0. (in [K])
+        :nl:val:`"P"`
+            offset = 0. (in [Pa])
+        :nl:val:`"QV"`
+            
 .. nl:value:: "THETAE_2M"
 
     2m-equivalent potential temperature (in [K])
-            The surface pressure is reduced hydrostatically to a 2 meter pressure,
-            using constant temperature T_2M; QV_2M is computed on the basis of this
-            reduced pressure and of TD_2M; the previous formula for THETAE is then used.
-                :nl:val:`"T_2M"`
-                    offset = 0. (in [K])
-                :nl:val:`"PS"`
-                    offset = 0. (in [P])
-                :nl:val:`"TD_2M"`
-                    offset = 0. (in [K])
+
+    The surface pressure is reduced hydrostatically to a 2 meter pressure,
+    using constant temperature T_2M; QV_2M is computed on the basis of this
+    reduced pressure and of TD_2M; the previous formula for THETAE is then used.
+
+    Parents:
+        :nl:val:`"T_2M"`
+            offset = 0. (in [K])
+        :nl:val:`"PS"`
+            offset = 0. (in [P])
+        :nl:val:`"TD_2M"`
+            offset = 0. (in [K])
 
 .. nl:value:: "THETA_V"
 
-    virtual potential temperature (in [K])
+    virtual potential temperature (in [K]) ::
 
             THETA_V = T * (1.E5/P)**(pc_r_d/pc_cp_d) *       &
                         (1+(((pc_r_v / pc_r_d) - 1.0)*QV/(1-QV))) ,
-                where pc_r_d (gas constant for dry air), pc_cp_d (specific
-                heat of dry air), pc_r_v (Gas constant for water vapor),
-                pc_r_d (Gas constant for dry air)
-                :nl:val:`"T"`
-                    offset = 0. (in [K])
-                :nl:val:`"P"`
-                    offset = 0. (in [Pa])
-                :nl:val:`"QV"`
-                    
+
+    where
+
+    ``pc_r_d`` (gas constant for dry air), 
+    ``pc_cp_d`` (specific heat of dry air), 
+    ``pc_r_v`` (Gas constant for water vapor), 
+    ``pc_r_d`` (Gas constant for dry air)
+
+    Parents:
+        :nl:val:`"T"`
+            offset = 0. (in [K])
+        :nl:val:`"P"`
+            offset = 0. (in [Pa])
+        :nl:val:`"QV"`
 
 .. nl:value:: "THETA_V_2M"
 
     2-m virtual potential temperature (in [K])
-            The surface pressure is reduced hydrostatically to a 2 meter pressure,
-            using constant temperature T_2M; QV_2M is computed on the basis of this
-            reduced pressure and of TD_2M; the previous formula for THETA_V is then used.
-                :nl:val:`"T_2M"`
-                    offset = 0. (in [K])
-                :nl:val:`"PS"`
-                    offset = 0. (in [Pa])
-                :nl:val:`"TD_2M"`
-                    
 
+    The surface pressure is reduced hydrostatically to a 2 meter pressure,
+    using constant temperature T_2M; QV_2M is computed on the basis of this
+    reduced pressure and of TD_2M; the previous formula for THETA_V is then used.
+
+    Parents:
+        :nl:val:`"T_2M"`
+            offset = 0. (in [K])
+        :nl:val:`"PS"`
+            offset = 0. (in [Pa])
+        :nl:val:`"TD_2M"`
+            
 .. nl:value:: "TW"
 
     wet bulb temperature [K];
 
-            (1) If out_mode_tw_iterative = .TRUE., a secant method is used to solve the 
-                psychrometric equation (cf. Bohren and Albrecht, 1998, equation (6.72)).
-                Undefined values is produced where the secant method does not converge,
-                and a warning is generated. 
+
+    1.  If :nl:val:`out_mode_tw_iterative=.TRUE.`, a secant method is used to solve the 
+
+        psychrometric equation (cf. Bohren and Albrecht, 1998, equation (6.72)).
+        Undefined values is produced where the secant method does not converge,
+        and a warning is generated. ::
+
             TW = f(T,P,QV)
-                :nl:val:`"T"`
-                    (in[K])
-                :nl:val:`"P"`
-                    (in[Pa])
-                :nl:val:`"QV"`
-                    (in[kg/kg])
-            (2) If out_mode_tw_iterative = .FALSE., an approximation formula is used
-                (as in cosmo pp_utilities:calsnowlmt, after after Egger/Joss).
-            TW = f(T,P,TD)
-                :nl:val:`"T"`
-                    (in[K])
-                :nl:val:`"P"`
-                    (in[Pa])
-                :nl:val:`"TD"`
-                    (in[kg/kg])
-                or
+
+        Parents:
+            :nl:val:`"T"`
+                (in[K])
+            :nl:val:`"P"`
+                (in[Pa])
+            :nl:val:`"QV"`
+                (in[kg/kg])
+
+    2.  If :nl:val:`out_mode_tw_iterative=.FALSE.`, an approximation formula is used (as in cosmo pp_utilities:calsnowlmt, after after Egger/Joss). ::
+            
+                TW = f(T,P,TD)
+        
+        Parents:
+            :nl:val:`"T"`
+                (in[K])
+            :nl:val:`"P"`
+                (in[Pa])
+            :nl:val:`"TD"`
+                (in[kg/kg])
+                
+        or ::
+
             TW = f(T,P,td(QV,P))
-                :nl:val:`"T"`
-                    (in[K])
-                :nl:val:`"P"`
-                    (in[Pa])
-                :nl:val:`"QV"`
-                    (in[kg/kg])
+
+        Parents:
+            :nl:val:`"T"`
+                (in[K])
+            :nl:val:`"P"`
+                (in[Pa])
+            :nl:val:`"QV"`
+                (in[kg/kg])
 
 .. nl:value:: "TW_2M"
 
@@ -1308,34 +1431,38 @@ thermodynamic quantities
             The surface pressure is reduced hydrostatically to a 2 meter pressure,
             using constant temperature T_2M.
             The algorithm is chosen in analogy to TW.
-            (1) If out_mode_tw_iterative = .TRUE., a secant method is used to solve the 
+
+    1.  If out_mode_tw_iterative = .TRUE., a secant method is used to solve the 
+
                 psychrometric equation (cf. Bohren and Albrecht, 1998, equation (6.72)).
                 Undefined values is produced where the secant method does not converge,
                 and a warning is generated. 
             TW_2M = f(T_2M,PS,QV_2M)
-                :nl:val:`"T_2M"`
-                    (in[K])
-                :nl:val:`"PS"`
-                    (in[Pa])
-                :nl:val:`"QV_2M"`
-                    (in[kg/kg])
-            (2) If out_mode_tw_iterative = .FALSE., an approximation formula is used
+        :nl:val:`"T_2M"`
+            (in[K])
+        :nl:val:`"PS"`
+            (in[Pa])
+        :nl:val:`"QV_2M"`
+            (in[kg/kg])
+
+    2.  If out_mode_tw_iterative = .FALSE., an approximation formula is used
+
                 (as in cosmo pp_utilities:calsnowlmt, after after Egger/Joss).
             TW_2M = f(T_2M,PS,TD_2M)
-                :nl:val:`"T_2M"`
-                    (in[K])
-                :nl:val:`"PS"`
-                    (in[Pa])
-                :nl:val:`"TD_2M"`
-                    (in[kg/kg])
+        :nl:val:`"T_2M"`
+            (in[K])
+        :nl:val:`"PS"`
+            (in[Pa])
+        :nl:val:`"TD_2M"`
+            (in[kg/kg])
                 or
             TW_2M = f(T_2M,PS,td(QV_2M,PS))
-                :nl:val:`"T_2M"`
-                    (in[K])
-                :nl:val:`"PS"`
-                    (in[Pa])
-                :nl:val:`"QV_2M"`
-                    (in[kg/kg])                
+        :nl:val:`"T_2M"`
+            (in[K])
+        :nl:val:`"PS"`
+            (in[Pa])
+        :nl:val:`"QV_2M"`
+            (in[kg/kg])                
 
 .. nl:value:: "TD"
 
@@ -1345,24 +1472,28 @@ thermodynamic quantities
 
     Parents:
         :nl:val:`"QV"` (main): 
-    
-                :nl:val:`"P"`
+
+        :nl:val:`"P"`
                     offset = 0. (in [Pa])
 
 .. nl:value:: "TD_2M"
 
     2m-dew point temperature (in [Kelvin]);
-            The surface pressure is reduced hydrostatically to a 2 meter pressure,
-            using constant temperature T_2M, and the dew point is then calculated
-            using this reduced pressure and QV_2M; TD_2M is constraint to be 
-            smaller or equal to T_2M.
+
+    The surface pressure is reduced hydrostatically to a 2 meter pressure,
+    using constant temperature T_2M, and the dew point is then calculated
+    using this reduced pressure and QV_2M; TD_2M is constraint to be 
+    smaller or equal to T_2M. ::
+
             TD_2M = f(PS,QV_2M,T_2M)
-                :nl:val:`"QV_2M"`
-                    (in [kg/kg])
-                :nl:val:`"PS"`
-                    (in [Pa])
-                :nl:val:`"T_2M"`
-                    (in [K])
+
+    Parents:
+        :nl:val:`"QV_2M"`
+            (in [kg/kg])
+        :nl:val:`"PS"`
+            (in [Pa])
+        :nl:val:`"T_2M"`
+            (in [K])
 
 .. nl:value:: "D_TD"
 
@@ -1371,52 +1502,63 @@ thermodynamic quantities
         D_TD = MAX(T - TD, 0)   where TD = f(P,QV)
 
     Parents:
-        :nl:val:`"QV"` (main): 
-    
-                :nl:val:`"T"`
-                    offset = 0. (in [K])
-                :nl:val:`"P"`
-                    offset = 0. (in [Pa])
+        :nl:val:`"QV"` (main)
+
+        :nl:val:`"T"`
+                offset = 0. (in [K])
+        :nl:val:`"P"`
+            offset = 0. (in [Pa])
 
 .. nl:value:: "D_TD_2M"
 
     2m-dew point depression; 
-            Compute TD_2M using PS, QV_2M and T_2M (see TD_2M), and then 
-            compute the depression
+
+    Compute TD_2M using PS, QV_2M and T_2M (see TD_2M), and then 
+    compute the depression ::
+
             D_TD_2M = MAX(T_2M - f(PS,QV_2M,T_2M), 0)
-                :nl:val:`"PS"`
-                    (in [Pa])
-                :nl:val:`"QV_2M"`
-                    (in [kg/kg])
-                :nl:val:`"T_2M"`
-                    (in [K])
-            or
+
+    Parents:
+        :nl:val:`"PS"`
+            (in [Pa])
+        :nl:val:`"QV_2M"`
+            (in [kg/kg])
+        :nl:val:`"T_2M"`
+            (in [K])
+            
+    or ::
+
             D_TD_2M = MAX(T_2M - TD_2M, 0)
-                :nl:val:`"TD_2M"`
-                    
-                :nl:val:`"T_2M"`
+
+    Parents:
+        :nl:val:`"TD_2M"`
+
+        :nl:val:`"T_2M"`
                     
 
 .. nl:value:: "ENTH"
 
-    enthalpy (heat content) of air based on specific humidity and temperature
+    enthalpy (heat content) of air based on specific humidity and temperature [J/kg]; ::
 
-            [J/kg];
             ENTH = f(QV,T)
-                :nl:val:`"QV"`
-                    (in [kg/kg])
-                :nl:val:`"T"`
-                    (in[K])
+    
+    Parents:
+        :nl:val:`"QV"`
+            (in [kg/kg])
+        :nl:val:`"T"`
+            (in[K])
 
 .. nl:value:: "ENTH_2M"
 
-    2m enthalpy (heat content) of air based on specific humidity and temperature
-            [J/kg];
+    2m enthalpy (heat content) of air based on specific humidity and temperature [J/kg]; ::
+
             ENTH_2M = f(QV_2M,T_2M)
-                :nl:val:`"QV_2M"`
-                    (in [kg/kg])
-                :nl:val:`"T_2M"`
-                    (in[K])
+
+    Parents:
+        :nl:val:`"QV_2M"`
+            (in [kg/kg])
+        :nl:val:`"T_2M"`
+            (in[K])
 
 .. nl:value:: "QV"
 
@@ -1427,47 +1569,57 @@ thermodynamic quantities
     Parents:
         :nl:val:`"TD"` (main)
             (in[K]) 
-
-                :nl:val:`"P"`
-                    (in [Pa])
+        :nl:val:`"P"`
+            (in [Pa])
 
 .. nl:value:: "QV_SAT"
 
     specific humidity at staturation [kg/kg];
 
-            The specific humidity at saturation uses the same formula as for the
-            computation of the specific humidity, but takes T instead of TD as first
-            argument.
+    The specific humidity at saturation uses the same formula as for the
+    computation of the specific humidity, but takes T instead of TD as first
+    argument. ::
+
             QV_SAT = f(T,P)
-                :nl:val:`"T"`
-                    (in[K])
-                :nl:val:`"P"`
-                    (in [Pa])
+
+    Parents:
+        :nl:val:`"T"`
+            (in[K])
+        :nl:val:`"P"`
+            (in [Pa])
 
 .. nl:value:: "QV_2M"
 
     2m specific humidity based on surface pressure and dew point [kg/kg];
-            The surface pressure is reduced hydrostatically to a 2 meter pressure,
-            using constant temperature T_2M.
+
+    The surface pressure is reduced hydrostatically to a 2 meter pressure,
+    using constant temperature T_2M. ::
+
             QV_2M = f(TD_2M,PS,T_2M)
-                :nl:val:`"TD_2M"`
-                    (in[K])
-                :nl:val:`"PS"`
-                    (in [Pa])
-                :nl:val:`"T_2M"`
-                    (in[K])
+
+    Parents:
+        :nl:val:`"TD_2M"`
+            (in[K])
+        :nl:val:`"PS"`
+            (in [Pa])
+        :nl:val:`"T_2M"`
+            (in[K])
 
 .. nl:value:: "QV_SAT_2M"
 
     2m specific humidity at saturation [kg/kg];
-            The specific humidity at saturation uses the same formula as for the
-            computation of the specific humidity, but takes T_2M instead of TD_2M
-            as first argument.
+
+    The specific humidity at saturation uses the same formula as for the
+    computation of the specific humidity, but takes T_2M instead of TD_2M
+    as first argument. ::
+    
             QV_SAT_2M = f(T_2M,PS,T_2M)
-                :nl:val:`"T_2M"`
-                    (in[K])
-                :nl:val:`"PS"`
-                    (in [Pa])
+
+    Parents:
+        :nl:val:`"T_2M"`
+            (in[K])
+        :nl:val:`"PS"`
+            (in [Pa])
 
 .. nl:value:: "MIXRAT"
 
@@ -1482,51 +1634,73 @@ thermodynamic quantities
 
 .. nl:value:: "MIXRAT_2M"
 
-    2m mixing ratio;
+    2m mixing ratio; ::
+
             MIXRAT_2M = QV_2M/(1-QV_2M)
-                :nl:val:`"QV_2M"`
-                    (in [kg/kg])
+
+    Parents:
+        :nl:val:`"QV_2M"`
+            (in [kg/kg])
 
 .. nl:value:: "RELHUM"
 
-    relative humidity over water [%];
+    relative humidity over water [%]; ::
 
             RELHUM = 100 * PVsat_water(TD)/PVsat_water(T)
-            (standard physical definition)
-                :nl:val:`"T"`
-                    offset = 0. (in [K])
-                :nl:val:`"TD"`
-                    offset = 0. (in [K])
-        or
-            RELHUM = 100 * QV/QVsat_water(T,P)
-            (COSMO definition, which is an approximation of WMO definition)
-                :nl:val:`"T"`
-                    offset = 0. (in [K])
-                :nl:val:`"QV"`
-                    
-                :nl:val:`"P"`
-                    offset = 0. (in [Pa])
+            
+            
+    (standard physical definition)
+
+    Parents:
+        :nl:val:`"T"`
+            offset = 0. (in [K])
+        :nl:val:`"TD"`
+            offset = 0. (in [K])
+    or ::
+
+        RELHUM = 100 * QV/QVsat_water(T,P)
+        
+    (COSMO definition, which is an approximation of WMO definition)
+
+    Parents:
+        :nl:val:`"T"`
+            offset = 0. (in [K])
+        :nl:val:`"QV"`
+
+        :nl:val:`"P"`
+                offset = 0. (in [Pa])
 
 .. nl:value:: "RELHUM_2M"
 
-    2m-relative humidity over water [%];
+    2m-relative humidity over water [%]; ::
+
             RELHUM = 100 * PVsat_water(TD_2M)/PVsat_water(T_2M)
-            (standard physical definition)
-                :nl:val:`"T_2M"`
-                    offset = 0. (in [K])
-                :nl:val:`"TD_2M"`
-                    offset = 0. (in [K])
-        or
-            RELHUM_2M = 100 * QV_2M/QVsat_water(T_2M,p2m(PS,T_2M))
-            (COSMO definition, which is an approximation of WMO definition)
-            where p2m is the surface pressure ihydrostatically reduced to a
-            2 meter pressure, using constant temperature T_2M.
-                :nl:val:`"T_2M"`
-                    offset = 0. (in [K])
-                :nl:val:`"QV_2M"`
-                    
-                :nl:val:`"PS"`
-                    offset = 0. (in [Pa])
+
+    (standard physical definition)
+
+    Parents:
+        :nl:val:`"T_2M"`
+            offset = 0. (in [K])
+        :nl:val:`"TD_2M"`
+            offset = 0. (in [K])
+
+    or ::
+            
+        RELHUM_2M = 100 * QV_2M/QVsat_water(T_2M,p2m(PS,T_2M))
+
+    (COSMO definition, which is an approximation of WMO definition)
+
+    where
+
+    | p2m is the surface pressure ihydrostatically reduced to a 2 meter pressure, using constant temperature T_2M.
+
+    Parents:
+        :nl:val:`"T_2M"`
+            offset = 0. (in [K])
+        :nl:val:`"QV_2M"`
+
+        :nl:val:`"PS"`
+                offset = 0. (in [Pa])
 
 .. nl:value:: "RH_ICE"
 
@@ -1537,11 +1711,10 @@ thermodynamic quantities
     Parents:
         :nl:val:`"T"` (main)
             offset = 0. (in [K]) 
+        :nl:val:`"QV"`
 
-                :nl:val:`"QV"`
-                    
-                :nl:val:`"P"`
-                    offset = 0. (in [Pa])
+        :nl:val:`"P"`
+            offset = 0. (in [Pa])
 
 .. nl:value:: "RH_MIX_EC"
 
@@ -1549,34 +1722,51 @@ thermodynamic quantities
 
     Pressure of water vapor over mixed phase computed according to (see formula 1.11 ad 1.12)
     http://www.ecmwf.int/sites/default/files/elibrary/2015/9208-part-i-observation-processing.pdf
-    In particular, RH_MIX_EC = RELHUM (if T > 0C) 
-                            = RH_ICE (if T < -23C).
-            RH_MIX_EC = 100 * QV/QVsat_mix(T,P)
-                :nl:val:`"T"`
-                    offset = 0. (in [K])
-                :nl:val:`"QV"`
-                    
-                :nl:val:`"P"`
-                    offset = 0. (in [Pa])
+    In particular, ::
+    
+        RH_MIX_EC = RELHUM (if T > 0C) 
+                  = RH_ICE (if T < -23C).
+        RH_MIX_EC = 100 * QV/QVsat_mix(T,P)
+
+    Parents:
+        :nl:val:`"T"`
+            offset = 0. (in [K])
+        :nl:val:`"QV"`
+
+        :nl:val:`"P"`
+                offset = 0. (in [Pa])
 
 .. nl:value:: "CLI_RATIO"
 
-    cloud ice ratio [%]
+    cloud ice ratio [%] ::
 
-            CLI_RATIO = 100. * (QI/(QI + QC))   
-                        where denominator larger than out_cloud_min, undef otherwise
-                :nl:val:`"QI"`
-                    
-                :nl:val:`"QC"`
+            CLI_RATIO = 100. * (QI/(QI + QC))  
+            
+    where denominator larger than out_cloud_min, undef otherwise
+
+    Parents:
+        :nl:val:`"QI"`
+
+        :nl:val:`"QC"`
                     
 
 .. nl:value:: "T_2M_SNOWC"
 
-    snow corrected 2m temperature;
+    snow corrected 2m temperature; ::
+
             T_2M_SNOWC = T_2M              if W_SNOW < 0.1
-                        = T(lowest level)   if W_SNOW > 0.1
-                W_SNOW, T_2M, T(lowest level):
-                T_2M, TD_2M: 
+                       = T(lowest level)   if W_SNOW > 0.1
+
+    Parents:
+        :nl:val:`"W_SNOW"`
+        
+        :nl:val:`"T_2M"`
+        
+        :nl:val:`"T"`
+            (lowest level)
+        :nl:val:`"T_2M"`
+        
+        :nl:val:`"TD_2M"`
 
 .. nl:value:: "TTOP_CON"
 
@@ -1585,106 +1775,118 @@ thermodynamic quantities
         TTOP_CON = T(TOP_CON)
 
     Parents:
-        :nl:val:`"TOP_CON"` (main): 
-    
-                :nl:val:`"T"`
+        :nl:val:`"TOP_CON"` (main)
+
+        :nl:val:`"T"`
                     offset = 0.0 (in [K])   
 
 .. nl:value:: "HZEROCL"
 
     height of the zero degree Centigrade isotherm [m asl].
 
-
-            T is evaluated from 8000m agl down to the lowest model level;
-            HZEROCL is set to the height where zero degree Centigrade is 
-            reached for the first time. If T never reaches zero degree 
-            Centigrade, or the model atmosphere is too shallow, HZEROCL
-            is set to undefined.
-            When out_mode_h0cl_extrapolate is set to true, the algorithm also
-            considers zero degree Centigrade isotherm below lowest model level.
-            In this case, a constant lapse rate derived from the temperature at
-            the two lowest model levels is assumed, and the zero degree isotherm
-            is based on the extrapolated T profile. When the lapse rate is
-            negative, or when the zero degree Centigrade isotherm is lower
-            than 0 m asl, HZEROCL is set to undefined.
+    T is evaluated from 8000m agl down to the lowest model level;
+    HZEROCL is set to the height where zero degree Centigrade is 
+    reached for the first time. If T never reaches zero degree 
+    Centigrade, or the model atmosphere is too shallow, HZEROCL
+    is set to undefined.
+    When out_mode_h0cl_extrapolate is set to true, the algorithm also
+    considers zero degree Centigrade isotherm below lowest model level.
+    In this case, a constant lapse rate derived from the temperature at
+    the two lowest model levels is assumed, and the zero degree isotherm
+    is based on the extrapolated T profile. When the lapse rate is
+    negative, or when the zero degree Centigrade isotherm is lower
+    than 0 m asl, HZEROCL is set to undefined. ::
 
             HZEROCL = f(T, HEIGHT, HSURF)
-                                :nl:val:`"T"`
-                                    (in [K])
-            HEIGHT or HHL or HFL :  (in [m asl])
-                            :nl:val:`"HSURF"`
-                                (in [m asl])
-                ... both T and HEIGHT must be defined on same type of
-                    model levels (either full or half levels)
+
+    Parents:
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"` or :nl:val:`"HFL"`
+            (in [m asl])
+        :nl:val:`"HSURF"`
+            (in [m asl])
+
+    both T and HEIGHT must be defined on same type of model levels (either full or half levels)
 
 .. nl:value:: "HEATX"
 
-    heat index (in [�K]): 
+    heat index (in [K]): 
 
-                        A "discomfort" index resulting from a multiple regression
-                        analysis performed on data obtained in extensive bio-
-                        meteorological studies (Steadman R.G., 1979, Rothfusz L.P., 1990).
-                        Computed with or without adjustments by NOAA
-                        (http://www.crh.noaa.gov/gjt/Weather_Info/heat_index.php)
-                        Evaluated for
+    A "discomfort" index resulting from a multiple regression
+    analysis performed on data obtained in extensive bio-
+    meteorological studies (Steadman R.G., 1979, Rothfusz L.P., 1990).
+    Computed with or without adjustments by NOAA
+    (http://www.crh.noaa.gov/gjt/Weather_Info/heat_index.php)
+    Evaluated for ::
+
                         T_2M > 80�F and RELHUM_2M > 40% if out_mode_adjusted = .F.
                         T_2M > 80�F and RELHUM_2M >  0% if out_mode_adjusted = .T.
-                :nl:val:`"T_2M"`
-                    offset = 0.     (conversion in �F in the code)
-                :nl:val:`"RELHUM_2M"`
-                    offset = 0.
-                or
-                :nl:val:`"T_2M"`
-                    offset = 0.     (conversion in �F in the code)
-                :nl:val:`"TD_2M"`
-                    offset = 0.
+
+    Parents:
+        :nl:val:`"T_2M"`
+            offset = 0.     (conversion in [F] in the code)
+        :nl:val:`"RELHUM_2M"`
+            offset = 0.
+
+    or
+
+    Parents:
+        :nl:val:`"T_2M"`
+            offset = 0.     (conversion in [F] in the code)
+        :nl:val:`"TD_2M"`
+            offset = 0.
 
 .. nl:value:: "UTCI_SHADOW"
 
-    universal thermal climate index ( in [�K])
+    universal thermal climate index ( in [K])
 
-                    "Discomfort index" developed in the framework of COST Action 730,
-                    based on multiple regression analysis on data obtained from
-                    a thermoregulation model (Jendritzky G. et al., 2009).
-                    Computed without contribution of direct incident shortwave
-                    radiation.
-                :nl:val:`"T_2M"`
-                    in [K]
-                :nl:val:`"TD_2M"`
-                    in [K]
-                :nl:val:`"ATHD_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ATHU_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ASWDIFD_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ASWDIFU_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"FF_10M"`
-                    in [m/s]
+    "Discomfort index" developed in the framework of COST Action 730,
+    based on multiple regression analysis on data obtained from
+    a thermoregulation model (Jendritzky G. et al., 2009).
+    Computed without contribution of direct incident shortwave
+    radiation.
+
+    Parents:
+        :nl:val:`"T_2M"`
+            in [K]
+        :nl:val:`"TD_2M"`
+            in [K]
+        :nl:val:`"ATHD_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ATHU_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ASWDIFD_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ASWDIFU_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"FF_10M"`
+            in [m/s]
 
 .. nl:value:: "UTCI_SUN"
 
-    universal thermal climate index ( in [�K])
+    universal thermal climate index ( in [K])
 
-                    Computed with contribution of direct incident shortwave radiation.
-                    Uses all parent fields of UTCI_SHADOW, and additionally
-                :nl:val:`"T_2M"`
-                    in [K]
-                :nl:val:`"TD_2M"`
-                    in [K]
-                :nl:val:`"ATHD_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ATHU_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ASWDIFD_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ASWDIFU_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"ASWDIR_S"`
-                    toper = tdelta, in [W/m**2]
-                :nl:val:`"FF_10M"`
-                    in [m/s]
+    Computed with contribution of direct incident shortwave radiation.
+    Uses all parent fields of UTCI_SHADOW, and additionally
+
+    Parents:
+        :nl:val:`"T_2M"`
+            in [K]
+        :nl:val:`"TD_2M"`
+            in [K]
+        :nl:val:`"ATHD_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ATHU_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ASWDIFD_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ASWDIFU_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"ASWDIR_S"`
+            toper = tdelta, in [W/m**2]
+        :nl:val:`"FF_10M"`
+            in [m/s]
 
 precipitation and moisture transport
 ------------------------------------
@@ -1693,63 +1895,77 @@ precipitation and moisture transport
 
     Total precipitation;
 
-            TOT_PREC = linear combination of components
-                coefficients and components: as defined by precip_all in &ModelSpecification
-                                            (main parent is first element of list)
+    ::
+
+        TOT_PREC = linear combination of components
+
+    coefficients and components: as defined by :nl:arg:`&ModelSpecification precip_all` (main parent is first element of list)
 
 .. nl:value:: "TOT_GSP"
 
     Total grid-scale precipitation;
 
-            TOT_GSP  = linear combination of components
-                coefficients and components: as defined by precip_gridscale in &ModelSpecification
-                                            (main parent is first element of list)
+    ::
+
+        TOT_GSP  = linear combination of components
+
+    coefficients and components: as defined by :nl:arg:`&ModelSpecification precip_gridscale` (main parent is first element of list)
 
 .. nl:value:: "TOT_CON"
 
     Total convective precipitation;
 
-            TOT_CON = linear combination of components
-                coefficients and components: as defined by precip_convective in &ModelSpecification
-                                            (main parent is first element of list)
+    ::
+
+        TOT_CON = linear combination of components
+
+    coefficients and components: as defined by :nl:arg:`&ModelSpecification precip_convective` (main parent is first element of list)
 
 .. nl:value:: "TOT_SNOW"
 
     Total precipitation in snow;
 
-            TOT_SNOW = linear combination of components
-                coefficients and components: as defined by precip_snow in &ModelSpecification
-                                            (main parent is first element of list)
+    ::
+
+        TOT_SNOW = linear combination of components
+
+    coefficients and components: as defined by :nl:arg:`&ModelSpecification precip_snow` (main parent is first element of list)
 
 .. nl:value:: "TOT_RAIN"
 
     Total precipitation in rain;
 
-            TOT_RAIN = linear combination of components
-                coefficients and components: as defined by precip_rain in &ModelSpecification
-                                            (main parent is first element of list)
+    ::
+
+        TOT_RAIN = linear combination of components
+
+    coefficients and components: as defined by :nl:arg:`&ModelSpecification precip_rain` (main parent is first element of list)
 
 .. nl:value:: "CONV_PERCENT"
 
     Percentage of total precipitation which are convective;
 
-            CONV_PERCENT = 100 * (linear combination of TOT_CON components/TOT_PREC)
-                coefficients and components for TOT_CON:
-                                as defined by precip_convective in &ModelSpecification
-                                (main parent is first element of list)
-                :nl:val:`"TOT_PREC"`
-                    
+    ::
+
+        CONV_PERCENT = 100 * (linear combination of TOT_CON components/TOT_PREC)
+
+    coefficients and components for TOT_CON: as defined by :nl:arg:`&ModelSpecification precip_convective` (main parent is first element of list)
+
+    Parents:
+        :nl:val:`"TOT_PREC"`
 
 .. nl:value:: "SNOW_PERCENT"
 
     Percentage of total precipitation in snow [%];
 
-            SNOW_PERCENT = 100 * (linear combination of TOT_SNOW components/TOT_PREC)
-                coefficients and components for TOT_SNOW:
-                                as defined by precip_snow in &ModelSpecification
-                                (main parent is first element of list)
-                :nl:val:`"TOT_PREC"`
-                    
+    ::
+
+        SNOW_PERCENT = 100 * (linear combination of TOT_SNOW components/TOT_PREC)
+
+    coefficients and components for TOT_SNOW: as defined by :nl:arg:`&ModelSpecification precip_snow` (main parent is first element of list)
+
+    Parents:
+        :nl:val:`"TOT_PREC"`
 
 .. nl:value:: "MCONV"
 
@@ -1761,18 +1977,20 @@ precipitation and moisture transport
         :nl:val:`"QV"` (main)
             (in [kg kg-1], on mass point grid) 
 
-                        :nl:val:`"U"`
-                            (in [m/s], on k-surface, in native ref. system, staggered)
-                        :nl:val:`"V"`
-                            (in [m/s], on k-surface, in native ref. system, staggered)
-                        :nl:val:`"W"`
-                            (in [m/s])
-            HEIGHT or HHL : (in [m], on model half levels) 
-            When computing MCONV on level k, all listed fields must be available
-            on level k, W and HEIGHT must also be available on level k+1, QV, U and V must
-            be available on at least one adjacent level (left or right derivative in k
-            is applied when k+1 or k-1 level is missing)
-            This algorithm requires height based vertical coordinates.
+        :nl:val:`"U"`
+            (in [m/s], on k-surface, in native ref. system, staggered)
+        :nl:val:`"V"`
+            (in [m/s], on k-surface, in native ref. system, staggered)
+        :nl:val:`"W"`
+            (in [m/s])
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+
+    When computing MCONV on level k, all listed fields must be available
+    on level k, W and HEIGHT must also be available on level k+1, QV, U and V must
+    be available on at least one adjacent level (left or right derivative in k
+    is applied when k+1 or k-1 level is missing)
+    This algorithm requires height based vertical coordinates.
 
 Turbulence variables
 --------------------
@@ -1783,88 +2001,122 @@ Turbulence variables
 
             parent fields (T,P,QV) have to be available on all levels between 
             the target level and the first level above surface
-            BRN = pc_g * (HEIGHT(target) - HSURF) *                           &
-                    (THETA_V(target) - THETA_V(bottom)) /                    &
-                    (THETA_V_avg * (U(target)**2 + V(target)**2)) ,
-                where pc_g (acceleration due to gravity), 
-                THETA_V_avg (average of THETA_V between target and bottom levels)
-            Note: to optimize the integral computing THETA_V_avg, it is
+    ::
+
+        BRN = pc_g * (HEIGHT(target) - HSURF) *
+                     (THETA_V(target) - THETA_V(bottom)) /
+                     (THETA_V_avg * (U(target)**2 + V(target)**2))
+
+    where
+
+    | pc_g (acceleration due to gravity), 
+    | THETA_V_avg (average of THETA_V between target and bottom levels)
+
+    .. note::
+                to optimize the integral computing THETA_V_avg, it is
                 suggested to explicitely specify the list of produced levels
                 (levmin=..., levmax=...). This has for consequence to sort
                 the processing order according to this list.
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                        :nl:val:`"QV"`
-                            
-                        :nl:val:`"HSURF"`
+
+    Parents:
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL :  (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
+        :nl:val:`HEIGHT` or :nl:val:`HHL`
+            (in [m], on model half levels) 
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
         
 .. nl:value:: "RI"
 
     Gradient Richardson number (dimensionless quantity)
 
-            RI = pc_g * (dTHETA/dz) / (THETA * WSHEAR**2)
-            where pc_g (acceleration due to gravity)
-                :nl:val:`"THETA"`
-                    (in [K])
-                :nl:val:`"WSHEAR"`
-                    (in [1/s])
+    ::
+
+        RI = pc_g * (dTHETA/dz) / (THETA * WSHEAR**2)
+
+
+    where
+
+    pc_g (acceleration due to gravity)
+
+    Parents:
+        :nl:val:`"THETA"`
+            (in [K])
+        :nl:val:`"WSHEAR"`
+            (in [1/s])
             This algorithm is only supported for the COSMO model. (CHECK THIS)
 
 .. nl:value:: "HPBL"
 
     Height of the Planetary Boundary Layer (in [m])
 
-            HPBL is the height of the level above the surface where the 
-            BRN value grows above the critical value (0.22) 
-            BRN has to be available on all levels between the surface and 
-            5000 m above surface level 
-                        :nl:val:`"BRN"`
-                            
-                        :nl:val:`"HSURF"`
+    HPBL is the height of the level above the surface where the 
+    BRN value grows above the critical value (0.22) 
+    BRN has to be available on all levels between the surface and 
+    5000 m above surface level 
+
+    Parents:
+        :nl:val:`"BRN"`
+ 
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model full levels) 
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+             (in [m], on model full levels) 
 
 .. nl:value:: "CAT_DVT"
 
     Divergence trend term (in [1/s**2])
 
-            CAT_DVT = C * WDIV_trend
-            where
-            C  (scaling factor > 0.0, dimensionless quantity, see out_mode_dvt_scale)
-            For details on the choice of C see F. Binder, 2013 (ETHZ Master Thesis)
-            WDIV_trend (trend of divergence of horizontal wind, i.e.,
-                        (WDIV(t) - WDIV(t')) / (t - t'))
-                :nl:val:`"WDIV"`
-                    toper = delta (in [1/s], factor 1/(t-t') is included in C)
-            This algorithm is only supported for the COSMO model.
+    ::
+
+        CAT_DVT = C * WDIV_trend
+
+    where C  (scaling factor > 0.0, dimensionless quantity, see out_mode_dvt_scale)
+
+    For details on the choice of C see F. Binder, 2013 (ETHZ Master Thesis)
+    WDIV_trend (trend of divergence of horizontal wind, i.e., ``(WDIV(t) - WDIV(t')) / (t - t'))``
+
+    Parents:
+        :nl:val:`"WDIV"`
+            toper = delta (in [1/s], factor 1/(t-t') is included in C)
+
+    This algorithm is only supported for the COSMO model.
 
 .. nl:value:: "CAT_TI1"
 
     Ellrod and Knapp turbulence index 1 (in [1/s**2])
-            CAT_TI1 = WSHEAR * WDEF_H
-                :nl:val:`"WSHEAR"`
-                    (in [1/s])
-                :nl:val:`"WDEF_H"`
-                    (in [1/s])
+    ::
+
+        CAT_TI1 = WSHEAR * WDEF_H
+
+    Parents:
+        :nl:val:`"WSHEAR"`
+            (in [1/s])
+        :nl:val:`"WDEF_H"`
+            (in [1/s])
 
 .. nl:value:: "CAT_TI2"
 
     Ellrod and Knapp turbulence index 2 (in [1/s**2])
-            CAT_TI2 = WSHEAR * (WDEF_H - WDIV)
-                :nl:val:`"WSHEAR"`
-                    (in [1/s])
-                :nl:val:`"WDEF_H"`
-                    (in [1/s])
-                :nl:val:`"WDIV"`
-                    (in [1/s])
+    ::
+
+        CAT_TI2 = WSHEAR * (WDEF_H - WDIV)
+
+    Parents:
+        :nl:val:`"WSHEAR"`
+            (in [1/s])
+        :nl:val:`"WDEF_H"`
+            (in [1/s])
+        :nl:val:`"WDIV"`
+            (in [1/s])
 
 .. nl:value:: "CAT_DTI"
 
@@ -1873,34 +2125,42 @@ Turbulence variables
         CAT_DTI = CAT_TI1 + CAT_DVT
 
     Parents:
-        :nl:val:`"CAT_TI"` (main)1 : (in [1/s**2]) 
-    
-                :nl:val:`"CAT_DVT"`
-                    (in [1/s**2])
+        :nl:val:`"CAT_TI"` (main)
+            (in [1/s**2]) 
+        :nl:val:`"CAT_DVT"`
+            (in [1/s**2])
 
 .. nl:value:: "EDP"
 
     Eddy dissipation parameter for aviation meteorology (in [m**(2/3) s**(-1)]
 
-            ICON model only 
-            Calculate eddy dissipation parameter, based on the direct usage of the
-            prognostic turbulent kinetic energy, using a MY level 2.5 approach and
-            new scale interacting terms:
-            EDP = [(2*TKE)**1/2]/(len_scale*A)**1/3 + (DTKE_CON)**1/3 + (B*DTKE_HSH)**1/3
-                    len_scale : formulation according to MESINGER 1993
-                    A : dissipation-constant (16.6)
-                    B : scaling factor (1.0)
-            For a detailed description see Raschendorfer, Barleben
-            (2014, PROMET Jahr.39,Nr.2,23-35)
-                        :nl:val:`"TKE"`
-                            
-                    :nl:val:`"DTKE_CON"`
-                        
-                    :nl:val:`"DTKE_HSH"`
-                        
-                HEIGHT or HHL :  (in [m], on model half levels) 
+    ICON model only 
+    Calculate eddy dissipation parameter, based on the direct usage of the
+    prognostic turbulent kinetic energy, using a MY level 2.5 approach and
+    new scale interacting terms:
+    ::
 
->>> Turbulence: "Direct" approach 
+        EDP = [(2*TKE)**1/2]/(len_scale*A)**1/3 + (DTKE_CON)**1/3 + (B*DTKE_HSH)**1/3
+
+    | ``len_scale`` : formulation according to MESINGER 1993
+    | ``A`` : dissipation-constant (16.6)
+    | ``B`` : scaling factor (1.0)
+
+    For a detailed description see Raschendorfer, Barleben
+    (2014, PROMET Jahr.39,Nr.2,23-35)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"DTKE_CON"`
+
+        :nl:val:`"DTKE_HSH"`
+
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+              (in [m], on model half levels) 
+
+"Direct" approach 
+^^^^^^^^^^^^^^^^^
 
 The following operators are limited to the COSMO model.
 Meaningful results are only produced when associated with a TKE
@@ -1910,165 +2170,184 @@ formulation following Mellor and Yamada (1982) level 2.5.
 
     Velocity fluctuation along the model x-axis (in [m/s]) 
 
-            Based on the direct usage of prognostic Turbulent Kinetic Energy,
-            using a Mellor and Yamada (1982) level 2.5 approach 
-            For detailed description see Szintai, 2010 (EPFL Thesis)
-                        :nl:val:`"TKE"`
-                            
-                            :nl:val:`"T"`
+    Based on the direct usage of prognostic Turbulent Kinetic Energy,
+    using a Mellor and Yamada (1982) level 2.5 approach 
+    For detailed description see Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"T"`
                                 (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
-                        :nl:val:`"TKVM"`
-                            
-                        :nl:val:`"TKVH"`
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
+        :nl:val:`"TKVM"`
+
+        :nl:val:`"TKVH"`
                             
 
 .. nl:value:: "SIGMAY"
 
     Velocity fluctuation along the model y-axis (in [m/s])
 
-            Based on the direct usage of prognostic Turbulent Kinetic Energy,
-            using a Mellor and Yamada (1982) level 2.5 approach
-            For detailed description see Szintai, 2010 (EPFL Thesis)
-                        :nl:val:`"TKE"`
-                            
-                            :nl:val:`"T"`
+    Based on the direct usage of prognostic Turbulent Kinetic Energy,
+    using a Mellor and Yamada (1982) level 2.5 approach
+    For detailed description see Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"T"`
                                 (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
-                        :nl:val:`"TKVM"`
-                            
-                        :nl:val:`"TKVH"`
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
+        :nl:val:`"TKVM"`
+
+        :nl:val:`"TKVH"`
                             
 
 .. nl:value:: "SIGMAZ"
 
     Vertical velocity fluctuation (in [m/s])
 
-            Based on the direct usage of prognostic Turbulent Kinetic Energy,
-            using a Mellor and Yamada (1982) level 2.5 approach
-            For detailed description see Szintai, 2010 (EPFL Thesis)
-                        :nl:val:`"TKE"`
-                            
-                            :nl:val:`"T"`
+    Based on the direct usage of prognostic Turbulent Kinetic Energy,
+    using a Mellor and Yamada (1982) level 2.5 approach
+    For detailed description see Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"T"`
                                 (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
-                        :nl:val:`"TKVM"`
-                            
-                        :nl:val:`"TKVH"`
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
+        :nl:val:`"TKVM"`
+
+        :nl:val:`"TKVH"`
                             
 
 .. nl:value:: "LAGTIMEX"
 
     Lagrangian timescale along the model x-axis (in [s])
 
-            Based on the direct usage of prognostic Turbulent Kinetic Energy,
-            using a Mellor and Yamada (1982) level 2.5 approach
-            For detailed description see Szintai, 2010 (EPFL Thesis)
-                        :nl:val:`"TKE"`
-                            
-                            :nl:val:`"T"`
+    Based on the direct usage of prognostic Turbulent Kinetic Energy,
+    using a Mellor and Yamada (1982) level 2.5 approach
+    For detailed description see Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"T"`
                                 (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
-                        :nl:val:`"TKVM"`
-                            
-                        :nl:val:`"TKVH"`
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
+        :nl:val:`"TKVM"`
+
+        :nl:val:`"TKVH"`
                             
 
 .. nl:value:: "LAGTIMEY"
 
     Lagrangian timescale along the model y-axis (in [s])
 
-            Based on the direct usage of prognostic Turbulent Kinetic Energy,
-            using a Mellor and Yamada (1982) level 2.5 approach
-            For detailed description see Szintai, 2010 (EPFL Thesis)
-                        :nl:val:`"TKE"`
-                            
-                            :nl:val:`"T"`
+    Based on the direct usage of prognostic Turbulent Kinetic Energy,
+    using a Mellor and Yamada (1982) level 2.5 approach
+    For detailed description see Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"T"`
                                 (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
-                        :nl:val:`"TKVM"`
-                            
-                        :nl:val:`"TKVH"`
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
+        :nl:val:`"TKVM"`
+
+        :nl:val:`"TKVH"`
                             
 
 .. nl:value:: "LAGTIMEZ"
 
     Lagrangian timescale for vertical direction (in [s])
 
-            Based on the direct usage of prognostic Turbulent Kinetic Energy,
-            using a Mellor and Yamada (1982) level 2.5 approach
-            For detailed description see Szintai, 2010 (EPFL Thesis)
-                        :nl:val:`"TKE"`
-                            
-                            :nl:val:`"T"`
+    Based on the direct usage of prognostic Turbulent Kinetic Energy,
+    using a Mellor and Yamada (1982) level 2.5 approach
+    For detailed description see Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"TKE"`
+
+        :nl:val:`"T"`
                                 (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"U"`
-                                (in [m/s])
-                            :nl:val:`"V"`
-                                (in [m/s])
-                        :nl:val:`"TKVM"`
-                            
-                        :nl:val:`"TKVH"`
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"U"`
+            (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
+        :nl:val:`"TKVM"`
+
+        :nl:val:`"TKVH"`
                             
 
->>> Turbulence: Similarity approach 
+Similarity approach 
+^^^^^^^^^^^^^^^^^^^
 
 Above the PBL top all values are set to undefined.
 Neutral conditions and surface layer are ignored.
@@ -2077,133 +2356,151 @@ Neutral conditions and surface layer are ignored.
 
     Along-wind velocity fluctuation (in [m/s])
 
-            Based on similarity theory considerations 
-            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+    Based on similarity theory considerations 
+    For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                    :nl:val:`"AUMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"AVMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"ASHFL_S"`
-                        (in [W/m2]), toper = tdelta
+        :nl:val:`"AUMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"AVMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"ASHFL_S"`
+            (in [W/m2]), toper = tdelta
 
 .. nl:value:: "SIGMAV"
 
     Cross-wind velocity fluctuation (in [m/s])
 
-            Based on similarity theory considerations
-            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+    Based on similarity theory considerations
+    For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                    :nl:val:`"AUMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"AVMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"ASHFL_S"`
-                        (in [W/m2]), toper = tdelta
+        :nl:val:`"AUMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"AVMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"ASHFL_S"`
+            (in [W/m2]), toper = tdelta
 
 .. nl:value:: "SIGMAW"
 
     Vertical velocity fluctuation (in [m/s])
 
-            Based on similarity theory considerations
-            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+    Based on similarity theory considerations
+    For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                    :nl:val:`"AUMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"AVMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"ASHFL_S"`
-                        (in [W/m2]), toper = tdelta
+        :nl:val:`"AUMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"AVMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"ASHFL_S"`
+            (in [W/m2]), toper = tdelta
 
 .. nl:value:: "LAGTIMEU"
 
     Along-wind Lagrangian timescale (in [s])
 
-            Based on similarity theory considerations
-            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+    Based on similarity theory considerations
+    For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                    :nl:val:`"AUMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"AVMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"ASHFL_S"`
-                        (in [W/m2]), toper = tdelta
+        :nl:val:`"AUMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"AVMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"ASHFL_S"`
+            (in [W/m2]), toper = tdelta
 
 .. nl:value:: "LAGTIMEV"
 
     Cross-wind Lagrangian timescale (in [s])
 
-            Based on similarity theory considerations
-            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+    Based on similarity theory considerations
+    For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                    :nl:val:`"AUMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"AVMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"ASHFL_S"`
-                        (in [W/m2]), toper = tdelta
+        :nl:val:`"AUMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"AVMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"ASHFL_S"`
+            (in [W/m2]), toper = tdelta
 
 .. nl:value:: "LAGTIMEW"
 
     Lagrangian timescale for vertical direction (in [s])
 
-            Based on similarity theory considerations
-            For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
-                HEIGHT or HHL : (in [m], on model half levels) 
-                            :nl:val:`"T"`
-                                (in [K])
-                            :nl:val:`"P"`
-                                (in [Pa])
-                            :nl:val:`"QV"`
-                                
-                        :nl:val:`"HSURF"`
+    Based on similarity theory considerations
+    For detailed description see Hanna (1982) and Szintai, 2010 (EPFL Thesis)
+
+    Parents:
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HSURF"`
                             (in [m])
-                    :nl:val:`"AUMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"AVMFL_S"`
-                        (in [Pa]), toper = tdelta
-                    :nl:val:`"ASHFL_S"`
-                        (in [W/m2]), toper = tdelta
+        :nl:val:`"AUMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"AVMFL_S"`
+            (in [Pa]), toper = tdelta
+        :nl:val:`"ASHFL_S"`
+            (in [W/m2]), toper = tdelta
 
 indices
 -------
@@ -2212,66 +2509,61 @@ indices
 
     convective available potential energy. Several parcels are lifted from 
 
-            different levels. Returned is the largest CAPE value achieved by the
-            most unstable parcel ascent.
-            Required parent fields:
+    different levels. Returned is the largest CAPE value achieved by the
+    most unstable parcel ascent.
+    Required parent fields: ::
+
             CAPE_ML(T,P,QV,HEIGHT) = [for details look at lm_pp_utilities]
-                            :nl:val:`"T"`
-                                (in [K])     [all levels required]
-                            :nl:val:`"P"`
-                                (in [Pa])    [all levels required]
-                            :nl:val:`"QV"`
-                                (in [kg/kg]) [all levels required]
-                HEIGHT or HHL : (in [m], on model half levels) 
-                        :nl:val:`"HSURF"`
-                            (in [m])   
+
+    Parents:
+        :nl:val:`"T"`
+            (in [K])     [all levels required]
+        :nl:val:`"P"`
+            (in [Pa])    [all levels required]
+        :nl:val:`"QV"`
+            (in [kg/kg]) [all levels required]
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels)  
+        :nl:val:`"HSURF"`
+            (in [m])   
 
 .. nl:value:: "CIN_MU"
 
     convective inhibition for the ascent of the most unstable parcel.
-
-            Requires the same parent fields as CAPE_MU.
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "CAPE_ML"
 
     convective available potential energy, achieved by a parcel starting
-
-            from the computed mixing layer.
-            Requires the same parent fields as CAPE_MU.
+    from the computed mixing layer.
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "CIN_ML"
 
     convective inhibition for the ascent of a parcel starting at the mixing layer.
-
-            Requires the same parent fields as CAPE_MU.
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "LCL_ML"
 
     mixed layer lifting condensation level above ground.
-
-            Requires the same parent fields as CAPE_MU.
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "LFC_ML"
 
     mixed layer level of free convection above ground.
-
-            Requires the same parent fields as CAPE_MU.
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "SI"
 
-    Showalter index. A parcel starting at 850hPa is lifted along dry adiabatic
-
-            till it has reached dew point temperature; it is then further lifted
-            along moist adiabatic up to 500hPa. The temperature difference between
-            the parcel and the environment is returned.
-            Requires the same parent fields as CAPE_MU.
+    Showalter index. A parcel starting at 850hPa is lifted along dry adiabatic till it has reached dew point temperature; 
+    it is then further lifted along moist adiabatic up to 500hPa. 
+    The temperature difference between the parcel and the environment is returned. 
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "SLI"
 
-    surface lifted index. Similar to SI, except that the parcel start from 
-
-            the surface. 
-            Requires the same parent fields as CAPE_MU.
+    surface lifted index. Similar to SI, except that the parcel start from the surface. 
+    Requires the same parent fields as CAPE_MU.
 
 .. nl:value:: "KINDEX"
 
@@ -2283,10 +2575,9 @@ indices
         :nl:val:`"T"` (main)
             (in [K]) 
 
-                :nl:val:`"P"`
-                    (in [Pa])
-            :nl:val:`"QV"`
-                
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
 
 .. nl:value:: "KOINDEX"
 
@@ -2298,91 +2589,101 @@ indices
         :nl:val:`"T"` (main)
             (in [K]) 
 
-                :nl:val:`"P"`
-                    (in [Pa])
-            :nl:val:`"QV"`
-                
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
 
 .. nl:value:: "TTINDEX"
 
     Total-Totals index (TT-index) 
 
-            The index is based on the temperature, pressure and humidity on 
-                850hPa and on the temperature on 500hPa. The values are taken from
-                nearest model level
+    The index is based on the temperature, pressure and humidity on 
+    850hPa and on the temperature on 500hPa. The values are taken from
+    nearest model level ::
+
             TT(T,P,QV) = 2*(T850-T500) - (T850-273) + (TD850(P,QV)-273)
-                :nl:val:`"T"`
-                    (in [K])
-                :nl:val:`"P"`
-                    (in [Pa])
-            :nl:val:`"QV"`
-                
+
+    Parents:
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
 
 .. nl:value:: "SWEAT"
 
     Severe weather threat index
 
-            An index based on temperature, pressure, humidity and horizontal wind
-                components at 850hPa and 500hPa. Values are taken from the closest
-                model levels. The needed values are dew point on 850hPa (TD850), TT-
-                index (TT), horizontal wind velocity on 850hPa and 500hPa (FF850, 
-                FF500) and sinus of the angle between the wind vectors on 500hPa and
-                850hPa (s).
+    An index based on temperature, pressure, humidity and horizontal wind
+    components at 850hPa and 500hPa. Values are taken from the closest
+    model levels. The needed values are dew point on 850hPa (TD850), TT-
+    index (TT), horizontal wind velocity on 850hPa and 500hPa (FF850, 
+    FF500) and sinus of the angle between the wind vectors on 500hPa and
+    850hPa (s). ::
+
             SWEAT(T,P,QV,U,V) = 12*(TD850(P,QV)-273) + 20*(TT(T,P,QV)-49) + 
                                 2*FF850(U,V)+FF500(U,V)+125*(s+0.2)
-                :nl:val:`"T"`
-                    (in [K])
-                :nl:val:`"P"`
-                    (in [Pa])
-            :nl:val:`"QV"`
-                
-                :nl:val:`"U"`
+
+    Parents:
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"U"`
                     (in [m/s])
-                :nl:val:`"V"`
-                    (in [m/s])
+        :nl:val:`"V"`
+            (in [m/s])
 
 .. nl:value:: "DCI"
 
     deep convection index (DCI)
 
-                The temperature, pressure and humidity fields are needed to compute
-                DCI. T850 is the temperature of the model level closest to 850hPa 
-                and TD850 the dew point temperature on 850hPa. SLI denotes the 
-                surface lifted index
+    The temperature, pressure and humidity fields are needed to compute
+    DCI. T850 is the temperature of the model level closest to 850hPa 
+    and TD850 the dew point temperature on 850hPa. SLI denotes the 
+    surface lifted index::
+
             DCI(T,P,QV) = (T850-273) + (TD850(P,QV)-273) - SLI
-                    :nl:val:`"T"`
-                        (in [K])
-                    :nl:val:`"P"`
-                        (in [Pa])
-                    :nl:val:`"QV"`
-                        
-        HEIGHT or HHL : (in [m], on model half levels) 
+
+    Parents:
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+             (in [m], on model half levels) 
 
 .. nl:value:: "ADEDO2"
 
     Adedokun 2 index: Lowering a parcel from 500hPa to surface moist
-                            adiabatically and comparing the wet bulb temperature
-                            of this parcel (THETAW_500S) with the wet bulb 
-                            temperature at surface (THETAW_S)
+    adiabatically and comparing the wet bulb temperature
+    of this parcel (THETAW_500S) with the wet bulb 
+    temperature at surface (THETAW_S) ::
+
             ADEDO2(T,P,QV) = THETAW_S(T,P,QV) - THETAW_500S(T,P,QV)
-                :nl:val:`"T"`
-                    (in [K])
-                :nl:val:`"P"`
-                    (in [Pa])
-            :nl:val:`"QV"`
-                
     
-Synthetic satellite images
---------------------------
+    Parents:
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
+        :nl:val:`"QV"`
+            Synthetic satellite images
+
 
 Calculate synthetic satellite forward observation operator using
 the release 11 of the RTTOV library.
 
 Three different treatments of clouds are supported, as defined by
-out_mode_rttov_cloud:
-    no cloud (only clear sky product can be computed),
-    simple clouds (only cloud cover and cloud top information is used),
-    complex clouds (cloud types and cloud profiles information is used)
+:nl:arg:`out_mode_rttov_cloud``:
+
+| no cloud (only clear sky product can be computed),
+| simple clouds (only cloud cover and cloud top information is used),
+| complex clouds (cloud types and cloud profiles information is used)
 
 The information on the satellite, the instrument and the channel to
 consider is taken from the active dictionary (rttovId, rttovChan),
@@ -2407,12 +2708,14 @@ The following auxiliary fields are used as parents:
     :nl:val:`"RTTOV_FRSNOW"`
         snow fraction field: between 0 and 1 ;
                 (COSMO) MIN(1.0, W_SNOW/cf_snow), with cf_snow = 0.015
-    ... for simple clouds treatment
+
+for simple clouds treatment
     :nl:val:`"RTTOV_TOPCLOUD"`
         cloud top in hPa
     :nl:val:`"RTTOV_FRCLOUD_TOT"`
         total cloud fraction, between 0 and 1
-    ... for complex clouds treatment
+        
+for complex clouds treatment
     :nl:val:`"RTTOV_FRCLOUD"`
         cloud fraction profile: between 0 and 1 ;
     :nl:val:`"RTTOV_CLOUD_1"`
@@ -2491,7 +2794,10 @@ Statistical post-processing
             in this latter file. Two kind of classifier can be applied,
             Threshold Classifier and Decision Tree Classifier, and the 
             one applied is also defined in this file.
-            CN_TSTORM = CN_TSTORM(INPUT)
+    ::
+
+        CN_TSTORM = CN_TSTORM(INPUT)
+
                 INPUT:      set of fields as defined by the list
                             of 'standard' features in adaboost_coefs
                             file ('standard' means not considering
@@ -2513,13 +2819,14 @@ and whose identity is set in the namelist.
 
     horizontal advection of TRACER on model surface.
                 AD2D_TRACER(tracer) = (u,v) * GRADIENT(tracer)
-                        :nl:val:`"TRACER"`
-                            any scalar field 
-                                :nl:val:`"U"`
-                                    (in [m/s], on k-surface, in native ref. system, staggered)
-                                :nl:val:`"V"`
-                                    (in [m/s], on k-surface, in native ref. system, staggered)
-                    HEIGHT or HHL : (in [m], on model half levels)
+        :nl:val:`"TRACER"`
+            any scalar field 
+        :nl:val:`"U"`
+            (in [m/s], on k-surface, in native ref. system, staggered)
+        :nl:val:`"V"`
+            (in [m/s], on k-surface, in native ref. system, staggered)
+        :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
+            (in [m], on model half levels) 
             TRACER is a generic field identity, which is declared in the namelist
             by using "new_field_id" (e.g. to use THETAE as tracer, one should set
             &Process tmp1_field ="THETAE", new_field_id="TRACER,K" / ).
@@ -2548,15 +2855,15 @@ qvsat   Specific water vapor content at saturation over water [kg/kg]
         qvsat = qvsat(temperature, pressure)
         Implemented for one of the two following cases:
         a) parents in {T_2M, PS}
-            :nl:val:`"T_2M"`
-                (in [K])
-            :nl:val:`"PS"`
-                (in [Pa])
+        :nl:val:`"T_2M"`
+            (in [K])
+        :nl:val:`"PS"`
+            (in [Pa])
         b) parents in {T, P}
-            :nl:val:`"T"`
-                (in [K])
-            :nl:val:`"P"`
-                (in [Pa])
+        :nl:val:`"T"`
+            (in [K])
+        :nl:val:`"P"`
+            (in [Pa])
         In case a), the surface pressure is reduced hydrostatically to
         a 2 meter pressure, using constant temperature T_2M.
     
