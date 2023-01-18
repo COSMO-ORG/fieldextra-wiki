@@ -258,10 +258,6 @@ and described in README.user.locale.</p>
 <section id="meteorological-operators">
 <h2>Meteorological operators<a class="headerlink" href="#meteorological-operators" title="Permalink to this heading">#</a></h2>
 <p>(Activated by short name of field and dictionary content)</p>
-<dl class="simple">
-<dt>field     operator description</dt><dd><p>list of parent fields (first in the list is the main parent)</p>
-</dd>
-</dl>
 <section id="constant-fields-produced-in-incore">
 <h3>constant fields (produced in INCORE)<a class="headerlink" href="#constant-fields-produced-in-incore" title="Permalink to this heading">#</a></h3>
 <dl class="nl value">
@@ -3509,30 +3505,32 @@ temperature at surface (THETAW_S)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ADEDO2</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">QV</span><span class="p">)</span> <span class="o">=</span> <span class="n">THETAW_S</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">QV</span><span class="p">)</span> <span class="o">-</span> <span class="n">THETAW_500S</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">QV</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="simple">
+<dl>
 <dt>Parents:</dt><dd><dl class="simple">
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a></dt><dd><p>(in [K])</p>
 </dd>
 <dt><a class="reference internal" href="#nl-val-Process-tmp1_field-P" title="&amp;Process tmp1_field=&quot;P&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a></dt><dd><p>(in [Pa])</p>
 </dd>
-<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-QV" title="&amp;Process tmp1_field=&quot;QV&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV&quot;</span></code></a></dt><dd><p>Synthetic satellite images</p>
-</dd>
 </dl>
+<p><a class="reference internal" href="#nl-val-Process-tmp1_field-QV" title="&amp;Process tmp1_field=&quot;QV&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV&quot;</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
+</section>
+<section id="synthetic-satellite-images">
+<h3>Synthetic satellite images<a class="headerlink" href="#synthetic-satellite-images" title="Permalink to this heading">#</a></h3>
 <p>Calculate synthetic satellite forward observation operator using
 the release 11 of the RTTOV library.</p>
 <p>Three different treatments of clouds are supported, as defined by
 <code class="xref nl nl-arg docutils literal notranslate"><span class="pre">out_mode_rttov_cloud`</span></code>:</p>
-<div class="line-block">
-<div class="line">no cloud (only clear sky product can be computed),</div>
-<div class="line">simple clouds (only cloud cover and cloud top information is used),</div>
-<div class="line">complex clouds (cloud types and cloud profiles information is used)</div>
-</div>
+<ul class="simple">
+<li><p>no cloud (only clear sky product can be computed),</p></li>
+<li><p>simple clouds (only cloud cover and cloud top information is used),</p></li>
+<li><p>complex clouds (cloud types and cloud profiles information is used)</p></li>
+</ul>
 <p>The information on the satellite, the instrument and the channel to
-consider is taken from the active dictionary (rttovId, rttovChan),
+consider is taken from the active dictionary (<code class="docutils literal notranslate"><span class="pre">rttovId</span></code>, <code class="docutils literal notranslate"><span class="pre">rttovChan</span></code>),
 on the basis of the field name.</p>
 <p>The RTTOV coefficient file for the chosen satellite and instrument must
 be available at the place specified by user_settings%rttov_coefs_path
@@ -3544,17 +3542,17 @@ as the channels represented in the RTTOV coefficient file.</p>
 <dl class="simple">
 <dt>The following auxiliary fields are used as parents:</dt><dd><dl class="simple">
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_STYPE&quot;</span></code></a></dt><dd><dl class="simple">
-<dt>surface type field: 0:land, 1:sea, 2:sea-ice ;</dt><dd><p>(COSMO with H_ICE) SOILTYP=9 &amp;&amp; H_ICE&gt;0.01 =&gt; RTTOV_STYPE=2</p>
+<dt>surface type field: 0:land, 1:sea, 2:sea-ice ;</dt><dd><p>(COSMO with H_ICE) <code class="docutils literal notranslate"><span class="pre">SOILTYP=9</span> <span class="pre">&amp;&amp;</span> <span class="pre">H_ICE&gt;0.01</span> <span class="pre">=&gt;</span> <span class="pre">RTTOV_STYPE=2</span></code></p>
 </dd>
 </dl>
 </dd>
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_WTYPE&quot;</span></code></a></dt><dd><dl class="simple">
-<dt>water type field: 0:fresh water, 1:ocean water ;</dt><dd><p>(COSMO with LAKE_DP) SOILTYP&gt;=9 &amp;&amp; DEPTH_LK=0 =&gt; RTTOV_WTYPE=1</p>
+<dt>water type field: 0:fresh water, 1:ocean water ;</dt><dd><p>(COSMO with LAKE_DP) <code class="docutils literal notranslate"><span class="pre">SOILTYP&gt;=9</span> <span class="pre">&amp;&amp;</span> <span class="pre">DEPTH_LK=0</span> <span class="pre">=&gt;</span> <span class="pre">RTTOV_WTYPE=1</span></code></p>
 </dd>
 </dl>
 </dd>
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_FRSNOW&quot;</span></code></a></dt><dd><dl class="simple">
-<dt>snow fraction field: between 0 and 1 ;</dt><dd><p>(COSMO) MIN(1.0, W_SNOW/cf_snow), with cf_snow = 0.015</p>
+<dt>snow fraction field: between 0 and 1 ;</dt><dd><p>(COSMO) <code class="docutils literal notranslate"><span class="pre">MIN(1.0,</span> <span class="pre">W_SNOW/cf_snow)</span></code>, with <code class="docutils literal notranslate"><span class="pre">cf_snow</span> <span class="pre">=</span> <span class="pre">0.015</span></code></p>
 </dd>
 </dl>
 </dd>
@@ -3586,48 +3584,223 @@ by ignoring any cloud columns with weights smaller than 1.E-4; a speedup
 of about 30% is achieved at the cost of a non significant degradation
 of the product quality (NWP SAF advice, see ticket id “gKqpbxFWT”).</p>
 <p>The following products can be computed:</p>
-<p>(1) MSG cloudy brightness temperature, out_mode_rttov_cloud=’complex’
-SYNMSG_BT_CL_IR10.8, SYNMSG_BT_CL_IR12.1, SYNMSG_BT_CL_IR13.4,
-SYNMSG_BT_CL_IR3.9 , SYNMSG_BT_CL_IR8.7 , SYNMSG_BT_CL_IR9.7 ,
-SYNMSG_BT_CL_WV6.2 , SYNMSG_BT_CL_WV7.3</p>
-<blockquote>
-<div><p>P, T, QV: on model half levels
-U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
-RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
-RTTOV_FRCLOUD, RTTOV_CLOUD_1, RTTOV_CLOUD_3, RTTOV_CLOUD_6:
-on model full levels; P, T and QV must be available on
+<ol class="arabic">
+<li><p>MSG cloudy brightness temperature, <a class="reference internal" href="control/process.html#nl-attr-Process-out_mode_rttov_cloud" title="&amp;Process out_mode_rttov_cloud"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">out_mode_rttov_cloud='complex'</span></code></a></p>
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR10.8">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR10.8</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR10.8" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR12.1">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR12.1</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR12.1" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR13.4">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR13.4</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR13.4" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR3.9">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR3.9</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR3.9" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR8.7">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR8.7</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR8.7" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR9.7">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR9.7</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR9.7" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV6.2">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_WV6.2</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV6.2" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV7.3">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_WV7.3</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV7.3" title="Permalink to this definition">#</a></dt>
+<dd><dl>
+<dt>Parents:</dt><dd><dl class="simple">
+<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-P" title="&amp;Process tmp1_field=&quot;P&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-QV" title="&amp;Process tmp1_field=&quot;QV&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV&quot;</span></code></a></dt><dd><p>on model half levels</p>
+</dd>
+</dl>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;U_10M&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;V_10M&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_2M&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-PS" title="&amp;Process tmp1_field=&quot;PS&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;PS&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-QV_2M" title="&amp;Process tmp1_field=&quot;QV_2M&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV_2M&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-T_G" title="&amp;Process tmp1_field=&quot;T_G&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_G&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-HSURF" title="&amp;Process tmp1_field=&quot;HSURF&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HSURF&quot;</span></code></a></p>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_STYPE&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_WTYPE&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_FRSNOW&quot;</span></code></a></p>
+<dl class="simple">
+<dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_FRCLOUD&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_CLOUD_1&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_CLOUD_3&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_CLOUD_6&quot;</span></code></a></dt><dd><p>on model full levels; <a class="reference internal" href="#nl-val-Process-tmp1_field-P" title="&amp;Process tmp1_field=&quot;P&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a> and <a class="reference internal" href="#nl-val-Process-tmp1_field-QV" title="&amp;Process tmp1_field=&quot;QV&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV&quot;</span></code></a> must be available on
 all associated model half levels</p>
-</div></blockquote>
-<p>(2) MSG cloudy brightness temperature, out_mode_rttov_cloud=’simple’
-SYNMSG_BT_CL_IR10.8, SYNMSG_BT_CL_IR12.1, SYNMSG_BT_CL_IR13.4,
-SYNMSG_BT_CL_IR3.9 , SYNMSG_BT_CL_IR8.7 , SYNMSG_BT_CL_IR9.7 ,
-SYNMSG_BT_CL_WV6.2 , SYNMSG_BT_CL_WV7.3</p>
-<blockquote>
-<div><p>P, T, QV: on model full levels
-U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
-RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
-RTTOV_TOPCLOUD, RTTOV_FRCLOUD_TOT:</p>
-</div></blockquote>
-<p>(3) MSG clear sky brightness temperature
-SYNMSG_BT_CS_IR10.8, SYNMSG_BT_CS_IR12.1, SYNMSG_BT_CS_IR13.4,
-SYNMSG_BT_CS_IR3.9 , SYNMSG_BT_CS_IR8.7 , SYNMSG_BT_CS_IR9.7 ,
-SYNMSG_BT_CS_WV6.2 , SYNMSG_BT_CS_WV7.3</p>
-<blockquote>
-<div><p>P, T, QV: on model full levels
-U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
-RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:</p>
-</div></blockquote>
-<p>Explanantion of MSG SEVIRI channels:
-rttovChan    lambda           Useful for                         Peak
-(coef file)  (micrometers)
-1            IR 3.9           Surface, clouds, wind fields       surface
-2            WV 6.2           Water vapor, high level clouds,    300 hPa
-3            WV 7.3           Water vapor                        500 hPa
-4            IR 8.7           Surface, clouds                    surface
-5            IR 9.7           Ozone                              surface + 50hPa
-6            IR 10.8          Surface, clouds, wind fields       surface
-7            IR 12.0          Surface, clouds, wind fields       surface
-8            IR 13.4          Cirrus cloud height                850 hPa</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</li>
+<li><p>MSG cloudy brightness temperature, <a class="reference internal" href="control/process.html#nl-attr-Process-out_mode_rttov_cloud" title="&amp;Process out_mode_rttov_cloud"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">out_mode_rttov_cloud='simple'</span></code></a></p>
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR10.8">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR10.8</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR10.8" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR12.1">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR12.1</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR12.1" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR13.4">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR13.4</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR13.4" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR3.9">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR3.9</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR3.9" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR8.7">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR8.7</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR8.7" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR9.7">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_IR9.7</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR9.7" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV6.2">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_WV6.2</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV6.2" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV7.3">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CL_WV7.3</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV7.3" title="Permalink to this definition">#</a></dt>
+<dd><dl>
+<dt>Parents:</dt><dd><dl class="simple">
+<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-P" title="&amp;Process tmp1_field=&quot;P&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-QV" title="&amp;Process tmp1_field=&quot;QV&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV&quot;</span></code></a></dt><dd><p>on model full levels</p>
+</dd>
+</dl>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;U_10M&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;V_10M&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_2M&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-PS" title="&amp;Process tmp1_field=&quot;PS&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;PS&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-QV_2M" title="&amp;Process tmp1_field=&quot;QV_2M&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV_2M&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-T_G" title="&amp;Process tmp1_field=&quot;T_G&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_G&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-HSURF" title="&amp;Process tmp1_field=&quot;HSURF&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HSURF&quot;</span></code></a></p>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_STYPE&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_WTYPE&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_FRSNOW&quot;</span></code></a></p>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_TOPCLOUD&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_FRCLOUD_TOT&quot;</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</li>
+<li><p>MSG clear sky brightness temperature</p>
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR10.8">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_IR10.8</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR10.8" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR12.1">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_IR12.1</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR12.1" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR13.4">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_IR13.4</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR13.4" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR3.9">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_IR3.9</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR3.9" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR8.7">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_IR8.7</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR8.7" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR9.7">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_IR9.7</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR9.7" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_WV6.2">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_WV6.2</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_WV6.2" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-SYNMSG_BT_CS_WV7.3">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">SYNMSG_BT_CS_WV7.3</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_WV7.3" title="Permalink to this definition">#</a></dt>
+<dd><dl>
+<dt>Parents:</dt><dd><dl class="simple">
+<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-P" title="&amp;Process tmp1_field=&quot;P&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-QV" title="&amp;Process tmp1_field=&quot;QV&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV&quot;</span></code></a></dt><dd><p>on model full levels</p>
+</dd>
+</dl>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;U_10M&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;V_10M&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_2M&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-PS" title="&amp;Process tmp1_field=&quot;PS&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;PS&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-QV_2M" title="&amp;Process tmp1_field=&quot;QV_2M&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;QV_2M&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-T_G" title="&amp;Process tmp1_field=&quot;T_G&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_G&quot;</span></code></a>, <a class="reference internal" href="#nl-val-Process-tmp1_field-HSURF" title="&amp;Process tmp1_field=&quot;HSURF&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HSURF&quot;</span></code></a></p>
+<p><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_STYPE&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_WTYPE&quot;</span></code></a>, <a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;RTTOV_FRSNOW&quot;</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</li>
+</ol>
+<p>Explanantion of MSG SEVIRI channels:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>rttovChan
+(coef file)</p></th>
+<th class="head"><p>lambda
+(micrometers)</p></th>
+<th class="head"><p>Useful for</p></th>
+<th class="head"><p>Peak</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>IR 3.9</p></td>
+<td><p>Surface, clouds, wind fields</p></td>
+<td><p>surface</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>WV 6.2</p></td>
+<td><p>Water vapor, high level clouds,</p></td>
+<td><p>300 hPa</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>WV 7.3</p></td>
+<td><p>Water vapor</p></td>
+<td><p>500 hPa</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>IR 8.7</p></td>
+<td><p>Surface, clouds</p></td>
+<td><p>surface</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>IR 9.7</p></td>
+<td><p>Ozone</p></td>
+<td><p>surface + 50hPa</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>IR 10.8</p></td>
+<td><p>Surface, clouds, wind fields</p></td>
+<td><p>surface</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>IR 12.0</p></td>
+<td><p>Surface, clouds, wind fields</p></td>
+<td><p>surface</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>IR 13.4</p></td>
+<td><p>Cirrus cloud height</p></td>
+<td><p>850 hPa</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="statistical-post-processing">
 <h3>Statistical post-processing<a class="headerlink" href="#statistical-post-processing" title="Permalink to this heading">#</a></h3>
@@ -3635,32 +3808,30 @@ rttovChan    lambda           Useful for                         Peak
 <dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-CN_TSTORM">
 <span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">&quot;CN_TSTORM&quot;</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-CN_TSTORM" title="Permalink to this definition">#</a></dt>
 <dd><p>(normalized) probability for a thunderstrom to occur [%].</p>
-<blockquote>
-<div><p>Algorithm is derived from AdaBoost classifier, and the values
+<p>Algorithm is derived from AdaBoost classifier, and the values
 are obtained by using the information in the corresponding
 adaboost_coefs file (see 6.6 below).
 The set of parent fields is described by the list of features
 in this latter file. Two kind of classifier can be applied,
 Threshold Classifier and Decision Tree Classifier, and the
 one applied is also defined in this file.</p>
-</div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CN_TSTORM</span> <span class="o">=</span> <span class="n">CN_TSTORM</span><span class="p">(</span><span class="n">INPUT</span><span class="p">)</span>
-
-        <span class="n">INPUT</span><span class="p">:</span>      <span class="nb">set</span> <span class="n">of</span> <span class="n">fields</span> <span class="k">as</span> <span class="n">defined</span> <span class="n">by</span> <span class="n">the</span> <span class="nb">list</span>
-                    <span class="n">of</span> <span class="s1">&#39;standard&#39;</span> <span class="n">features</span> <span class="ow">in</span> <span class="n">adaboost_coefs</span>
-                    <span class="n">file</span> <span class="p">(</span><span class="s1">&#39;standard&#39;</span> <span class="n">means</span> <span class="ow">not</span> <span class="n">considering</span>
-                    <span class="n">one</span> <span class="n">of</span> <span class="n">DAYOFYEAR</span><span class="p">,</span> <span class="n">TIME</span><span class="p">,</span> <span class="n">HEIGHT</span><span class="p">)</span>
 </pre></div>
 </div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">INPUT</span></code>:</dt><dd><p>set of fields as defined by the list
+of ‘standard’ features in adaboost_coefs
+file (‘standard’ means not considering
+one of DAYOFYEAR, TIME, HEIGHT)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="nl value">
 <dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-C_TSTORM">
 <span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">&quot;C_TSTORM&quot;</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-C_TSTORM" title="Permalink to this definition">#</a></dt>
-<dd><p>as CN_TSTORM, but value is the raw classifier output.</p>
-<blockquote>
-<div><p>Its range is between 0 (no event) and 1 (event occurs).</p>
-</div></blockquote>
+<dd><p>as CN_TSTORM, but value is the raw classifier output.
+Its range is between 0 (no event) and 1 (event occurs).</p>
 </dd></dl>
 
 </section>
@@ -3671,70 +3842,74 @@ and whose identity is set in the namelist.</p>
 <dl class="nl value">
 <dt class="sig sig-object nl" id="nl-val-Process-tmp1_field-AD2D_TRACER">
 <span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=</span></span><span class="sig-name descname"><span class="pre">&quot;AD2D_TRACER&quot;</span></span><a class="headerlink" href="#nl-val-Process-tmp1_field-AD2D_TRACER" title="Permalink to this definition">#</a></dt>
-<dd><dl>
-<dt>horizontal advection of TRACER on model surface.</dt><dd><blockquote>
-<div><p>AD2D_TRACER(tracer) = (u,v) * GRADIENT(tracer)</p>
-</div></blockquote>
+<dd><p>horizontal advection of TRACER on model surface.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AD2D_TRACER</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">GRADIENT</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="simple">
+<dt>Parents:</dt><dd><dl class="simple">
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;TRACER&quot;</span></code></a></dt><dd><p>any scalar field</p>
 </dd>
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;U&quot;</span></code></a></dt><dd><p>(in [m/s], on k-surface, in native ref. system, staggered)</p>
 </dd>
 <dt><a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;V&quot;</span></code></a></dt><dd><p>(in [m/s], on k-surface, in native ref. system, staggered)</p>
 </dd>
-<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-HEIGHT" title="&amp;Process tmp1_field=&quot;HEIGHT&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HEIGHT&quot;</span></code></a> or <a class="reference internal" href="#nl-val-Process-tmp1_field-HHL" title="&amp;Process tmp1_field=&quot;HHL&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HHL&quot;</span></code></a></dt><dd><p>(in [m], on model half levels)
-TRACER is a generic field identity, which is declared in the namelist
-by using “new_field_id” (e.g. to use THETAE as tracer, one should set
-&amp;Process tmp1_field =”THETAE”, new_field_id=”TRACER,K” / ).
+<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-HEIGHT" title="&amp;Process tmp1_field=&quot;HEIGHT&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HEIGHT&quot;</span></code></a> or <a class="reference internal" href="#nl-val-Process-tmp1_field-HHL" title="&amp;Process tmp1_field=&quot;HHL&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;HHL&quot;</span></code></a></dt><dd><p>(in [m], on model half levels)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>TRACER is a generic field identity, which is declared in the namelist
+by using <a class="reference internal" href="control/process.html#nl-attr-Process-new_field_id" title="&amp;Process new_field_id"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">new_field_id</span></code></a> (e.g. to use THETAE as tracer, one should set
+<code class="docutils literal notranslate"><span class="pre">&amp;Process</span> <span class="pre">tmp1_field=&quot;THETAE&quot;,</span> <span class="pre">new_field_id=&quot;TRACER,K&quot;</span> <span class="pre">/</span></code> ).
 When computing AD2D_TRACER on level k, all listed fields must be available
 on level k, HEIGHT must also be available on level k+1, TRACER must be
 available on at least one adjacent level (left or right derivative in k
 is applied when k+1 or k-1 level is missing).
-It is compulsory to use “set_units” or “new_field_id” to manually set
+It is compulsory to use <a class="reference internal" href="control/process.html#nl-attr-Process-set_units" title="&amp;Process set_units"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">set_units</span></code></a> or <a class="reference internal" href="control/process.html#nl-attr-Process-new_field_id" title="&amp;Process new_field_id"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">new_field_id</span></code></a> to manually set
 the field units of the resulting field.
 This algorithm requires height based vertical coordinates.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
 </section>
 <section id="named-operators">
 <h2>Named operators<a class="headerlink" href="#named-operators" title="Permalink to this heading">#</a></h2>
-<p>(Activated by setting ‘use_operator’ and ‘use_tag’)</p>
-<dl class="simple">
-<dt>operator  operator description</dt><dd><p>list of parent fields (first in the list is the main parent)</p>
-</dd>
-</dl>
+<p>(Activated by setting <a class="reference internal" href="control/process.html#nl-attr-Process-use_operator" title="&amp;Process use_operator"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">use_operator</span></code></a> and <a class="reference internal" href="control/process.html#nl-attr-Process-use_tag" title="&amp;Process use_tag"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">use_tag</span></code></a>)</p>
 <section id="id1">
 <h3>constant fields (produced in INCORE)<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<dl>
-<dt>qvsat   Specific water vapor content at saturation over water [kg/kg]</dt><dd><p>qvsat = qvsat(temperature, pressure)
-Implemented for one of the two following cases:
-a) parents in {T_2M, PS}
-<a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_2M&quot;</span></code></a></p>
-<blockquote>
-<div><p>(in [K])</p>
-</div></blockquote>
+<dl class="nl value">
+<dt class="sig sig-object nl" id="nl-val-Process-use_operator-qvsat">
+<span class="sig-prename descclassname"><span class="pre">&amp;Process</span> <span class="pre">use_operator=</span></span><span class="sig-name descname"><span class="pre">qvsat</span></span><a class="headerlink" href="#nl-val-Process-use_operator-qvsat" title="Permalink to this definition">#</a></dt>
+<dd><p>Specific water vapor content at saturation over water [kg/kg]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qvsat</span> <span class="o">=</span> <span class="n">qvsat</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Implemented for one of the two following cases:</p>
+<ol class="arabic">
+<li><p>parents in {T_2M, PS}</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-PS" title="&amp;Process tmp1_field=&quot;PS&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;PS&quot;</span></code></a></dt><dd><p>(in [Pa])</p>
+<dt><a class="reference internal" href="control/process.html#nl-attr-Process-use_operator" title="&amp;Process use_operator"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T_2M&quot;</span></code></a></dt><dd><p>(in [K])</p>
+</dd>
+<dt><a class="reference internal" href="control/process.html#nl-attr-Process-use_operator" title="&amp;Process use_operator"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;PS&quot;</span></code></a></dt><dd><p>(in [Pa])</p>
 </dd>
 </dl>
-<p>b) parents in {T, P}
-<a class="reference internal" href="control/process.html#nl-attr-Process-tmp1_field" title="&amp;Process tmp1_field"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a></p>
+</li>
+<li><p>parents in {T, P}</p>
 <blockquote>
-<div><p>(in [K])</p>
-</div></blockquote>
-<dl class="simple">
-<dt><a class="reference internal" href="#nl-val-Process-tmp1_field-P" title="&amp;Process tmp1_field=&quot;P&quot;"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a></dt><dd><p>(in [Pa])</p>
+<div><dl class="simple">
+<dt><a class="reference internal" href="control/process.html#nl-attr-Process-use_operator" title="&amp;Process use_operator"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code></a></dt><dd><p>(in [K])</p>
+</dd>
+<dt><a class="reference internal" href="control/process.html#nl-attr-Process-use_operator" title="&amp;Process use_operator"><code class="xref nl nl-val docutils literal notranslate"><span class="pre">&quot;P&quot;</span></code></a></dt><dd><p>(in [Pa])</p>
 </dd>
 </dl>
-<p>In case a), the surface pressure is reduced hydrostatically to
+</div></blockquote>
+</li>
+</ol>
+<p>In case 1., the surface pressure is reduced hydrostatically to
 a 2 meter pressure, using constant temperature T_2M.</p>
-</dd>
-</dl>
+</dd></dl>
+
 </section>
 </section>
 <section id="postprocessing-operators">
@@ -3973,6 +4148,33 @@ a 2 meter pressure, using constant temperature T_2M.</p>
 <li><a class="reference internal" href="#nl-val-Process-tmp1_field-ADEDO2"><code class="docutils literal notranslate"><span class="pre">&quot;ADEDO2&quot;</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#synthetic-satellite-images">Synthetic satellite images</a><ul>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR10.8"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR10.8</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR12.1"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR12.1</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR13.4"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR13.4</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR3.9"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR3.9</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR8.7"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR8.7</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR9.7"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR9.7</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV6.2"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_WV6.2</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV7.3"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_WV7.3</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR10.8"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR10.8</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR12.1"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR12.1</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR13.4"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR13.4</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR3.9"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR3.9</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR8.7"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR8.7</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_IR9.7"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_IR9.7</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV6.2"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_WV6.2</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CL_WV7.3"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CL_WV7.3</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR10.8"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_IR10.8</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR12.1"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_IR12.1</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR13.4"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_IR13.4</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR3.9"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_IR3.9</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR8.7"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_IR8.7</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_IR9.7"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_IR9.7</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_WV6.2"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_WV6.2</span></code></a></li>
+<li><a class="reference internal" href="#nl-val-Process-tmp1_field-SYNMSG_BT_CS_WV7.3"><code class="docutils literal notranslate"><span class="pre">SYNMSG_BT_CS_WV7.3</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#statistical-post-processing">Statistical post-processing</a><ul>
 <li><a class="reference internal" href="#nl-val-Process-tmp1_field-CN_TSTORM"><code class="docutils literal notranslate"><span class="pre">&quot;CN_TSTORM&quot;</span></code></a></li>
 <li><a class="reference internal" href="#nl-val-Process-tmp1_field-C_TSTORM"><code class="docutils literal notranslate"><span class="pre">&quot;C_TSTORM&quot;</span></code></a></li>
@@ -3985,7 +4187,10 @@ a 2 meter pressure, using constant temperature T_2M.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#named-operators">Named operators</a><ul>
-<li><a class="reference internal" href="#id1">constant fields (produced in INCORE)</a></li>
+<li><a class="reference internal" href="#id1">constant fields (produced in INCORE)</a><ul>
+<li><a class="reference internal" href="#nl-val-Process-use_operator-qvsat"><code class="docutils literal notranslate"><span class="pre">qvsat</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#postprocessing-operators">Postprocessing operators</a></li>

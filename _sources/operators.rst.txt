@@ -52,9 +52,6 @@ Meteorological operators
                
 (Activated by short name of field and dictionary content)
 
-field     operator description
-            list of parent fields (first in the list is the main parent)
-
 constant fields (produced in INCORE)
 ------------------------------------
 
@@ -2672,8 +2669,10 @@ indices
         :nl:val:`"P"`
             (in [Pa])
         :nl:val:`"QV"`
-            Synthetic satellite images
+            
 
+Synthetic satellite images
+--------------------------
 
 Calculate synthetic satellite forward observation operator using
 the release 11 of the RTTOV library.
@@ -2681,12 +2680,12 @@ the release 11 of the RTTOV library.
 Three different treatments of clouds are supported, as defined by
 :nl:arg:`out_mode_rttov_cloud``:
 
-| no cloud (only clear sky product can be computed),
-| simple clouds (only cloud cover and cloud top information is used),
-| complex clouds (cloud types and cloud profiles information is used)
+* no cloud (only clear sky product can be computed),
+* simple clouds (only cloud cover and cloud top information is used),
+* complex clouds (cloud types and cloud profiles information is used)
 
 The information on the satellite, the instrument and the channel to
-consider is taken from the active dictionary (rttovId, rttovChan),
+consider is taken from the active dictionary (``rttovId``, ``rttovChan``),
 on the basis of the field name.
 
 The RTTOV coefficient file for the chosen satellite and instrument must
@@ -2701,20 +2700,20 @@ as the channels represented in the RTTOV coefficient file.
 The following auxiliary fields are used as parents:
     :nl:val:`"RTTOV_STYPE"`
         surface type field: 0:land, 1:sea, 2:sea-ice ;
-                (COSMO with H_ICE) SOILTYP=9 && H_ICE>0.01 => RTTOV_STYPE=2
+                (COSMO with H_ICE) ``SOILTYP=9 && H_ICE>0.01 => RTTOV_STYPE=2``
     :nl:val:`"RTTOV_WTYPE"`
         water type field: 0:fresh water, 1:ocean water ;
-                (COSMO with LAKE_DP) SOILTYP>=9 && DEPTH_LK=0 => RTTOV_WTYPE=1
+                (COSMO with LAKE_DP) ``SOILTYP>=9 && DEPTH_LK=0 => RTTOV_WTYPE=1``
     :nl:val:`"RTTOV_FRSNOW"`
         snow fraction field: between 0 and 1 ;
-                (COSMO) MIN(1.0, W_SNOW/cf_snow), with cf_snow = 0.015
+                (COSMO) ``MIN(1.0, W_SNOW/cf_snow)``, with ``cf_snow = 0.015``
 
 for simple clouds treatment
     :nl:val:`"RTTOV_TOPCLOUD"`
         cloud top in hPa
     :nl:val:`"RTTOV_FRCLOUD_TOT"`
         total cloud fraction, between 0 and 1
-        
+
 for complex clouds treatment
     :nl:val:`"RTTOV_FRCLOUD"`
         cloud fraction profile: between 0 and 1 ;
@@ -2734,50 +2733,116 @@ of about 30% is achieved at the cost of a non significant degradation
 of the product quality (NWP SAF advice, see ticket id "gKqpbxFWT").
 
 
-
-
 The following products can be computed:
 
-(1) MSG cloudy brightness temperature, out_mode_rttov_cloud='complex'
-SYNMSG_BT_CL_IR10.8, SYNMSG_BT_CL_IR12.1, SYNMSG_BT_CL_IR13.4,
-SYNMSG_BT_CL_IR3.9 , SYNMSG_BT_CL_IR8.7 , SYNMSG_BT_CL_IR9.7 ,
-SYNMSG_BT_CL_WV6.2 , SYNMSG_BT_CL_WV7.3
-                P, T, QV: on model half levels
-                U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
-                RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
-                RTTOV_FRCLOUD, RTTOV_CLOUD_1, RTTOV_CLOUD_3, RTTOV_CLOUD_6:
-                on model full levels; P, T and QV must be available on 
+1.  MSG cloudy brightness temperature, :nl:val:`out_mode_rttov_cloud='complex'`
+
+    .. nl:value:: SYNMSG_BT_CL_IR10.8
+
+    .. nl:value:: SYNMSG_BT_CL_IR12.1
+
+    .. nl:value:: SYNMSG_BT_CL_IR13.4
+
+    .. nl:value:: SYNMSG_BT_CL_IR3.9
+
+    .. nl:value:: SYNMSG_BT_CL_IR8.7
+
+    .. nl:value:: SYNMSG_BT_CL_IR9.7
+
+    .. nl:value:: SYNMSG_BT_CL_WV6.2
+
+    .. nl:value:: SYNMSG_BT_CL_WV7.3
+
+        Parents:
+            :nl:val:`"P"`, :nl:val:`"T"`, :nl:val:`"QV"`
+                on model half levels
+            :nl:val:`"U_10M"`, :nl:val:`"V_10M"`, :nl:val:`"T_2M"`, :nl:val:`"PS"`, :nl:val:`"QV_2M"`, :nl:val:`"T_G"`, :nl:val:`"HSURF"`
+                
+            :nl:val:`"RTTOV_STYPE"`, :nl:val:`"RTTOV_WTYPE"`, :nl:val:`"RTTOV_FRSNOW"`
+                
+            :nl:val:`"RTTOV_FRCLOUD"`, :nl:val:`"RTTOV_CLOUD_1"`, :nl:val:`"RTTOV_CLOUD_3"`, :nl:val:`"RTTOV_CLOUD_6"`
+                on model full levels; :nl:val:`"P"`, :nl:val:`"T"` and :nl:val:`"QV"` must be available on 
                 all associated model half levels
 
-(2) MSG cloudy brightness temperature, out_mode_rttov_cloud='simple'
-SYNMSG_BT_CL_IR10.8, SYNMSG_BT_CL_IR12.1, SYNMSG_BT_CL_IR13.4,
-SYNMSG_BT_CL_IR3.9 , SYNMSG_BT_CL_IR8.7 , SYNMSG_BT_CL_IR9.7 ,
-SYNMSG_BT_CL_WV6.2 , SYNMSG_BT_CL_WV7.3
-                P, T, QV: on model full levels
-                U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
-                RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
-                RTTOV_TOPCLOUD, RTTOV_FRCLOUD_TOT:
+2.  MSG cloudy brightness temperature, :nl:val:`out_mode_rttov_cloud='simple'`
 
-(3) MSG clear sky brightness temperature
-SYNMSG_BT_CS_IR10.8, SYNMSG_BT_CS_IR12.1, SYNMSG_BT_CS_IR13.4,
-SYNMSG_BT_CS_IR3.9 , SYNMSG_BT_CS_IR8.7 , SYNMSG_BT_CS_IR9.7 ,
-SYNMSG_BT_CS_WV6.2 , SYNMSG_BT_CS_WV7.3
-                P, T, QV: on model full levels
-                U_10M, V_10M, T_2M, PS, QV_2M, T_G, HSURF:
-                RTTOV_STYPE, RTTOV_WTYPE, RTTOV_FRSNOW:
+    .. nl:value:: SYNMSG_BT_CL_IR10.8
+
+    .. nl:value:: SYNMSG_BT_CL_IR12.1
+
+    .. nl:value:: SYNMSG_BT_CL_IR13.4
+
+    .. nl:value:: SYNMSG_BT_CL_IR3.9
+
+    .. nl:value:: SYNMSG_BT_CL_IR8.7
+    
+    .. nl:value:: SYNMSG_BT_CL_IR9.7
+
+    .. nl:value:: SYNMSG_BT_CL_WV6.2
+
+    .. nl:value:: SYNMSG_BT_CL_WV7.3
+
+        Parents:
+            :nl:val:`"P"`, :nl:val:`"T"`, :nl:val:`"QV"`
+                on model full levels
+            :nl:val:`"U_10M"`, :nl:val:`"V_10M"`, :nl:val:`"T_2M"`, :nl:val:`"PS"`, :nl:val:`"QV_2M"`, :nl:val:`"T_G"`, :nl:val:`"HSURF"`
+                
+            :nl:val:`"RTTOV_STYPE"`, :nl:val:`"RTTOV_WTYPE"`, :nl:val:`"RTTOV_FRSNOW"`
+                
+            :nl:val:`"RTTOV_TOPCLOUD"`, :nl:val:`"RTTOV_FRCLOUD_TOT"`
+                
+                    
+
+3.  MSG clear sky brightness temperature
+
+    .. nl:value:: SYNMSG_BT_CS_IR10.8
+
+    .. nl:value:: SYNMSG_BT_CS_IR12.1
+
+    .. nl:value:: SYNMSG_BT_CS_IR13.4
+
+    .. nl:value:: SYNMSG_BT_CS_IR3.9
+    
+    .. nl:value:: SYNMSG_BT_CS_IR8.7
+    
+    .. nl:value:: SYNMSG_BT_CS_IR9.7
+
+    .. nl:value:: SYNMSG_BT_CS_WV6.2
+
+    .. nl:value:: SYNMSG_BT_CS_WV7.3
+
+        Parents:
+            :nl:val:`"P"`, :nl:val:`"T"`, :nl:val:`"QV"`
+                on model full levels
+            :nl:val:`"U_10M"`, :nl:val:`"V_10M"`, :nl:val:`"T_2M"`, :nl:val:`"PS"`, :nl:val:`"QV_2M"`, :nl:val:`"T_G"`, :nl:val:`"HSURF"`
+                
+            :nl:val:`"RTTOV_STYPE"`, :nl:val:`"RTTOV_WTYPE"`, :nl:val:`"RTTOV_FRSNOW"`
+                
+                    
 
 
 Explanantion of MSG SEVIRI channels:
-rttovChan    lambda           Useful for                         Peak
-(coef file)  (micrometers)
-1            IR 3.9           Surface, clouds, wind fields       surface
-2            WV 6.2           Water vapor, high level clouds,    300 hPa
-3            WV 7.3           Water vapor                        500 hPa
-4            IR 8.7           Surface, clouds                    surface
-5            IR 9.7           Ozone                              surface + 50hPa
-6            IR 10.8          Surface, clouds, wind fields       surface
-7            IR 12.0          Surface, clouds, wind fields       surface
-8            IR 13.4          Cirrus cloud height                850 hPa
+
++-------------+---------------+----------------------------------+-----------------+
+| rttovChan   | lambda        | Useful for                       | Peak            |
+| (coef file) | (micrometers) |                                  |                 |
++=============+===============+==================================+=================+
+| 1           | IR 3.9        | Surface, clouds, wind fields     | surface         |
++-------------+---------------+----------------------------------+-----------------+
+| 2           | WV 6.2        | Water vapor, high level clouds,  | 300 hPa         |
++-------------+---------------+----------------------------------+-----------------+
+| 3           | WV 7.3        | Water vapor                      | 500 hPa         |
++-------------+---------------+----------------------------------+-----------------+
+| 4           | IR 8.7        | Surface, clouds                  | surface         |
++-------------+---------------+----------------------------------+-----------------+
+| 5           | IR 9.7        | Ozone                            | surface + 50hPa |
++-------------+---------------+----------------------------------+-----------------+
+| 6           | IR 10.8       | Surface, clouds, wind fields     | surface         |
++-------------+---------------+----------------------------------+-----------------+
+| 7           | IR 12.0       | Surface, clouds, wind fields     | surface         |
++-------------+---------------+----------------------------------+-----------------+
+| 8           | IR 13.4       | Cirrus cloud height              | 850 hPa         |
++-------------+---------------+----------------------------------+-----------------+
 
 
 Statistical post-processing
@@ -2787,27 +2852,27 @@ Statistical post-processing
 
     (normalized) probability for a thunderstrom to occur [%].
 
-            Algorithm is derived from AdaBoost classifier, and the values
-            are obtained by using the information in the corresponding
-            adaboost_coefs file (see 6.6 below).
-            The set of parent fields is described by the list of features
-            in this latter file. Two kind of classifier can be applied,
-            Threshold Classifier and Decision Tree Classifier, and the 
-            one applied is also defined in this file.
+    Algorithm is derived from AdaBoost classifier, and the values
+    are obtained by using the information in the corresponding
+    adaboost_coefs file (see 6.6 below).
+    The set of parent fields is described by the list of features
+    in this latter file. Two kind of classifier can be applied,
+    Threshold Classifier and Decision Tree Classifier, and the 
+    one applied is also defined in this file.
     ::
 
         CN_TSTORM = CN_TSTORM(INPUT)
 
-                INPUT:      set of fields as defined by the list
-                            of 'standard' features in adaboost_coefs
-                            file ('standard' means not considering
-                            one of DAYOFYEAR, TIME, HEIGHT) 
+    ``INPUT``:      
+                set of fields as defined by the list
+                of 'standard' features in adaboost_coefs
+                file ('standard' means not considering
+                one of DAYOFYEAR, TIME, HEIGHT) 
 
 .. nl:value:: "C_TSTORM"
 
     as CN_TSTORM, but value is the raw classifier output.
-
-            Its range is between 0 (no event) and 1 (event occurs).
+    Its range is between 0 (no event) and 1 (event occurs).
 
 Generic operators
 -----------------
@@ -2817,8 +2882,11 @@ and whose identity is set in the namelist.
 
 .. nl:value:: "AD2D_TRACER"
 
-    horizontal advection of TRACER on model surface.
+    horizontal advection of TRACER on model surface. ::
+
                 AD2D_TRACER(tracer) = (u,v) * GRADIENT(tracer)
+
+    Parents:
         :nl:val:`"TRACER"`
             any scalar field 
         :nl:val:`"U"`
@@ -2827,45 +2895,53 @@ and whose identity is set in the namelist.
             (in [m/s], on k-surface, in native ref. system, staggered)
         :nl:val:`"HEIGHT"` or :nl:val:`"HHL"`
             (in [m], on model half levels) 
-            TRACER is a generic field identity, which is declared in the namelist
-            by using "new_field_id" (e.g. to use THETAE as tracer, one should set
-            &Process tmp1_field ="THETAE", new_field_id="TRACER,K" / ).
-            When computing AD2D_TRACER on level k, all listed fields must be available
-            on level k, HEIGHT must also be available on level k+1, TRACER must be
-            available on at least one adjacent level (left or right derivative in k
-            is applied when k+1 or k-1 level is missing).
-            It is compulsory to use "set_units" or "new_field_id" to manually set
-            the field units of the resulting field.
-            This algorithm requires height based vertical coordinates.
+
+    TRACER is a generic field identity, which is declared in the namelist
+    by using :nl:arg:`new_field_id` (e.g. to use THETAE as tracer, one should set
+    ``&Process tmp1_field="THETAE", new_field_id="TRACER,K" /`` ).
+    When computing AD2D_TRACER on level k, all listed fields must be available
+    on level k, HEIGHT must also be available on level k+1, TRACER must be
+    available on at least one adjacent level (left or right derivative in k
+    is applied when k+1 or k-1 level is missing).
+    It is compulsory to use :nl:arg:`set_units` or :nl:arg:`new_field_id` to manually set
+    the field units of the resulting field.
+    This algorithm requires height based vertical coordinates.
 
 
 
 Named operators
 ===============
-(Activated by setting 'use_operator' and 'use_tag')
+(Activated by setting :nl:arg:`use_operator` and :nl:arg:`use_tag`)
 
-
-operator  operator description
-            list of parent fields (first in the list is the main parent)
+.. nl:active_arg:: use_operator
 
 constant fields (produced in INCORE)
 ------------------------------------
 
-qvsat   Specific water vapor content at saturation over water [kg/kg]
+.. nl:value:: qvsat   
+    
+    Specific water vapor content at saturation over water [kg/kg] ::
+
         qvsat = qvsat(temperature, pressure)
-        Implemented for one of the two following cases:
-        a) parents in {T_2M, PS}
+
+    Implemented for one of the two following cases:
+
+    1.  parents in {T_2M, PS}
+
         :nl:val:`"T_2M"`
             (in [K])
         :nl:val:`"PS"`
             (in [Pa])
-        b) parents in {T, P}
+
+    2. parents in {T, P}
+
         :nl:val:`"T"`
             (in [K])
         :nl:val:`"P"`
             (in [Pa])
-        In case a), the surface pressure is reduced hydrostatically to
-        a 2 meter pressure, using constant temperature T_2M.
+
+    In case 1., the surface pressure is reduced hydrostatically to
+    a 2 meter pressure, using constant temperature T_2M.
     
 
 
