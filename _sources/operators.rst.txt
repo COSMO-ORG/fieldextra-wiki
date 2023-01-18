@@ -2927,18 +2927,16 @@ constant fields (produced in INCORE)
     Implemented for one of the two following cases:
 
     1.  parents in {T_2M, PS}
+            :nl:val:`"T_2M"`
+                (in [K])
+            :nl:val:`"PS"`
+                (in [Pa])
 
-        :nl:val:`"T_2M"`
-            (in [K])
-        :nl:val:`"PS"`
-            (in [Pa])
-
-    2. parents in {T, P}
-
-        :nl:val:`"T"`
-            (in [K])
-        :nl:val:`"P"`
-            (in [Pa])
+    2.  parents in {T, P}
+            :nl:val:`"T"`
+                (in [K])
+            :nl:val:`"P"`
+                (in [Pa])
 
     In case 1., the surface pressure is reduced hydrostatically to
     a 2 meter pressure, using constant temperature T_2M.
