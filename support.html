@@ -221,39 +221,30 @@
 <p>All blank lines and all lines beginning with an exclamation mark are ignored.
 The first interpreted lines define the name of the dictionary and the type of model.
 All following interpreted lines define the set of key/values.</p>
-<ol class="loweralpha">
-<li><dl>
-<dt>Global information</dt><dd><p>The first interpreted lines define global information valid for all keys of
+<section id="global-information">
+<h3>Global information<a class="headerlink" href="#global-information" title="Permalink to this heading">#</a></h3>
+<p>The first interpreted lines define global information valid for all keys of
 the current dictionary.</p>
-<blockquote>
-<div><p>DICTIONARY_NAME ‘name’          (any string)
-MODEL_TYPE ‘type’               (e.g. cosmo, ifs, gme; blank is allowed)
-PRODUCT_CATEGORY ‘cat1,…’     (optional; e.g. ‘determinist’; blank is allowed)
-GRIB2_MASTER_TABLE_VERSION nn   (optional; e.g. 11; blank is allowed)
-GRIB2_LOCAL_TABLE_VERSION vv    (optional; e.g. 1; blank is allowed only when</p>
-<blockquote>
-<div><p>no local code is used)</p>
-</div></blockquote>
-</div></blockquote>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="n">DICTIONARY_NAME</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="w">          </span><span class="c">!(any string)</span>
+<span class="n">MODEL_TYPE</span><span class="w"> </span><span class="s1">&#39;type&#39;</span><span class="w">               </span><span class="c">!(e.g. cosmo, ifs, gme; blank is allowed)</span>
+<span class="n">GRIB2_MASTER_TABLE_VERSION</span><span class="w"> </span><span class="n">nn</span><span class="w">   </span><span class="c">!(optional; e.g. 11; blank is allowed)</span>
+<span class="n">GRIB2_LOCAL_TABLE_VERSION</span><span class="w"> </span><span class="n">vv</span><span class="w">    </span><span class="c">!(optional; e.g. 1; blank is allowed only when no local code is used)</span>
+</pre></div>
+</div>
 <p>The dictionary name is used to refer to a specific dictionary in the namelist of
 fieldextra. The model type is used to interpret local values in the dictionary and
-in input records. Furthermore, in combination with PRODUCT_CATEGORY, this information
-is used to define the products compatible with the current dictionary.</p>
-<p>Both DICTIONARY_NAME and MODEL_TYPE entries are compulsory. Empty value of MODEL_TYPE
+in input records, and to select a dictionary on the base of a specified model name.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">DICTIONARY_NAME</span></code> and <code class="docutils literal notranslate"><span class="pre">MODEL_TYPE</span></code> entries are compulsory. Empty value of <code class="docutils literal notranslate"><span class="pre">MODEL_TYPE</span></code>
 is supported and means any possible value (e.g. for dictionary refering to observations,
 for default dictionary valid for any model).</p>
-<p>The PRODUCT_CATEGORY entry is optional; it refers to a comma separated list of
-compatible product categories (see description of default_product_category in
-README.user for a list of supported values). Empty value is supported and means
-any possible value.</p>
 <p>The values of GRIB2_MASTER_TABLE_VERSION and GRIB2_LOCAL_TABLE_VERSION refer to the
 minimal version of the GRIB 2 tables which are required to interpret the GRIB 2
 information used in the current dictionary.</p>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt>Key / values (repeated as many times as necessary)</dt><dd><p>The values associated whith each key are grouped into 5 lines:</p>
+</section>
+<section id="key-values">
+<h3>Key / values<a class="headerlink" href="#key-values" title="Permalink to this heading">#</a></h3>
+<p>(repeated as many times as necessary)</p>
+<p>The values associated whith each key are grouped into 5 lines:</p>
 <dl>
 <dt>Line 1 (Key)</dt><dd><ul class="simple">
 <li><p>Key is the field short name (no embedded blanks)</p></li>
@@ -265,175 +256,417 @@ information used in the current dictionary.</p>
 </ul>
 </dd>
 <dt>Line 3 (set of GRIB 1 attributes as key=value)</dt><dd><ul class="simple">
-<li><p>The first surface is the top surface, the second surface (if any) is the bottom surface,</p></li>
+<li><p>The first surface is the top surface, the second surface (if any) is the bottom surface, in a geographic meaning</p></li>
 </ul>
-<p>in a geographic meaning</p>
 </dd>
-<dt>Line 4 (set of GRIB 2 attributes as key=value)</dt><dd><ul class="simple">
-<li><p>Some GRIB 2 attributes, such as the surface value or the central wave number, are coded</p></li>
+<dt>Line 4 (set of GRIB 2 attributes as key=value)</dt><dd><ul>
+<li><p>Some GRIB 2 attributes, such as the surface value or the central wave number, are coded
+with the two integers <code class="docutils literal notranslate"><span class="pre">scaleFactorOf...</span></code> and <code class="docutils literal notranslate"><span class="pre">scaledValueOf...</span></code>, the attribute value being</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">scaleFactorOf</span><span class="p">...)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scaledValueOf</span><span class="p">...</span>
+</pre></div>
+</div>
+<p>in the dictionary below, <code class="docutils literal notranslate"><span class="pre">scaleFactorOf...</span></code>
+is named <code class="docutils literal notranslate"><span class="pre">factor...</span></code> and <code class="docutils literal notranslate"><span class="pre">scaledValueOf...</span></code> is named <code class="docutils literal notranslate"><span class="pre">value...</span></code></p>
+</li>
+<li><p>The first surface is the top surface, the second surface (if any) is the bottom surface, in a geographic meaning</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gridInRef</span></code> is the value of <code class="docutils literal notranslate"><span class="pre">numberOfGridInReference</span></code> (subgrid), and is only meaningful for unsructured grid (see also the attibute <code class="docutils literal notranslate"><span class="pre">'subgrid'</span></code> at line 5)</p></li>
 </ul>
-<p>with the two integers scaleFactorOf… and scaledValueOf…, the attribute value being
-10**(-scaleFactorOf…) * scaledValueOf… ; in the dictionary below, scaleFactorOf…
-is named ‘factor…’ and scaledValueOf… is named ‘value…’
-+ The first surface is the top surface, the second surface (if any) is the bottom surface,
-in a geographic meaning</p>
 </dd>
 <dt>Line 5 (other field characteristics, expressed as a set of key=value)</dt><dd><ul>
-<li><p>constant: true if the field is constant in time (associated validation date is ignored)</p></li>
-<li><p>singleLevel: true if the field is a single level field</p></li>
-<li><dl>
-<dt>passiveSfc2: second surface of associated field is passive when:</dt><dd><blockquote>
-<div><ol class="arabic simple">
-<li><p>singleLevel=false</p></li>
-<li><p>passiveSfc2=true</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keyUsedInProgram</span></code>: when set, the short name which has to be used in any namelist and any resource
+files is the one defined by <code class="docutils literal notranslate"><span class="pre">keyUsedInProgram</span></code>, and not the original key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant</span></code>: true if the field is constant in time (associated validation date is ignored)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">singleLevel</span></code>: true if the field is a single level field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passiveSfc2</span></code>: second surface of associated field is passive when:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">singleLevel=false</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passiveSfc2=true</span></code></p></li>
 <li><p>first surface is indexed model level</p></li>
 <li><p>second surface is either undefined or not associated with any value</p></li>
 </ol>
-</div></blockquote>
 <p>Passive second surface means that the second surface information is only
 used for documenting the level characteristics (incl. vertical coefficients)
 and is not considered when matching levels. More precisely, for passive
-second surface:
-&gt; the surface type is removed by import and reset by export;
-&gt; when processing GRIB 2 records, it is expected that the vertical</p>
-<blockquote>
-<div><p>coordinate coefficients are coded as value of the second fix surface;
+second surface:</p>
+<ul class="simple">
+<li><p>the surface type is removed by import and reset by export;</p></li>
+<li><p>when processing GRIB 2 records, it is expected that the vertical
+coordinate coefficients are coded as value of the second fix surface;
 this is considered both by import and export.
 If found in input record, the coefficients are transfered in the
 output record; otherwise, if suitable vertical coefficients are
-available from another source (e.g. namelist), they will be used.</p>
-</div></blockquote>
+available from another source (e.g. namelist), they will be used.</p></li>
+</ul>
 <p>This non standard use of the GRIB 2 second surface is expected by the
 COSMO model for the height of the half levels.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modelComp</span></code>: specify to which model component the field belongs; one of</p>
+<p>{<code class="docutils literal notranslate"><span class="pre">'soil'</span></code>, <code class="docutils literal notranslate"><span class="pre">'snow'</span></code>, <code class="docutils literal notranslate"><span class="pre">'urban'</span></code>, <code class="docutils literal notranslate"><span class="pre">'lake'</span></code>, <code class="docutils literal notranslate"><span class="pre">'sea'</span></code>, <code class="docutils literal notranslate"><span class="pre">'seaice'</span></code>, <code class="docutils literal notranslate"><span class="pre">'other'</span></code>}</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">'soil'</span></code></dt><dd><p>also includes surface and vegetation</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'snow'</span></code></dt><dd><p>is for the snow model</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'urban'</span></code></dt><dd><p>is for the urban model</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'lake'</span></code></dt><dd><p>is for the lake model</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'sea'</span></code></dt><dd><p>is for the sea model, it also includes wave model</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'seaice'</span></code></dt><dd><p>is for the sea ice model</p>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>soilModel: true if the field belongs to the soil model</dt><dd><p>(soil, vegetation… but also snow and lake)</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>vCompIndex: order of vector component, or -1 if not a 2d vector field</dt><dd><p>(vector basis as defined by bit 5 of GRIB code table 7)</p>
-</dd>
-</dl>
-</li>
-<li><p>associatedVComp: short name of of associated vector component, for 2d vector fields</p></li>
-<li><p>associatedMLev: short name of multi-level field which can be associated to build a full vertical profile.</p></li>
-<li><dl>
-<dt>parent: short name of main parent field (if any).</dt><dd><p>When the operator to compute the field requires a lateral halo around the target area,
+<li><p><code class="docutils literal notranslate"><span class="pre">vCompIndex</span></code>: order of vector component, or -1 if not a 2d vector field
+For vector field defined in a (rotated) geographical reference system, <code class="docutils literal notranslate"><span class="pre">vCompIndex=1</span></code>
+means West-East component, <code class="docutils literal notranslate"><span class="pre">vCompIndex=2</span></code> means South-North component.
+(vector basis as defined by bit 5 of GRIB code table 7)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">associatedVComp</span></code>: short name of of associated vector component, for 2d vector fields</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">associatedMLev</span></code>: short name of multi-level field which can be associated to build a full vertical profile.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent</span></code>: short name of main parent field (if any).
+When the operator to compute the field requires a lateral halo around the target area,
 the size of this halo has to be specified; in this case the string format is:</p>
-<blockquote>
-<div><p>main_parent_key:halo_size</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">main_parent_key</span><span class="p">:</span><span class="n">halo_size</span>
+</pre></div>
+</div>
 <p>A halo size of 999 means the full field has to be provided.</p>
-</dd>
-</dl>
 </li>
-<li><dl class="simple">
-<dt>rttovId: string characterizing the RTTOV coefficient file used to compute the associated field;</dt><dd><p>the full name of the coefficients file is rtcoef_&lt;rttovID&gt;.dat, and the file should
-be accessible at the location rttov_coefs_path specified in &amp;GlobalResource.</p>
-</dd>
-</dl>
-</li>
-<li><p>rttovChan: channel number in RTTOV coefficient file; required to compute the associated field.</p></li>
-<li><p>multiTLevParent: true if multiple time levels of (some of) the parent fields are required.</p></li>
-<li><dl>
-<dt>localInfoNumberUse: meaning of GRIB 2 localInformationNumber, if any; if localInformationNumber</dt><dd><p>is used for something different than just differentiating different fields representing
-the same physical quantity, this should be documented here. The value of localInfoNumberUse
+<li><p><code class="docutils literal notranslate"><span class="pre">multiTLevParent</span></code>: true if multiple time levels of (some of) the parent fields are required.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rttovId</span></code>: string characterizing the RTTOV coefficient file used to compute the associated field;
+the full name of the coefficients file is <code class="docutils literal notranslate"><span class="pre">rtcoef_&lt;rttovID&gt;.dat</span></code>, and the file should
+be accessible at the location <a class="reference internal" href="control/globRes.html#nl-attr-GlobalResource-rttov_coefs_path" title="&amp;GlobalResource rttov_coefs_path"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">&amp;GlobalResource</span> <span class="pre">rttov_coefs_path</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rttovChan</span></code>: channel number in RTTOV coefficient file; required to compute the associated field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">packing</span></code>: packing algorithm used to pack GRIB data in output file (see description of
+<a class="reference internal" href="control/process.html#nl-attr-Process-out_type_packing" title="&amp;Process out_type_packing"><code class="xref nl nl-arg docutils literal notranslate"><span class="pre">out_type_packing</span></code></a> for supported values); only active when <code class="xref nl nl-val docutils literal notranslate"><span class="pre">&amp;GlobalSettings</span> <span class="pre">default_out_type_packing=&quot;__from_dictionary__&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">localInfoNumberUse</span></code>: meaning of GRIB 2 localInformationNumber, if any; if localInformationNumber
+is used for something different than just differentiating different fields representing
+the same physical quantity, this should be documented here. The value of <code class="docutils literal notranslate"><span class="pre">localInfoNumberUse</span></code>
 can be any meaningful string; however, if the corresponding characteristics is computed in
 fieldextra, a pre-defined value has to be used. Currently this is the case for:</p>
-<blockquote>
-<div><p>poper=azimut_class &lt;–&gt; localInfoNumberUse=numberOfClasses</p>
-</div></blockquote>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">poper</span><span class="o">=</span><span class="n">azimut_class</span> <span class="o">&lt;--&gt;</span> <span class="n">localInfoNumberUse</span><span class="o">=</span><span class="n">numberOfClasses</span>
+</pre></div>
+</div>
 </li>
-<li><dl class="simple">
-<dt>keyUsedInProgram: when set, the short name which has to be used in any namelist and any resource</dt><dd><p>files is the one defined by ‘keyUsedInProgram’, and not the original key.</p>
-</dd>
-</dl>
+<li><p><code class="docutils literal notranslate"><span class="pre">nonCanonicalDim</span></code>: name and dimension of non canonical dimension if present (i.e. a dimension which
+is neither spatio-temporal, nor the EPS member dimension). The string format is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dimension_name</span><span class="p">:</span><span class="n">dimension_size</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">dimension_name</span></code> is one of {<code class="docutils literal notranslate"><span class="pre">lu_class</span></code>, <code class="docutils literal notranslate"><span class="pre">azimuth</span></code>}, and dimension_size is a
+positive integer.</p>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subgrid</span></code>: if set, specifies that the field is only defined on the specific subgrid, one of
+{<code class="docutils literal notranslate"><span class="pre">cell</span></code>, <code class="docutils literal notranslate"><span class="pre">edge</span></code>, <code class="docutils literal notranslate"><span class="pre">vertex</span></code>}. Only meaningful for unstructured grids. Should be defined when
+<code class="docutils literal notranslate"><span class="pre">gridInRef</span></code> is set.</p></li>
 </ul>
 </dd>
 <dt>Algorithm used to derive the field short name associated with a GRIB record:</dt><dd><ul class="simple">
 <li><p>list of matching dictionary entries is derived according to the rules below</p></li>
-<li><p>GRIB 1 attributes are used when working with GRIB 1 records, GRIB 2 attributes</p></li>
+<li><p>GRIB 1 attributes are used when working with GRIB 1 records, GRIB 2 attributes
+are used when working with GRIB 2 records</p></li>
+<li><p>dictionary attributes explicitely defined only match when the same value is
+available in the decoded record</p></li>
+<li><p>missing dictionary attributes, or dictionary attributes with values set to -1,
+always match (wildcard)</p></li>
+<li><p>entry with highest explicit matches is selected (i.e. wildcards have lower
+priority)</p></li>
+<li><p>a short name is associated with a record if, and only if, a unique dictionary
+entry can be associated with the decoded record</p></li>
 </ul>
-<p>are used when working with GRIB 2 records
-+ dictionary attributes explicitely defined only match when the same value is
-available in the decoded record
-+ missing dictionary attributes, or dictionary attributes with values set to -1,
-always match (wildcard)
-+ entry with highest explicit matches is selected (i.e. wildcards have lower
-priority)
-+ a short name is associated with a record if, and only if, a unique dictionary
-entry can be associated with the decoded record</p>
 </dd>
 </dl>
-<p>Line2: Description (fixed format according to template: A20,2X,A140)
-Units                Name
-AAAAAAAAAAAAAAAAAAA  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA…
-———————————————————————————————————————–
-Line3: GRIB 1 information, blank separated key=value groups</p>
-<blockquote>
-<div><blockquote>
-<div><p>key :   table parameter alternateTable alternateParameter
-type : integer   integer        integer            integer</p>
-</div></blockquote>
-<p>required:     yes       yes             no                 no
-default:      -1        -1             -1                 -1</p>
-<blockquote>
-<div><p>key : typeLevel valueSfc1 valueSfc2 timeRangeType localElemNumber
-type :   integer   integer   integer       integer         integer</p>
-</div></blockquote>
-<p>required:        no       no         no            no              no
-default:        -1       -1         -1            -1              -1</p>
-</div></blockquote>
-<dl>
-<dt>Line4: GRIB 2 information, blank separated key=value groups</dt><dd><blockquote>
-<div><p>key : discipline category parameter statProcType typeSfc1 factorSfc1 valueSfc1 typeSfc2 factorSfc2 valueSfc2
-type :    integer  integer   integer      integer  integer    integer   integer  integer    integer   integer</p>
-</div></blockquote>
-<p>required:       yes       yes       yes           no      no          no        no       no         no        no
-default:        -1        -1        -1           -1      -1           0        -1       -1          0        -1</p>
-<blockquote>
-<div><p>key : typeGenProc satelliteSeries satelliteNumber instrumentType factorWaveNumber valueWaveNumber
-type :     integer         integer         integer        integer          integer         integer</p>
-</div></blockquote>
-<p>required:          no              no              no             no               no              no
-default:          -1              -1              -1             -1                0              -1</p>
-<blockquote>
-<div><p>key : constituentType aerosolType modeNumber distFuncType localInfoNumber
-type :         integer     integer    integer      integer         integer</p>
-</div></blockquote>
-<p>required:              no          no         no           no              no
-default:              -1          -1         -1           -1              -1</p>
-</dd>
-</dl>
-<dl>
-<dt>Line5: additional information on field characteristics, blank separated key=value groups</dt><dd><blockquote>
-<div><p>key : constant singleLevel passiveSfc2 soilModel vCompIndex associatedVComp associatedMLev
-type :  logical     logical     logical   logical    integer          string         string</p>
-</div></blockquote>
-<p>required:      yes         yes          no       yes        no              no             no
-default:        F           F           F         F        -1              ‘’             ‘’</p>
-<blockquote>
-<div><p>key :   parent rttovId rttovChan multiTLevParent localInfoNumberUse keyUsedInProgram
-type :   string  string   integer         logical             string           string</p>
-</div></blockquote>
-<p>required:       no      no        no              no                 no               no
-default:       ‘’      ‘’        -1               F                 ‘’               ‘’</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-</ol>
+<section id="detailed-format-of-each-line">
+<h4>Detailed format of each line<a class="headerlink" href="#detailed-format-of-each-line" title="Permalink to this heading">#</a></h4>
+<p>Line1: Short name (string)</p>
+<p>Line2: Description (fixed format according to template: A20,2X,A140)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Units</span>                <span class="n">Name</span>
+<span class="n">AAAAAAAAAAAAAAAAAAA</span>  <span class="n">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>Line3: GRIB 1 information, blank separated key=value groups</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>key</p></th>
+<th class="head"><p>type</p></th>
+<th class="head"><p>required</p></th>
+<th class="head"><p>default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">table</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>yes</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parameter</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>yes</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alternateTable</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alternateParameter</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">typeLevel</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">valueSfc1</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">valueSfc2</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timeRangeType</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">localElemNumber</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Line4: GRIB 2 information, blank separated key=value groups</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>key</p></th>
+<th class="head"><p>type</p></th>
+<th class="head"><p>required</p></th>
+<th class="head"><p>default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">discipline</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>yes</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">category</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>yes</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">parameter</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>yes</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statProcType</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">typeSfc1</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">factorSfc1</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">valueSfc1</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">typeSfc2</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">factorSfc2</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">valueSfc2</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">typeGenProc</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">satelliteSeries</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">satelliteNumber</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">instrumentType</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">factorWaveNumber</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">valueWaveNumber</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">constituentType</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">aerosolType</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">modeNumber</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">distFuncType</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">localInfoNumber</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gridInRef</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Line5: additional information on field characteristics, blank separated key=value groups</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>key</p></th>
+<th class="head"><p>type</p></th>
+<th class="head"><p>required</p></th>
+<th class="head"><p>default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">constant</span></code></p></td>
+<td><p>logical</p></td>
+<td><p>yes</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">singleLevel</span></code></p></td>
+<td><p>logical</p></td>
+<td><p>yes</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">passiveSfc2</span></code></p></td>
+<td><p>logical</p></td>
+<td><p>no</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">modelComp</span></code></p></td>
+<td><p>string</p></td>
+<td><p>yes</p></td>
+<td><p>‘atm’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vCompIndex</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">associatedVComp</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">associatedMLev</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parent</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rttovId</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rttovChan</span></code></p></td>
+<td><p>integer</p></td>
+<td><p>no</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">multiTLevParent</span></code></p></td>
+<td><p>logical</p></td>
+<td><p>no</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">localInfoNumberUse</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">keyUsedInProgram</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">packing</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nonCanonicalDim</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">subgrid</span></code></p></td>
+<td><p>string</p></td>
+<td><p>no</p></td>
+<td><p>‘’</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
 </section>
 <section id="location-list">
 <h2>location_list<a class="headerlink" href="#location-list" title="Permalink to this heading">#</a></h2>
-<p>All blank lines and all lines beginning with an exclamation mark are ignored.
+<blockquote>
+<div><p>All blank lines and all lines beginning with an exclamation mark are ignored.
 All other lines are interpreted.</p>
 <p>A location is defined by two lines:</p>
 <p>The first line follows a fixed format and contains the fields described below; any text
@@ -460,7 +693,17 @@ Flags(7-10): unused</p>
 Lat:           latitude of location, in (-90.0,90.0) [deg]
 Alt:           location altitude [m]
 gpi/gpj:       index of associated LM grid point (automatic association if set to 0)
-gph:           height of associated LM grid point (only if gpi/gpj explicitely specified)</p>
+gph:           height of associated LM grid point (only output)
+gpidx:         global index of associated grid point (automatic association if set to 0)</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Note: use gpi/gpj for regular grid and gpidx for unstructured grid</dt><dd><dl class="simple">
+<dt>(gpi/gpj will be ignored in case of unstructured grid, and</dt><dd><p>gpidx will be ignored in case of regular grid)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
 </div></blockquote>
 <p>The second line is a comma-separated list of location aliases. These are unique strings of
 the form ‘&lt;group&gt;:&lt;name&gt;’, which may be used in the namelist alternatively to the station id.
@@ -475,6 +718,7 @@ case-independent.</p>
 </dd>
 </dl>
 <p>ATTENTION: The location id, group, and name must not start with the character ‘_’.</p>
+</div></blockquote>
 </section>
 <section id="location-list-additional">
 <h2>location_list_additional<a class="headerlink" href="#location-list-additional" title="Permalink to this heading">#</a></h2>
@@ -1023,8 +1267,8 @@ The following algorithms are supported:</p>
 geodesic_ij_slice, straight_ij_slice
 where:
 the first part of the string specifies the type of segments
-between the control points (‘geodesic’: geodesic along earth
-great circles, ‘straight’: straight line in model coordinates),
+between the control points (<code class="docutils literal notranslate"><span class="pre">'geodesic'</span></code>: geodesic along earth
+great circles, <code class="docutils literal notranslate"><span class="pre">'straight'</span></code>: straight line in model coordinates),
 the second part of the string specifies how control points are
 expressed (‘latlon_slice’: as geographical lat/lon, ‘ij_slice’:
 as model coordinates, ‘loc_slice’: as location).</p>
@@ -1194,7 +1438,14 @@ MFT 0.4 0.6</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Description of support files</a><ul>
-<li><a class="reference internal" href="#dictionary">dictionary</a></li>
+<li><a class="reference internal" href="#dictionary">dictionary</a><ul>
+<li><a class="reference internal" href="#global-information">Global information</a></li>
+<li><a class="reference internal" href="#key-values">Key / values</a><ul>
+<li><a class="reference internal" href="#detailed-format-of-each-line">Detailed format of each line</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#location-list">location_list</a></li>
 <li><a class="reference internal" href="#location-list-additional">location_list_additional</a></li>
 <li><a class="reference internal" href="#region-list">region_list</a></li>
