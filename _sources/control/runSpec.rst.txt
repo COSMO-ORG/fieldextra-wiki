@@ -316,7 +316,9 @@ This namelist block must be present and unique.
     Default is false.
 
 .. nl:argument::  grib1_bufferin_size 
-    :type: integer, in [1024(=2**10),134217728(=2**27)]
+    :type: integer
+
+    :format: integer, in [1024(=2**10),134217728(=2**27)]
 
     Suggested buffer size for reading GRIB 1 files, in bytes. Default
     value is set to 4194304 (=2**22) bytes. If set to 0, the GRIB 1

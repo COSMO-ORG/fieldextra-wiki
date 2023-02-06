@@ -547,8 +547,13 @@ Default is false.</p>
 
 <dl class="nl argument">
 <dt class="sig sig-object nl" id="nl-attr-RunSpecification-grib1_bufferin_size">
-<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">grib1_bufferin_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer,</span> <span class="pre">in</span> <span class="pre">[1024(=2**10),134217728(=2**27)]</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-grib1_bufferin_size" title="Permalink to this definition">#</a></dt>
-<dd><p>Suggested buffer size for reading GRIB 1 files, in bytes. Default
+<span class="sig-prename descclassname"><span class="pre">&amp;RunSpecification</span> </span><span class="sig-name descname"><span class="pre">grib1_bufferin_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">integer</span></span><span class="p"><span class="pre">)</span></span></em><a class="headerlink" href="#nl-attr-RunSpecification-grib1_bufferin_size" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Format<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer, in [1024(=2**10),134217728(=2**27)]</p>
+</dd>
+</dl>
+<p>Suggested buffer size for reading GRIB 1 files, in bytes. Default
 value is set to 4194304 (=2**22) bytes. If set to 0, the GRIB 1
 library uses a system dependent default value.</p>
 <p>Large impact on performance can be expected if the value is too

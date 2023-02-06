@@ -2390,14 +2390,22 @@ of the time loop in the namelist (:nl:arg:`out_type_mminfo`).
     Compatible with ``XLS_TABLE``, ``ASCII_TABLE``
 
 .. nl:argument:: out_type_line_label
+    :default: "location_time"
 
     :format: <define way data is tabulated - string>
+
+    See :ref:`section 7.5`
 
 .. nl:argument:: out_type_legend
 
     :format: <define type of header - string>
 
     Compatible with ``ASCII_TABLE``
+
+    Default value is :nl:val:`"minimal"` (if :nl:arg:`out_type_line_label` is not set or
+    :nl:val:`out_type_line_label=location_time`) or :nl:val:`"standard"` otherwise.
+
+    See :ref:`section 7.5`
 
 The above parameters define the characteristics of CSV oriented output.
 
