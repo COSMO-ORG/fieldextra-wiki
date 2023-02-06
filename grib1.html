@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Description of GRIB2 local use" href="grib2.html" /><link rel="prev" title="Description of output format" href="output.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>Description of some GRIB1 conventions - fieldextra v13_0_0 documentation</title>
+        <title>Description of some local GRIB1 conventions - fieldextra v13_0_0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -172,7 +172,7 @@
 <li class="toctree-l1"><a class="reference internal" href="operators.html">Operators to compute new fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="support.html">Description of support files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output.html">Description of output format</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Description of some GRIB1 conventions</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Description of some local GRIB1 conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="grib2.html">Description of GRIB2 local use</a></li>
 <li class="toctree-l1"><a class="reference internal" href="meta.html">Handling of meta-information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="aboutOpsTags.html">About operators and tags</a></li>
@@ -214,39 +214,37 @@
           </label>
         </div>
         <article role="main">
-          <section id="description-of-some-grib1-conventions">
-<h1>Description of some GRIB1 conventions<a class="headerlink" href="#description-of-some-grib1-conventions" title="Permalink to this heading">#</a></h1>
+          <section id="description-of-some-local-grib1-conventions">
+<span id="chapter-8"></span><h1>Description of some local GRIB1 conventions<a class="headerlink" href="#description-of-some-local-grib1-conventions" title="Permalink to this heading">#</a></h1>
 <p>Due to limitations of the GRIB 1 standard, local extensions have been defined to
 code some additional information. Fieldextra relies on some de facto conventions
 used within the COSMO consortia to correctly decode the processed input records.</p>
 <section id="cosmo-coding-of-model-name">
-<h2>COSMO: coding of model name<a class="headerlink" href="#cosmo-coding-of-model-name" title="Permalink to this heading">#</a></h2>
-<section id="standard">
-<h3>Standard<a class="headerlink" href="#standard" title="Permalink to this heading">#</a></h3>
+<span id="section-8-1"></span><h2>COSMO: coding of model name<a class="headerlink" href="#cosmo-coding-of-model-name" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard
+..........................................................................
+Based on pds(3) [center] and pds(4) [generatingProcessIdentifier]
+..........................................................................
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>COSMO-LEPS
+..........................................................................
+Based on pds(3) [center], pds(23) [subCentre] and
+                            pds(4) [generatingProcessIdentifier]
+    pds(3) == Roma or COSMO, pds(23) == ECMWF, pds(4) = 131
+..........................................................................
+</pre></div>
+</div>
 </section>
-<section id="based-on-pds-3-center-and-pds-4-generatingprocessidentifier">
-<h3>Based on pds(3) [center] and pds(4) [generatingProcessIdentifier]<a class="headerlink" href="#based-on-pds-3-center-and-pds-4-generatingprocessidentifier" title="Permalink to this heading">#</a></h3>
-</section>
-<section id="cosmo-leps">
-<h3>COSMO-LEPS<a class="headerlink" href="#cosmo-leps" title="Permalink to this heading">#</a></h3>
-<dl>
-<dt>Based on pds(3) [center], pds(23) [subCentre] and</dt><dd><blockquote>
-<div><p>pds(4) [generatingProcessIdentifier]</p>
-</div></blockquote>
-<p>pds(3) == Roma or COSMO, pds(23) == ECMWF, pds(4) = 131</p>
-</dd>
-</dl>
-</section>
-</section>
-<hr class="docutils" />
 <section id="cosmo-coding-of-product-category">
-<h2>COSMO: coding of product category<a class="headerlink" href="#cosmo-coding-of-product-category" title="Permalink to this heading">#</a></h2>
-<section id="id1">
-<h3>Standard<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<blockquote>
-<div><p>pds         37        39                45</p>
-</div></blockquote>
-<p>EPS member           253
+<span id="section-8-2"></span><h2>COSMO: coding of product category<a class="headerlink" href="#cosmo-coding-of-product-category" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard
+..........................................................................
+        pds         37        39                45
+..........................................................................
+determinist          254,255
+EPS control         -------------- NA --------------
+EPS member           253
 EPS mean             1         17,43
 EPS perturbation     28        61
 EPS stddev           1         18,44,46
@@ -254,156 +252,198 @@ EPS quantile         5         117,143           1
 EPS quantile diff    5         117,143           3
 EPS probability      5         16
 neighbourhood prob.  201       16
-probability, derived</p>
-<blockquote>
-<div><p>from stat. model
-MOS logreg         204                         1
-MOS extlogreg      204                         1</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Note: both weighted and unweighted EPS perturbation are coded in</dt><dd><p>the same way</p>
-</dd>
-</dl>
-</section>
-<section id="id2">
-<h3>COSMO-LEPS<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<blockquote>
-<div><p>pds         37        39                45</p>
-</div></blockquote>
-<p>EPS member           28        11
+probability, derived
+  from stat. model
+  MOS logreg         204                         1
+  MOS extlogreg      204                         1
+..........................................................................
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>when multiple values of pds(39) are listed, this is used to discriminate between weigthed and unweighted products</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>both weighted and unweighted EPS perturbation are coded in the same way</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>COSMO-LEPS
+..........................................................................
+        pds         37        39                45
+..........................................................................
+determinist         -------------- NA --------------
+EPS control          1         9,10
+EPS member           28        11
 EPS mean          |
 EPS perturbation  |
 EPS stddev        |
 EPS quantile      |  Same as standard coding
 EPS quantile diff |
 EPS probability   |
-………………………………………………………………..</p>
-</section>
+..........................................................................
+</pre></div>
+</div>
 </section>
 <section id="cosmo-coding-of-eps-member-information">
-<h2>COSMO: coding of EPS member information<a class="headerlink" href="#cosmo-coding-of-eps-member-information" title="Permalink to this heading">#</a></h2>
-<section id="id3">
-<h3>Standard<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<p>EPS mean           pds(51) = total number of members, pds(52) = member id
+<span id="section-8-3"></span><h2>COSMO: coding of EPS member information<a class="headerlink" href="#cosmo-coding-of-eps-member-information" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard
+..........................................................................
+EPS mean           pds(51) = total number of members, pds(52) = member id
 EPS perturbation   pds(43) = total number of members, pds(42) = member id
-………………………………………………………………..</p>
-</section>
-<section id="id4">
-<h3>COSMO-LEPS<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>EPS mean           pds(43) = total number of members, pds(42) = member id
+..........................................................................
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>COSMO-LEPS
+..........................................................................
+EPS mean           pds(43) = total number of members, pds(42) = member id
 EPS perturbation   pds(43) = total number of members, pds(42) = member id
-………………………………………………………………..</p>
-</section>
+..........................................................................
+</pre></div>
+</div>
 </section>
 <section id="cosmo-coding-of-quantile-information">
-<h2>COSMO: coding of quantile information<a class="headerlink" href="#cosmo-coding-of-quantile-information" title="Permalink to this heading">#</a></h2>
-<section id="id5">
-<h3>Standard<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p>the p of the p-quantile is coded in pds(46)
+<span id="section-8-4"></span><h2>COSMO: coding of quantile information<a class="headerlink" href="#cosmo-coding-of-quantile-information" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard
+..........................................................................
+the p of the p-quantile is coded in pds(46)
 for quantiles difference, pds(46) and pds(47) are used
-………………………………………………………………..</p>
-</section>
+..........................................................................
+</pre></div>
+</div>
 </section>
 <section id="cosmo-coding-of-probability-information">
-<h2>COSMO: coding of probability information<a class="headerlink" href="#cosmo-coding-of-probability-information" title="Permalink to this heading">#</a></h2>
-<section id="id6">
-<h3>Standard<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<dl class="simple">
-<dt>pds(45) defines the range for which the probability is computed:</dt><dd><p>pds(45) == 1 : larger than a specified threshold
-pds(45) == 2 : smaller than a specified threshold
-pds(45) == 3 : between threshold1 and threshold2</p>
-</dd>
-<dt>the threshold(s) values(s) are coded in pds(44,46,47):</dt><dd><p>REAL(pds(46) * 10**pds(44) [low] and REAL(pds(47) * 10**pds(44) [high]</p>
-</dd>
-</dl>
+<span id="section-8-5"></span><h2>COSMO: coding of probability information<a class="headerlink" href="#cosmo-coding-of-probability-information" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard
+..........................................................................
+pds(45) defines the range for which the probability is computed:
+    pds(45) == 1 : larger than a specified threshold
+    pds(45) == 2 : smaller than a specified threshold
+    pds(45) == 3 : between threshold1 and threshold2
+the threshold(s) values(s) are coded in pds(44,46,47):
+    REAL(pds(46) * 10**pds(44) [low] and REAL(pds(47) * 10**pds(44) [high]
+..........................................................................
+</pre></div>
+</div>
 </section>
-</section>
-<hr class="docutils" />
 <section id="cosmo-coding-of-experiment-tag-local-information">
-<h2>COSMO: coding of experiment tag (local information)<a class="headerlink" href="#cosmo-coding-of-experiment-tag-local-information" title="Permalink to this heading">#</a></h2>
-<section id="id7">
-<h3>Standard<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p>EPS control, EPS member    pds(47)
+<span id="section-8-6"></span><h2>COSMO: coding of experiment tag (local information)<a class="headerlink" href="#cosmo-coding-of-experiment-tag-local-information" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard
+..........................................................................
+EPS control, EPS member    pds(47)
 Others                     pds(41)
-………………………………………………………………..</p>
-</section>
-<section id="id8">
-<h3>COSMO-LEPS<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
-<p>EPS control, EPS member    pds(41)
+..........................................................................
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>COSMO-LEPS
+..........................................................................
+EPS control, EPS member    pds(41)
 Others                     pds(41)
-………………………………………………………………..</p>
-</section>
+..........................................................................
+</pre></div>
+</div>
 </section>
 <section id="cosmo-coding-of-element-number-local-information">
-<h2>COSMO: coding of element number (local information)<a class="headerlink" href="#cosmo-coding-of-element-number-local-information" title="Permalink to this heading">#</a></h2>
-<section id="standard-non-cosmo-leps-products">
-<h3>Standard (non COSMO-LEPS products)<a class="headerlink" href="#standard-non-cosmo-leps-products" title="Permalink to this heading">#</a></h3>
-<p>Determinist                pds(41)
+<span id="section-8-7"></span><h2>COSMO: coding of element number (local information)<a class="headerlink" href="#cosmo-coding-of-element-number-local-information" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard (non COSMO-LEPS products)
+..........................................................................
+Determinist                pds(41)
 EPS control, EPS member    pds(41)
-………………………………………………………………..</p>
-</section>
+..........................................................................
+</pre></div>
+</div>
 </section>
 <section id="cosmo-coding-of-vertical-coordinate-parameters-and-of-reference-atmosphere">
-<h2>COSMO: coding of vertical coordinate parameters and of reference atmosphere<a class="headerlink" href="#cosmo-coding-of-vertical-coordinate-parameters-and-of-reference-atmosphere" title="Permalink to this heading">#</a></h2>
+<span id="section-8-8"></span><h2>COSMO: coding of vertical coordinate parameters and of reference atmosphere<a class="headerlink" href="#cosmo-coding-of-vertical-coordinate-parameters-and-of-reference-atmosphere" title="Permalink to this heading">#</a></h2>
 <p>This information is coded in the gds of each record, as a set of gds values
 trailing the definition of the grid. The coding convention has been modified
 many times. The corresponding gds values are:</p>
 <ul>
-<li><dl class="simple">
-<dt>Old coding (prior to COSMO v2.14)</dt><dd><p>p0sl, t0sl, dt0lp, vcfl, vc(1), …, vc(ke+1)</p>
-</dd>
-</dl>
+<li><p>Old coding (prior to COSMO v2.14)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p0sl, t0sl, dt0lp, vcfl, vc(1), ..., vc(ke+1)
+</pre></div>
+</div>
 </li>
-<li><dl class="simple">
-<dt>Old coding (introduced with COSMO v2.14)</dt><dd><p>p0sl, t0sl, dt0lp, vcfl, vc(1), …, vc(ke+1), vctyp
-[, svc1, svc2, nfltvc, delta_t, h_scal]</p>
-</dd>
-</dl>
+<li><p>Old coding (introduced with COSMO v2.14)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p0sl, t0sl, dt0lp, vcfl, vc(1), ..., vc(ke+1), vctyp
+[, svc1, svc2, nfltvc, delta_t, h_scal]
+</pre></div>
+</div>
 </li>
-<li><dl>
-<dt>New coding (introduced with COSMO v3.18)</dt><dd><p>vctyp, ke, p0sl, t0sl, dt0lp, vcfl, vc(1), …, vc(ke+1)
-[, svc1, svc2, nfltvc] [, delta_t, h_scal]</p>
-<dl>
-<dt>-&gt; Interpretation of vctyp</dt><dd><dl>
-<dt>vctyp   1  pressure based, old ref. atm. (based on dT/dlnp = const)</dt><dd><blockquote>
-<div><p>2  height based, old ref. atm. (based on dT/dlnp = const)
-3  SLEVE (n=1), old ref. atm. (based on dT/dlnp = const)</p>
-</div></blockquote>
-<p>101  pressure based, new ref. atm. (asymptotically isothermal stratosphere)
-102  height based, new ref. atm. (asymptotically isothermal stratosphere)
-103  SLEVE (n=1), new ref. atm. (asymptotically isothermal stratosphere)
-104  SLEVE (n=1.35), new ref. atm. (asymptotically isothermal stratosphere)</p>
-</dd>
-</dl>
-</dd>
-<dt>-&gt; Optional information</dt><dd><p>svc1, svc2, nfltvc : only defined for vctyp={3,103,104}
-delta_t, h_scal : only defined for vctyp={101,102,103,104}</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt>Generalized vertical coordinates</dt><dd><p>nlev, numberOfVGridUsed and uuidOfVGrid(1:4)
-(no analytic formulation of vcoord coded in GRIB record in this case)</p>
+<li><p>New coding (introduced with COSMO v3.18)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>vctyp, ke, p0sl, t0sl, dt0lp, vcfl, vc(1), ..., vc(ke+1)
+[, svc1, svc2, nfltvc] [, delta_t, h_scal]
+</pre></div>
+</div>
+<ul>
+<li><p>Interpretation of <code class="docutils literal notranslate"><span class="pre">vctyp</span></code></p>
 <dl class="simple">
-<dt>-&gt; this information is available if, and only if, the associated surface type</dt><dd><p>is ‘generalized vertical coordinates’</p>
+<dt>1</dt><dd><p>pressure based, old ref. atm. (based on dT/dlnp = const)</p>
 </dd>
-<dt>Where: vctyp<span class="classifier">type of vert. coord and type of reference atmosphere</span></dt><dd><p>ke : number of full levels
-p0sl, t0sl, dt0lp : coefficients defining the reference atmosphere
-vcfl : level where hybrid coord. are flat
-vc() : coefficients defining the model levels
-svc1, svc2, nfltvc : coefficients defining SLEVE transformation
-delta_t, h_scal : additional coefficients defining the reference atmosphere</p>
+<dt>2</dt><dd><p>height based, old ref. atm. (based on dT/dlnp = const)</p>
+</dd>
+<dt>3</dt><dd><p>SLEVE (n=1), old ref. atm. (based on dT/dlnp = const)</p>
+</dd>
+<dt>101</dt><dd><p>pressure based, new ref. atm. (asymptotically isothermal stratosphere)</p>
+</dd>
+<dt>102</dt><dd><p>height based, new ref. atm. (asymptotically isothermal stratosphere)</p>
+</dd>
+<dt>103</dt><dd><p>SLEVE (n=1), new ref. atm. (asymptotically isothermal stratosphere)</p>
+</dd>
+<dt>104</dt><dd><p>SLEVE (n=1.35), new ref. atm. (asymptotically isothermal stratosphere)</p>
 </dd>
 </dl>
+</li>
+<li><p>Optional information</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">svc1</span></code>, <code class="docutils literal notranslate"><span class="pre">svc2</span></code>, <code class="docutils literal notranslate"><span class="pre">nfltvc</span></code></dt><dd><p>only defined for vctyp={3,103,104}</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">delta_t</span></code>, <code class="docutils literal notranslate"><span class="pre">h_scal</span></code></dt><dd><p>only defined for vctyp={101,102,103,104}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><p>Generalized vertical coordinates</p>
+<p><code class="docutils literal notranslate"><span class="pre">nlev</span></code>, <code class="docutils literal notranslate"><span class="pre">numberOfVGridUsed</span></code> and <code class="docutils literal notranslate"><span class="pre">uuidOfVGrid(1:4)</span></code>
+(no analytic formulation of vcoord coded in GRIB record in this case)</p>
+<ul class="simple">
+<li><p>this information is available if, and only if, the associated surface type
+is ‘generalized vertical coordinates’</p></li>
+</ul>
+<p>Where:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">vctyp</span></code></dt><dd><p>type of vert. coord and type of reference atmosphere</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ke</span></code></dt><dd><p>number of full levels</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">p0sl</span></code>, <code class="docutils literal notranslate"><span class="pre">t0sl</span></code>, <code class="docutils literal notranslate"><span class="pre">dt0lp</span></code></dt><dd><p>coefficients defining the reference atmosphere</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vcfl</span></code></dt><dd><p>level where hybrid coord. are flat</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vc()</span></code></dt><dd><p>coefficients defining the model levels</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">svc1</span></code>, <code class="docutils literal notranslate"><span class="pre">svc2</span></code>, <code class="docutils literal notranslate"><span class="pre">nfltvc</span></code></dt><dd><p>coefficients defining SLEVE transformation</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">delta_t</span></code>, <code class="docutils literal notranslate"><span class="pre">h_scal</span></code></dt><dd><p>additional coefficients defining the reference atmosphere</p>
 </dd>
 </dl>
 </li>
 </ul>
 </section>
+<section id="cosmo-coding-of-horizontal-grid">
+<span id="section-8-9"></span><h2>COSMO: coding of horizontal grid<a class="headerlink" href="#cosmo-coding-of-horizontal-grid" title="Permalink to this heading">#</a></h2>
+<p>The following cosmo local codes have been introduced (gds(4))</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>..........................................................................
+Swiss grid LV03            200
+Swiss grid LV95            203
+Gauss-Boaga, west sector   201
+Gauss-Boaga, east sector   202
+..........................................................................
+</pre></div>
+</div>
+</section>
 <section id="coding-of-undefined-values">
-<h2>Coding of undefined values<a class="headerlink" href="#coding-of-undefined-values" title="Permalink to this heading">#</a></h2>
+<span id="secton-8-10"></span><h2>Coding of undefined values<a class="headerlink" href="#coding-of-undefined-values" title="Permalink to this heading">#</a></h2>
 <p>(see also section 7.11)</p>
 <p>Besides the use of bitmap (which is currently not supported in feldextra) there
 is no standard way to code undefined values in a GRIB 1 output. Furthermore, any
@@ -411,42 +451,34 @@ numerical value used to flag undefined in a 2d field has to be carefully chosen
 in order not to lose too much precision in the GRIB 1 packing process.
 For this reason, a local extension has been defined to optimally set and code
 undefined values:</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>undef flag is a real number constructed by choosing</dt><dd><p>a value which has the same order of magnitude as
-one of the data set extrema</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>if the data set maxima is positive, the undef flag</dt><dd><p>is larger than the maxima; otherwise, it is smaller
+<ul>
+<li><p>undef flag is a real number constructed by choosing
+a value which has the same order of magnitude as
+one of the data set extrema</p></li>
+<li><p>if the data set maxima is positive, the undef flag
+is larger than the maxima; otherwise, it is smaller
 than the minima (after considering a possible scaling
-factor)</p>
+factor)</p></li>
+<li><p>undef_flag is coded in pds(35-36):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">undef_flag</span> <span class="o">=</span> <span class="n">sign_m</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">sign_e</span><span class="o">*</span><span class="n">exponent</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>pds(35), bit 0</dt><dd><p>sign_m (0: positive, 1: negative)</p>
+</dd>
+<dt>pds(35), bit 1</dt><dd><p>sign_e (0: positive, 1: negative)</p>
+</dd>
+<dt>pds(36)</dt><dd><p>exponent</p>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>undef_flag is coded in pds(35-36):</dt><dd><dl class="simple">
-<dt>undef_flag = sign_m * 0.99 * 10**(sign_e*exponent)</dt><dd><p>pds(35), bit 0: sign_m (0: positive, 1: negative)
-pds(35), bit 1: sign_e (0: positive, 1: negative)
-pds(36)       : exponent</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>usage of this mechanism is signaled by a pds(35)</dt><dd><p>value differing both from 0 and from 255</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>to cope with rounding error, a tolerance is applied</dt><dd><dl class="simple">
-<dt>when checking data against undef_flag:</dt><dd><p>undef_eps = 10**(exponent-1)</p>
-</dd>
-</dl>
-</dd>
-</dl>
+<li><p>usage of this mechanism is signaled by a pds(35)
+value differing both from 0 and from 255</p></li>
+<li><p>to cope with rounding error, a tolerance is applied
+when checking data against undef_flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">undef_eps</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">exponent</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 </ul>
 <p>The price to pay for this extension is the incompatibility of the so produced
@@ -512,41 +544,16 @@ the problem remains to communicate this value to any downstream tool).</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Description of some GRIB1 conventions</a><ul>
-<li><a class="reference internal" href="#cosmo-coding-of-model-name">COSMO: coding of model name</a><ul>
-<li><a class="reference internal" href="#standard">Standard</a></li>
-<li><a class="reference internal" href="#based-on-pds-3-center-and-pds-4-generatingprocessidentifier">Based on pds(3) [center] and pds(4) [generatingProcessIdentifier]</a></li>
-<li><a class="reference internal" href="#cosmo-leps">COSMO-LEPS</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cosmo-coding-of-product-category">COSMO: coding of product category</a><ul>
-<li><a class="reference internal" href="#id1">Standard</a></li>
-<li><a class="reference internal" href="#id2">COSMO-LEPS</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cosmo-coding-of-eps-member-information">COSMO: coding of EPS member information</a><ul>
-<li><a class="reference internal" href="#id3">Standard</a></li>
-<li><a class="reference internal" href="#id4">COSMO-LEPS</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cosmo-coding-of-quantile-information">COSMO: coding of quantile information</a><ul>
-<li><a class="reference internal" href="#id5">Standard</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cosmo-coding-of-probability-information">COSMO: coding of probability information</a><ul>
-<li><a class="reference internal" href="#id6">Standard</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cosmo-coding-of-experiment-tag-local-information">COSMO: coding of experiment tag (local information)</a><ul>
-<li><a class="reference internal" href="#id7">Standard</a></li>
-<li><a class="reference internal" href="#id8">COSMO-LEPS</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cosmo-coding-of-element-number-local-information">COSMO: coding of element number (local information)</a><ul>
-<li><a class="reference internal" href="#standard-non-cosmo-leps-products">Standard (non COSMO-LEPS products)</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Description of some local GRIB1 conventions</a><ul>
+<li><a class="reference internal" href="#cosmo-coding-of-model-name">COSMO: coding of model name</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-product-category">COSMO: coding of product category</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-eps-member-information">COSMO: coding of EPS member information</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-quantile-information">COSMO: coding of quantile information</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-probability-information">COSMO: coding of probability information</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-experiment-tag-local-information">COSMO: coding of experiment tag (local information)</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-element-number-local-information">COSMO: coding of element number (local information)</a></li>
 <li><a class="reference internal" href="#cosmo-coding-of-vertical-coordinate-parameters-and-of-reference-atmosphere">COSMO: coding of vertical coordinate parameters and of reference atmosphere</a></li>
+<li><a class="reference internal" href="#cosmo-coding-of-horizontal-grid">COSMO: coding of horizontal grid</a></li>
 <li><a class="reference internal" href="#coding-of-undefined-values">Coding of undefined values</a></li>
 </ul>
 </li>
